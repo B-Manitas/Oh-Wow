@@ -8,6 +8,7 @@ const InputField = ({
   returnKeyType,
   keyboardType,
   maxLength,
+  secureTextEntry
 }) => {
   return (
     <View style={styles.container}>
@@ -19,6 +20,7 @@ const InputField = ({
         passwordRules={"minlength: 8; required: lower; required: upper; required: digit; required: [%./?@]];"}
         placeholder={plh}
         maxLength={maxLength}
+        secureTextEntry={secureTextEntry}
         returnKeyType={returnKeyType}
       />
 

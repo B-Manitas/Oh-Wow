@@ -15,10 +15,8 @@ const styles = StyleSheet.create({
   content: {
     borderRadius: 5,
     borderWidth: 2,
-    width: "75%",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 20,
     margin: 10,
     backgroundColor: "#fff",
     shadowColor: "#000",
@@ -33,7 +31,6 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 32,
     fontWeight: "400",
   },
 });

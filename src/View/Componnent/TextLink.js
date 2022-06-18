@@ -1,13 +1,9 @@
-import {
-    StyleSheet,
-    TouchableOpacity,
-    Text,
-  } from "react-native";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const TextLink = ({text}) => {
+const TextLink = ({ text, style, pad_top }) => {
   return (
-    <TouchableOpacity>
-      <Text style={styles.link}>{text}</Text>
+    <TouchableOpacity style={{ paddingTop: pad_top }}>
+      <Text style={[styles.link, style]}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -15,9 +11,7 @@ const TextLink = ({text}) => {
 export default TextLink;
 
 const styles = StyleSheet.create({
-    link: {
-      color: "#364fc7",
-      textDecorationLine: "underline",
-    },
-  });
-  
+  link: {
+    marginBottom: 4,
+  },
+});

@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import ButtonRoundValid from "../Componnent/ButtonRoundValid";
 import CheckBox from "../Componnent/CheckBox";
-import ButtonSocial from "../Componnent/ButtonSocial";
 import Header from "../Componnent/Header";
 import InputField from "../Componnent/InputField";
 import TextLink from "../Componnent/TextLink";
@@ -29,6 +28,7 @@ const SignUp = () => {
           returnKeyType={"next"}
           maxLength={12}
           keyboardType={"default"}
+          secureTextEntry={false}
         />
         <InputField
           info={"Nom *"}
@@ -38,6 +38,7 @@ const SignUp = () => {
           returnKeyType={"next"}
           maxLength={12}
           keyboardType={"default"}
+          secureTextEntry={false}
         />
         <InputField
           info={"Mail *"}
@@ -47,6 +48,7 @@ const SignUp = () => {
           returnKeyType={"next"}
           maxLength={50}
           keyboardType={"email-address"}
+          secureTextEntry={false}
         />
         <InputField
           info={"Télephone"}
@@ -56,6 +58,7 @@ const SignUp = () => {
           returnKeyType={"next"}
           maxLength={14}
           keyboardType={"phone-pad"}
+          secureTextEntry={false}
         />
         <InputField
           info={"Mots de passe *"}
@@ -65,13 +68,17 @@ const SignUp = () => {
           returnKeyType={"done"}
           maxLength={20}
           keyboardType={"default"}
+          secureTextEntry={true}
         />
 
         <View style={styles.content_tou}>
           <CheckBox />
           <Text style={styles.text_tou}>
             En poursuivant j'accepte les{" "}
-            <TextLink text={"conditions d'utilisations"} />
+            <TextLink
+              text={"conditions d'utilisations"}
+              style={styles.text_link}
+            />
           </Text>
         </View>
 
@@ -82,9 +89,12 @@ const SignUp = () => {
             height={10}
             font_size={20}
           />
-          <TouchableOpacity>
-            <Text>Déja Client ?</Text>
-          </TouchableOpacity>
+
+          <TextLink
+            text={"Déja Client ?"}
+            pad_top={7}
+            style={{ textDecorationLine: "underline" }}
+          />
         </View>
       </ScrollView>
 
@@ -159,5 +169,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 25,
+  },
+
+  text_link: {
+    color: "#364fc7",
+    textDecorationLine: "underline",
   },
 });
