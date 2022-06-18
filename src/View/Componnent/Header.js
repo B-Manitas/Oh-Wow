@@ -5,7 +5,7 @@ const Header = ({ title, is_back }) => {
   return (
     <View style={styles.header}>
       <ButtonTop is_back={is_back} />
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title} adjustsFontSizeToFit={true} numberOfLines={1}>{title}</Text>
     </View>
   );
 };
@@ -23,7 +23,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    marginLeft: 50,
+    marginRight: 30,
     fontWeight: "bold",
-    fontSize: 36,
+    fontSize: 32,
   },
 });

@@ -26,8 +26,18 @@ const ConnectionSelect = () => {
       </View>
 
       <View style={styles.content_btn}>
-        <ButtonRoundValid width={"75%"} font_size={28} height={20} text={"Créer un compte"} />
-        <ButtonRoundValid width={"75%"} font_size={28} height={20} text={"Se connecter"} />
+        <ButtonRoundValid
+          width={"75%"}
+          font_size={28}
+          height={20}
+          text={"Créer un compte"}
+        />
+        <ButtonRoundValid
+          width={"75%"}
+          font_size={28}
+          height={20}
+          text={"Se connecter"}
+        />
       </View>
 
       <Footer />
@@ -38,11 +48,6 @@ const ConnectionSelect = () => {
 export default ConnectionSelect;
 
 const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-
   content_text: {
     width: "100%",
     height: "25%",
@@ -60,22 +65,5 @@ const styles = StyleSheet.create({
     height: "40%",
     justifyContent: "center",
     alignItems: "center",
-  },
-
-  footer: {
-    flexDirection: "row",
-    position: "absolute",
-    bottom: 15,
-    right: 0,
-    marginVertical: 10,
-    marginHorizontal: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  footer_text: {
-    fontWeight: "300",
-    fontSize: 16,
-    marginHorizontal: 10,
   },
 });
