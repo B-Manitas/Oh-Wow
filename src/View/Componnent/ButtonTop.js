@@ -1,12 +1,10 @@
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
+import { ICON } from "../ConstsIcons";
 
-const ButtonTop = () => {
+const ButtonTop = ({ is_back }) => {
   return (
     <TouchableOpacity style={styles.content}>
-      <Image
-        source={require("../../../assets/img/close.png")}
-        style={styles.icon}
-      />
+      <Image source={is_back ? ICON.back : ICON.close} style={styles.icon} />
     </TouchableOpacity>
   );
 };

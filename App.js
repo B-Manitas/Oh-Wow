@@ -1,9 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import ConnectionSelect from "./src/View/Page/ConnectionSelect";
+import SignUp from "./src/View/Page/SignUp";
 
 export default function App() {
-  return <ConnectionSelect />;
+  return <SignUp />;
 }
 
 const styles = StyleSheet.create({

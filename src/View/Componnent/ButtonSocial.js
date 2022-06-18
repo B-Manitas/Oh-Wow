@@ -1,12 +1,10 @@
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
+import { ICON } from "../ConstsIcons";
 
 const ButtonSocial = () => {
   return (
     <TouchableOpacity style={styles.link}>
-      <Image
-        style={styles.icon}
-        source={require("../../../assets/img/instagram.png")}
-      />
+      <Image style={styles.icon} source={ICON.insta} />
     </TouchableOpacity>
   );
 };

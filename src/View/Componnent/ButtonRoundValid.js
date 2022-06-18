@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const ButtonRoundValid = ({ text }) => {
+const ButtonRoundValid = ({ text, width, height, font_size }) => {
   return (
-    <TouchableOpacity style={styles.content}>
-      <Text style={styles.text}>{text}</Text>
+    <TouchableOpacity style={[styles.content, { width: width, paddingVertical: height }]}>
+      <Text style={[styles.text, { fontSize: font_size }]}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 20,
-    margin: 5,
+    margin: 10,
     backgroundColor: "#fff",
     shadowColor: "#000",
     shadowOffset: {

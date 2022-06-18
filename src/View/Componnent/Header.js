@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 import ButtonTop from "./ButtonTop";
 
-const Header = ({ title }) => {
+const Header = ({ title, is_back }) => {
   return (
     <View style={styles.header}>
-      <ButtonTop />
+      <ButtonTop is_back={is_back} />
       <Text style={styles.title}>{title}</Text>
     </View>
   );

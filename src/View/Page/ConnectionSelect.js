@@ -11,6 +11,7 @@ import {
 
 import ButtonRoundValid from "../Componnent/ButtonRoundValid";
 import ButtonSocial from "../Componnent/ButtonSocial";
+import Footer from "../Componnent/Footer";
 import Header from "../Componnent/Header";
 import Page from "./Page";
 
@@ -25,14 +26,11 @@ const ConnectionSelect = () => {
       </View>
 
       <View style={styles.content_btn}>
-        <ButtonRoundValid text={"Créer un compte"} />
-        <ButtonRoundValid text={"Se connecter"} />
+        <ButtonRoundValid width={"75%"} font_size={28} height={20} text={"Créer un compte"} />
+        <ButtonRoundValid width={"75%"} font_size={28} height={20} text={"Se connecter"} />
       </View>
 
-      <View style={styles.footer}>
-        <Text style={styles.footer_text}>Retrouvez-nous sur</Text>
-        <ButtonSocial />
-      </View>
+      <Footer />
     </Page>
   );
 };
