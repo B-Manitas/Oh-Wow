@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
-import Round from "../../Buttons/Round";
+import NavRound from "../../Buttons/NavRound";
 import Item from "../../Container/Item";
 
 import { PHOTO } from "../../../Constants/IMAGES";
@@ -14,8 +14,8 @@ const HomeHeader = () => {
       </TouchableOpacity>
 
       <View style={styles.nav}>
-        <Round title={"Les prestations"} />
-        <Round title={"Le catalogues"} />
+        <NavRound title={"Les prestations"} />
+        <NavRound title={"Le catalogues"} />
       </View>
 
       <View style={styles.trend}>

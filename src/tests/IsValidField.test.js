@@ -1,4 +1,4 @@
-import IsValidField from "../model/IsValidField";
+import IsValidField from "../model/Connection/IsValidField";
 
 test("Format Password", () => {
   expect(IsValidField.isFormatPassword("")).toBe(false);

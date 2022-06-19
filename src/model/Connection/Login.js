@@ -1,4 +1,4 @@
-import { Email } from "./SMTP";
+import { Email } from "../Network/SMTP";
 
 export default {
   /**

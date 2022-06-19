@@ -1,13 +1,33 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View, Image } from "react-native";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const Round = ({ title }) => {
+const Round = ({
+  text,
+  enabled,
+  colors,
+  size,
+  style_ctn_enabled,
+  style_txt_enabled,
+}) => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.container_img}>
-        <Image style={styles.img} />
-      </View>
-      <Text>{title}</Text>
+    <TouchableOpacity
+      style={[
+        styles.container,
+        { width: size, height: size },
+        { borderColor: colors },
+        enabled && [styles.enabled, style_ctn_enabled],
+      ]}
+      disabled={!enabled}
+    >
+      <Text
+        style={[
+          styles.text,
+          { color: colors },
+          enabled && [styles.txt_enabled, style_txt_enabled],
+        ]}
+      >
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -18,26 +38,31 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 15,
+    borderRadius: 50,
+    margin: 5,
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#CECECE",
   },
 
-  container_img: {
-    backgroundColor: "#fff",
-    borderRadius: 50,
-    borderWidth: 2,
+  text: {
+    color: "#CECECE",
+  },
+
+  enabled: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 2,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
-    marginVertical: 10,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    backgroundColor: "#fff",
   },
 
-  img: {
-    width: 64,
-    height: 64,
+  txt_enabled: {
+    fontWeight: "bold",
   },
 });

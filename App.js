@@ -10,7 +10,8 @@ import ValidationMail from "./src/View/Page/Authcode";
 import ModifyPass from "./src/View/Page/ModifyPass";
 import Home from "./src/View/Page/Home/Home";
 import Navigation from "./src/View/Page/Navigation";
+import Appointment from "./src/View/Page/Appointments.js/Appointment";
 
 export default function App() {
-  return <Authcode />;
+  return <Appointment />;
 }
