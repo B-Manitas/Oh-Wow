@@ -22,6 +22,10 @@ export default {
     }
   },
 
+  randomBool() {
+    return Math.round(Math.random());
+  },
+
   days(month, year) {
     let date = new Date(year, month, 0);
     let nb_day = date.getDate();
@@ -31,7 +35,7 @@ export default {
     for (let i = 0; i < nb_day; i++) {
       lists[i + day] = {
         date: new Date(year, month, i + 1),
-        is_available: Math.round(Math.random()),
+        is_available: this.randomBool(),
       };
     }
 
@@ -46,5 +50,30 @@ export default {
     month.func(month.val);
     year.func(year.val);
     cal.func(this.days(month.val, year.val));
+  },
+
+  hours(date) {
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let open = { morning: [8, 9, 10, 11], afternoon: [14, 15, 16, 17] };
+    let morning = [];
+    let afternoon = [];
+
+    for (let i = 0; i < open["morning"].length; i++) {
+      morning[i] = {
+        date: new Date(year, month, day, open["morning"][i]),
+        is_available: this.randomBool(),
+      };
+    }
+
+    for (let i = 0; i < open["morning"].length; i++) {
+      afternoon[i] = {
+        date: new Date(year, month, day, open["afternoon"][i]),
+        is_available: this.randomBool(),
+      };
+    }
+
+    return { morning, afternoon };
   },
 };
