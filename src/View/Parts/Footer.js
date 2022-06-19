@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import ButtonSocial from "../Componnent/ButtonSocial";
+import Social from "../Buttons/Social";
 
 const Footer = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Retrouvez-nous sur</Text>
-      <ButtonSocial />
+      <Social />
     </View>
   );
 };

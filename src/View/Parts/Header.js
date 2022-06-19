@@ -1,11 +1,15 @@
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import ButtonTop from "./ButtonTop";
 
-const Header = ({ title, is_back }) => {
+import Menu from "../Buttons/Menu";
+
+const Header = ({ title, type }) => {
   return (
     <View style={styles.header}>
-      <ButtonTop is_back={is_back} />
-      <Text style={styles.title} adjustsFontSizeToFit={true} numberOfLines={1}>{title}</Text>
+      <Menu type={type} />
+      <Text style={styles.title} adjustsFontSizeToFit={true} numberOfLines={1}>
+        {title}
+      </Text>
     </View>
   );
 };
@@ -23,7 +27,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginLeft: 50,
+    marginLeft: 30,
     marginRight: 30,
     fontWeight: "bold",
     fontSize: 32,

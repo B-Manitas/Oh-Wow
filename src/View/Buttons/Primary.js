@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const ButtonRoundValid = ({ text, width, height, font_size }) => {
+const Primary = ({ text, width, height, font_size }) => {
   return (
     <TouchableOpacity style={[styles.content, { width: width, paddingVertical: height }]}>
       <Text style={[styles.text, { fontSize: font_size }]}>{text}</Text>
@@ -9,7 +9,7 @@ const ButtonRoundValid = ({ text, width, height, font_size }) => {
   );
 };
 
-export default ButtonRoundValid;
+export default Primary;
 
 const styles = StyleSheet.create({
   content: {

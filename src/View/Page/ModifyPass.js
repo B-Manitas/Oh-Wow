@@ -1,10 +1,12 @@
+import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import Header from "../Componnent/Header";
+
+import Page from "../Container/Page";
+import Header from "../Parts/Header";
+import Footer from "../Parts/Footer";
+
 import InputField from "../Componnent/InputField";
-import ButtonRoundValid from "../Componnent/ButtonRoundValid";
-import Page from "./Page";
-import Footer from "../Componnent/Footer";
-import TextLink from "../Componnent/TextLink";
+import Primary from "../Buttons/Primary";
 
 const ModifyPass = () => {
   return (
@@ -39,7 +41,7 @@ const ModifyPass = () => {
         />
 
         <View style={styles.content_valid_btn}>
-          <ButtonRoundValid
+          <Primary
             text={"Sauvegarder"}
             width={"60%"}
             height={10}

@@ -1,18 +1,14 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  View,
-  Text,
-  ScrollView,
-} from "react-native";
-import ButtonRoundValid from "../Componnent/ButtonRoundValid";
+import React from "react";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
+
+import Page from "../Container/Page";
+import Header from "../Parts/Header";
+import Footer from "../Parts/Footer";
+
+import Primary from "../Buttons/Primary";
+import Link from "../Buttons/Link";
 import CheckBox from "../Componnent/CheckBox";
-import Header from "../Componnent/Header";
 import InputField from "../Componnent/InputField";
-import TextLink from "../Componnent/TextLink";
-import Page from "./Page";
-import Footer from "../Componnent/Footer";
 
 const SignUp = () => {
   return (
@@ -75,22 +71,19 @@ const SignUp = () => {
           <CheckBox />
           <Text style={styles.text_tou}>
             En poursuivant j'accepte les{" "}
-            <TextLink
-              text={"conditions d'utilisations"}
-              style={styles.text_link}
-            />
+            <Link text={"conditions d'utilisations"} style={styles.text_link} />
           </Text>
         </View>
 
         <View style={styles.content_valid_btn}>
-          <ButtonRoundValid
+          <Primary
             text={"Créer un compte"}
             width={"60%"}
             height={10}
             font_size={20}
           />
 
-          <TextLink
+          <Link
             text={"Déja Client ?"}
             pad_top={7}
             style={{ textDecorationLine: "underline" }}

@@ -1,15 +1,16 @@
+import React from "react";
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
-import { ICON } from "../ConstsIcons";
+import Utils from "../../model/Utils";
 
-const ButtonTop = ({ is_back }) => {
+const Menu = ({ type }) => {
   return (
     <TouchableOpacity style={styles.content}>
-      <Image source={is_back ? ICON.back : ICON.close} style={styles.icon} />
+      <Image source={Utils.getIconHeaders(type)} style={styles.icon} />
     </TouchableOpacity>
   );
 };
 
-export default ButtonTop;
+export default Menu;
 
 const styles = StyleSheet.create({
   content: {

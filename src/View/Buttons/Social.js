@@ -1,7 +1,8 @@
+import React from "react";
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
-import { ICON } from "../ConstsIcons";
+import { ICON } from "../../Constants/IMAGES";
 
-const ButtonSocial = () => {
+const Social = () => {
   return (
     <TouchableOpacity style={styles.link}>
       <Image style={styles.icon} source={ICON.insta} />
@@ -9,7 +10,7 @@ const ButtonSocial = () => {
   );
 };
 
-export default ButtonSocial;
+export default Social;
 
 const styles = StyleSheet.create({
   icon: {

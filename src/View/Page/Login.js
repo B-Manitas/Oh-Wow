@@ -1,16 +1,17 @@
+import React from "react";
 import {
   ScrollView,
   View,
   StyleSheet,
-  TouchableOpacity,
-  Text,
 } from "react-native";
-import Header from "../Componnent/Header";
+
+import Page from "../Container/Page";
+import Header from "../Parts/Header";
+import Footer from "../Parts/Footer";
+
 import InputField from "../Componnent/InputField";
-import ButtonRoundValid from "../Componnent/ButtonRoundValid";
-import Page from "./Page";
-import Footer from "../Componnent/Footer";
-import TextLink from "../Componnent/TextLink";
+import Primary from "../Buttons/Primary";
+import Link from "../Buttons/Link";
 
 const Login = () => {
   return (
@@ -39,19 +40,19 @@ const Login = () => {
         />
 
         <View style={styles.content_valid_btn}>
-          <ButtonRoundValid
+          <Primary
             text={"Se connecter"}
             width={"60%"}
             height={10}
             font_size={20}
           />
 
-          <TextLink
+          <Link
             pad_top={7}
             text={"Mots de passe oubliée"}
             style={{ textDecorationLine: "underline" }}
           />
-          <TextLink
+          <Link
             text={"Pas encore client ?"}
             style={{ textDecorationLine: "underline" }}
           />

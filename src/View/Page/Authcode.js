@@ -1,18 +1,18 @@
 import { Text, View, StyleSheet } from "react-native";
-import Header from "../Componnent/Header";
+import Page from "../Container/Page";
+import Header from "../Parts/Header";
+import Footer from "../Parts/Footer";
 import InputField from "../Componnent/InputField";
-import ButtonRoundValid from "../Componnent/ButtonRoundValid";
-import Page from "./Page";
-import Footer from "../Componnent/Footer";
-import TextLink from "../Componnent/TextLink";
+import Primary from "../Buttons/Primary";
+import Link from "../Buttons/Link";
 
-const ForgottenPass = () => {
+const Authcode = () => {
   return (
     <Page>
       <Header is_back={true} />
 
       <View style={styles.content_text}>
-        <Text style={styles.text_h1}>Valider votre addresse mail</Text>
+        <Text style={styles.text_h1}>Code d'authentification</Text>
         <Text style={styles.text_h2}>
           Saissisez le code reçu dans votre boite mail. Veillez à vérifier vos
           SPAM.
@@ -32,13 +32,13 @@ const ForgottenPass = () => {
         />
 
         <View style={styles.content_valid_btn}>
-          <ButtonRoundValid
+          <Primary
             text={"Valider votre mail"}
             width={"60%"}
             height={10}
             font_size={20}
           />
-          <TextLink
+          <Link
             pad_top={7}
             text={"Envoyer un autre code"}
             style={{ color: "#8c8b8b" }}
@@ -51,7 +51,7 @@ const ForgottenPass = () => {
   );
 };
 
-export default ForgottenPass;
+export default Authcode;
 
 const styles = StyleSheet.create({
   content_text: {

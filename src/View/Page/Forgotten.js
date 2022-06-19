@@ -1,12 +1,15 @@
+import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import Header from "../Componnent/Header";
-import InputField from "../Componnent/InputField";
-import ButtonRoundValid from "../Componnent/ButtonRoundValid";
-import Page from "./Page";
-import Footer from "../Componnent/Footer";
-import { ICON } from "../ConstsIcons";
 
-const ForgottenPass = () => {
+import Page from "../Container/Page";
+import Header from "../Parts/Header";
+import Footer from "../Parts/Footer";
+import Primary from "../Buttons/Primary";
+import InputField from "../Componnent/InputField";
+
+import { ICON } from "../../Constants/IMAGES";
+
+const Forgotten = () => {
   return (
     <Page>
       <Header img={ICON.back} />
@@ -44,7 +47,7 @@ const ForgottenPass = () => {
         />
 
         <View style={styles.content_valid_btn}>
-          <ButtonRoundValid
+          <Primary
             text={"Envoyer un code"}
             width={"60%"}
             height={10}
@@ -58,7 +61,7 @@ const ForgottenPass = () => {
   );
 };
 
-export default ForgottenPass;
+export default Forgotten;
 
 const styles = StyleSheet.create({
   content_text: {

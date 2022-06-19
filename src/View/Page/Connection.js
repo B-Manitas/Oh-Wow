@@ -1,21 +1,12 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  StatusBar,
-  SafeAreaView,
-  View,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-import ButtonRoundValid from "../Componnent/ButtonRoundValid";
-import ButtonSocial from "../Componnent/ButtonSocial";
-import Footer from "../Componnent/Footer";
-import Header from "../Componnent/Header";
-import Page from "./Page";
+import Primary from "../Buttons/Primary";
+import Footer from "../Parts/Footer";
+import Header from "../Parts/Header";
+import Page from "../Container/Page";
 
-const ConnectionSelect = () => {
+const Connection = () => {
   return (
     <Page>
       <Header />
@@ -26,13 +17,13 @@ const ConnectionSelect = () => {
       </View>
 
       <View style={styles.content_btn}>
-        <ButtonRoundValid
+        <Primary
           width={"75%"}
           font_size={28}
           height={20}
           text={"Créer un compte"}
         />
-        <ButtonRoundValid
+        <Primary
           width={"75%"}
           font_size={28}
           height={20}
@@ -45,7 +36,7 @@ const ConnectionSelect = () => {
   );
 };
 
-export default ConnectionSelect;
+export default Connection;
 
 const styles = StyleSheet.create({
   content_text: {

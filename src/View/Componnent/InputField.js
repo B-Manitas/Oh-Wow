@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 
 const InputField = ({
@@ -8,7 +9,7 @@ const InputField = ({
   returnKeyType,
   keyboardType,
   maxLength,
-  secureTextEntry
+  secureTextEntry,
 }) => {
   return (
     <View style={styles.container}>
@@ -17,7 +18,9 @@ const InputField = ({
         keyboardType={keyboardType}
         autoComplete={typeAndroid}
         textContentType={typeIOS}
-        passwordRules={"minlength: 8; required: lower; required: upper; required: digit; required: [%./?@]];"}
+        passwordRules={
+          "minlength: 8; required: lower; required: upper; required: digit; required: [%./?@]];"
+        }
         placeholder={plh}
         maxLength={maxLength}
         secureTextEntry={secureTextEntry}
