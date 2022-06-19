@@ -50,11 +50,11 @@ const Login = () => {
           <Link
             pad_top={7}
             text={"Mots de passe oubliée"}
-            style={{ textDecorationLine: "underline" }}
+            style_text={styles.link}
           />
           <Link
             text={"Pas encore client ?"}
-            style={{ textDecorationLine: "underline" }}
+            style_text={styles.link}
           />
         </View>
       </ScrollView>
@@ -80,5 +80,6 @@ const styles = StyleSheet.create({
 
   link: {
     textDecorationLine: "underline",
+    marginBottom: 4
   },
 });

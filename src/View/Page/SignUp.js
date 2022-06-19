@@ -71,7 +71,7 @@ const SignUp = () => {
           <CheckBox />
           <Text style={styles.text_tou}>
             En poursuivant j'accepte les{" "}
-            <Link text={"conditions d'utilisations"} style={styles.text_link} />
+            <Link text={"conditions d'utilisations"} style_text={styles.text_link} />
           </Text>
         </View>
 
@@ -86,7 +86,7 @@ const SignUp = () => {
           <Link
             text={"Déja Client ?"}
             pad_top={7}
-            style={{ textDecorationLine: "underline" }}
+            style_text={{ textDecorationLine: "underline" }}
           />
         </View>
       </ScrollView>
@@ -167,5 +167,6 @@ const styles = StyleSheet.create({
   text_link: {
     color: "#364fc7",
     textDecorationLine: "underline",
+    marginBottom: 4
   },
 });

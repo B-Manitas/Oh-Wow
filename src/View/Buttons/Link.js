@@ -1,18 +1,12 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const Link = ({ text, style, pad_top }) => {
+const Link = ({ text, style_container, style_text, pad_top }) => {
   return (
-    <TouchableOpacity style={{ paddingTop: pad_top }}>
-      <Text style={[styles.link, style]}>{text}</Text>
+    <TouchableOpacity style={[style_container, { paddingTop: pad_top }]}>
+      <Text style={style_text}>{text}</Text>
     </TouchableOpacity>
   );
 };
 
 export default Link;
-
-const styles = StyleSheet.create({
-  link: {
-    marginBottom: 4,
-  },
-});

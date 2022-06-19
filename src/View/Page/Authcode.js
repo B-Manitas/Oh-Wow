@@ -1,7 +1,10 @@
+import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Footer from "../Parts/Footer";
+
 import InputField from "../Componnent/InputField";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
@@ -41,7 +44,7 @@ const Authcode = () => {
           <Link
             pad_top={7}
             text={"Envoyer un autre code"}
-            style={{ color: "#8c8b8b" }}
+            style_text={styles.link}
           />
         </View>
       </View>
@@ -78,6 +81,9 @@ const styles = StyleSheet.create({
   content_valid_btn: {
     justifyContent: "center",
     alignItems: "center",
-    // marginTop: 22,
+  },
+
+  link: {
+    color: "#8c8b8b",
   },
 });
