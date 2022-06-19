@@ -4,31 +4,44 @@ import { StyleSheet } from "react-native";
 import Utils from "../../model/Utils";
 import Round from "./Round";
 
-const Day = ({ day }) => {
+const Day = ({ day, state_day }) => {
   if (day == 0) {
     return <Round size={40} colors="#fff" enabled={false} />;
   } else {
-    var isPast = Utils.isPast(day.day);
-    var isToday = Utils.isToday(day.day);
+    var date = day.date;
+    var isPast = Utils.isPast(date);
+    var isToday = Utils.isToday(date);
 
-    if (isToday) {
+    if (state_day.val == day.date.getDate()) {
       return (
         <Round
           size={40}
-          text={day.day}
-          colors="#d95959"
+          text={date.getDate()}
+          colors="#4489C5"
           enabled={day.is_available}
+          onPress={() => state_day.func(date.getDate())}
+        />
+      );
+    } else if (isToday) {
+      return (
+        <Round
+          size={40}
+          text={date.getDate()}
+          colors="#D95959"
+          enabled={day.is_available}
+          onPress={() => state_day.func(date.getDate())}
         />
       );
     } else {
       return (
         <Round
           size={40}
-          text={day.day}
+          text={date.getDate()}
           style_ctn_enabled={styles.enabled_ctn}
           style_txt_enabled={styles.enabled_txt}
           enabled={!isPast && day.is_available}
           colors="#CECECE"
+          onPress={() => state_day.func(date.getDate())}
         />
       );
     }

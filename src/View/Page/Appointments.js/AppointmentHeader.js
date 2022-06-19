@@ -8,8 +8,19 @@ import PickerMonths from "../../Picker/PickerMonths";
 import PickerYears from "../../Picker/PickerYears";
 
 const AppointmentHeader = (props) => {
-  const onChange = () =>
-    Utils.onChangeCalendarPicker(props.month, props.year, props.calendar);
+  const onChangeMonth = (v) =>
+    Utils.onChangeCalendarPicker(
+      Utils.dictState(v, props.month.func),
+      props.year,
+      props.calendar
+    );
+
+  const onChangeYear = (v) =>
+    Utils.onChangeCalendarPicker(
+      props.month,
+      Utils.dictState(v, props.year.func),
+      props.calendar
+    );
 
   return (
     <View style={styles.container}>
@@ -24,8 +35,14 @@ const AppointmentHeader = (props) => {
         <Text style={styles.text_slot}>Autres créneaux</Text>
 
         <View style={styles.container_picker}>
-          <PickerMonths value={props.month} onChange={onChange} />
-          <PickerYears value={props.year} onChange={onChange} />
+          <PickerMonths
+            value={props.month.val}
+            onChange={(v) => onChangeMonth(v)}
+          />
+          <PickerYears
+            value={props.year.val}
+            onChange={(v) => onChangeYear(v)}
+          />
         </View>
       </View>
 
@@ -40,7 +57,7 @@ export default AppointmentHeader;
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 10,
+    paddingTop: 10,
   },
 
   container_nextslot: {
@@ -83,46 +100,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 
-  picker: {
-    flex: 1,
-  },
-
-  picker_item: {
-    height: 130,
-    fontSize: 15,
-    fontWeight: "400",
-    marginHorizontal: -5,
-  },
-
   container_day: {
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 20,
-  },
-
-  day: {
-    flex: 1,
-    fontWeight: "bold",
-    fontSize: 16,
-    paddingVertical: 5,
-    textAlign: "center",
-    textDecorationLine: "underline",
-  },
-
-  container_slot: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-    marginHorizontal: 20,
-  },
-
-  dayslot: {
-    borderRadius: 5,
-    flex: 1,
-    borderWidth: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    marginHorizontal: 2,
-    textAlign: "center",
   },
 });

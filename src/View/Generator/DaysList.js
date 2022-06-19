@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: "bold",
     fontSize: 16,
-    paddingVertical: 5,
     textAlign: "center",
     textDecorationLine: "underline",
   },

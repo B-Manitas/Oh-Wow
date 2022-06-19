@@ -1,23 +1,15 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import { Picker } from "@react-native-picker/picker";
+import { View, StyleSheet } from "react-native";
 
 import Page from "../../Container/Page";
 import Header from "../../Parts/Header";
-import Round from "../../Buttons/Round";
 import Calendar from "../../Componnent/Calendar";
-import Day from "../../Buttons/Day";
 import Utils from "../../../model/Utils";
 import AppointmentHeader from "./AppointmentHeader";
 
 const Appointment = () => {
   const date = new Date();
+  const [select_day, setSelect_day] = useState(date.getDate());
   const [month, setMonth] = useState(date.getMonth());
   const [year, setYear] = useState(date.getFullYear());
   const [calendar, setCalendar] = useState(Utils.days(month, year));
@@ -27,11 +19,12 @@ const Appointment = () => {
       <Header type={"back"} title={"RDV - Pose d'ongles (1h)"} />
       <View style={styles.container}>
         <Calendar
+          state_day={Utils.dictState(select_day, setSelect_day)}
           header={
             <AppointmentHeader
-              month={[month, setMonth]}
-              year={[year, setYear]}
-              calendar={[calendar, setCalendar]}
+              month={Utils.dictState(month, setMonth)}
+              year={Utils.dictState(year, setYear)}
+              calendar={Utils.dictState(calendar, setCalendar)}
             />
           }
           arr={calendar}

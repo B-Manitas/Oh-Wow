@@ -8,9 +8,11 @@ const Round = ({
   size,
   style_ctn_enabled,
   style_txt_enabled,
+  onPress,
 }) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={[
         styles.container,
         { width: size, height: size },
