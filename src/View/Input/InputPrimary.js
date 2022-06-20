@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 
-const InputField = ({
+const Primary = ({
   info,
   plh,
   typeAndroid,
@@ -34,7 +34,7 @@ const InputField = ({
   );
 };
 
-export default InputField;
+export default Primary;
 
 const styles = StyleSheet.create({
   container: {

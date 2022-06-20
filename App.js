@@ -10,8 +10,9 @@ import ValidationMail from "./src/View/Page/Authcode";
 import ModifyPass from "./src/View/Page/ModifyPass";
 import Home from "./src/View/Page/Home/Home";
 import Navigation from "./src/View/Page/Navigation";
-import Appointment from "./src/View/Page/Appointments.js/Appointment";
+import Appointment from "./src/View/Page/Appointment.js/Appointment";
+import ConfirmAppt from "./src/View/Page/ConfirmAppt";
 
 export default function App() {
-  return <Appointment />;
+  return <ConfirmAppt />;
 }

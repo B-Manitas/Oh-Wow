@@ -1,19 +1,16 @@
 import React from "react";
-import { useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 
-const CheckBox = ({ state }) => {
-  const [is_active, setIs_active] = useState(state);
-
+const RadioBox = ({ id, id_selected, onPress }) => {
   return (
     <Pressable
-      onPress={() => setIs_active((v) => !v)}
-      style={[styles.container, is_active && styles.container_active]}
+      onPress={() => onPress(id)}
+      style={[styles.container, id == id_selected && styles.container_active]}
     ></Pressable>
   );
 };
 
-export default CheckBox;
+export default RadioBox;
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fafafa",
     width: 30,
     height: 30,
+    margin: 2,
   },
 
   container_active: { backgroundColor: "#383838" },

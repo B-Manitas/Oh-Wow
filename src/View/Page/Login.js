@@ -9,7 +9,7 @@ import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Footer from "../Parts/Footer";
 
-import InputField from "../Componnent/InputField";
+import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 
@@ -18,7 +18,7 @@ const Login = () => {
     <Page>
       <Header is_back={true} />
       <ScrollView contentContainerStyle={styles.container}>
-        <InputField
+        <InputPrimary
           info={"Mail *"}
           plh={"john@doe.com"}
           typeAndroid={"email"}
@@ -28,7 +28,7 @@ const Login = () => {
           keyboardType={"email-address"}
           secureTextEntry={false}
         />
-        <InputField
+        <InputPrimary
           info={"Mots de passe *"}
           plh={"mY%Pa9ss."}
           secureTextEntry={true}

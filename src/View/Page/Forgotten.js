@@ -5,7 +5,7 @@ import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Footer from "../Parts/Footer";
 import Primary from "../Buttons/Primary";
-import InputField from "../Componnent/InputField";
+import InputPrimary from "../Input/InputPrimary";
 
 import { ICON } from "../../Constants/IMAGES";
 
@@ -25,7 +25,7 @@ const Forgotten = () => {
       </View>
 
       <View contentContainerStyle={styles.container}>
-        <InputField
+        <InputPrimary
           info={"Nom *"}
           plh={"Doe"}
           typeAndroid={"name-family"}
@@ -35,7 +35,7 @@ const Forgotten = () => {
           keyboardType={"default"}
           secureTextEntry={false}
         />
-        <InputField
+        <InputPrimary
           info={"Mail *"}
           plh={"john@doe.com"}
           typeAndroid={"email"}

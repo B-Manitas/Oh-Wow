@@ -5,7 +5,7 @@ import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Footer from "../Parts/Footer";
 
-import InputField from "../Componnent/InputField";
+import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 
@@ -23,7 +23,7 @@ const Authcode = () => {
       </View>
 
       <View contentContainerStyle={styles.container}>
-        <InputField
+        <InputPrimary
           info={"Code *"}
           plh={"0000000"}
           typeAndroid={"sms-otp"}

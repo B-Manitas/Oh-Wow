@@ -8,7 +8,7 @@ import Footer from "../Parts/Footer";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 import CheckBox from "../Componnent/CheckBox";
-import InputField from "../Componnent/InputField";
+import InputPrimary from "../Input/InputPrimary";
 
 const SignUp = () => {
   return (
@@ -16,7 +16,7 @@ const SignUp = () => {
       <Header is_back={true} />
 
       <ScrollView style={styles.container}>
-        <InputField
+        <InputPrimary
           info={"Prénom *"}
           plh={"John"}
           typeAndroid={"name"}
@@ -26,7 +26,7 @@ const SignUp = () => {
           keyboardType={"default"}
           secureTextEntry={false}
         />
-        <InputField
+        <InputPrimary
           info={"Nom *"}
           plh={"Doe"}
           typeAndroid={"name-family"}
@@ -36,7 +36,7 @@ const SignUp = () => {
           keyboardType={"default"}
           secureTextEntry={false}
         />
-        <InputField
+        <InputPrimary
           info={"Mail *"}
           plh={"john@doe.com"}
           typeAndroid={"email"}
@@ -46,7 +46,7 @@ const SignUp = () => {
           keyboardType={"email-address"}
           secureTextEntry={false}
         />
-        <InputField
+        <InputPrimary
           info={"Télephone"}
           plh={"+216 071122334455"}
           typeAndroid={"tel"}
@@ -56,7 +56,7 @@ const SignUp = () => {
           keyboardType={"phone-pad"}
           secureTextEntry={false}
         />
-        <InputField
+        <InputPrimary
           info={"Mots de passe *"}
           plh={"mY%Pa9ss."}
           typeAndroid={"password-new"}
@@ -68,7 +68,7 @@ const SignUp = () => {
         />
 
         <View style={styles.content_tou}>
-          <CheckBox />
+          <CheckBox is_active={false}/>
           <Text style={styles.text_tou}>
             En poursuivant j'accepte les{" "}
             <Link text={"conditions d'utilisations"} style_text={styles.text_link} />

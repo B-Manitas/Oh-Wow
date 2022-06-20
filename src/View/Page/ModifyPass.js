@@ -5,7 +5,7 @@ import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Footer from "../Parts/Footer";
 
-import InputField from "../Componnent/InputField";
+import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 
 const ModifyPass = () => {
@@ -18,7 +18,7 @@ const ModifyPass = () => {
       </View>
 
       <View contentContainerStyle={styles.container}>
-        <InputField
+        <InputPrimary
           info={"Mots de passe *"}
           plh={"mY%Pa9ss."}
           typeAndroid={"password-new"}
@@ -29,7 +29,7 @@ const ModifyPass = () => {
           secureTextEntry={true}
         />
 
-        <InputField
+        <InputPrimary
           info={"Confirmation *"}
           plh={"mY%Pa9ss."}
           typeAndroid={"password"}
