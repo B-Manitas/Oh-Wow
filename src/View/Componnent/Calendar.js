@@ -10,6 +10,8 @@ const Calendar = ({ arr, header, footer, state_day }) => {
       ListHeaderComponent={header}
       ListFooterComponent={footer}
       renderItem={(day) => <Day day={day.item} state_day={state_day} />}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
       numColumns={7}
     />
   );
@@ -20,6 +22,7 @@ export default Calendar;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 10
   },
 });

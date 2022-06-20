@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+import Calendars from "../../model/Calendars";
 
 import Utils from "../../model/Utils";
 import Round from "./Round";
@@ -9,8 +10,8 @@ const Day = ({ day, state_day }) => {
     return <Round size={40} colors="#fff" enabled={false} />;
   } else {
     var date = day.date;
-    var isPast = Utils.isPast(date);
-    var isToday = Utils.isToday(date);
+    var isPast = Calendars.isPast(date);
+    var isToday = Calendars.isToday(date);
 
     if (state_day.val == day.date.getDate()) {
       return (

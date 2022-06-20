@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const Primary = ({ text, width, height, font_size }) => {
+const Primary = ({ text, width, height, font_size, style }) => {
   return (
-    <TouchableOpacity style={[styles.content, { width: width, paddingVertical: height }]}>
+    <TouchableOpacity style={[styles.content, style, { width: width, paddingVertical: height }]}>
       <Text style={[styles.text, { fontSize: font_size }]}>{text}</Text>
     </TouchableOpacity>
   );

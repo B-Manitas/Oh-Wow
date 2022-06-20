@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import Calendars from "../../../model/Calendars";
 
 import Utils from "../../../model/Utils";
 
@@ -9,14 +10,14 @@ import PickerYears from "../../Picker/PickerYears";
 
 const AppointmentHeader = (props) => {
   const onChangeMonth = (v) =>
-    Utils.onChangeCalendarPicker(
+    Calendars.onChangeCalendarPicker(
       Utils.dictState(v, props.month.func),
       props.year,
       props.calendar
     );
 
   const onChangeYear = (v) =>
-    Utils.onChangeCalendarPicker(
+    Calendars.onChangeCalendarPicker(
       props.month,
       Utils.dictState(v, props.year.func),
       props.calendar
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    marginBottom: 30,
+    marginBottom: 20,
   },
 
   text_slot: {

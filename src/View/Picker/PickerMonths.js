@@ -2,8 +2,6 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-import ItemsMonths from "../Generator/ItemsMonths";
-
 const PickerMonths = ({onChange, value}) => {
   return (
     <Picker
@@ -41,5 +39,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "400",
     marginHorizontal: -5,
+    marginVertical: -8
   },
 });

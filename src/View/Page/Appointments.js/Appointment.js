@@ -4,16 +4,20 @@ import { View, StyleSheet } from "react-native";
 import Page from "../../Container/Page";
 import Header from "../../Parts/Header";
 import Calendar from "../../Componnent/Calendar";
-import Utils from "../../../model/Utils";
 import AppointmentHeader from "./AppointmentHeader";
 import AppointmentFooter from "./AppointmentFooter";
+
+import Utils from "../../../model/Utils";
+import Calendars from "../../../model/Calendars";
 
 const Appointment = () => {
   const date = new Date();
   const [select_day, setSelect_day] = useState(date.getDate() + 1);
   const [month, setMonth] = useState(date.getMonth());
   const [year, setYear] = useState(date.getFullYear());
-  const [calendar, setCalendar] = useState(Utils.days(month, year));
+  const [calendar, setCalendar] = useState(
+    Calendars.calendar(year, month + 1)
+  );
 
   return (
     <Page>

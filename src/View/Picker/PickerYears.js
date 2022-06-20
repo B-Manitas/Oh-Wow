@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 
 import ItemsYears from "../Generator/ItemsYearsPicker";
 
-const PickerYears = ({onChange, value}) => {
+const PickerYears = ({ onChange, value }) => {
   return (
     <Picker
       style={styles.picker}
@@ -31,5 +31,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "400",
     marginHorizontal: -5,
+    marginVertical: -8,
   },
 });

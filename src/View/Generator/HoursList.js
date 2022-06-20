@@ -1,11 +1,11 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
+import Calendars from "../../model/Calendars";
 
-import Utils from "../../model/Utils";
 import Hour from "../Buttons/Hour";
 
 const HoursList = ({ date }) => {
-  const hours = Utils.hours(date);
+  const hours = Calendars.hours(date);
 
   return (
     <View>
