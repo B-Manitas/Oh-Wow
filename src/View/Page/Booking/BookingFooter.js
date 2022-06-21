@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import Utils from "../../../model/Utils";
 import Primary from "../../Buttons/Primary";
 import HoursList from "../../Generator/HoursList";
 

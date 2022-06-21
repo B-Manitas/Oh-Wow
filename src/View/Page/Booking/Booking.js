@@ -1,23 +1,21 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import Page from "../../Container/Page";
 import Header from "../../Parts/Header";
 import Calendar from "../../Componnent/Calendar";
-import AppointmentHeader from "./AppointmentHeader";
-import AppointmentFooter from "./AppointmentFooter";
+import BookingHeader from "./BookingHeader";
+import BookingFooter from "./BookingFooter";
 
 import Utils from "../../../model/Utils";
 import Calendars from "../../../model/Calendars";
 
-const Appointment = () => {
+const Booking = () => {
   const date = new Date();
   const [select_day, setSelect_day] = useState(date.getDate() + 1);
   const [month, setMonth] = useState(date.getMonth());
   const [year, setYear] = useState(date.getFullYear());
-  const [calendar, setCalendar] = useState(
-    Calendars.calendar(year, month + 1)
-  );
+  const [calendar, setCalendar] = useState(Calendars.calendar(year, month + 1));
 
   return (
     <Page>
@@ -25,19 +23,19 @@ const Appointment = () => {
       <Calendar
         state_day={Utils.dictState(select_day, setSelect_day)}
         header={
-          <AppointmentHeader
+          <BookingHeader
             month={Utils.dictState(month, setMonth)}
             year={Utils.dictState(year, setYear)}
             calendar={Utils.dictState(calendar, setCalendar)}
           />
         }
-        footer={<AppointmentFooter date={new Date(year, month, select_day)} />}
+        footer={<BookingFooter date={new Date(year, month, select_day)} />}
         arr={calendar}
       />
     </Page>
   );
 };
 
-export default Appointment;
+export default Booking;
 
 const styles = StyleSheet.create({});

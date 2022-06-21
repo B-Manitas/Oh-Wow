@@ -8,7 +8,7 @@ import DaysList from "../../Generator/DaysList";
 import PickerMonths from "../../Picker/PickerMonths";
 import PickerYears from "../../Picker/PickerYears";
 
-const AppointmentHeader = (props) => {
+const BookingHeader = (props) => {
   const onChangeMonth = (v) =>
     Calendars.onChangeCalendarPicker(
       Utils.dictState(v, props.month.func),
@@ -54,7 +54,7 @@ const AppointmentHeader = (props) => {
   );
 };
 
-export default AppointmentHeader;
+export default BookingHeader;
 
 const styles = StyleSheet.create({
   container: {

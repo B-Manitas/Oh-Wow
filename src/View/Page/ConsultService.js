@@ -18,7 +18,7 @@ import Absolute from "../Buttons/Absolute";
 const ConsultService = ({ data }) => {
   return (
     <Page>
-      <Header type={"back"} title={data.name} />
+      <Header type={"back"} title={data.name} editable={true} />
 
       <ScrollView style={styles.main_container}>
         <View style={styles.container_img}>
