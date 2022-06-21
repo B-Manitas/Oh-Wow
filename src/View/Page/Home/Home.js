@@ -25,8 +25,4 @@ const Home = () => {
 
 export default Home;
 
-const styles = StyleSheet.create({
-  container: {
-    // marginHorizontal: 30,
-  },
-});
+const styles = StyleSheet.create({});

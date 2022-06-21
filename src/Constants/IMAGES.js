@@ -4,9 +4,11 @@ export const ICON = {
   close: require("../../assets/img/close.png"),
   insta: require("../../assets/img/instagram.png"),
   temp: require("../../assets/img/temp.png"),
+  trash: require("../../assets/img/trash.png"),
+  book: require("../../assets/img/book.png"),
 };
 export const PHOTO = {
-  home: require("../../assets/img/home.jpg"),
+  home: require("../../assets/img/nailsbar.jpg"),
   service_1: require("../../assets/img/service_1.jpg"),
   service_2: require("../../assets/img/service_2.jpg"),
   service_3: require("../../assets/img/service_3.jpg"),

@@ -14,6 +14,10 @@ export default {
     }
   },
 
+  isNull(value) {
+    return value === null || value === undefined;
+  },
+
   randomBool() {
     return Math.round(Math.random());
   },

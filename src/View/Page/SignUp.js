@@ -68,7 +68,7 @@ const SignUp = () => {
         />
 
         <View style={styles.content_tou}>
-          <CheckBox is_active={false}/>
+          <CheckBox is_active={false} size={30}/>
           <Text style={styles.text_tou}>
             En poursuivant j'accepte les{" "}
             <Link text={"conditions d'utilisations"} style_text={styles.text_link} />

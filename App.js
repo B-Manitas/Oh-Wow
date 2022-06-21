@@ -1,6 +1,5 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 
 import Connection from "./src/View/Page/Connection";
 import Login from "./src/View/Page/Login";
@@ -13,7 +12,10 @@ import Navigation from "./src/View/Page/Navigation";
 import Appointment from "./src/View/Page/Appointment.js/Appointment";
 import ConfirmAppt from "./src/View/Page/ConfirmAppt";
 import ConsultAllServices from "./src/View/Page/ConsultAllServices";
+import ConsultService from "./src/View/Page/ConsultService";
+import Forgotten from "./src/View/Page/Forgotten";
+import { SERVICES } from "./src/Constants/DATA";
 
 export default function App() {
-  return <Home />;
+  return <ConsultService data={SERVICES[1]} />;
 }

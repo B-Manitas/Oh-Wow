@@ -15,7 +15,7 @@ const HomeHeader = () => {
       <View style={styles.nav}>
         <NavRound img={PHOTO.services} title={"Les prestations"} />
         <NavRound img={PHOTO.nails} title={"Le catalogue"} />
-        <NavRound img={PHOTO.plannings} title={"Mes RDVs"} />
+        <NavRound img={PHOTO.plannings} title={"Mes RDV"} />
       </View>
 
       <View style={styles.trend}>
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
   img: {
     width: "100%",
     height: 169,
-    // resizeMode: "cover",
-    aspectRatio: 1
+    resizeMode: "cover",
+    // aspectRatio: 1
   },
 
   nav: {
