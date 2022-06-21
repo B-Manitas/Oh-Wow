@@ -1,39 +1,41 @@
 import React from "react";
 import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const Item = ({ title, descr, price, duration }) => {
+const ServiceLarge = ({ data }) => {
   return (
     <TouchableOpacity style={styles.container}>
-      <Image style={styles.img} />
+      <Image source={data.img} style={styles.img} />
 
       <View style={styles.container_text}>
-        <Text style={styles.h1}>{title}</Text>
+        <Text style={styles.h1}>{data.name}</Text>
 
         <Text style={styles.h2} numberOfLines={2}>
-          {descr}
+          {data.description}
         </Text>
 
         <Text style={styles.info}>
-          {price}€ - {duration}min
+          {data.price}€ - {data.duration}min
         </Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-export default Item;
+export default ServiceLarge;
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    borderRadius: 5,
+    borderRadius: 2,
     borderWidth: 2,
     padding: 10,
     paddingBottom: 5,
     marginVertical: 5,
-    alignItems: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
     backgroundColor: "#fff",
-    width: "85%",
+    marginHorizontal: 30,
+    flex: 1,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
 
   container_text: {
     height: 90,
+    flex: 1,
   },
 
   img: {
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
 
   h1: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "500",
   },
 
   h2: {
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
 
   info: {
     position: "absolute",
-    bottom: 10,
+    bottom: 0,
     fontWeight: "bold",
   },
 });

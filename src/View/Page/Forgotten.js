@@ -16,11 +16,11 @@ const Forgotten = () => {
 
       <View style={styles.content_text}>
         <Text style={styles.text_h1}>
-          Vous avez oubliée votre mots de passe ?
+          Vous avez oubliée votre mot de passe ?
         </Text>
         <Text style={styles.text_h2}>
           Si le compte existe, vous recevrez un code par mail pour modifier
-          votre mots de passe.
+          votre mot de passe.
         </Text>
       </View>
 

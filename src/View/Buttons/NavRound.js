@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View, Image } from "react-native";
 
-const NavRound = ({ title }) => {
+const NavRound = ({ title, img }) => {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.container_img}>
-        <Image style={styles.img} />
+        <Image style={styles.img} source={img} />
       </View>
       <Text>{title}</Text>
     </TouchableOpacity>
@@ -23,8 +23,6 @@ const styles = StyleSheet.create({
 
   container_img: {
     backgroundColor: "#fff",
-    borderRadius: 50,
-    borderWidth: 2,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -34,10 +32,14 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 8,
     marginVertical: 10,
+    borderRadius: 10
   },
 
   img: {
-    width: 64,
-    height: 64,
+    width: 80,
+    height: 80,
+    resizeMode: "cover",
+    borderRadius: 10,
+    borderWidth: 2,
   },
 });

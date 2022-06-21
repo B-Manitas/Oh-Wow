@@ -12,7 +12,8 @@ import Home from "./src/View/Page/Home/Home";
 import Navigation from "./src/View/Page/Navigation";
 import Appointment from "./src/View/Page/Appointment.js/Appointment";
 import ConfirmAppt from "./src/View/Page/ConfirmAppt";
+import ConsultAllServices from "./src/View/Page/ConsultAllServices";
 
 export default function App() {
-  return <ConfirmAppt />;
+  return <Home />;
 }

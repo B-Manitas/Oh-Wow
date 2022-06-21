@@ -2,7 +2,6 @@ import React from "react";
 import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import NavRound from "../../Buttons/NavRound";
-import Item from "../../Container/Item";
 
 import { PHOTO } from "../../../Constants/IMAGES";
 
@@ -14,16 +13,14 @@ const HomeHeader = () => {
       </TouchableOpacity>
 
       <View style={styles.nav}>
-        <NavRound title={"Les prestations"} />
-        <NavRound title={"Le catalogues"} />
+        <NavRound img={PHOTO.services} title={"Les prestations"} />
+        <NavRound img={PHOTO.nails} title={"Le catalogue"} />
+        <NavRound img={PHOTO.plannings} title={"Mes RDVs"} />
       </View>
 
       <View style={styles.trend}>
         <Text style={styles.text_trend}>Nos soins tendances</Text>
       </View>
-      <Item title={"Pose d'ongles"} price={20} duration={60} descr={"Sed severitas amicitiae ."} />
-      <Item title={"Pose d'ongles"} price={20} duration={60} descr={"Sed severitas amicitiae ."} />
-      <Item title={"Pose d'ongles"} price={20} duration={60} descr={"Sed severitas amicitiae ."} />
     </View>
   );
 };
@@ -33,15 +30,13 @@ export default HomeHeader;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    paddingVertical: 10,
-
+    paddingTop: 10,
   },
 
   container_img: {
     justifyContent: "center",
     alignItems: "center",
     width: "85%",
-    height: 170,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -51,14 +46,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
 
     elevation: 8,
-    borderRadius: 5,
-    borderWidth: 3,
     backgroundColor: "#fff",
+    borderRadius: 2,
+    borderWidth: 3,
   },
-
+  
   img: {
-    flex: 1,
-    resizeMode: "contain",
+    width: "100%",
+    height: 169,
+    // resizeMode: "cover",
+    aspectRatio: 1
   },
 
   nav: {
@@ -73,13 +70,15 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: "#000",
     width: "85%",
-    marginVertical: 20,
+    marginTop: 8,
     paddingVertical: 10,
   },
-
+  
   text_trend: {
+    marginTop: 15,
+    marginBottom: 5,
     fontSize: 25,
-    fontWeight: "200",
+    fontWeight: "300",
     paddingHorizontal: 20,
   },
 });

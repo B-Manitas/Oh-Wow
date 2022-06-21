@@ -57,7 +57,7 @@ const SignUp = () => {
           secureTextEntry={false}
         />
         <InputPrimary
-          info={"Mots de passe *"}
+          info={"Mot de passe *"}
           plh={"mY%Pa9ss."}
           typeAndroid={"password-new"}
           typeIOS={"newPassword"}

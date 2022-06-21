@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 const Round = ({
   text,
+  style,
   enabled,
   colors,
   size,
@@ -14,6 +15,7 @@ const Round = ({
     <TouchableOpacity
       onPress={onPress}
       style={[
+        style,
         styles.container,
         { width: size, height: size },
         { borderColor: colors },

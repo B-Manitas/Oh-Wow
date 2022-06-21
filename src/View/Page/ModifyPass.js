@@ -14,12 +14,12 @@ const ModifyPass = () => {
       <Header is_back={true} />
 
       <View style={styles.content_text}>
-        <Text style={styles.text_h1}>Modifier votre mots de passe</Text>
+        <Text style={styles.text_h1}>Modifier votre mot de passe</Text>
       </View>
 
       <View contentContainerStyle={styles.container}>
         <InputPrimary
-          info={"Mots de passe *"}
+          info={"Mot de passe *"}
           plh={"mY%Pa9ss."}
           typeAndroid={"password-new"}
           typeIOS={"newPassword"}

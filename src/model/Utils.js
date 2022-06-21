@@ -18,6 +18,10 @@ export default {
     return Math.round(Math.random());
   },
 
+  randomInt(max) {
+    return Math.floor(Math.random() * max);
+  },
+
   dictState(value, setValue) {
     return { val: value, func: setValue };
   },

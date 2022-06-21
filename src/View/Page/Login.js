@@ -29,7 +29,7 @@ const Login = () => {
           secureTextEntry={false}
         />
         <InputPrimary
-          info={"Mots de passe *"}
+          info={"Mot de passe *"}
           plh={"mY%Pa9ss."}
           secureTextEntry={true}
           typeAndroid={"password"}
@@ -49,7 +49,7 @@ const Login = () => {
 
           <Link
             pad_top={7}
-            text={"Mots de passe oubliée"}
+            text={"Mot de passe oubliée"}
             style_text={styles.link}
           />
           <Link
