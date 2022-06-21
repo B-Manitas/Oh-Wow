@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { ICON } from "../../Constants/IMAGES";
 
-const Search = () => {
+const Searchbar = ({ plh }) => {
   const [text, setText] = useState("");
 
   return (
@@ -27,7 +27,7 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Searchbar;
 
 const styles = StyleSheet.create({
   container_search: {

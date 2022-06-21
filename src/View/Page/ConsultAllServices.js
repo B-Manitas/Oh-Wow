@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { SERVICES } from "../../Constants/DATA";
 import Round from "../Buttons/Round";
-import Search from "../Componnent/Search";
+import Searchbar from "../Componnent/Searchbar";
 
 import Page from "../Container/Page";
 import Service from "../Container/Service/Service";
@@ -12,7 +12,7 @@ const ConsultAllServices = () => {
   return (
     <Page>
       <Header type="menu" title="Nos prestations" />
-      <Search />
+      <Searchbar />
 
       <FlatList
         data={SERVICES}

@@ -50,7 +50,7 @@ const ConsultService = ({ data }) => {
           />
           <ServiceInfo
             enabled={false}
-            text={"Créneau"}
+            text={"Prochain créneau"}
             value={"25/02 à 12h30"}
             flex={2}
             width={"40%"}

@@ -16,7 +16,9 @@ import ConsultService from "./src/View/Page/ConsultService";
 import Forgotten from "./src/View/Page/Forgotten";
 import { SERVICES } from "./src/Constants/DATA";
 import Appointments from "./src/View/Page/Appointments";
+import Search from "./src/View/Page/Search";
 
 export default function App() {
-  return <Appointments />;
+  return <ConsultService data={SERVICES[1]} />;
+  // return <Home />;
 }
