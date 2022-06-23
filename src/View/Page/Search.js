@@ -3,10 +3,14 @@ import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Searchbar from "../Componnent/Searchbar";
 
-const Search = () => {
+const Search = ({ navigation }) => {
   return (
     <Page>
-      <Header type={"close"} title={"Rechercher un client"} />
+      <Header
+        navigation={navigation}
+        type={"close"}
+        title={"Rechercher un client"}
+      />
       <Searchbar />
 
       <TouchableOpacity style={styles.container}>
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
 
   h1: {
@@ -51,6 +55,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 10,
     position: "absolute",
-    right: 10
+    right: 10,
   },
 });

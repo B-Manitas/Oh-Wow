@@ -1,23 +1,15 @@
 import React from "react";
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import InputSecondary from "../Input/InputSecondary";
-import { ICON } from "../../Constants/IMAGES";
 import Chevron from "../Buttons/Chevron";
 
-const Settings = () => {
+const Settings = ({ navigation }) => {
   return (
     <Page>
-      <Header type={"close"} title={"Paramètres"} />
+      <Header navigation={navigation} type={"close"} title={"Paramètres"} />
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.h1}>Vos informations personnelles :</Text>
@@ -57,7 +49,7 @@ const Settings = () => {
 
         <View style={styles.container}>
           <Text style={styles.h1}>Actions :</Text>
-          <Chevron text={"Supprimer votre compte 'Oh Wow'"} />
+          <Chevron text={"Supprimer votre compte"} />
         </View>
       </ScrollView>
     </Page>

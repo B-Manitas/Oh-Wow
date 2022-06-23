@@ -7,12 +7,16 @@ import Page from "../Container/Page";
 import InputSecondary from "../Input/InputSecondary";
 import Header from "../Parts/Header";
 
-const ConfirmAppt = () => {
+const ConfirmAppt = ({ navigation }) => {
   const [box_selected, setBox_selected] = useState(0);
 
   return (
     <Page>
-      <Header title={"Validation du RDV"} type={"back"} />
+      <Header
+        title={"Validation du RDV"}
+        type={"back"}
+        navigation={navigation}
+      />
       <View style={styles.container}>
         <Text style={styles.text_offer}>Prendre un RDV pour :</Text>
 
@@ -69,6 +73,7 @@ const ConfirmAppt = () => {
           height={10}
           font_size={18}
           style={styles.button_appt}
+          func={() => navigation.navigate("Home")}
         />
       </View>
     </Page>
@@ -111,7 +116,7 @@ const styles = StyleSheet.create({
   container_resume: {
     marginVertical: 0,
   },
-  
+
   text_resume: {
     fontSize: 18,
     paddingVertical: 5,

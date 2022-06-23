@@ -10,7 +10,7 @@ import BookingFooter from "./BookingFooter";
 import Utils from "../../../model/Utils";
 import Calendars from "../../../model/Calendars";
 
-const Booking = () => {
+const Booking = ({ navigation }) => {
   const date = new Date();
   const [select_day, setSelect_day] = useState(date.getDate() + 1);
   const [month, setMonth] = useState(date.getMonth());
@@ -19,7 +19,11 @@ const Booking = () => {
 
   return (
     <Page>
-      <Header type={"back"} title={"RDV - Pose d'ongles (1h)"} />
+      <Header
+        type={"back"}
+        title={"RDV - Pose d'ongles (1h)"}
+        navigation={navigation}
+      />
       <Calendar
         state_day={Utils.dictState(select_day, setSelect_day)}
         header={

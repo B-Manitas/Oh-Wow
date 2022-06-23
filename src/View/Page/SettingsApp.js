@@ -7,17 +7,20 @@ import {
   TextInput,
 } from "react-native";
 import Chevron from "../Buttons/Chevron";
-import CheckBoxText from "../Componnent/CheckBoxText";
 import ToggleLong from "../Componnent/ToggleLong";
 
 import Page from "../Container/Page";
 import DaysCheckBoxList from "../Generator/DaysCheckBoxList";
 import Header from "../Parts/Header";
 
-const SettingsApp = () => {
+const SettingsApp = ({ navigation }) => {
   return (
     <Page>
-      <Header type={"close"} title={"Paramètres de l'applications"} />
+      <Header
+        navigation={navigation}
+        type={"close"}
+        title={"Paramètres de l'applications"}
+      />
       <ScrollView style={styles.container}>
         <View style={styles.parts}>
           <Text style={styles.h1}>Jours de fermeture du salon</Text>
@@ -80,6 +83,6 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
 
     elevation: 3,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
 });

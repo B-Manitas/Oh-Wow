@@ -10,10 +10,10 @@ import Link from "../Buttons/Link";
 import CheckBox from "../Componnent/CheckBox";
 import InputPrimary from "../Input/InputPrimary";
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   return (
     <Page>
-      <Header is_back={true} />
+      <Header is_back={true} navigation={navigation} />
 
       <ScrollView style={styles.container}>
         <InputPrimary
@@ -68,10 +68,13 @@ const SignUp = () => {
         />
 
         <View style={styles.content_tou}>
-          <CheckBox is_active={false} size={30}/>
+          <CheckBox is_active={false} size={30} />
           <Text style={styles.text_tou}>
             En poursuivant j'accepte les{" "}
-            <Link text={"conditions d'utilisations"} style_text={styles.text_link} />
+            <Link
+              text={"conditions d'utilisations"}
+              style_text={styles.text_link}
+            />
           </Text>
         </View>
 
@@ -81,12 +84,14 @@ const SignUp = () => {
             width={"60%"}
             height={10}
             font_size={20}
+            func={() => navigation.navigate("Login")}
           />
 
           <Link
             text={"Déja Client ?"}
             pad_top={7}
             style_text={{ textDecorationLine: "underline" }}
+            func={() => navigation.navigate("Login")}
           />
         </View>
       </ScrollView>
@@ -167,6 +172,6 @@ const styles = StyleSheet.create({
   text_link: {
     color: "#364fc7",
     textDecorationLine: "underline",
-    marginBottom: 4
+    marginBottom: 4,
   },
 });

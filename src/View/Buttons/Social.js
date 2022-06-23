@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Image, StyleSheet } from "react-native";
+import { TouchableOpacity, Image, StyleSheet, Linking } from "react-native";
 import { ICON } from "../../Constants/IMAGES";
 
 const Social = () => {

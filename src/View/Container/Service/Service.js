@@ -2,10 +2,12 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import Round from "../../Buttons/Round";
 
-const Service = ({ data }) => {
+const Service = ({ data, navigation }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Service", { data })}
+      >
         <View style={styles.info}>
           <Text style={styles.info_h1}>{data.name}</Text>
           <Text style={styles.info_h2}>

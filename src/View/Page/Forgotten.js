@@ -9,10 +9,10 @@ import InputPrimary from "../Input/InputPrimary";
 
 import { ICON } from "../../Constants/IMAGES";
 
-const Forgotten = () => {
+const Forgotten = ({ navigation }) => {
   return (
     <Page>
-      <Header img={ICON.back} />
+      <Header img={ICON.back} navigation={navigation} />
 
       <View style={styles.content_text}>
         <Text style={styles.text_h1}>
@@ -52,6 +52,7 @@ const Forgotten = () => {
             width={"60%"}
             height={10}
             font_size={20}
+            func={() => navigation.navigate("Home")}
           />
         </View>
       </View>

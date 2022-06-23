@@ -1,9 +1,12 @@
 import React from "react";
 import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const ServiceLarge = ({ data }) => {
+const ServiceLarge = ({ navigation, data }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate("Service", { data })}
+    >
       <Image source={data.img} style={styles.img} />
 
       <View style={styles.container_text}>

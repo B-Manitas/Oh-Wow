@@ -6,10 +6,10 @@ import Footer from "../Parts/Footer";
 import Header from "../Parts/Header";
 import Page from "../Container/Page";
 
-const Connection = () => {
+const Connection = ({ navigation }) => {
   return (
     <Page>
-      <Header />
+      <Header navigation={navigation} />
 
       <View style={styles.content_text}>
         <Text style={styles.text}>Oh Wow !</Text>
@@ -22,12 +22,14 @@ const Connection = () => {
           font_size={28}
           height={20}
           text={"Créer un compte"}
+          func={() => navigation.navigate("SignUp")}
         />
         <Primary
           width={"75%"}
           font_size={28}
           height={20}
           text={"Se connecter"}
+          func={() => navigation.navigate("Login")}
         />
       </View>
 

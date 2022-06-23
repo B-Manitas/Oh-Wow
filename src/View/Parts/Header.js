@@ -4,10 +4,10 @@ import Utils from "../../model/Utils";
 
 import Menu from "../Buttons/Menu";
 
-const Header = ({ title, type, editable }) => {
+const Header = ({ title, type, editable, navigation }) => {
   return (
     <View style={styles.header}>
-      <Menu type={type} />
+      <Menu type={type} navigation={navigation} />
       {editable ? (
         <TextInput
           style={styles.title}

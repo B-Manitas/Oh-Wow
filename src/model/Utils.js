@@ -29,4 +29,20 @@ export default {
   dictState(value, setValue) {
     return { val: value, func: setValue };
   },
+
+  selectFuncHeader(navigation, type) {
+    switch (type) {
+      case "menu":
+        navigation.navigate("Navigation");
+        break;
+
+      case "back":
+        navigation.goBack();
+        break;
+
+      default:
+        navigation.popToTop();
+        break;
+    }
+  },
 };

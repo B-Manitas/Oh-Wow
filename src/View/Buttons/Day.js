@@ -20,7 +20,7 @@ const Day = ({ day, state_day }) => {
           text={date.getDate()}
           colors="#4489C5"
           enabled={day.is_available}
-          onPress={() => state_day.func(date.getDate())}
+          func={() => state_day.func(date.getDate())}
         />
       );
     } else if (isToday) {
@@ -30,7 +30,7 @@ const Day = ({ day, state_day }) => {
           text={date.getDate()}
           colors="#D95959"
           enabled={day.is_available}
-          onPress={() => state_day.func(date.getDate())}
+          func={() => state_day.func(date.getDate())}
         />
       );
     } else {
@@ -42,7 +42,7 @@ const Day = ({ day, state_day }) => {
           style_txt_enabled={styles.enabled_txt}
           enabled={!isPast && day.is_available}
           colors="#CECECE"
-          onPress={() => state_day.func(date.getDate())}
+          func={() => state_day.func(date.getDate())}
         />
       );
     }

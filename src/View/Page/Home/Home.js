@@ -8,14 +8,16 @@ import HomeHeader from "./HomeHeader";
 import { SERVICES } from "../../../Constants/DATA";
 import ServiceLarge from "../../Container/Service/ServiceLarge";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <Page>
-      <Header title={"Oh Wow"} type={"menu"} />
+      <Header title={"Oh Wow"} type={"menu"} navigation={navigation} />
       <FlatList
         data={SERVICES}
-        renderItem={(item) => <ServiceLarge data={item.item} />}
-        ListHeaderComponent={<HomeHeader />}
+        renderItem={(item) => (
+          <ServiceLarge data={item.item} navigation={navigation} />
+        )}
+        ListHeaderComponent={<HomeHeader navigation={navigation} />}
         showsVerticalScrollIndicator={false}
         style={styles.container}
       />

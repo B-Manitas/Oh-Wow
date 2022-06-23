@@ -1,9 +1,12 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 
-const Link = ({ text, style_container, style_text, pad_top }) => {
+const Link = ({ text, style_container, style_text, pad_top, func }) => {
   return (
-    <TouchableOpacity style={[style_container, { paddingTop: pad_top }]}>
+    <TouchableOpacity
+      onPress={func}
+      style={[style_container, { paddingTop: pad_top }]}
+    >
       <Text style={style_text}>{text}</Text>
     </TouchableOpacity>
   );

@@ -9,10 +9,10 @@ import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 
-const Authcode = () => {
+const Authcode = ({ navigation }) => {
   return (
     <Page>
-      <Header is_back={true} />
+      <Header is_back={true} navigation={navigation} />
 
       <View style={styles.content_text}>
         <Text style={styles.text_h1}>Code d'authentification</Text>
@@ -40,6 +40,7 @@ const Authcode = () => {
             width={"60%"}
             height={10}
             font_size={20}
+            func={() => navigation.navigate("Authcode")}
           />
           <Link
             pad_top={7}

@@ -5,10 +5,10 @@ import TextEdit from "../Input/TextEdit";
 import Footer from "../Parts/Footer";
 import Header from "../Parts/Header";
 
-const Contact = () => {
+const Contact = ({ navigation }) => {
   return (
     <Page>
-      <Header type={"close"} title={"Nous contacter"} />
+      <Header type={"close"} title={"Nous contacter"} navigation={navigation} />
 
       <View style={styles.parts}>
         <TextEdit
@@ -25,7 +25,7 @@ const Contact = () => {
 
       <View style={styles.parts}>
         <Text style={styles.h1}>Nos centres esthétiques</Text>
-        <MapView style={styles.map}/>
+        <MapView style={styles.map} />
       </View>
 
       <Footer />
@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
 
-  map:{
+  map: {
     width: "100%",
     height: "70%",
-  }
+  },
 });

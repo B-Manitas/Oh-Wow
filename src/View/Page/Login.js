@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  ScrollView,
-  View,
-  StyleSheet,
-} from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
@@ -13,10 +9,10 @@ import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   return (
     <Page>
-      <Header is_back={true} />
+      <Header is_back={true} navigation={navigation} />
       <ScrollView contentContainerStyle={styles.container}>
         <InputPrimary
           info={"Mail *"}
@@ -45,16 +41,19 @@ const Login = () => {
             width={"60%"}
             height={10}
             font_size={20}
+            func={() => navigation.navigate("Home")}
           />
 
           <Link
             pad_top={7}
             text={"Mot de passe oubliée"}
             style_text={styles.link}
+            func={() => navigation.navigate("Forgotten")}
           />
           <Link
             text={"Pas encore client ?"}
             style_text={styles.link}
+            func={() => navigation.navigate("SignUp")}
           />
         </View>
       </ScrollView>
@@ -80,6 +79,6 @@ const styles = StyleSheet.create({
 
   link: {
     textDecorationLine: "underline",
-    marginBottom: 4
+    marginBottom: 4,
   },
 });

@@ -15,10 +15,17 @@ import CheckBox from "../Componnent/CheckBox";
 import ServiceInfo from "../Container/ServiceInfo";
 import Absolute from "../Buttons/Absolute";
 
-const ConsultService = ({ data }) => {
+const ConsultService = ({ navigation, route }) => {
+  var data = route.params.data;
+
   return (
     <Page>
-      <Header type={"back"} title={data.name} editable={true} />
+      <Header
+        type={"back"}
+        title={data.name}
+        editable={true}
+        navigation={navigation}
+      />
 
       <ScrollView style={styles.main_container}>
         <View style={styles.container_img}>
@@ -78,7 +85,13 @@ const ConsultService = ({ data }) => {
       </ScrollView>
 
       <Absolute img={ICON.trash} bottom={30} left={30} />
-      <Absolute text={"Prendre RDV"} img={ICON.book} bottom={30} right={30} />
+      <Absolute
+        text={"Prendre RDV"}
+        img={ICON.book}
+        bottom={30}
+        right={30}
+        func={() => navigation.navigate("Booking")}
+      />
     </Page>
   );
 };

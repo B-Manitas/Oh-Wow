@@ -5,21 +5,23 @@ import Link from "../Buttons/Link";
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 
-const Navigation = () => {
+const Navigation = ({ navigation }) => {
   return (
     <Page>
-      <Header title={"Oh Wow"} />
+      <Header title={"Oh Wow"} navigation={navigation} />
       <View style={styles.container}>
         <View style={styles.nav}>
           <Link
             text={"Créer un compte"}
             style_container={styles.button_nav}
             style_text={styles.text_nav}
+            func={() => navigation.navigate("SignUp")}
           />
           <Link
             text={"Se connecter"}
             style_container={styles.button_nav}
             style_text={styles.text_nav}
+            func={() => navigation.navigate("Login")}
           />
         </View>
 
@@ -28,6 +30,7 @@ const Navigation = () => {
             text={"Consulter les services proposées"}
             style_container={styles.button_nav}
             style_text={styles.text_nav}
+            func={() => navigation.navigate("AllServices")}
           />
         </View>
 
@@ -36,11 +39,13 @@ const Navigation = () => {
             text={"Nous contacter"}
             style_container={styles.button_nav}
             style_text={styles.text_nav}
+            func={() => navigation.navigate("Contact")}
           />
           <Link
             text={"Mes paramètres"}
             style_container={styles.button_nav}
             style_text={styles.text_nav}
+            func={() => navigation.navigate("Settings")}
           />
         </View>
       </View>

@@ -8,17 +8,19 @@ import Page from "../Container/Page";
 import Service from "../Container/Service/Service";
 import Header from "../Parts/Header";
 
-const ConsultAllServices = () => {
+const ConsultAllServices = ({ navigation }) => {
   return (
     <Page>
-      <Header type="menu" title="Nos prestations" />
+      <Header type="menu" title="Nos prestations" navigation={navigation} />
       <Searchbar />
 
       <FlatList
         data={SERVICES}
         numColumns={2}
         style={styles.container_item}
-        renderItem={(item) => <Service data={item.item} />}
+        renderItem={(item) => (
+          <Service navigation={navigation} data={item.item} />
+        )}
       />
 
       <Round

@@ -5,10 +5,14 @@ import Header from "../Parts/Header";
 import ToggleLong from "../Componnent/ToggleLong";
 import Chevron from "../Buttons/Chevron";
 
-const Client = () => {
+const Client = ({ navigation }) => {
   return (
     <Page>
-      <Header type={"back"} title={"Information Client"} />
+      <Header
+        type={"back"}
+        title={"Information Client"}
+        navigation={navigation}
+      />
       <View style={styles.parts}>
         <View style={styles.container_name}>
           <TextEdit size={26} plh={"John"} value={"John"} />

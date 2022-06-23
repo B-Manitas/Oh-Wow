@@ -11,9 +11,11 @@ const Absolute = ({
   left,
   ctn_style,
   txt_style,
+  func,
 }) => {
   return (
     <TouchableOpacity
+      onPress={func}
       style={[
         { position: "absolute", bottom, top, right, left },
         styles.container,
@@ -23,10 +25,7 @@ const Absolute = ({
       {!Utils.isNull(img) && (
         <Image
           source={img}
-          style={[
-            styles.img,
-            !Utils.isNull(text) && { marginRight: 15 },
-          ]}
+          style={[styles.img, !Utils.isNull(text) && { marginRight: 15 }]}
         />
       )}
 

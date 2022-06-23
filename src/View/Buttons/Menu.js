@@ -2,9 +2,12 @@ import React from "react";
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
 import Utils from "../../model/Utils";
 
-const Menu = ({ type }) => {
+const Menu = ({ navigation, type }) => {
   return (
-    <TouchableOpacity style={styles.content}>
+    <TouchableOpacity
+      style={styles.content}
+      onPress={() => Utils.selectFuncHeader(navigation, type)}
+    >
       <Image source={Utils.getIconHeaders(type)} style={styles.icon} />
     </TouchableOpacity>
   );
