@@ -6,6 +6,7 @@ export const ICON = {
   temp: require("../../assets/img/temp.png"),
   trash: require("../../assets/img/trash.png"),
   book: require("../../assets/img/book.png"),
+  chevron: require("../../assets/img/chevron.png"),
 };
 export const PHOTO = {
   home: require("../../assets/img/nailsbar.jpg"),

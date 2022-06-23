@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Text } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 
-const Secondary = ({
+const InputSecondary = ({
   plh,
   typeAndroid,
   typeIOS,
@@ -13,7 +13,7 @@ const Secondary = ({
   return (
     <TextInput
       editable={!disabled}
-      placeholderTextColor={disabled?"#c4c4c4":"#858585"}
+      placeholderTextColor={disabled ? "#c4c4c4" : "#858585"}
       style={[styles.input, disabled && styles.disabled]}
       keyboardType={keyboardType}
       autoComplete={typeAndroid}
@@ -25,7 +25,7 @@ const Secondary = ({
   );
 };
 
-export default Secondary;
+export default InputSecondary;
 
 const styles = StyleSheet.create({
   input: {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   placeholder: {
     color: "#999999",
   },
-  
+
   disabled: {
     borderColor: "#f4f4f4",
   },

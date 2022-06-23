@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, Text } from "react-native";
 import Utils from "../../model/Utils";
 
 import Menu from "../Buttons/Menu";
@@ -8,14 +8,20 @@ const Header = ({ title, type, editable }) => {
   return (
     <View style={styles.header}>
       <Menu type={type} />
-      <TextInput
-        style={styles.title}
-        adjustsFontSizeToFit={true}
-        numberOfLines={1}
-        value={title}
-        returnKeyType={"done"}
-        editable={!Utils.isNull(editable)}
-      />
+      {editable ? (
+        <TextInput
+          style={styles.title}
+          allowFontScaling={true}
+          numberOfLines={1}
+          value={title}
+          returnKeyType={"done"}
+          editable={!Utils.isNull(editable)}
+        />
+      ) : (
+        <Text style={styles.title} adjustsFontSizeToFit={true} numberOfLines={1}>
+          {title}
+        </Text>
+      )}
     </View>
   );
 };

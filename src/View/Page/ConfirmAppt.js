@@ -4,7 +4,7 @@ import Primary from "../Buttons/Primary";
 import RadioBox from "../Componnent/RadioBox";
 
 import Page from "../Container/Page";
-import Secondary from "../Input/InputSecondary";
+import InputSecondary from "../Input/InputSecondary";
 import Header from "../Parts/Header";
 
 const ConfirmAppt = () => {
@@ -35,17 +35,16 @@ const ConfirmAppt = () => {
           </View>
 
           <View style={styles.container_input}>
-            <Secondary
+            <InputSecondary
               disabled={box_selected == 0}
               plh={"Nom: Maria"}
-              info={"Prénom *"}
-              typeAndroid={"name"}
-              typeIOS={"name"}
+              typeAndroid={"name-family"}
+              typeIOS={"familyName"}
               returnKeyType={"next"}
               maxLength={20}
               keyboardType={"default"}
             />
-            <Secondary
+            <InputSecondary
               disabled={box_selected == 0}
               plh={"Tél: +216 00.00.00.00.00"}
               typeAndroid={"tel"}

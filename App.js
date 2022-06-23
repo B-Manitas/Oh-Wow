@@ -17,8 +17,9 @@ import Forgotten from "./src/View/Page/Forgotten";
 import { SERVICES } from "./src/Constants/DATA";
 import Appointments from "./src/View/Page/Appointments";
 import Search from "./src/View/Page/Search";
+import Settings from "./src/View/Page/Settings";
+import SettingsApp from "./src/View/Page/SettingsApp";
 
 export default function App() {
-  return <ConsultService data={SERVICES[1]} />;
-  // return <Home />;
+  return <SettingsApp />;
 }

@@ -19,8 +19,8 @@ const SignUp = () => {
         <InputPrimary
           info={"Prénom *"}
           plh={"John"}
-          typeAndroid={"name"}
-          typeIOS={"name"}
+          typeAndroid={"name-given"}
+          typeIOS={"givenName"}
           returnKeyType={"next"}
           maxLength={12}
           keyboardType={"default"}
