@@ -19,7 +19,9 @@ import Appointments from "./src/View/Page/Appointments";
 import Search from "./src/View/Page/Search";
 import Settings from "./src/View/Page/Settings";
 import SettingsApp from "./src/View/Page/SettingsApp";
+import Contact from "./src/View/Page/Contact";
+import Client from "./src/View/Page/Clients";
 
 export default function App() {
-  return <SettingsApp />;
+  return <Client />;
 }
