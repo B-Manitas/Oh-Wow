@@ -9,22 +9,24 @@ const CheckBoxText = ({
   color_bg_active,
   color_bd_active,
   flex,
+  func,
 }) => {
   const [is_active, setIs_active] = useState(state);
+
   return (
     <Pressable
-      onPress={() => setIs_active((v) => !v)}
+      onPress={() => func((v) => !v)}
       style={[
         styles.button,
         { width: size, height: size, flex: flex },
-        is_active && {
+        state && {
           backgroundColor: color_bg_active,
           borderColor: color_bd_active,
         },
       ]}
     >
       <Text
-        style={is_active && { color: color_txt_active }}
+        style={state && { color: color_txt_active }}
         adjustsFontSizeToFit={true}
         numberOfLines={1}
       >

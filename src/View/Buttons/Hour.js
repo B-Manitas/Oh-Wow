@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 
-import Utils from "../../model/Utils";
+import Utils from "../../Model/Utils";
 import Round from "./Round";
 
 const Hour = ({ hour, is_available }) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 
 import Page from "../Container/Page";
@@ -10,6 +10,8 @@ import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 
 const Login = ({ navigation }) => {
+  const [data, setData] = useState({});
+
   return (
     <Page>
       <Header is_back={true} navigation={navigation} />
@@ -23,6 +25,8 @@ const Login = ({ navigation }) => {
           maxLength={50}
           keyboardType={"email-address"}
           secureTextEntry={false}
+          value={data["mail"]}
+          onChangeText={(mail) => setData((props) => ({ ...props, mail }))}
         />
         <InputPrimary
           info={"Mot de passe *"}
@@ -33,6 +37,10 @@ const Login = ({ navigation }) => {
           returnKeyType={"done"}
           maxLength={20}
           keyboardType={"default"}
+          value={data["password"]}
+          onChangeText={(password) =>
+            setData((props) => ({ ...props, password }))
+          }
         />
 
         <View style={styles.content_valid_btn}>
@@ -41,7 +49,6 @@ const Login = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => navigation.navigate("Home")}
           />
 
           <Link

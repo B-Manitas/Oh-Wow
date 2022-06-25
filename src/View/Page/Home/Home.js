@@ -5,8 +5,8 @@ import Page from "../../Container/Page";
 import Header from "../../Parts/Header";
 
 import HomeHeader from "./HomeHeader";
-import { SERVICES } from "../../../Constants/DATA";
 import ServiceLarge from "../../Container/Service/ServiceLarge";
+import { SERVICES } from "../../../Constants/DATA";
 
 const Home = ({ navigation }) => {
   return (

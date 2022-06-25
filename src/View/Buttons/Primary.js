@@ -1,11 +1,25 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const Primary = ({ text, width, height, font_size, style, func }) => {
+const Primary = ({
+  text,
+  width,
+  height,
+  font_size,
+  style,
+  is_active,
+  func,
+}) => {
   return (
     <TouchableOpacity
       onPress={func}
-      style={[styles.content, style, { width: width, paddingVertical: height }]}
+      disabled={!is_active}
+      style={[
+        styles.content,
+        style,
+        { width: width, paddingVertical: height },
+        !is_active && { opacity: 0.4 },
+      ]}
     >
       <Text style={[styles.text, { fontSize: font_size }]}>{text}</Text>
     </TouchableOpacity>

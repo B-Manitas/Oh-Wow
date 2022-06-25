@@ -1,4 +1,9 @@
-import Calendars from "../model/Calendars";
+import Calendars from "../Model/Calendars";
+
+test("getISODateFormat", () => {
+  var date = new Date(2022, 5, 25);
+  expect(Calendars.getISODateFormat(Calendars.today())).toEqual("2022-06-25");
+});
 
 test("RemoveTime", () => {
   var date_with_time = new Date();

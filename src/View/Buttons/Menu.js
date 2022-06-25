@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
-import Utils from "../../model/Utils";
+import Utils from "../../Model/Utils";
 
 const Menu = ({ navigation, type }) => {
   return (

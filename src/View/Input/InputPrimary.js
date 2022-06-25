@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 
-const Primary = ({
+const InputPrimary = ({
   info,
   plh,
   typeAndroid,
@@ -10,11 +10,14 @@ const Primary = ({
   keyboardType,
   maxLength,
   secureTextEntry,
+  value,
+  onChangeText,
+  isValidFormat,
 }) => {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, !isValidFormat && { borderColor: "red" }]}
         keyboardType={keyboardType}
         autoComplete={typeAndroid}
         textContentType={typeIOS}
@@ -25,16 +28,20 @@ const Primary = ({
         maxLength={maxLength}
         secureTextEntry={secureTextEntry}
         returnKeyType={returnKeyType}
+        value={value}
+        onChangeText={onChangeText}
       />
 
-      <View style={styles.content_info}>
+      <View
+        style={[styles.content_info, !isValidFormat && { borderColor: "red" }]}
+      >
         <Text style={styles.text_info}>{info}</Text>
       </View>
     </View>
   );
 };
 
-export default Primary;
+export default InputPrimary;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 
 import Page from "../Container/Page";
@@ -10,7 +10,18 @@ import Link from "../Buttons/Link";
 import CheckBox from "../Componnent/CheckBox";
 import InputPrimary from "../Input/InputPrimary";
 
+import Schema from "../../Objects/Schema";
+import Controller from "../../Controller/Controller";
+import { frontend } from "../../Model/Frontend";
+import CheckBoxText from "../Componnent/CheckBoxText";
+
 const SignUp = ({ navigation }) => {
+  const [is_CGU_accepted, setIsCGUAccepted] = useState(false);
+  const [data, setData] = useState(Schema.users());
+  const [valid_format, setValidFormat] = useState(
+    frontend.fakeAudit(Schema.users())
+  );
+
   return (
     <Page>
       <Header is_back={true} navigation={navigation} />
@@ -25,6 +36,9 @@ const SignUp = ({ navigation }) => {
           maxLength={12}
           keyboardType={"default"}
           secureTextEntry={false}
+          onChangeText={(t) => setData({ ...data, firstname: t })}
+          value={data["firstname"]}
+          isValidFormat={valid_format["firstname"]}
         />
         <InputPrimary
           info={"Nom *"}
@@ -35,6 +49,9 @@ const SignUp = ({ navigation }) => {
           maxLength={12}
           keyboardType={"default"}
           secureTextEntry={false}
+          onChangeText={(t) => setData({ ...data, lastname: t })}
+          value={data["lastname"]}
+          isValidFormat={valid_format["lastname"]}
         />
         <InputPrimary
           info={"Mail *"}
@@ -45,6 +62,9 @@ const SignUp = ({ navigation }) => {
           maxLength={50}
           keyboardType={"email-address"}
           secureTextEntry={false}
+          onChangeText={(t) => setData({ ...data, mail: t })}
+          value={data["mail"]}
+          isValidFormat={valid_format["mail"]}
         />
         <InputPrimary
           info={"Télephone"}
@@ -55,6 +75,9 @@ const SignUp = ({ navigation }) => {
           maxLength={14}
           keyboardType={"phone-pad"}
           secureTextEntry={false}
+          onChangeText={(t) => setData({ ...data, phone: t })}
+          value={data["phone"]}
+          isValidFormat={valid_format["phone"]}
         />
         <InputPrimary
           info={"Mot de passe *"}
@@ -65,10 +88,19 @@ const SignUp = ({ navigation }) => {
           maxLength={20}
           keyboardType={"default"}
           secureTextEntry={true}
+          onChangeText={(t) => setData({ ...data, password: t })}
+          value={data["password"]}
+          isValidFormat={valid_format["password"]}
         />
 
         <View style={styles.content_tou}>
-          <CheckBox is_active={false} size={30} />
+          {/* <CheckBox is_active={false} size={30} /> */}
+          <CheckBoxText
+            func={setIsCGUAccepted}
+            state={is_CGU_accepted}
+            size={30}
+            color_bg_active={"#383838"}
+          />
           <Text style={styles.text_tou}>
             En poursuivant j'accepte les{" "}
             <Link
@@ -84,7 +116,8 @@ const SignUp = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => navigation.navigate("Login")}
+            func={() => Controller.signup(data, setValidFormat, navigation)}
+            is_active={is_CGU_accepted}
           />
 
           <Link

@@ -7,7 +7,7 @@ import Header from "../Parts/Header";
 
 const Navigation = ({ navigation }) => {
   return (
-    <Page>
+    <Page is_safe_input={false}>
       <Header title={"Oh Wow"} navigation={navigation} />
       <View style={styles.container}>
         <View style={styles.nav}>

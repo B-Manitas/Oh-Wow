@@ -1,8 +1,18 @@
 import Utils from "./Utils";
 
 export default {
+  getISODateFormat(date) {
+    month = date.getMonth() + 1;
+    day = date.getDate();
+
+    if (day < 10) day = "0" + day;
+    if (month < 10) month = "0" + month;
+
+    return date.getFullYear() + "-" + month + "-" + day;
+  },
+
   removeTime(date) {
-    return new Date(date.toDateString());
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   },
 
   yesterday() {
@@ -19,6 +29,22 @@ export default {
     var date = this.today();
     date.setDate(date.getDate() + 1);
     return date;
+  },
+
+  ISOYesterday() {
+    return this.getISODateFormat(this.yesterday());
+  },
+
+  ISOToday() {
+    return this.getISODateFormat(this.today());
+  },
+
+  ISOTomorrow() {
+    return this.getISODateFormat(this.tomorrow());
+  },
+
+  isValid(date) {
+    return date.getTime() === date.getTime();
   },
 
   isPast(date) {
@@ -47,7 +73,7 @@ export default {
         is_available: Utils.randomBool(),
       };
     }
-    
+
     return lists;
   },
 

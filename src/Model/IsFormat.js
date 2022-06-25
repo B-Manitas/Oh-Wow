@@ -1,9 +1,31 @@
-const FORMAT_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-const FORMAT_MAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
-const FORMAT_PHONE = /^(\+\d{1,3}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-const FORMAT_AUTHCODE = /^[0-9]{6}$/;
+import Calendars from "./Calendars";
 
-export default {
+export class IsFormat {
+  constructor() {
+    this._FORMAT_PASSWORD =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}([^A-Za-z0-9]{0,})$/;
+    this._FORMAT_MAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
+    this._FORMAT_PHONE = /^[0-9]{10}$/;
+    this._FORMAT_AUTHCODE = /^[0-9]{6}$/;
+    this._FORMAT_BIRTHDATE = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/;
+  }
+
+  isFirstname(name) {
+    return name !== "" && name.toLowerCase() == name;
+  }
+
+  isLastname(name) {
+    return name !== "" && name.toUpperCase() == name;
+  }
+
+  isBirthdate(date) {
+    return (
+      this._FORMAT_BIRTHDATE.test(date) &&
+      Calendars.isValid(new Date(date)) &&
+      Calendars.isPast(new Date(date))
+    );
+  }
+
   /**
    * Check whether the password meets the requirements of the format.
    * @param {String} password The string.
@@ -15,9 +37,9 @@ export default {
    *
    * Otherwise return false.
    */
-  isFormatPassword(password) {
-    return FORMAT_PASSWORD.test(password);
-  },
+  isPassword(password) {
+    return this._FORMAT_PASSWORD.test(password);
+  }
 
   /**
    * Check whether the mail meets the requirements of the format.
@@ -32,13 +54,13 @@ export default {
    *
    * Otherwise return false.
    */
-  isFormatMail(mail) {
-    return FORMAT_MAIL.test(mail);
-  },
+  isMail(mail) {
+    return this._FORMAT_MAIL.test(mail);
+  }
 
   /**
    * Check whether the phone number meets the requirements of the format.
-   * @param {String} tel The string.
+   * @param {String} phone The string.
    * @returns true if and only if all the following conditions are met.
    * - Contains digits.
    * - The length of the phone number is 10.
@@ -47,9 +69,9 @@ export default {
    *
    * Otherwise return false.
    */
-  isFormatPhone(tel) {
-    return FORMAT_PHONE.test(tel);
-  },
+  isPhone(phone) {
+    return this._FORMAT_PHONE.test(phone);
+  }
 
   /**
    * Check whether the authentication code meets the requirements of the format.
@@ -60,18 +82,7 @@ export default {
    *
    * Otherwise return false.
    */
-  isFormatAuthcode(authcode) {
-    return FORMAT_AUTHCODE.test(authcode);
-  },
-
-  /**
-   * Check that the login fields are valid.
-   * @param {Boolean} is_valid_mail true if mail field is valid, else false.
-   * @param {Boolean} is_valid_tel true if tel field is valid, else false.
-   * @param {Boolean} is_valid_password true if password field is valid, else false.
-   * @returns true if all field are valid. Otherwise, return false.
-   */
-  isValidFieldLogin(is_valid_mail, is_valid_tel, is_valid_password) {
-    return is_valid_mail && is_valid_tel && is_valid_password;
-  },
-};
+  isAuthcode(authcode) {
+    return this._FORMAT_AUTHCODE.test(authcode);
+  }
+}
