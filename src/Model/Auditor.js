@@ -1,34 +1,34 @@
-import IsFormat from "./IsFormat";
+import { IsFormat } from "./IsFormat";
 
-export default {
+export class Auditor extends IsFormat {
   fakeAudit(data) {
     Object.keys(data).map((key) => (data[key] = true));
     return data;
-  },
+  }
 
   auditKey(data, key) {
     switch (key) {
       case "firstname":
       case "lastname":
-        return IsFormat.isName(data[key]);
+        return this.isName(data[key]);
       case "mail":
-        return IsFormat.isMail(data[key]);
+        return this.isMail(data[key]);
       case "phone":
-        return IsFormat.isPhone(data[key]);
+        return this.isPhone(data[key]);
       case "birthdate":
-        return IsFormat.isBirthdate(data[key]);
+        return this.isBirthdate(data[key]);
       case "password":
-        return IsFormat.isPassword(data[key]);
+        return this.isPassword(data[key]);
       case "status":
-        return IsFormat.isStatus(data[key]);
+        return this.isStatus(data[key]);
       default:
         return false;
     }
-  },
+  }
 
   audit(data) {
     var report = {};
     Object.keys(data).map((key) => (report[key] = this.auditKey(data, key)));
     return report;
-  },
-};
+  }
+}

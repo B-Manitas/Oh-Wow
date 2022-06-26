@@ -1,7 +1,9 @@
-export default {
-  cleanValue(string) {
-    return string.trim().toLowerCase();
-  },
+import { Schema } from "./Schema";
+
+export class Cleaner extends Schema {
+  cleanValue(val) {
+    return val.trim().toLowerCase();
+  }
 
   cleanDictByKey(dict, key) {
     switch (key) {
@@ -14,20 +16,20 @@ export default {
       default:
         return this.cleanValue(dict[key]);
     }
-  },
+  }
 
   cleanDict(dict) {
     Object.keys(dict).map(
       (key) => (dict[key] = this.cleanDictByKey(dict, key))
     );
     return dict;
-  },
+  }
 
   formattingLastname(lastname) {
     return lastname.trim().toUpperCase();
-  },
+  }
 
   formattingFirstname([first, ...rest]) {
     return [first.toUpperCase(), ...rest].join("").trim();
-  },
-};
+  }
+}

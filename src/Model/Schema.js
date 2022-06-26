@@ -1,15 +1,15 @@
-export default {
+export class Schema {
   _isSchema(data, schema) {
     return Object.keys(data) == Object.keys(schema);
-  },
+  }
 
   isSchemaUser(data) {
     return this._isSchema(data, this.user());
-  },
+  }
 
   login(mail = "", password = "") {
     return { mail, password };
-  },
+  }
 
   user() {
     return {
@@ -21,5 +21,5 @@ export default {
       status: "valid",
       password: "",
     };
-  },
-};
+  }
+}

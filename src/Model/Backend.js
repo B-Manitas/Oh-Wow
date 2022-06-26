@@ -1,6 +1,6 @@
 import { Request } from "./Request";
 
-class Backend extends Request {
+export class Backend extends Request {
   constructor() {
     super({
       url: "https://data.mongodb-api.com/app/data-qqvij/endpoint/data/v1/action",
@@ -34,5 +34,3 @@ class Backend extends Request {
     return resp["document"];
   }
 }
-
-export default Backend;

@@ -9,13 +9,12 @@ import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 import Controller from "../../Controller/Controller";
-import Schema from "../../Model/Schema";
-import Auditor from "../../Model/Auditor";
+import { controller } from "../../Model/Main";
 
 const Login = ({ navigation }) => {
-  const [data, setData] = useState(Schema.user());
+  const [data, setData] = useState(controller.frontend.user());
   const [valid_format, setValidFormat] = useState(
-    Auditor.fakeAudit(Schema.user())
+    controller.frontend.fakeAudit(controller.frontend.user())
   );
 
   return (

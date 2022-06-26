@@ -1,4 +1,3 @@
-import NetworkError from "../Exceptions/NetworkError";
 import NetworkStatusError from "../Exceptions/NetworkStatusError";
 
 export class Request {

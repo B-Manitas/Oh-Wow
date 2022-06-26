@@ -8,17 +8,15 @@ import Footer from "../Parts/Footer";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 import InputPrimary from "../Input/InputPrimary";
-
-import Controller from "../../Controller/Controller";
 import CheckBoxText from "../Componnent/CheckBoxText";
-import Schema from "../../Model/Schema";
-import Auditor from "../../Model/Auditor";
+
+import { controller } from "../../Model/Main";
 
 const SignUp = ({ navigation }) => {
   const [is_CGU_accepted, setIsCGUAccepted] = useState(false);
-  const [data, setData] = useState(Schema.user());
+  const [data, setData] = useState(controller.frontend.user());
   const [valid_format, setValidFormat] = useState(
-    Auditor.fakeAudit(Schema.user())
+    controller.frontend.fakeAudit(controller.frontend.user())
   );
 
   return (
@@ -93,7 +91,6 @@ const SignUp = ({ navigation }) => {
         />
 
         <View style={styles.content_tou}>
-          {/* <CheckBox is_active={false} size={30} /> */}
           <CheckBoxText
             func={setIsCGUAccepted}
             state={is_CGU_accepted}
@@ -115,7 +112,7 @@ const SignUp = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => Controller.signup(data, setValidFormat, navigation)}
+            func={() => controller.signup(data, setValidFormat, navigation)}
             is_active={is_CGU_accepted}
           />
 
