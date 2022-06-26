@@ -1,3 +1,4 @@
+// Import Custom Exceptions
 import NetworkStatusError from "exceptions/NetworkStatusError";
 
 export class Request {
@@ -6,6 +7,12 @@ export class Request {
     this._headers = options.headers || {};
   }
 
+  /**
+   * Set field of the header.
+   * @param {String} key The key to add in the header.
+   * @param {String} value The value of key.
+   * @returns this.
+   */
   setHeaders(key, value) {
     this._headers[key] = value;
     return this;

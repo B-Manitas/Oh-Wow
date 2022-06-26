@@ -3,20 +3,27 @@ import { Alert } from "react-native";
 
 // Import Custom Exceptions
 import InvalidDataError from "exceptions/InvalidDataError";
-import InvalidSchemaError from "exceptions/InvalidSchemaError";
+import UserAlreadyExist from "exceptions/UserAlreadyExist";
 import NetworkError from "exceptions/NetworkError";
 import NetworkStatusError from "exceptions/NetworkStatusError";
-import UserAlreadyExist from "exceptions/UserAlreadyExist";
+import InvalidSchemaError from "exceptions/InvalidSchemaError";
 
-export class ErrorsManager {
+export class ErrorsCatcher {
+  /** Capture errors before the user interface. */
   constructor() {
     this.error = undefined;
   }
 
+  /**
+   * Catching the InvalidDataError.
+   * @param {Function} func The hook function to be called when required
+   * fields in the user data are missing.
+   */
   manageInvalidData(func) {
     func((prev) => ({ ...prev, ...this.error.invalid_data }));
   }
 
+  /** Catching the UserAlreadyExist. */
   manageUserAlreadyExist() {
     Alert.alert(
       "User already exist",
@@ -24,6 +31,7 @@ export class ErrorsManager {
     );
   }
 
+  /** Catching the NetworkError. */
   manageNetwork() {
     Alert.alert(
       "Network Error",
@@ -31,6 +39,7 @@ export class ErrorsManager {
     );
   }
 
+  /** Catching the NetworkStatuError. */
   manageNetworkStatus() {
     Alert.alert(
       "Network Status Error",
@@ -38,6 +47,7 @@ export class ErrorsManager {
     );
   }
 
+  /** Catching the InvalidSchemaError. */
   manageInvalidSchema() {
     Alert.alert(
       "Invalid Data",
@@ -51,6 +61,7 @@ export class ErrorsManager {
     );
   }
 
+  /** Catching the Error. */
   manageDefault() {
     console.log(error);
     Alert.alert(
@@ -59,6 +70,12 @@ export class ErrorsManager {
     );
   }
 
+  /**
+   *
+   * @param {Any} error The error catched.
+   * @param {Function} func_invalid_data The hook function to be called when required
+   * fields in the user data are missing.
+   */
   manageAllErrors(error, func_invalid_data) {
     this.error = error;
 
