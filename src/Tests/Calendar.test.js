@@ -2,7 +2,7 @@ import Calendars from "../Model/Calendars";
 
 test("getISODateFormat", () => {
   var date = new Date(2022, 5, 25);
-  expect(Calendars.getISODateFormat(Calendars.today())).toEqual("2022-06-25");
+  expect(Calendars.getISODateFormat(date)).toEqual("2022-06-25");
 });
 
 test("RemoveTime", () => {

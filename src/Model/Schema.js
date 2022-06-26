@@ -4,30 +4,22 @@ export default {
   },
 
   isSchemaUser(data) {
-    return this._isSchema(data, this.users());
+    return this._isSchema(data, this.user());
   },
 
   login(mail = "", password = "") {
     return { mail, password };
   },
 
-  users(
-    firstname = "",
-    lastname = "",
-    mail = "",
-    phone = "",
-    status = "",
-    birthdate = "",
-    password = ""
-  ) {
+  user() {
     return {
-      firstname,
-      lastname,
-      mail,
-      phone,
-      birthdate,
-      status,
-      password,
+      firstname: "",
+      lastname: "",
+      mail: "",
+      phone: "",
+      birthdate: "2000-01-01",
+      status: "valid",
+      password: "",
     };
   },
 };

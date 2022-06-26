@@ -4,16 +4,11 @@ const FORMAT_AUTHCODE = /^[0-9]{6}$/;
 const FORMAT_MAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
 const FORMAT_PHONE = /^[0-9]{10}$/;
 const FORMAT_BIRTHDATE = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/;
-const FORMAT_PASSWORD =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}([^A-Za-z0-9]{0,})$/;
+const FORMAT_PASSWORD = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
 
 export default {
-  isFirstname(name) {
-    return name !== "" && name.toLowerCase() == name;
-  },
-
-  isLastname(name) {
-    return name !== "" && name.toUpperCase() == name;
+  isName(name) {
+    return name !== "";
   },
 
   isBirthdate(date) {
@@ -82,5 +77,9 @@ export default {
    */
   isAuthcode(authcode) {
     return FORMAT_AUTHCODE.test(authcode);
+  },
+
+  isStatus(status) {
+    return status === "valid" || status === "pending";
   },
 };

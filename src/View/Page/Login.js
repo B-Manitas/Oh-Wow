@@ -13,9 +13,9 @@ import Schema from "../../Model/Schema";
 import Auditor from "../../Model/Auditor";
 
 const Login = ({ navigation }) => {
-  const [data, setData] = useState(Schema.users());
+  const [data, setData] = useState(Schema.user());
   const [valid_format, setValidFormat] = useState(
-    Auditor.fakeAudit(Schema.users())
+    Auditor.fakeAudit(Schema.user())
   );
 
   return (

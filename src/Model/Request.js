@@ -16,8 +16,6 @@ export class Request {
     const response = await fetch(this._url + endpoint, {
       ...options,
       headers: this._headers,
-    }).catch((error) => {
-      throw new NetworkError(error);
     });
 
     if (!response.ok) throw new NetworkStatusError();

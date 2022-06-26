@@ -16,9 +16,9 @@ import Auditor from "../../Model/Auditor";
 
 const SignUp = ({ navigation }) => {
   const [is_CGU_accepted, setIsCGUAccepted] = useState(false);
-  const [data, setData] = useState(Schema.users());
+  const [data, setData] = useState(Schema.user());
   const [valid_format, setValidFormat] = useState(
-    Auditor.fakeAudit(Schema.users())
+    Auditor.fakeAudit(Schema.user())
   );
 
   return (
@@ -67,11 +67,11 @@ const SignUp = ({ navigation }) => {
         />
         <InputPrimary
           info={"Télephone"}
-          plh={"+216 071122334455"}
+          plh={"060000000000"}
           typeAndroid={"tel"}
           typeIOS={"telephoneNumber"}
           returnKeyType={"next"}
-          maxLength={14}
+          maxLength={10}
           keyboardType={"phone-pad"}
           secureTextEntry={false}
           onChangeText={(t) => setData({ ...data, phone: t })}

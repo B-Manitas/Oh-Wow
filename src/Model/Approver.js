@@ -10,7 +10,7 @@ export default {
   approve(data) {
     let audit = Auditor.audit(data);
     return {
-      is_valid: Object.keys(audit).every((val) => audit[val] == true),
+      is_valid: this.isApprovedAudit(audit),
       audit,
     };
   },

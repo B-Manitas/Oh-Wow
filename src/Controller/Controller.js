@@ -9,7 +9,8 @@ import Frontend from "../Model/Frontend";
 export default {
   async signup(data, func, navigation) {
     try {
-      await Frontend.signup(data);
+      const id = await Frontend.signup(data);
+      Alert.alert("Welcome", `ID: ${id}`);
       navigation.navigate("Home");
     } catch (error) {
       if (error instanceof InvalidDataError) func(error.invalid_data);

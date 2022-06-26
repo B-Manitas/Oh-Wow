@@ -9,9 +9,8 @@ export default {
   auditKey(data, key) {
     switch (key) {
       case "firstname":
-        return IsFormat.isFirstname(data[key]);
       case "lastname":
-        return IsFormat.isLastname(data[key]);
+        return IsFormat.isName(data[key]);
       case "mail":
         return IsFormat.isMail(data[key]);
       case "phone":
@@ -20,6 +19,8 @@ export default {
         return IsFormat.isBirthdate(data[key]);
       case "password":
         return IsFormat.isPassword(data[key]);
+      case "status":
+        return IsFormat.isStatus(data[key]);
       default:
         return false;
     }
