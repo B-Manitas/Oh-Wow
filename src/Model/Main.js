@@ -1,6 +1,6 @@
 import { Controller } from "../Controller/Controller";
-import { Backend } from "./Backend";
-import { Frontend } from "./Frontend";
+import { Backend } from "./Back/Backend";
+import { Frontend } from "./Front/Frontend";
 
 const backend = new Backend();
 const frontend = new Frontend(backend);

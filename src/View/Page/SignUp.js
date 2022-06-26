@@ -14,9 +14,9 @@ import { controller } from "../../Model/Main";
 
 const SignUp = ({ navigation }) => {
   const [is_CGU_accepted, setIsCGUAccepted] = useState(false);
-  const [data, setData] = useState(controller.frontend.user());
+  const [data, setData] = useState(controller.frontend.schemaUser());
   const [valid_format, setValidFormat] = useState(
-    controller.frontend.fakeAudit(controller.frontend.user())
+    controller.frontend.fakeAudit(controller.frontend.schemaUser())
   );
 
   return (

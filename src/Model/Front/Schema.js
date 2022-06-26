@@ -4,14 +4,14 @@ export class Schema {
   }
 
   isSchemaUser(data) {
-    return this._isSchema(data, this.user());
+    return this._isSchema(data, this.schemaUser());
   }
 
-  login(mail = "", password = "") {
+  schemaLogin(mail = "", password = "") {
     return { mail, password };
   }
 
-  user() {
+  schemaUser() {
     return {
       firstname: "",
       lastname: "",

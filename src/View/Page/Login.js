@@ -8,13 +8,13 @@ import Footer from "../Parts/Footer";
 import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
-import Controller from "../../Controller/Controller";
+
 import { controller } from "../../Model/Main";
 
 const Login = ({ navigation }) => {
-  const [data, setData] = useState(controller.frontend.user());
+  const [data, setData] = useState(controller.frontend.schemaLogin());
   const [valid_format, setValidFormat] = useState(
-    controller.frontend.fakeAudit(controller.frontend.user())
+    controller.frontend.fakeAudit(controller.frontend.schemaLogin())
   );
 
   return (
@@ -56,7 +56,7 @@ const Login = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => Controller.login(data, setValidFormat, navigation)}
+            func={() => controller.login(data, setValidFormat, navigation)}
             is_active={true}
           />
 

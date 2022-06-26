@@ -29,8 +29,9 @@ export class Backend extends Request {
       ...this._body,
       collection: "user",
       filter: { ...user },
+      projection: { _id: 1, firstname: 1 },
     });
 
-    return resp["document"];
+    return resp["document"].firstname;
   }
 }

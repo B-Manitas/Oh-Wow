@@ -1,4 +1,4 @@
-import Calendars from "./Calendars";
+import Calendars from "../Calendars";
 import { Cleaner } from "./Cleaner";
 
 export class IsFormat extends Cleaner {
