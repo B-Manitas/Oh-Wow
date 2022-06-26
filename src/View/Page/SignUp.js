@@ -7,19 +7,18 @@ import Footer from "../Parts/Footer";
 
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
-import CheckBox from "../Componnent/CheckBox";
 import InputPrimary from "../Input/InputPrimary";
 
-import Schema from "../../Objects/Schema";
 import Controller from "../../Controller/Controller";
-import { frontend } from "../../Model/Frontend";
 import CheckBoxText from "../Componnent/CheckBoxText";
+import Schema from "../../Model/Schema";
+import Auditor from "../../Model/Auditor";
 
 const SignUp = ({ navigation }) => {
   const [is_CGU_accepted, setIsCGUAccepted] = useState(false);
   const [data, setData] = useState(Schema.users());
   const [valid_format, setValidFormat] = useState(
-    frontend.fakeAudit(Schema.users())
+    Auditor.fakeAudit(Schema.users())
   );
 
   return (

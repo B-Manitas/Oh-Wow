@@ -1,4 +1,5 @@
-import { NetworkError } from "../Exceptions/NetworkError";
+import NetworkError from "../Exceptions/NetworkError";
+import NetworkStatusError from "../Exceptions/NetworkStatusError";
 
 export class Request {
   constructor(options = {}) {
@@ -12,12 +13,14 @@ export class Request {
   }
 
   async _fetch(endpoint, options = {}) {
-    const response = await fetch(this.url + endpoint, {
+    const response = await fetch(this._url + endpoint, {
       ...options,
       headers: this._headers,
+    }).catch((error) => {
+      throw new NetworkError(error);
     });
 
-    if (!response.ok) throw new NetworkError();
+    if (!response.ok) throw new NetworkStatusError();
     return response.json();
   }
 
@@ -25,8 +28,12 @@ export class Request {
     return this._fetch(endpoint, { ...options, method: "GET" });
   }
 
-  post(endpoint, options = {}) {
-    return this._fetch(endpoint, { ...options, method: "POST" });
+  async post(endpoint, body, options = {}) {
+    return await this._fetch(endpoint, {
+      ...options,
+      body: JSON.stringify(body),
+      method: "POST",
+    });
   }
 
   delete(endpoint, options = {}) {

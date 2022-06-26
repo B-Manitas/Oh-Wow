@@ -1,4 +1,4 @@
-export class InvalidDataError extends Error {
+export default class InvalidDataError extends Error {
   constructor(invalid_data = []) {
     super();
     this.name = "InvalidDataError";

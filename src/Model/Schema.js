@@ -1,7 +1,15 @@
-class Schema {
+export default {
+  _isSchema(data, schema) {
+    return Object.keys(data) == Object.keys(schema);
+  },
+
   isSchemaUser(data) {
-    return Object.keys(data) == Object.keys(this.users());
-  }
+    return this._isSchema(data, this.users());
+  },
+
+  login(mail = "", password = "") {
+    return { mail, password };
+  },
 
   users(
     firstname = "",
@@ -21,7 +29,5 @@ class Schema {
       status,
       password,
     };
-  }
-}
-
-export const schema = new Schema();
+  },
+};

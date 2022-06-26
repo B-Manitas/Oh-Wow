@@ -1,4 +1,4 @@
-export class InvalidSchemaError extends Error {
+export default class InvalidSchemaError extends Error {
   constructor(invalid_data = []) {
     super();
     this.name = "InvalidSchemaError";

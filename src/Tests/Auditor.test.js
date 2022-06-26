@@ -1,4 +1,4 @@
-import { Auditor } from "../Model/Auditor";
+import Auditor from "../Model/Auditor";
 
 var auditor = new Auditor();
 

@@ -1,6 +1,5 @@
 import React from "react";
 
-import { SERVICES } from "./src/Constants/DATA";
 import Home from "./src/View/Page/Home/Home";
 import Navigation from "./src/View/Page/Navigation";
 import Connection from "./src/View/Page/Connection";

@@ -8,9 +8,15 @@ import Footer from "../Parts/Footer";
 import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
+import Controller from "../../Controller/Controller";
+import Schema from "../../Model/Schema";
+import Auditor from "../../Model/Auditor";
 
 const Login = ({ navigation }) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(Schema.users());
+  const [valid_format, setValidFormat] = useState(
+    Auditor.fakeAudit(Schema.users())
+  );
 
   return (
     <Page>
@@ -27,6 +33,7 @@ const Login = ({ navigation }) => {
           secureTextEntry={false}
           value={data["mail"]}
           onChangeText={(mail) => setData((props) => ({ ...props, mail }))}
+          isValidFormat={valid_format["mail"]}
         />
         <InputPrimary
           info={"Mot de passe *"}
@@ -41,6 +48,7 @@ const Login = ({ navigation }) => {
           onChangeText={(password) =>
             setData((props) => ({ ...props, password }))
           }
+          isValidFormat={valid_format["password"]}
         />
 
         <View style={styles.content_valid_btn}>
@@ -49,6 +57,8 @@ const Login = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
+            func={() => Controller.login(data, setValidFormat, navigation)}
+            is_active={true}
           />
 
           <Link

@@ -1,7 +1,6 @@
-export class NetworkError extends Error {
-  constructor() {
-    super();
-    this.name = "NetworkError";
-    this.message = "Network error";
+export default class NetworkError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "Network Error";
   }
 }

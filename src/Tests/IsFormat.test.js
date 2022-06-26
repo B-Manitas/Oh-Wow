@@ -1,4 +1,4 @@
-import { IsFormat } from "../Model/IsFormat";
+import IsFormat from "../Model/IsFormat";
 import Calendars from "../Model/Calendars";
 
 var is_format = new IsFormat();

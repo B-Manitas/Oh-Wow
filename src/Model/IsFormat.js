@@ -1,30 +1,28 @@
 import Calendars from "./Calendars";
 
-export class IsFormat {
-  constructor() {
-    this._FORMAT_PASSWORD =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}([^A-Za-z0-9]{0,})$/;
-    this._FORMAT_MAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
-    this._FORMAT_PHONE = /^[0-9]{10}$/;
-    this._FORMAT_AUTHCODE = /^[0-9]{6}$/;
-    this._FORMAT_BIRTHDATE = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/;
-  }
+const FORMAT_AUTHCODE = /^[0-9]{6}$/;
+const FORMAT_MAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
+const FORMAT_PHONE = /^[0-9]{10}$/;
+const FORMAT_BIRTHDATE = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/;
+const FORMAT_PASSWORD =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}([^A-Za-z0-9]{0,})$/;
 
+export default {
   isFirstname(name) {
     return name !== "" && name.toLowerCase() == name;
-  }
+  },
 
   isLastname(name) {
     return name !== "" && name.toUpperCase() == name;
-  }
+  },
 
   isBirthdate(date) {
     return (
-      this._FORMAT_BIRTHDATE.test(date) &&
+      FORMAT_BIRTHDATE.test(date) &&
       Calendars.isValid(new Date(date)) &&
       Calendars.isPast(new Date(date))
     );
-  }
+  },
 
   /**
    * Check whether the password meets the requirements of the format.
@@ -38,8 +36,8 @@ export class IsFormat {
    * Otherwise return false.
    */
   isPassword(password) {
-    return this._FORMAT_PASSWORD.test(password);
-  }
+    return FORMAT_PASSWORD.test(password);
+  },
 
   /**
    * Check whether the mail meets the requirements of the format.
@@ -55,8 +53,8 @@ export class IsFormat {
    * Otherwise return false.
    */
   isMail(mail) {
-    return this._FORMAT_MAIL.test(mail);
-  }
+    return FORMAT_MAIL.test(mail);
+  },
 
   /**
    * Check whether the phone number meets the requirements of the format.
@@ -70,8 +68,8 @@ export class IsFormat {
    * Otherwise return false.
    */
   isPhone(phone) {
-    return this._FORMAT_PHONE.test(phone);
-  }
+    return FORMAT_PHONE.test(phone);
+  },
 
   /**
    * Check whether the authentication code meets the requirements of the format.
@@ -83,6 +81,6 @@ export class IsFormat {
    * Otherwise return false.
    */
   isAuthcode(authcode) {
-    return this._FORMAT_AUTHCODE.test(authcode);
-  }
-}
+    return FORMAT_AUTHCODE.test(authcode);
+  },
+};

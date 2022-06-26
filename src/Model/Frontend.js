@@ -1,14 +1,34 @@
-import { InvalidDataError } from "../Exceptions/InvalidDataError";
-import { Auditor } from "./Auditor";
-import { backend } from "./Backend";
+import InvalidDataError from "../Exceptions/InvalidDataError";
+import UserAlreadyExist from "../Exceptions/UserAlreadyExist";
+import Approver from "./Approver";
+import Backend from "./Backend";
 
-class Frontend extends Auditor {
-  signup(user) {
-    const data = this.isValidSignupData(user);
+var backend = new Backend();
 
-    if (data.is_valid) return backend.signup(user);
-    else throw new InvalidDataError(data.invalid_data);
-  }
-}
+export default {
+  async _actions(user, func_validation, func_backend) {
+    const data = func_validation(user);
 
-export const frontend = new Frontend();
+    if (data.is_valid) return await func_backend(user);
+    else throw new InvalidDataError(data.audit);
+  },
+
+  async isExistingUser(user) {
+    return (await this._actions(user, Approver.approve, backend.login.bind(backend))) != null;
+  },
+
+  async signup(user) {
+    if (await this.isExistingUser({ mail: user["mail"] }))
+      throw new UserAlreadyExist(user);
+
+    return this._actions(user, Approver.approve, backend.signup);
+  },
+
+  async login(user) {
+    return await this._actions(
+      user,
+      Approver.approve,
+      Backend.login.bind(backend)
+    );
+  },
+};
