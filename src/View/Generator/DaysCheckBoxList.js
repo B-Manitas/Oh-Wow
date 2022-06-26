@@ -1,4 +1,4 @@
-import { DAYS } from "../../Constants/DAYS";
+import { DAYS } from "../../constants/DAYS";
 import CheckBoxText from "../Componnent/CheckBoxText";
 
 const DaysCheckBoxList = () => {

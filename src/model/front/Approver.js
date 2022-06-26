@@ -1,4 +1,4 @@
-import InvalidSchemaError from "../../Exceptions/InvalidSchemaError";
+import InvalidSchemaError from "exceptions/InvalidSchemaError";
 import { Auditor } from "./Auditor";
 
 export class Approver extends Auditor {

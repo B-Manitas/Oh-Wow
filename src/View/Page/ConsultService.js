@@ -10,7 +10,7 @@ import {
 
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
-import { ICON } from "../../Constants/IMAGES";
+import { ICON } from "../../constants/IMAGES";
 import CheckBox from "../Componnent/CheckBox";
 import ServiceInfo from "../Container/ServiceInfo";
 import Absolute from "../Buttons/Absolute";

@@ -1,4 +1,4 @@
-import { ICON } from "../Constants/IMAGES";
+import { ICON } from "../constants/IMAGES";
 
 export default {
   getIconHeaders(type) {

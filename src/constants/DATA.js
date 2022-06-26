@@ -1,4 +1,4 @@
-import Utils from "../Model/Utils";
+import Utils from "model/Utils";
 import { PHOTO } from "./IMAGES";
 
 export const SERVICES = [

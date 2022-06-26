@@ -1,4 +1,4 @@
-import NetworkStatusError from "../../Exceptions/NetworkStatusError";
+import NetworkStatusError from "exceptions/NetworkStatusError";
 
 export class Request {
   constructor(options = {}) {

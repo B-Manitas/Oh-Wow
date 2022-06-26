@@ -10,7 +10,7 @@ import Link from "../Buttons/Link";
 import InputPrimary from "../Input/InputPrimary";
 import CheckBoxText from "../Componnent/CheckBoxText";
 
-import { controller } from "../../Model/Main";
+import { controller } from "model/Main";
 
 const SignUp = ({ navigation }) => {
   const [is_CGU_accepted, setIsCGUAccepted] = useState(false);

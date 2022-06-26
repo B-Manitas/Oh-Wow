@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { APPOINTMENTS } from "../../Constants/DATA";
+import { APPOINTMENTS } from "../../constants/DATA";
 import Appointment from "../Container/Appointment";
 import Page from "../Container/Page";
 import Header from "../Parts/Header";

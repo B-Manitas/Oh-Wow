@@ -1,4 +1,4 @@
-import { Request } from "./Request";
+import { Request } from "model/back/Request";
 
 export class Backend extends Request {
   constructor() {

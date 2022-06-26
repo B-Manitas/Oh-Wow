@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
-import { SERVICES } from "../../Constants/DATA";
+import { SERVICES } from "../../constants/DATA";
 import Round from "../Buttons/Round";
 import Searchbar from "../Componnent/Searchbar";
 

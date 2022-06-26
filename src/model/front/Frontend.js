@@ -1,5 +1,5 @@
-import InvalidDataError from "../../Exceptions/InvalidDataError";
-import UserAlreadyExist from "../../Exceptions/UserAlreadyExist";
+import InvalidDataError from "exceptions/InvalidDataError";
+import UserAlreadyExist from "exceptions/UserAlreadyExist";
 
 import { Approver } from "./Approver";
 

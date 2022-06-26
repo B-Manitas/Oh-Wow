@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import NavRound from "../../Buttons/NavRound";
 
-import { PHOTO } from "../../../Constants/IMAGES";
+import { PHOTO } from "../../../constants/IMAGES";
 
 const HomeHeader = ({ navigation }) => {
   return (

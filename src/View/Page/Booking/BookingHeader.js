@@ -1,8 +1,8 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import Calendars from "../../../Model/Calendars";
+import Calendars from "model/Calendars";
 
-import Utils from "../../../Model/Utils";
+import Utils from "model/Utils";
 
 import DaysList from "../../Generator/DaysList";
 import PickerMonths from "../../Picker/PickerMonths";

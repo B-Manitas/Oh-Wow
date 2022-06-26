@@ -1,11 +1,11 @@
 import { Alert } from "react-native";
 
 // Import Custom Exceptions
-import InvalidDataError from "../Exceptions/InvalidDataError";
-import InvalidSchemaError from "../Exceptions/InvalidSchemaError";
-import NetworkError from "../Exceptions/NetworkError";
-import NetworkStatusError from "../Exceptions/NetworkStatusError";
-import UserAlreadyExist from "../Exceptions/UserAlreadyExist";
+import InvalidDataError from "exceptions/InvalidDataError";
+import InvalidSchemaError from "exceptions/InvalidSchemaError";
+import NetworkError from "exceptions/NetworkError";
+import NetworkStatusError from "exceptions/NetworkStatusError";
+import UserAlreadyExist from "exceptions/UserAlreadyExist";
 
 export class Controller {
   constructor(backend, frontend) {

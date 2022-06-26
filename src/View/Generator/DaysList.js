@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, StyleSheet } from "react-native";
-import { DAYS } from "../../Constants/DAYS";
+import { DAYS } from "../../constants/DAYS";
 
 const DaysList = () => {
   return DAYS.map((day, id) => (

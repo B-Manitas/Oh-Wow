@@ -9,7 +9,7 @@ import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 
-import { controller } from "../../Model/Main";
+import { controller } from "model/Main";
 
 const Login = ({ navigation }) => {
   const [data, setData] = useState(controller.frontend.schemaLogin());

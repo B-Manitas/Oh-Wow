@@ -7,8 +7,8 @@ import Calendar from "../../Componnent/Calendar";
 import BookingHeader from "./BookingHeader";
 import BookingFooter from "./BookingFooter";
 
-import Utils from "../../../Model/Utils";
-import Calendars from "../../../Model/Calendars";
+import Utils from "model/Utils";
+import Calendars from "model/Calendars";
 
 const Booking = ({ navigation }) => {
   const date = new Date();

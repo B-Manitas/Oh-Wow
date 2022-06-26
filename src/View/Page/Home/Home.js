@@ -6,7 +6,7 @@ import Header from "../../Parts/Header";
 
 import HomeHeader from "./HomeHeader";
 import ServiceLarge from "../../Container/Service/ServiceLarge";
-import { SERVICES } from "../../../Constants/DATA";
+import { SERVICES } from "../../../constants/DATA";
 
 const Home = ({ navigation }) => {
   return (

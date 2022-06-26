@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { SERVICES } from "../../Constants/DATA";
-import { ICON } from "../../Constants/IMAGES";
+import { SERVICES } from "constants/DATA";
+import { ICON } from "constants/IMAGES";
 
 const Appointment = ({ data }) => {
   return (

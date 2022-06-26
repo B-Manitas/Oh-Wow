@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import Calendars from "../../Model/Calendars";
+import Calendars from "model/Calendars";
 
-import Utils from "../../Model/Utils";
 import Round from "./Round";
 
 const Day = ({ day, state_day }) => {

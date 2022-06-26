@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Calendars from "../../Model/Calendars";
+import Calendars from "model/Calendars";
 
 import Hour from "../Buttons/Hour";
 

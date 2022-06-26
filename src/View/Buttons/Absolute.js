@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, Image, TouchableOpacity } from "react-native";
-import Utils from "../../Model/Utils";
+import Utils from "model/Utils";
 
 const Absolute = ({
   text,

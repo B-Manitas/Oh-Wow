@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
-import Utils from "../../Model/Utils";
+import Utils from "../../model/Utils";
 
 import Menu from "../Buttons/Menu";
 

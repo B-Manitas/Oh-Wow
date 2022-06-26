@@ -1,5 +1,5 @@
 import { Picker } from "@react-native-picker/picker";
-import { MONTHS } from "../../Constants/DAYS";
+import { MONTHS } from "../../constants/DAYS";
 
 const ItemsMonths = () => {
   return MONTHS.forEach((month, id) => (

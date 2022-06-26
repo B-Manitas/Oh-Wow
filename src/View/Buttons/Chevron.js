@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
-import { ICON } from "../../Constants/IMAGES";
+import { ICON } from "constants/IMAGES";
 
 const Chevron = ({ text }) => {
   return (

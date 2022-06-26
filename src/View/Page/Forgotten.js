@@ -7,7 +7,7 @@ import Footer from "../Parts/Footer";
 import Primary from "../Buttons/Primary";
 import InputPrimary from "../Input/InputPrimary";
 
-import { ICON } from "../../Constants/IMAGES";
+import { ICON } from "../../constants/IMAGES";
 
 const Forgotten = ({ navigation }) => {
   return (
