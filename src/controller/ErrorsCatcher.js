@@ -63,7 +63,7 @@ export class ErrorsCatcher {
 
   /** Catching the Error. */
   manageDefault() {
-    console.log(error);
+    console.log(this.error);
     Alert.alert(
       "Error",
       `An error was occured, please try again later.\n${this.error}`
@@ -84,24 +84,24 @@ export class ErrorsCatcher {
         this.manageInvalidData(func_invalid_data);
         break;
 
-      case error instanceof UserAlreadyExist:
+      case this.error instanceof UserAlreadyExist:
         this.manageUserAlreadyExist();
         break;
 
-      case error instanceof NetworkError:
+      case this.error instanceof NetworkError:
         this.manageNetwork();
         break;
 
-      case error instanceof NetworkStatusError:
-        this.manageNetworkStatus(error);
+      case this.error instanceof NetworkStatusError:
+        this.manageNetworkStatus();
         break;
 
-      case error instanceof InvalidSchemaError:
-        this.manageInvalidSchema(error);
+      case this.error instanceof InvalidSchemaError:
+        this.manageInvalidSchema();
         break;
 
       default:
-        this.manageDefault(error);
+        this.manageDefault();
         break;
     }
   }

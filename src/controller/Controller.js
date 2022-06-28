@@ -1,9 +1,15 @@
+// Import react-native componnent
+import { Alert } from "react-native";
+
 // Super-class import
 import { ErrorsCatcher } from "./ErrorsCatcher";
 
+// Import redux componnent
+import { addUserStore } from "../redux/ActionsCreator";
+
 export class Controller extends ErrorsCatcher {
   /**
-   * Manage the link between the application and the user. 
+   * Manage the link between the application and the user.
    * @param {Backend} backend The backend of the application.
    * @param {Frontend} frontend The frontend of the application.
    */
@@ -22,8 +28,9 @@ export class Controller extends ErrorsCatcher {
    */
   async signup(data, func, navigation) {
     try {
-      const id = await this.frontend.signup(data);
-      Alert.alert("Welcome", `ID: ${id}`);
+      const user = await this.frontend.signup(data);
+      Alert.alert("Welcome", `ID: ${user._id}`);
+      addUserStore(user);
       navigation.navigate("Home");
     } catch (error) {
       this.manageAllErrors(error, func);
@@ -39,8 +46,9 @@ export class Controller extends ErrorsCatcher {
    */
   async login(data, func, navigation) {
     try {
-      const id = await this.frontend.login(data);
-      Alert.alert("Welcome Back", `ID: ${id}`);
+      const user = await this.frontend.login(data);
+      Alert.alert("Welcome Back", `ID: ${user._id}`);
+      addUserStore(user);
       navigation.navigate("Home");
     } catch (error) {
       this.manageAllErrors(error, func);

@@ -14,7 +14,8 @@ export class Frontend extends Approver {
 
     if (data.is_valid) {
       user = this.cleanDict(user);
-      return await func_backend(user);
+      const id = await func_backend(user);
+      return { ...id, ...user };
     } else throw new InvalidDataError(data.audit);
   }
 

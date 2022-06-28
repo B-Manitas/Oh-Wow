@@ -1,0 +1,2 @@
+export const CONNECTION = "CONNECTION";
+export const DISCONNECTION = "DISCONNECTION";

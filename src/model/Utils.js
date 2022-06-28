@@ -45,4 +45,9 @@ export default {
         break;
     }
   },
+
+  removeKey(object, key) {
+    delete object[key];
+    return object;
+  },
 };
