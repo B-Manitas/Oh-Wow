@@ -9,8 +9,16 @@ import NetworkError from "exceptions/NetworkError";
 import NetworkStatusError from "exceptions/NetworkStatusError";
 import InvalidSchemaError from "exceptions/InvalidSchemaError";
 
+/**
+ * Capture errors before the user interface.
+ * @methods {@link manageInvalidData}, {@link manageUserAlreadyExist}, {@link manageLogin}
+ * , {@link manageNetwork}, {@link manageNetworkStatus}, {@link manageInvalidSchema}
+ * , {@link manageInvalidSchema}, {@link manageDefault}, {@link manageAllErrors}.
+ * 
+ * @public These are the public attributes of the class.
+ * {@link error} The error catched.
+ */
 export class ErrorsCatcher {
-  /** Capture errors before the user interface. */
   constructor() {
     this.error = undefined;
   }
@@ -32,6 +40,7 @@ export class ErrorsCatcher {
     );
   }
 
+  /** Catching the LogginError. */
   manageLogin() {
     Alert.alert(
       "The username or password is incorrect",

@@ -1,7 +1,16 @@
-import Calendars from "../Calendars";
-import { Cleaner } from "./Cleaner";
+// Super-class import
+import { Formatter } from "./Formatter";
 
-export class IsFormat extends Cleaner {
+// Other import
+import Calendars from "../Calendars";
+
+/**
+ * IsFormat class contains methods to test if value respects specific value
+ * like date, password, mail...
+ * @methods {@link isName}, {@link isDate}, {@link isPassword}, {@link isMail},
+ * {@link isPhone}, {@link isAuthcode}, {@link isStatus}.
+ */
+export class IsFormat extends Formatter {
   constructor() {
     super();
 
@@ -12,11 +21,21 @@ export class IsFormat extends Cleaner {
     this._FORMAT_PASSWORD = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
   }
 
+  /**
+   * Check wether the name meets the requirements of the format.
+   * @param {String} name The name string.
+   * @returns true if the name is not empty. Otherwise, return false.
+   */
   isName(name) {
     return name !== "";
   }
 
-  isBirthdate(date) {
+  /**
+   * Check wether the name meets the requirements of the format.
+   * @param {String} date The date string.
+   * @returns true if the date has the following format : YYYY-MM-DD. Otherwise, return false.
+   */
+  isDate(date) {
     return (
       this._FORMAT_BIRTHDATE.test(date) &&
       Calendars.isValid(new Date(date)) &&
@@ -84,6 +103,11 @@ export class IsFormat extends Cleaner {
     return this._FORMAT_AUTHCODE.test(authcode);
   }
 
+  /**
+   * Check whether the status meets the requirements of the format.
+   * @param {String} status The status string.
+   * @returns true if the status is 'valid' or 'pending'. Otherwise, return false.
+   */
   isStatus(status) {
     return status === "valid" || status === "pending";
   }

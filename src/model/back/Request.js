@@ -1,6 +1,11 @@
 // Import Custom Exceptions
 import NetworkStatusError from "exceptions/NetworkStatusError";
 
+/**
+ * Send primary request.
+ * @methods {@link setHeaders}, {@link get}, {@link post}, {@link delete}, 
+ * {@link put}.
+ */
 export class Request {
   constructor(options = {}) {
     this._url = options.url || "";
@@ -18,6 +23,14 @@ export class Request {
     return this;
   }
 
+  /**
+   * Send a request.
+   * @param {String} endpoint The endpoint of the request.
+   * @param {Object} options Options of the request.
+   * @returns The response of the request.
+   *
+   * @throws {NetworkStatuError} If the response is not successful.
+   */
   async _fetch(endpoint, options = {}) {
     const response = await fetch(this._url + endpoint, {
       ...options,
@@ -32,6 +45,13 @@ export class Request {
     return this._fetch(endpoint, { ...options, method: "GET" });
   }
 
+  /**
+   * Send a POST request.
+   * @param {String} endpoint The endpoint of the request.
+   * @param {Object} body The body of the request.
+   * @param {Object} options Options of the request
+   * @returns The response of the request.
+   */
   async post(endpoint, body, options = {}) {
     return await this._fetch(endpoint, {
       ...options,

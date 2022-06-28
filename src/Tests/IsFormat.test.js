@@ -6,14 +6,14 @@ test("isName", () => {
   expect(IsFormat.isName("user")).toBe(true);
 });
 
-test("isBirthdate", () => {
-  expect(IsFormat.isBirthdate("")).toBe(false);
-  expect(IsFormat.isBirthdate("date")).toBe(false);
-  expect(IsFormat.isBirthdate(Calendars.ISOToday())).toBe(false);
-  expect(IsFormat.isBirthdate(Calendars.ISOTomorrow().toString())).toBe(false);
-  expect(IsFormat.isBirthdate(Calendars.ISOYesterday().toString())).toBe(true);
-  expect(IsFormat.isBirthdate("01-01-2000")).toBe(false);
-  expect(IsFormat.isBirthdate("2000-01-01")).toBe(true);
+test("isDate", () => {
+  expect(IsFormat.isDate("")).toBe(false);
+  expect(IsFormat.isDate("date")).toBe(false);
+  expect(IsFormat.isDate(Calendars.ISOToday())).toBe(false);
+  expect(IsFormat.isDate(Calendars.ISOTomorrow().toString())).toBe(false);
+  expect(IsFormat.isDate(Calendars.ISOYesterday().toString())).toBe(true);
+  expect(IsFormat.isDate("01-01-2000")).toBe(false);
+  expect(IsFormat.isDate("2000-01-01")).toBe(true);
 });
 
 test("isPassword", () => {

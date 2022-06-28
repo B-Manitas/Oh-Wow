@@ -1,7 +1,11 @@
+// Super-class import
 import { Request } from "model/back/Request";
 
+/**
+ * The backend of the application.
+ * @methods {@link signup}, {@link login}, {@link update}
+ */
 export class Backend extends Request {
-  /** The backend of the application. */
   constructor() {
     super({
       url: "https://data.mongodb-api.com/app/data-qqvij/endpoint/data/v1/action",
@@ -46,6 +50,10 @@ export class Backend extends Request {
     return resp["document"];
   }
 
+  /**
+   * Send a request to update the user's data.
+   * @param {Object} user The user's data to update.
+   */
   async update(user) {
     await this.post("/updateOne", {
       ...this._body,

@@ -9,6 +9,16 @@ import { addUserStore, removeUserStore } from "../redux/ActionsCreator";
 import { store } from "../redux/Store";
 import Utils from "../model/Utils";
 
+/**
+ * Manage the link between the application and the user.
+ * @methods {@link signup}, {@link login}, {@link logout}, {@link onCloseSettings}.
+
+ * @public These are the public attributes of the class.
+ * - {@link backend} (Backend) The backend of the application. 
+ * - {@link frontend} (Frontend) The frontend of the application 
+ * - {@link is_connected} (Boolean) true if user is connected, otherwise false.
+ * - {@link user_data} (Object) The state in the redux store of the user. 
+ */
 export class Controller extends ErrorsCatcher {
   /**
    * Manage the link between the application and the user.
@@ -22,6 +32,7 @@ export class Controller extends ErrorsCatcher {
     this.is_connected = false;
   }
 
+  /** Get the user redux state. */
   get user_data() {
     if (this.is_connected) return store.getState().user;
     else return this.frontend.schemaUser;
@@ -66,6 +77,10 @@ export class Controller extends ErrorsCatcher {
     }
   }
 
+  /**
+   * Logs out the user
+   * @param {Function} navigation The navigation function for changing page.
+   */
   logout(navigation) {
     removeUserStore();
     this.is_connected = false;

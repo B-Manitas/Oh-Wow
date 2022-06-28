@@ -1,16 +1,32 @@
+/** The Schema class contains all the tables in the database. */
 export class Schema {
-  _isSchema(data, schema) {
-    return Object.keys(data) == Object.keys(schema);
+  /**
+   * Tests whether the object is a specified schema.
+   * @param {Object} data The test object.
+   * @param {Object} schema The schema to be compare.
+   * @returns true if the keys of the object are equal to the keys of the schema.
+   * Otherwise, return false.
+   */
+  isSchema(object, schema) {
+    return Object.keys(object) == Object.keys(schema);
   }
 
+  /**
+   * Tests whether the object is a user schema.
+   * @param {Object} data The test object
+   * @returns true if the keys of the object are equal to the keys of the user schema.
+   * Otherwise, return false.
+   */
   isSchemaUser(data) {
-    return this._isSchema(data, this.schemaUser());
+    return this.isSchema(data, this.schemaUser());
   }
 
-  schemaLogin(mail = "", password = "") {
+  /** Get the login schema. */
+  schemaLogin(mail, password) {
     return { mail, password };
   }
 
+  /** Get the user schema. */
   schemaUser() {
     return {
       firstname: "",
