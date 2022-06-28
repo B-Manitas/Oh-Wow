@@ -4,6 +4,7 @@ import { Alert } from "react-native";
 // Import Custom Exceptions
 import InvalidDataError from "exceptions/InvalidDataError";
 import UserAlreadyExist from "exceptions/UserAlreadyExist";
+import LogginError from "exceptions/LogginError";
 import NetworkError from "exceptions/NetworkError";
 import NetworkStatusError from "exceptions/NetworkStatusError";
 import InvalidSchemaError from "exceptions/InvalidSchemaError";
@@ -28,6 +29,13 @@ export class ErrorsCatcher {
     Alert.alert(
       "User already exist",
       "A user with this e-mail address has already been registered."
+    );
+  }
+
+  manageLogin() {
+    Alert.alert(
+      "The username or password is incorrect",
+      "Please ensure that you have entered the correct information.."
     );
   }
 
@@ -86,6 +94,10 @@ export class ErrorsCatcher {
 
       case this.error instanceof UserAlreadyExist:
         this.manageUserAlreadyExist();
+        break;
+
+      case this.error instanceof LogginError:
+        this.manageLogin();
         break;
 
       case this.error instanceof NetworkError:

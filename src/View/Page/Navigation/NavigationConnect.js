@@ -4,19 +4,36 @@ import Link from "../../Buttons/Link";
 
 const NavigationConnect = ({ navigation }) => {
   return (
-    <View style={styles.nav}>
-      <Link
-        text={"Consulter les services proposées"}
-        style_container={styles.button_nav}
-        style_text={styles.text_nav}
-        func={() => navigation.navigate("AllServices")}
-      />
-      <Link
-        text={"Consulter mes rendez-vous"}
-        style_container={styles.button_nav}
-        style_text={styles.text_nav}
-        func={() => navigation.navigate("Appointments")}
-      />
+    <View>
+      <View style={styles.nav}>
+        <Link
+          text={"Consulter les services proposées"}
+          style_container={styles.button_nav}
+          style_text={styles.text_nav}
+          func={() => navigation.navigate("AllServices")}
+        />
+        <Link
+          text={"Consulter mes rendez-vous"}
+          style_container={styles.button_nav}
+          style_text={styles.text_nav}
+          func={() => navigation.navigate("Appointments")}
+        />
+      </View>
+
+      <View style={styles.nav}>
+        <Link
+          text={"Nous contacter"}
+          style_container={styles.button_nav}
+          style_text={styles.text_nav}
+          func={() => navigation.navigate("Contact")}
+        />
+        <Link
+          text={"Mes paramètres"}
+          style_container={styles.button_nav}
+          style_text={styles.text_nav}
+          func={() => navigation.navigate("Settings")}
+        />
+      </View>
     </View>
   );
 };

@@ -46,8 +46,8 @@ export default {
     }
   },
 
-  removeKey(object, key) {
-    delete object[key];
+  removeKey(object, ...keys) {
+    keys.forEach((key) => delete object[key]);
     return object;
   },
 };

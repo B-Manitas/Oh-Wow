@@ -5,8 +5,9 @@ import { Alert } from "react-native";
 import { ErrorsCatcher } from "./ErrorsCatcher";
 
 // Import redux componnent
-import { addUserStore } from "../redux/ActionsCreator";
+import { addUserStore, removeUserStore } from "../redux/ActionsCreator";
 import { store } from "../redux/Store";
+import Utils from "../model/Utils";
 
 export class Controller extends ErrorsCatcher {
   /**
@@ -21,6 +22,11 @@ export class Controller extends ErrorsCatcher {
     this.is_connected = false;
   }
 
+  get user_data() {
+    if (this.is_connected) return store.getState().user;
+    else return this.frontend.schemaUser;
+  }
+
   /**
    * Function to be called when the user has pressed the registration button.
    * @param {Object} data The user's data to be stored in the database.
@@ -32,7 +38,7 @@ export class Controller extends ErrorsCatcher {
     try {
       const user = await this.frontend.signup(data);
       this.is_connected = true;
-      addUserStore(user);
+      addUserStore(Utils.removeKey(user, "status", "password"));
       navigation.navigate("Home");
       Alert.alert(`Welcome, ${user.firstname} !`);
     } catch (error) {
@@ -53,15 +59,27 @@ export class Controller extends ErrorsCatcher {
       addUserStore(user);
       this.is_connected = true;
       navigation.navigate("Home");
+      console.log(user);
       Alert.alert(`Welcome back, ${user.firstname} !`);
     } catch (error) {
       this.manageAllErrors(error, func);
     }
   }
 
-  async _isConnected() {
-    const user = store.getState().user;
-    const log_info = { _id: user._id, password: user.password };
-    this.is_connected = await this.frontend.isExistingUser(log_info);
+  logout(navigation) {
+    removeUserStore();
+    this.is_connected = false;
+    navigation.navigate("Home");
+    Alert.alert(`Bye, see you soon !`);
+  }
+
+  async onCloseSettings(user, func, navigation) {
+    try {
+      if (this.is_connected && user != this.user_data)
+        await this.frontend.update(user);
+      if (navigation) navigation.navigate("Home");
+    } catch (error) {
+      this.manageAllErrors(error, func);
+    }
   }
 }

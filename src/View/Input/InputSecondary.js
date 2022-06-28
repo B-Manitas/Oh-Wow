@@ -9,18 +9,27 @@ const InputSecondary = ({
   keyboardType,
   maxLength,
   disabled,
+  value,
+  setValue,
+  isValidFormat,
 }) => {
   return (
     <TextInput
       editable={!disabled}
       placeholderTextColor={disabled ? "#c4c4c4" : "#858585"}
-      style={[styles.input, disabled && styles.disabled]}
+      style={[
+        styles.input,
+        disabled && styles.disabled,
+        !isValidFormat && { borderColor: "red" },
+      ]}
       keyboardType={keyboardType}
       autoComplete={typeAndroid}
       textContentType={typeIOS}
       placeholder={plh}
       maxLength={maxLength}
       returnKeyType={returnKeyType}
+      value={value}
+      onChangeText={(t) => setValue(t)}
     />
   );
 };

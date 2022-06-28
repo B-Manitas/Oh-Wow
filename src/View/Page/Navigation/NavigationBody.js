@@ -4,7 +4,6 @@ import { View, StyleSheet } from "react-native";
 import { controller } from "model/Main";
 import NavigationConnect from "./NavigationConnect";
 import NavigationDisconnect from "./NavigationDisconnect";
-import NavigationAnonymous from "./NavigationAnonymous";
 
 const NavigationBody = ({ navigation }) => {
   return (
@@ -14,7 +13,6 @@ const NavigationBody = ({ navigation }) => {
       ) : (
         <NavigationDisconnect navigation={navigation} />
       )}
-      <NavigationAnonymous navigation={navigation} />
     </View>
   );
 };

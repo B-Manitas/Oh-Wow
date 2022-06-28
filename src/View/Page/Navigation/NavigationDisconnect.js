@@ -28,6 +28,14 @@ const NavigationDisconnect = ({ navigation }) => {
           func={() => navigation.navigate("AllServices")}
         />
       </View>
+      <View style={styles.nav}>
+        <Link
+          text={"Nous contacter"}
+          style_container={styles.button_nav}
+          style_text={styles.text_nav}
+          func={() => navigation.navigate("Contact")}
+        />
+      </View>
     </View>
   );
 };

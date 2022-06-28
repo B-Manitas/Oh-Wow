@@ -22,7 +22,7 @@ export class Auditor extends IsFormat {
       case "status":
         return this.isStatus(data[key]);
       default:
-        return false;
+        return true;
     }
   }
 

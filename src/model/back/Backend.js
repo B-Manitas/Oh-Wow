@@ -24,7 +24,7 @@ export class Backend extends Request {
     const resp = await this.post("/insertOne", {
       ...this._body,
       collection: "user",
-      document: { ...user },
+      document: { _id: Date.now().toString(), ...user },
     });
 
     return resp["insertedId"];
@@ -40,9 +40,18 @@ export class Backend extends Request {
       ...this._body,
       collection: "user",
       filter: { ...user },
-      projection: { status: 0 },
+      projection: { status: 0, password: 0 },
     });
 
     return resp["document"];
+  }
+
+  async update(user) {
+    await this.post("/updateOne", {
+      ...this._body,
+      collection: "user",
+      filter: { _id: user._id },
+      update: { ...user },
+    });
   }
 }

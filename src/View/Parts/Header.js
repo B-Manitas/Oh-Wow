@@ -4,10 +4,10 @@ import Utils from "../../model/Utils";
 
 import Menu from "../Buttons/Menu";
 
-const Header = ({ title, type, editable, navigation }) => {
+const Header = ({ title, type, editable, navigation, func }) => {
   return (
     <View style={styles.header}>
-      <Menu type={type} navigation={navigation} />
+      <Menu type={type} navigation={navigation} func={func} />
       {editable ? (
         <TextInput
           style={styles.title}
@@ -18,7 +18,11 @@ const Header = ({ title, type, editable, navigation }) => {
           editable={!Utils.isNull(editable)}
         />
       ) : (
-        <Text style={styles.title} adjustsFontSizeToFit={true} numberOfLines={1}>
+        <Text
+          style={styles.title}
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}
+        >
           {title}
         </Text>
       )}

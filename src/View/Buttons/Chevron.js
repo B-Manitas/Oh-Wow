@@ -3,9 +3,9 @@ import { Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import { ICON } from "constants/IMAGES";
 
-const Chevron = ({ text }) => {
+const Chevron = ({ text, func }) => {
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={func}>
       <Text style={styles.text}>{text}</Text>
       <Image source={ICON.chevron} style={styles.img} />
     </TouchableOpacity>
