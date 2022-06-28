@@ -6,6 +6,7 @@ import { ErrorsCatcher } from "./ErrorsCatcher";
 
 // Import redux componnent
 import { addUserStore } from "../redux/ActionsCreator";
+import { store } from "../redux/Store";
 
 export class Controller extends ErrorsCatcher {
   /**
@@ -17,6 +18,7 @@ export class Controller extends ErrorsCatcher {
     super();
     this.backend = backend;
     this.frontend = frontend;
+    this.is_connected = false;
   }
 
   /**
@@ -29,9 +31,10 @@ export class Controller extends ErrorsCatcher {
   async signup(data, func, navigation) {
     try {
       const user = await this.frontend.signup(data);
-      Alert.alert("Welcome", `ID: ${user._id}`);
+      this.is_connected = true;
       addUserStore(user);
       navigation.navigate("Home");
+      Alert.alert(`Welcome, ${user.firstname} !`);
     } catch (error) {
       this.manageAllErrors(error, func);
     }
@@ -47,11 +50,18 @@ export class Controller extends ErrorsCatcher {
   async login(data, func, navigation) {
     try {
       const user = await this.frontend.login(data);
-      Alert.alert("Welcome Back", `ID: ${user._id}`);
       addUserStore(user);
+      this.is_connected = true;
       navigation.navigate("Home");
+      Alert.alert(`Welcome back, ${user.firstname} !`);
     } catch (error) {
       this.manageAllErrors(error, func);
     }
+  }
+
+  async _isConnected() {
+    const user = store.getState().user;
+    const log_info = { _id: user._id, password: user.password };
+    this.is_connected = await this.frontend.isExistingUser(log_info);
   }
 }

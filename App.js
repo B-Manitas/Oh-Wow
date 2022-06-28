@@ -9,7 +9,7 @@ import { store } from "redux-store/Store";
 
 // Imports pages
 import Home from "./src/View/Page/Home/Home";
-import Navigation from "./src/View/Page/Navigation";
+import Navigation from "./src/View/Page/Navigation/Navigation";
 import Connection from "./src/View/Page/Connection";
 import Login from "./src/View/Page/Login";
 import SignUp from "./src/View/Page/SignUp";
