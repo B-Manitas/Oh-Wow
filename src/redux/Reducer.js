@@ -1,8 +1,13 @@
 // Import default state.
-import { user_state } from "./State";
+import { access_state, user_state } from "./State";
 
 // Import actions types.
-import { CONNECTION, DISCONNECTION } from "./ActionsTypes";
+import {
+  CONNECTION,
+  DISCONNECTION,
+  GAIN_ACCESS,
+  LOSS_ACCESS,
+} from "./ActionsTypes";
 
 /**
  * The user reducer for the redux store.
@@ -17,6 +22,19 @@ export const userReducer = (state = user_state, action) => {
 
     case DISCONNECTION:
       return user_state;
+
+    default:
+      return state;
+  }
+};
+
+export const accessReducer = (state = access_state, action) => {
+  switch (action.type) {
+    case GAIN_ACCESS:
+      return { ...state, ...action.payload };
+
+    case LOSS_ACCESS:
+      return state;
 
     default:
       return state;

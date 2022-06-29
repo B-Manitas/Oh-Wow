@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import Page from "../../Container/Page";
 import Header from "../../Parts/Header";
@@ -8,10 +8,15 @@ import HomeHeader from "./HomeHeader";
 import ServiceLarge from "../../Container/Service/ServiceLarge";
 import { SERVICES } from "../../../constants/DATA";
 
+import { controller } from "model/Main";
+
 const Home = ({ navigation }) => {
   return (
     <Page>
       <Header title={"Oh Wow"} type={"menu"} navigation={navigation} />
+      <TouchableOpacity onPress={() => controller.setAdmin()}>
+        <Text>set admin</Text>
+      </TouchableOpacity>
       <FlatList
         data={SERVICES}
         renderItem={(item) => (

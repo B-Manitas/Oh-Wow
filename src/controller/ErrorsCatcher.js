@@ -8,13 +8,14 @@ import LogginError from "exceptions/LogginError";
 import NetworkError from "exceptions/NetworkError";
 import NetworkStatusError from "exceptions/NetworkStatusError";
 import InvalidSchemaError from "exceptions/InvalidSchemaError";
+import InexistingUserError from "exceptions/InexistingUserError";
 
 /**
  * Capture errors before the user interface.
  * @methods {@link manageInvalidData}, {@link manageUserAlreadyExist}, {@link manageLogin}
  * , {@link manageNetwork}, {@link manageNetworkStatus}, {@link manageInvalidSchema}
  * , {@link manageInvalidSchema}, {@link manageDefault}, {@link manageAllErrors}.
- * 
+ *
  * @public These are the public attributes of the class.
  * {@link error} The error catched.
  */
@@ -37,6 +38,14 @@ export class ErrorsCatcher {
     Alert.alert(
       "User already exist",
       "A user with this e-mail address has already been registered."
+    );
+  }
+
+  /** Catching the InexistingUserError. */
+  manageInexistingUser() {
+    Alert.alert(
+      "Inexisting User",
+      "The user is not yet registered in the database."
     );
   }
 
@@ -93,7 +102,7 @@ export class ErrorsCatcher {
    * @param {Function} func_invalid_data The hook function to be called when required
    * fields in the user data are missing.
    */
-  manageAllErrors(error, func_invalid_data) {
+  manageAllErrors(error, func_invalid_data = undefined) {
     this.error = error;
 
     switch (true) {
@@ -103,6 +112,10 @@ export class ErrorsCatcher {
 
       case this.error instanceof UserAlreadyExist:
         this.manageUserAlreadyExist();
+        break;
+
+      case this.error instanceof InexistingUserError:
+        this.manageInexistingUser();
         break;
 
       case this.error instanceof LogginError:

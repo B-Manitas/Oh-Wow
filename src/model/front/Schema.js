@@ -38,4 +38,8 @@ export class Schema {
       password: "",
     };
   }
+
+  schemaStaff(_id = "", access = "") {
+    return { _id, access };
+  }
 }

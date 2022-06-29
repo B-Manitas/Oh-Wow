@@ -2,7 +2,12 @@
 import { store } from "./Store";
 
 // Import actions types.
-import { CONNECTION, DISCONNECTION } from "./ActionsTypes";
+import {
+  CONNECTION,
+  DISCONNECTION,
+  GAIN_ACCESS,
+  LOSS_ACCESS,
+} from "./ActionsTypes";
 
 /**
  * The default redux creator.
@@ -24,4 +29,12 @@ export const addUserStore = (user) => {
 /** Remove user data in the store. */
 export const removeUserStore = () => {
   creator(DISCONNECTION);
+};
+
+export const gainAccess = (access) => {
+  creator(GAIN_ACCESS, { access });
+};
+
+export const lossAccess = () => {
+  creator(LOSS_ACCESS);
 };

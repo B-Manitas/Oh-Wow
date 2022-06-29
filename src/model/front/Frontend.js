@@ -5,6 +5,7 @@ import { Approver } from "./Approver";
 import InvalidDataError from "exceptions/InvalidDataError";
 import LogginError from "exceptions/LogginError";
 import UserAlreadyExist from "exceptions/UserAlreadyExist";
+import InexistingUserError from "exceptions/InexistingUserError";
 
 /**
  * The frontend of the application.
@@ -86,5 +87,17 @@ export class Frontend extends Approver {
    */
   async update(user) {
     await this._actions(user, this.backend.update.bind(this.backend));
+  }
+
+  async isAdmin(id_user) {
+    const resp = await this.backend.staff(id_user);
+    return resp !== null && resp["access"] == "admin";
+  }
+
+  async setAccess(id_user, access) {
+    const is_existing_user = await this.isExistingUser({ _id: id_user });
+    if (is_existing_user)
+      await this.backend.setAccess(this.schemaStaff(id_user, access));
+    else throw new InexistingUserError();
   }
 }

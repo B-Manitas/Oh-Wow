@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import Link from "../../Buttons/Link";
+import NavigationAdmin from "./NavigationAdmin";
 
 const NavigationConnect = ({ navigation }) => {
   return (
@@ -19,6 +20,8 @@ const NavigationConnect = ({ navigation }) => {
           func={() => navigation.navigate("Appointments")}
         />
       </View>
+
+      <NavigationAdmin navigation={navigation} />
 
       <View style={styles.nav}>
         <Link

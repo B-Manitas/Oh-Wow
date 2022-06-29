@@ -5,7 +5,11 @@ import { Alert } from "react-native";
 import { ErrorsCatcher } from "./ErrorsCatcher";
 
 // Import redux componnent
-import { addUserStore, removeUserStore } from "../redux/ActionsCreator";
+import {
+  addUserStore,
+  gainAccess,
+  removeUserStore,
+} from "../redux/ActionsCreator";
 import { store } from "../redux/Store";
 import Utils from "../model/Utils";
 
@@ -49,7 +53,9 @@ export class Controller extends ErrorsCatcher {
     try {
       const user = await this.frontend.signup(data);
       this.is_connected = true;
+
       addUserStore(Utils.removeKey(user, "status", "password"));
+
       navigation.navigate("Home");
       Alert.alert(`Welcome, ${user.firstname} !`);
     } catch (error) {
@@ -67,10 +73,12 @@ export class Controller extends ErrorsCatcher {
   async login(data, func, navigation) {
     try {
       const user = await this.frontend.login(data);
-      addUserStore(user);
       this.is_connected = true;
+
+      addUserStore(user);
+      if (this.isAdmin()) gainAccess("admin");
+
       navigation.navigate("Home");
-      console.log(user);
       Alert.alert(`Welcome back, ${user.firstname} !`);
     } catch (error) {
       this.manageAllErrors(error, func);
@@ -90,11 +98,30 @@ export class Controller extends ErrorsCatcher {
 
   async onCloseSettings(user, func, navigation) {
     try {
-      if (this.is_connected && user != this.user_data)
+      if (this.is_connected && user != this.user_data) {
         await this.frontend.update(user);
+        addUserStore(user);
+      }
+
       if (navigation) navigation.navigate("Home");
     } catch (error) {
       this.manageAllErrors(error, func);
+    }
+  }
+
+  isAdmin() {
+    return store.getState().access.access == "admin";
+  }
+
+  async setAdmin() {
+    try {
+      const id = store.getState().user["_id"];
+      await this.frontend.setAccess(id, "admin");
+      gainAccess("admin");
+      Alert.alert("Admin", "Your are now admin");
+    } catch (error) {
+      console.log(error);
+      this.manageAllErrors(error);
     }
   }
 }

@@ -15,7 +15,7 @@ export class Formatter extends Schema {
    * @returns The value in lowercase and without leading and ending white space.
    */
   formatDefaultValue(value) {
-    return value.trim().toLowerCase();
+    return value.toString().trim().toLowerCase();
   }
 
   /**

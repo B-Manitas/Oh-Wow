@@ -59,7 +59,30 @@ export class Backend extends Request {
       ...this._body,
       collection: "user",
       filter: { _id: user._id },
-      update: { ...user },
+      update: { $set: { ...user } },
+    });
+  }
+
+  async _find(collection, filter = {}, projection = {}) {
+    const resp = await this.post("/findOne", {
+      ...this._body,
+      collection,
+      filter,
+      projection,
+    });
+
+    return resp["document"];
+  }
+
+  async staff(id_user) {
+    return await this._find("staff", { _id: id_user });
+  }
+
+  async setAccess(data) {
+    return await this.post("/insertOne", {
+      ...this._body,
+      collection: "staff",
+      document: { _id: data.id, ...data },
     });
   }
 }

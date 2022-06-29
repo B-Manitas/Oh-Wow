@@ -9,3 +9,5 @@ export const user_state = Utils.removeKey(
   "status",
   "password"
 );
+
+export const access_state = { access: null };

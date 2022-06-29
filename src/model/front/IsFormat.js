@@ -111,4 +111,8 @@ export class IsFormat extends Formatter {
   isStatus(status) {
     return status === "valid" || status === "pending";
   }
+
+  isAccess(access) {
+    return access === "employee" || access === "admin";
+  }
 }
