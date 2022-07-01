@@ -3,7 +3,7 @@ import NetworkStatusError from "exceptions/NetworkStatusError";
 
 /**
  * Send primary request.
- * @methods {@link setHeaders}, {@link get}, {@link post}, {@link delete}, 
+ * @methods {@link setHeaders}, {@link get}, {@link post}, {@link delete},
  * {@link put}.
  */
 export class Request {
@@ -41,8 +41,8 @@ export class Request {
     return response.json();
   }
 
-  get(endpoint, options = {}) {
-    return this._fetch(endpoint, { ...options, method: "GET" });
+  async get(endpoint, options = {}) {
+    return await this._fetch(endpoint, { ...options, method: "GET" });
   }
 
   /**
@@ -60,11 +60,11 @@ export class Request {
     });
   }
 
-  delete(endpoint, options = {}) {
-    return this._fetch(endpoint, { ...options, method: "DELETE" });
+  async delete(endpoint, options = {}) {
+    return await this._fetch(endpoint, { ...options, method: "DELETE" });
   }
 
-  put(endpoint, options = {}) {
-    return this._fetch(endpoint, { ...options, method: "PUT" });
+  async put(endpoint, options = {}) {
+    return await this._fetch(endpoint, { ...options, method: "PUT" });
   }
 }

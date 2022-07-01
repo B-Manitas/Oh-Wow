@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import Link from "../../Buttons/Link";
+import NavigationAdmin from "./NavigationAdmin";
 
 const NavigationDisconnect = ({ navigation }) => {
   return (
@@ -19,7 +20,7 @@ const NavigationDisconnect = ({ navigation }) => {
           func={() => navigation.navigate("Login")}
         />
       </View>
-
+      <NavigationAdmin navigation={navigation} />
       <View style={styles.nav}>
         <Link
           text={"Consulter les services proposées"}

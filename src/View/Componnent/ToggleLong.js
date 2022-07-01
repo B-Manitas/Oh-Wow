@@ -1,10 +1,10 @@
 import { StyleSheet, Switch, Text, View } from "react-native";
 
-const ToggleLong = ({ state, text }) => {
+const ToggleLong = ({ text, value, func }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{text}</Text>
-      <Switch value={state} style={styles.switch} />
+      <Switch value={value} style={styles.switch} onChange={() => func(value)} />
     </View>
   );
 };

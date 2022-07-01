@@ -11,11 +11,9 @@ const CheckBoxText = ({
   flex,
   func,
 }) => {
-  const [is_active, setIs_active] = useState(state);
-
   return (
     <Pressable
-      onPress={() => func((v) => !v)}
+      onPress={() => func(state)}
       style={[
         styles.button,
         { width: size, height: size, flex: flex },

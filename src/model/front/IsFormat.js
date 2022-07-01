@@ -17,8 +17,10 @@ export class IsFormat extends Formatter {
     this._FORMAT_AUTHCODE = /^[0-9]{6}$/;
     this._FORMAT_MAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
     this._FORMAT_PHONE = /^[0-9]{10}$/;
-    this._FORMAT_BIRTHDATE = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/;
+    this._FORMAT_DATE = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/;
     this._FORMAT_PASSWORD = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
+    this._FORMAT_HOURS = /^([01]?[0-9]|2[0-3])h[0-5][0-9]$/;
+    this._FORMAT_MMDD = /^[0-3][0-9]\/[01][0-9]$/;
   }
 
   /**
@@ -37,7 +39,7 @@ export class IsFormat extends Formatter {
    */
   isDate(date) {
     return (
-      this._FORMAT_BIRTHDATE.test(date) &&
+      this._FORMAT_DATE.test(date) &&
       Calendars.isValid(new Date(date)) &&
       Calendars.isPast(new Date(date))
     );
@@ -114,5 +116,43 @@ export class IsFormat extends Formatter {
 
   isAccess(access) {
     return access === "employee" || access === "admin";
+  }
+
+  isDayOff(day_off) {
+    return (
+      this.isSchema(day_off, this.schemaSalon().day_off) &&
+      Object.values(day_off).every((val) => {
+        return this.isBool(val);
+      })
+    );
+  }
+
+  isDateOff(date_off) {
+    if (date_off == "") return true;
+    else if (/[^0-9\/;]/.test(date_off)) return false;
+    else
+      return date_off.split(";").map((date) => {
+        if (!this._FORMAT_MMDD.test(date)) return false;
+
+        date = date.split("/");
+        if (date.length != 2) return false;
+
+        const [day, month, year] = [parseInt(date[0]), parseInt(date[1]), 2022];
+
+        if (day <= 0 || month <= 0) return false;
+
+        const nb_days = Calendars.numberOfDays(year, month);
+        if (day > nb_days) return false;
+        else return true;
+      })[0];
+  }
+
+  isHours(hours) {
+    return true;
+    return this._FORMAT_HOURS.test(hours);
+  }
+
+  isBool(bool) {
+    return bool === true || bool === false;
   }
 }

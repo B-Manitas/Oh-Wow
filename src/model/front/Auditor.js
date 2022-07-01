@@ -1,4 +1,5 @@
 // Super-class import
+import Utils from "../Utils";
 import { IsFormat } from "./IsFormat";
 
 /**
@@ -15,8 +16,9 @@ export class Auditor extends IsFormat {
    * @returns An object whose data keys are associated with true values.
    */
   fakeAudit(data) {
-    Object.keys(data).map((key) => (data[key] = true));
-    return data;
+    var audit = Utils.copy(data);
+    Object.keys(audit).forEach((key) => (audit[key] = true));
+    return audit;
   }
 
   /**
@@ -41,6 +43,17 @@ export class Auditor extends IsFormat {
         return this.isPassword(data[key]);
       case "status":
         return this.isStatus(data[key]);
+      case "day_off":
+        return this.isDayOff(data[key]);
+      case "date_off":
+        return this.isDateOff(data[key]);
+      case "morning_opening_hours":
+      case "morning_closing_hours":
+      case "afternoon_opening_hours":
+      case "afternoon_closing_hours":
+        return this.isHours(data[key]);
+      case "is_opened":
+        return this.isBool(data[key]);
       default:
         return true;
     }

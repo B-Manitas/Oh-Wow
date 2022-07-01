@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, StyleSheet } from "react-native";
-import { DAYS } from "../../constants/DAYS";
+import { SHORT_DAYS } from "../../constants/DAYS";
 
 const DaysList = () => {
-  return DAYS.map((day, id) => (
+  return SHORT_DAYS.map((day, id) => (
     <Text key={id} style={styles.day} numberOfLines={1} allowFontScaling={true}>
       {day}
     </Text>

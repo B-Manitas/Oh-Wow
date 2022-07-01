@@ -1,11 +1,13 @@
-import Formatter from "../Model/Formatter";
+import { Formatter } from "model/front/Formatter";
+
+const formatter = new Formatter();
 
 test("formattingFirstname", () => {
-  expect(Formatter.formattingFirstname("user")).toEqual("User");
-  expect(Formatter.formattingFirstname("user name")).toEqual("User name");
+  expect(formatter.formatFirstname("user")).toEqual("User");
+  expect(formatter.formatFirstname("user name")).toEqual("User name");
 });
 
 test("formattingLastname", () => {
-  expect(Formatter.formattingLastname("user")).toEqual("USER");
-  expect(Formatter.formattingLastname("user name")).toEqual("USER NAME");
+  expect(formatter.formatLastname("user")).toEqual("USER");
+  expect(formatter.formatLastname("user name")).toEqual("USER NAME");
 });

@@ -99,7 +99,7 @@ export class Controller extends ErrorsCatcher {
   async onCloseSettings(user, func, navigation) {
     try {
       if (this.is_connected && user != this.user_data) {
-        await this.frontend.update(user);
+        await this.frontend.updateUser(user);
         addUserStore(user);
       }
 
@@ -109,8 +109,19 @@ export class Controller extends ErrorsCatcher {
     }
   }
 
-  isAdmin() {
-    return store.getState().access.access == "admin";
+  async onCloseSettingsApp(salon, init_salon, func, navigation) {
+    try {
+      if (salon != init_salon)
+        await this.frontend.updateSalon(salon);
+
+      if (navigation) navigation.navigate("Home");
+    } catch (error) {
+      this.manageAllErrors(error, func);
+    }
+  }
+
+  async isAdmin() {
+    return await this.frontend.isAdmin(this.user_data._id);
   }
 
   async setAdmin() {
@@ -120,8 +131,17 @@ export class Controller extends ErrorsCatcher {
       gainAccess("admin");
       Alert.alert("Admin", "Your are now admin");
     } catch (error) {
-      console.log(error);
       this.manageAllErrors(error);
     }
+  }
+
+  async newSalon() {
+    const data_salon = this.frontend.schemaSalon();
+    await this.frontend.newSalon(data_salon);
+  }
+
+  async getSalon(funcs) {
+    const data = await this.frontend.getSalonData();
+    funcs.forEach((func) => func(data[0]));
   }
 }

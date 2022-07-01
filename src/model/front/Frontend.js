@@ -22,20 +22,20 @@ export class Frontend extends Approver {
 
   /**
    * To call a function in the backend.
-   * @param {Object} user The data entered by the user.
+   * @param {Object} data The data entered by the user.
    * @param {Function} func_backend The function to call in the backend.
    * @returns The response of the request made by the backend.
    *
    * @throws {InvalidDataError} If the user data does not follow a valid format
    * imposed by the IsFormat class.
    */
-  async _actions(user, func_backend) {
-    const data = this.approve(user);
+  async _actions(data, func_backend) {
+    const resume = this.approve(data);
 
-    if (data.is_valid) {
-      user = this.formatDict(user);
-      return await func_backend(user);
-    } else throw new InvalidDataError(data.audit);
+    if (resume.is_valid) {
+      data = this.formatDict(data);
+      return await func_backend(data);
+    } else throw new InvalidDataError(resume.audit);
   }
 
   /**
@@ -85,8 +85,8 @@ export class Frontend extends Approver {
    * Send a request in the backend to update user data.
    * @param {Object} user The data entered by the user.
    */
-  async update(user) {
-    await this._actions(user, this.backend.update.bind(this.backend));
+  async updateUser(user) {
+    await this._actions(user, this.backend.updateUser.bind(this.backend));
   }
 
   async isAdmin(id_user) {
@@ -99,5 +99,17 @@ export class Frontend extends Approver {
     if (is_existing_user)
       await this.backend.setAccess(this.schemaStaff(id_user, access));
     else throw new InexistingUserError();
+  }
+
+  async newSalon(salon) {
+    await this._actions(salon, this.backend.newSalon.bind(this.backend));
+  }
+
+  getSalonData() {
+    return this.backend.getAllSalon();
+  }
+
+  async updateSalon(salon) {
+    await this._actions(salon, this.backend.updateSalon.bind(this.backend));
   }
 }

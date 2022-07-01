@@ -1,4 +1,4 @@
-import Calendars from "../Model/Calendars";
+import Calendars from "model/Calendars";
 
 test("getISODateFormat", () => {
   var date = new Date(2022, 5, 25);

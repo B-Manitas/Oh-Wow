@@ -1,3 +1,5 @@
+import Utils from "../Utils";
+
 /** The Schema class contains all the tables in the database. */
 export class Schema {
   /**
@@ -8,7 +10,7 @@ export class Schema {
    * Otherwise, return false.
    */
   isSchema(object, schema) {
-    return Object.keys(object) == Object.keys(schema);
+    return Utils.isArrayEquals(Object.keys(object), Object.keys(schema));
   }
 
   /**
@@ -41,5 +43,26 @@ export class Schema {
 
   schemaStaff(_id = "", access = "") {
     return { _id, access };
+  }
+
+  schemaSalon() {
+    return {
+      address: "",
+      day_off: {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+      },
+      date_off: "",
+      morning_opening_hours: "8h00",
+      morning_closing_hours: "12h00",
+      afternoon_opening_hours: "13h00",
+      afternoon_closing_hours: "18h00",
+      is_opened: true,
+    };
   }
 }
