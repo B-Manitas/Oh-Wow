@@ -3,6 +3,7 @@ import { Formatter } from "./Formatter";
 
 // Other import
 import Calendars from "../Calendars";
+import _ from "lodash";
 
 /**
  * IsFormat class contains methods to test if value respects specific value
@@ -148,11 +149,14 @@ export class IsFormat extends Formatter {
   }
 
   isHours(hours) {
-    return true;
     return this._FORMAT_HOURS.test(hours);
   }
 
   isBool(bool) {
     return bool === true || bool === false;
+  }
+  
+  isNumber(n) {
+    return _.isInteger(n)
   }
 }

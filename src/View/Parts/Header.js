@@ -4,7 +4,15 @@ import Utils from "../../model/Utils";
 
 import Menu from "../Buttons/Menu";
 
-const Header = ({ title, type, editable, navigation, func }) => {
+const Header = ({
+  title,
+  type,
+  editable,
+  navigation,
+  func,
+  setValue,
+  is_valid,
+}) => {
   return (
     <View style={styles.header}>
       <Menu type={type} navigation={navigation} func={func} />
@@ -16,6 +24,9 @@ const Header = ({ title, type, editable, navigation, func }) => {
           value={title}
           returnKeyType={"done"}
           editable={!Utils.isNull(editable)}
+          onChangeText={(t) => setValue(t)}
+          placeholder={"Click to edit"}
+          placeholderTextColor={!is_valid && "red"}
         />
       ) : (
         <Text

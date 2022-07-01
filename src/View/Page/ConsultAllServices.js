@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { SERVICES } from "../../constants/DATA";
 import Round from "../Buttons/Round";
@@ -8,14 +8,18 @@ import Page from "../Container/Page";
 import Service from "../Container/Service/Service";
 import Header from "../Parts/Header";
 
+import { controller } from "model/Main";
+
 const ConsultAllServices = ({ navigation }) => {
+  const services = controller.getAllServices();
+
   return (
     <Page>
       <Header type="menu" title="Nos prestations" navigation={navigation} />
       <Searchbar />
 
       <FlatList
-        data={SERVICES}
+        data={services}
         numColumns={2}
         style={styles.container_item}
         renderItem={(item) => (
@@ -29,6 +33,11 @@ const ConsultAllServices = ({ navigation }) => {
         enabled={true}
         style_txt_enabled={styles.txt_add}
         style_ctn_enabled={styles.btn_add}
+        func={() =>
+          navigation.navigate("Service", {
+            data: controller.frontend.schemaService(),
+          })
+        }
       />
     </Page>
   );

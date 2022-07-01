@@ -32,6 +32,8 @@ export class Auditor extends IsFormat {
     switch (key) {
       case "firstname":
       case "lastname":
+      case "name":
+      case "description":
         return this.isName(data[key]);
       case "mail":
         return this.isMail(data[key]);
@@ -53,7 +55,11 @@ export class Auditor extends IsFormat {
       case "afternoon_closing_hours":
         return this.isHours(data[key]);
       case "is_opened":
+      case "is_trend":
         return this.isBool(data[key]);
+      case "price":
+      case "duration":
+        return this.isNumber(data[key]);
       default:
         return true;
     }

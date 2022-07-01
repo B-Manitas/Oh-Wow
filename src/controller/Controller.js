@@ -12,6 +12,8 @@ import {
 } from "../redux/ActionsCreator";
 import { store } from "../redux/Store";
 import Utils from "../model/Utils";
+import { isDeepStrictEqual } from "util";
+import _ from "lodash";
 
 /**
  * Manage the link between the application and the user.
@@ -111,7 +113,7 @@ export class Controller extends ErrorsCatcher {
 
   async onCloseSettingsApp(salon, init_salon, func, navigation) {
     try {
-      if (salon != init_salon)
+      if (salon != init_salon && this.isAdmin())
         await this.frontend.updateSalon(salon);
 
       if (navigation) navigation.navigate("Home");
@@ -121,7 +123,10 @@ export class Controller extends ErrorsCatcher {
   }
 
   async isAdmin() {
-    return await this.frontend.isAdmin(this.user_data._id);
+    return (
+      this.user_data._id != undefined &&
+      (await this.frontend.isAdmin(this.user_data._id))
+    );
   }
 
   async setAdmin() {
@@ -143,5 +148,29 @@ export class Controller extends ErrorsCatcher {
   async getSalon(funcs) {
     const data = await this.frontend.getSalonData();
     funcs.forEach((func) => func(data[0]));
+  }
+
+  async fetchAllServices(funcs) {
+    const data = await this.frontend.getAllServices();
+    funcs.forEach((func) => func(data));
+  }
+
+  getAllServices() {
+    return store.getState().services;
+  }
+
+  async onCloseService(service, init_service, func, navigation) {
+    try {
+      const service_2 = Utils.removeKey(service, ["_id", "img"]);
+      const init_service_2 = Utils.removeKey(init_service, ["_id", "img"]);
+
+      console.log(this.user_data._id);
+      if (!_.isEqual(service_2, init_service_2) && (await this.isAdmin()))
+        await this.frontend.updateService(service);
+
+      if (navigation) navigation.goBack();
+    } catch (error) {
+      this.manageAllErrors(error, func);
+    }
   }
 }

@@ -24,8 +24,8 @@ export class Schema {
   }
 
   /** Get the login schema. */
-  schemaLogin(mail, password) {
-    return { mail, password };
+  schemaLogin() {
+    return { mail: "", password: "" };
   }
 
   /** Get the user schema. */
@@ -63,6 +63,18 @@ export class Schema {
       afternoon_opening_hours: "13h00",
       afternoon_closing_hours: "18h00",
       is_opened: true,
+    };
+  }
+
+  schemaService() {
+    return {
+      _id: Date.now().toString(),
+      name: "",
+      description: "",
+      price: 0,
+      duration: 0,
+      is_trend: false,
+      img: "data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=",
     };
   }
 }

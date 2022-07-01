@@ -13,7 +13,7 @@ const Round = ({
 }) => {
   return (
     <TouchableOpacity
-      func={func}
+      onPress={func}
       style={[
         style,
         styles.container,

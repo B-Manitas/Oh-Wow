@@ -92,7 +92,7 @@ const SignUp = ({ navigation }) => {
 
         <View style={styles.content_tou}>
           <CheckBoxText
-            func={setIsCGUAccepted}
+            func={(b) => setIsCGUAccepted(!b)}
             state={is_CGU_accepted}
             size={30}
             color_bg_active={"#383838"}

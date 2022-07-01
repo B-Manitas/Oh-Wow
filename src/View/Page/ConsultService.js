@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,35 +6,75 @@ import {
   TextInput,
   ScrollView,
   Image,
+  Dimensions,
 } from "react-native";
 
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import { ICON } from "../../constants/IMAGES";
-import CheckBox from "../Componnent/CheckBox";
 import ServiceInfo from "../Container/ServiceInfo";
 import Absolute from "../Buttons/Absolute";
+import CheckBoxText from "../Componnent/CheckBoxText";
+
+import { controller } from "model/Main";
+import * as ImagePicker from "expo-image-picker";
 
 const ConsultService = ({ navigation, route }) => {
-  var data = route.params.data;
+  const service_init = route.params.data;
+  const [service, setService] = useState(service_init);
+  const [valid_format, setValidFormat] = useState(
+    controller.frontend.fakeAudit(service_init)
+  );
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      base64: true,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      console.log(typeof result.base64);
+      setService((p) => ({
+        ...p,
+        img: "data:image/jpeg;base64," + result.base64,
+      }));
+    }
+  };
 
   return (
     <Page>
       <Header
         type={"back"}
-        title={data.name}
+        title={service.name}
         editable={true}
         navigation={navigation}
+        setValue={(t) => setService((p) => ({ ...p, name: t }))}
+        is_valid={valid_format["name"]}
+        func={() =>
+          controller.onCloseService(
+            service,
+            service_init,
+            setValidFormat,
+            navigation
+          )
+        }
       />
 
       <ScrollView style={styles.main_container}>
-        <View style={styles.container_img}>
-          <Image source={data.img} style={styles.img} />
+        <View style={styles.img}>
+          <Image
+            source={{ uri: service.img }}
+            style={{ width: "100%", height: "100%" }}
+          />
           <Absolute
             text="Editer"
             top={10}
             left={10}
             ctn_style={styles.btn_edit}
+            func={() => pickImage()}
           />
         </View>
 
@@ -43,17 +83,23 @@ const ConsultService = ({ navigation, route }) => {
             text={"Durée"}
             unit={"min"}
             enabled={true}
-            value={data.duration.toString()}
+            value={service.duration.toString()}
             flex={1}
             width={"25%"}
+            setValue={(t) =>
+              setService((p) => ({ ...p, duration: parseInt(t == "" ? 0 : t) }))
+            }
           />
           <ServiceInfo
             text={"Tarifs"}
             unit={"€"}
             enabled={true}
-            value={data.price.toString()}
+            value={service.price.toString()}
             flex={1}
             width={"25%"}
+            setValue={(t) =>
+              setService((p) => ({ ...p, price: parseInt(t == "" ? 0 : t) }))
+            }
           />
           <ServiceInfo
             enabled={false}
@@ -67,16 +113,24 @@ const ConsultService = ({ navigation, route }) => {
         <View style={styles.parts}>
           <Text style={styles.h2}>Description :</Text>
           <TextInput
-            value={data.description}
+            value={service.description}
             style={styles.h3}
             multiline={true}
+            onChangeText={(t) => setService((p) => ({ ...p, description: t }))}
+            placeholder={"Click to edit the description..."}
+            placeholderTextColor={!valid_format["description"] && "red"}
           />
         </View>
 
         <View style={styles.parts}>
           <Text style={styles.h2}>En tendance</Text>
           <View style={styles.container_trend}>
-            <CheckBox state={false} size={25} />
+            <CheckBoxText
+              state={service["is_trend"]}
+              size={25}
+              color_bg_active={"#383838"}
+              func={(b) => setService((p) => ({ ...p, is_trend: !b }))}
+            />
             <Text style={styles.text_trend}>
               Afficher la prestation en tendance
             </Text>

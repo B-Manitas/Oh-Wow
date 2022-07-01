@@ -3,3 +3,4 @@ export const CONNECTION = "CONNECTION";
 export const DISCONNECTION = "DISCONNECTION";
 export const GAIN_ACCESS = "GAIN_ACCESS";
 export const LOSS_ACCESS = "LOSS_ACCESS";
+export const FETCH_SERVICES = "FETCH_SERVICES";

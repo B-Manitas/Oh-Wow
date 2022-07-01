@@ -25,7 +25,15 @@ const Contact = ({ navigation }) => {
 
       <View style={styles.parts}>
         <Text style={styles.h1}>Nos centres esthétiques</Text>
-        <MapView style={styles.map} />
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: 36.8065,
+            longitude: 10.1815,
+            latitudeDelta: .7,
+            longitudeDelta: .7,
+          }}
+        />
       </View>
 
       <Footer />

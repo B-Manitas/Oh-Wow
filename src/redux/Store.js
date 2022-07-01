@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { accessReducer, userReducer } from "./Reducer";
+import { accessReducer, serviceReducer, userReducer } from "./Reducer";
 
 /** The redux store. */
 export const store = configureStore({
-  reducer: { user: userReducer, access: accessReducer },
+  reducer: {
+    user: userReducer,
+    access: accessReducer,
+    services: serviceReducer,
+  },
 });

@@ -14,7 +14,7 @@ const Service = ({ data, navigation }) => {
             {data.price}€ - {data.duration}min
           </Text>
         </View>
-        <Image source={data.img} style={styles.img} />
+        <Image source={{ uri: data.img }} style={styles.img} />
       </TouchableOpacity>
       <Round
         text="RDV"

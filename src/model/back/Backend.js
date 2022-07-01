@@ -54,6 +54,11 @@ export class Backend extends Request {
     if (upsert) return resp["insertedId"];
   }
 
+  async _find(collection) {
+    const resp = await this.post("/find", { ...this._body, collection });
+    return resp["documents"];
+  }
+
   /**
    * Send a request to register a new user.
    * @param {Object} user The user's data to register .
@@ -81,12 +86,7 @@ export class Backend extends Request {
   }
 
   async getAllSalon() {
-    const resp = await this.post("/find", {
-      ...this._body,
-      collection: "salon",
-    });
-    
-    return resp["documents"]
+    return await this._find("salon");
   }
 
   async newSalon(salon) {
@@ -103,5 +103,17 @@ export class Backend extends Request {
 
   async setAccess(data) {
     return await this._insertOne("staff", { _id: data.id, ...data });
+  }
+
+  async getAllServices() {
+    return this._find("service");
+  }
+
+  async addService(service) {
+    return await this._insertOne("service", service);
+  }
+
+  async updateService(data) {
+    await this._updateOne("service", { _id: data._id }, { $set: { ...data } }, true);
   }
 }

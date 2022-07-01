@@ -112,4 +112,12 @@ export class Frontend extends Approver {
   async updateSalon(salon) {
     await this._actions(salon, this.backend.updateSalon.bind(this.backend));
   }
+
+  async getAllServices() {
+    return this.backend.getAllServices();
+  }
+
+  async updateService(service) {
+    await this._actions(service, this.backend.updateService.bind(this.backend));
+  }
 }

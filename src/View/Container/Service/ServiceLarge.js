@@ -7,7 +7,7 @@ const ServiceLarge = ({ navigation, data }) => {
       style={styles.container}
       onPress={() => navigation.navigate("Service", { data })}
     >
-      <Image source={data.img} style={styles.img} />
+      <Image source={{ uri: data.img }} style={styles.img} />
 
       <View style={styles.container_text}>
         <Text style={styles.h1}>{data.name}</Text>
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
   img: {
     marginRight: 15,
     width: 90,
-    aspectRatio: 1,
+    // aspectRatio: 1,
+    height: 100,
   },
 
   h1: {

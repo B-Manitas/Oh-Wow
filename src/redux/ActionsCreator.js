@@ -5,6 +5,7 @@ import { store } from "./Store";
 import {
   CONNECTION,
   DISCONNECTION,
+  FETCH_SERVICES,
   GAIN_ACCESS,
   LOSS_ACCESS,
 } from "./ActionsTypes";
@@ -37,4 +38,8 @@ export const gainAccess = (access) => {
 
 export const lossAccess = () => {
   creator(LOSS_ACCESS);
+};
+
+export const fetchServices = (services) => {
+  creator(FETCH_SERVICES, services);
 };

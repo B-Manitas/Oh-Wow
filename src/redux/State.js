@@ -4,10 +4,12 @@ import { Schema } from "model/front/Schema";
 const schema = new Schema();
 
 /** The default user state. */
-export const user_state = Utils.removeKey(
+export const state_user = Utils.removeKey(
   schema.schemaUser(),
   "status",
   "password"
 );
 
-export const access_state = { access: null };
+export const state_access = { access: null };
+
+export const state_service = [schema.schemaService()];

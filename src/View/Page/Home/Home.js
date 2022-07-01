@@ -1,23 +1,25 @@
-import React from "react";
-import { FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
 
 import Page from "../../Container/Page";
 import Header from "../../Parts/Header";
 
 import HomeHeader from "./HomeHeader";
 import ServiceLarge from "../../Container/Service/ServiceLarge";
-import { SERVICES } from "../../../constants/DATA";
 import { controller } from "model/Main";
+import Splash from "../Splash";
 
 const Home = ({ navigation }) => {
+  const [show_splash, setShowSplash] = useState(true);
+  const services = controller.getAllServices();
+
   return (
     <Page>
+      {show_splash && <Splash setShowSplash={setShowSplash} />}
       <Header title={"Oh Wow"} type={"menu"} navigation={navigation} />
-      <TouchableOpacity onPress={() => controller.newSalon()}>
-        <Text>new salon</Text>
-      </TouchableOpacity>
+
       <FlatList
-        data={SERVICES}
+        data={services}
         renderItem={(item) => (
           <ServiceLarge data={item.item} navigation={navigation} />
         )}

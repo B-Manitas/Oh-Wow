@@ -12,9 +12,10 @@ import Link from "../Buttons/Link";
 import { controller } from "model/Main";
 
 const Login = ({ navigation }) => {
-  const [data, setData] = useState(controller.frontend.schemaLogin());
+  const schema = controller.frontend.schemaLogin();
+  const [data, setData] = useState(schema);
   const [valid_format, setValidFormat] = useState(
-    controller.frontend.fakeAudit(controller.frontend.schemaLogin())
+    controller.frontend.fakeAudit(schema)
   );
 
   return (
