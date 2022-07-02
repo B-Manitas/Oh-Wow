@@ -13,7 +13,7 @@ import { controller } from "model/Main";
 const ConsultAllServices = ({ navigation }) => {
   const [services, setService] = useState([]);
   useEffect(() => {
-    controller.getAllServices([setService]);
+    controller.getter.getAllServices(setService);
   }, []);
 
   return (
@@ -36,11 +36,7 @@ const ConsultAllServices = ({ navigation }) => {
         enabled={true}
         style_txt_enabled={styles.txt_add}
         style_ctn_enabled={styles.btn_add}
-        func={() =>
-          navigation.navigate("Service", {
-            data: controller.frontend.schemaService(),
-          })
-        }
+        func={() => controller.onPress.addService(navigation)}
       />
     </Page>
   );

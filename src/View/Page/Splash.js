@@ -6,7 +6,7 @@ import { fetchServices } from "../../redux/ActionsCreator";
 
 const Splash = ({ setShowSplash, setService }) => {
   useEffect(() => {
-    controller.fetchAllServices([fetchServices, setService]);
+    controller.frontend.fetchAllServices([fetchServices, setService]);
     setShowSplash(false);
   }, []);
 

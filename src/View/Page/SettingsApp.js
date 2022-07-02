@@ -12,7 +12,7 @@ import InputHours from "../Input/InputHours";
 
 const SettingsApp = ({ navigation }) => {
   var schema = controller.frontend.schemaSalon();
-  
+
   const [salon, setSalon] = useState(schema);
   const [init_salon, setInitSalon] = useState(schema);
   const [valid_format, setValidFormat] = useState(
@@ -20,14 +20,14 @@ const SettingsApp = ({ navigation }) => {
   );
 
   useEffect(() => {
-    controller.getSalon([setSalon, setInitSalon]);
+    controller.getter.getSalon([setSalon, setInitSalon]);
   }, []);
 
   return (
     <Page>
       <Header
         func={() =>
-          controller.onCloseSettingsApp(
+          controller.onClose.settingsApp(
             salon,
             init_salon,
             setValidFormat,

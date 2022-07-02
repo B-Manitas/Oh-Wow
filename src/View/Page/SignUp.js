@@ -112,7 +112,7 @@ const SignUp = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => controller.signup(data, setValidFormat, navigation)}
+            func={() => controller.onPress.signup(data, setValidFormat, navigation)}
             is_active={is_CGU_accepted}
           />
 

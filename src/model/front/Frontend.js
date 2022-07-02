@@ -120,4 +120,9 @@ export class Frontend extends Approver {
   async updateService(service) {
     await this._actions(service, this.backend.updateService.bind(this.backend));
   }
+
+  async fetchAllServices(funcs) {
+    const data = await this.getAllServices();
+    funcs.forEach((func) => func(data));
+  }
 }

@@ -57,7 +57,9 @@ const Login = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => controller.login(data, setValidFormat, navigation)}
+            func={() =>
+              controller.onPress.login(data, setValidFormat, navigation)
+            }
             is_active={true}
           />
 

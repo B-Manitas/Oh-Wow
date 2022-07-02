@@ -9,7 +9,7 @@ import InputSecondary from "../Input/InputSecondary";
 import Chevron from "../Buttons/Chevron";
 
 const Settings = ({ navigation }) => {
-  const [data, setData] = useState(controller.user_data);
+  const [data, setData] = useState(controller.getter.user_data);
   const [valid_format, setValidFormat] = useState(
     controller.frontend.audit(data)
   );
@@ -21,7 +21,7 @@ const Settings = ({ navigation }) => {
         type={"close"}
         title={"Paramètres"}
         func={() =>
-          controller.onCloseSettings(data, setValidFormat, navigation)
+          controller.onClose.settings(data, setValidFormat, navigation)
         }
       />
 
@@ -78,7 +78,7 @@ const Settings = ({ navigation }) => {
           <Text style={styles.h1}>Actions :</Text>
           <Chevron
             text={"Se déconnecter"}
-            func={() => controller.logout(navigation)}
+            func={() => controller.onPress.logout(navigation)}
           />
           <Chevron text={"Supprimer votre compte"} />
         </View>

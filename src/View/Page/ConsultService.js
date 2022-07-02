@@ -47,12 +47,12 @@ const ConsultService = ({ navigation, route }) => {
       <Header
         type={"back"}
         title={service.name}
-        editable={controller.user_access}
+        editable={controller.getter.user_access}
         navigation={navigation}
         setValue={(t) => setService((p) => ({ ...p, name: t }))}
         is_valid={valid_format["name"]}
         func={() =>
-          controller.onCloseService(
+          controller.onClose.service(
             service,
             service_init,
             setValidFormat,
@@ -134,7 +134,7 @@ const ConsultService = ({ navigation, route }) => {
         </View>
       </ScrollView>
 
-      {controller.user_access && (
+      {controller.getter.user_access && (
         <Absolute img={ICON.trash} bottom={30} left={30} />
       )}
       <Absolute
