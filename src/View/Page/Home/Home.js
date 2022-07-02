@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 import Page from "../../Container/Page";
@@ -11,15 +11,19 @@ import Splash from "../Splash";
 
 const Home = ({ navigation }) => {
   const [show_splash, setShowSplash] = useState(true);
-  const services = controller.getAllServices();
+  const [services, setService] = useState([]);
 
   return (
     <Page>
-      {show_splash && <Splash setShowSplash={setShowSplash} />}
+      {show_splash && (
+        <Splash setShowSplash={setShowSplash} setService={setService} />
+      )}
       <Header title={"Oh Wow"} type={"menu"} navigation={navigation} />
 
       <FlatList
+        extraData={services}
         data={services}
+        keyExtractor={(item, id) => item._id}
         renderItem={(item) => (
           <ServiceLarge data={item.item} navigation={navigation} />
         )}

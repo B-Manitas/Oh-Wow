@@ -32,7 +32,13 @@ export class Formatter extends Schema {
         return this.formatFirstname(dict[key]);
       case "day_off":
       case "is_opened":
+      case "img":
+      case "price":
+      case "duration":
       case "password":
+      case "is_trend":
+      case "name":
+      case "description":
         return dict[key];
       default:
         return this.formatDefaultValue(dict[key]);

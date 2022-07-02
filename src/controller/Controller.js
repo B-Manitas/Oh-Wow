@@ -44,6 +44,11 @@ export class Controller extends ErrorsCatcher {
     else return this.frontend.schemaUser;
   }
 
+  get user_access() {
+    if (this.is_connected) return store.getState().access;
+    else return false;
+  }
+
   /**
    * Function to be called when the user has pressed the registration button.
    * @param {Object} data The user's data to be stored in the database.
@@ -155,8 +160,9 @@ export class Controller extends ErrorsCatcher {
     funcs.forEach((func) => func(data));
   }
 
-  getAllServices() {
-    return store.getState().services;
+  getAllServices(funcs) {
+    const data = store.getState().services;
+    funcs.forEach((func) => func(data));
   }
 
   async onCloseService(service, init_service, func, navigation) {
@@ -164,7 +170,6 @@ export class Controller extends ErrorsCatcher {
       const service_2 = Utils.removeKey(service, ["_id", "img"]);
       const init_service_2 = Utils.removeKey(init_service, ["_id", "img"]);
 
-      console.log(this.user_data._id);
       if (!_.isEqual(service_2, init_service_2) && (await this.isAdmin()))
         await this.frontend.updateService(service);
 

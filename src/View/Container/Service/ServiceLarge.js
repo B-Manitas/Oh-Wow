@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingBottom: 5,
     marginVertical: 5,
-    // alignItems: "center",
-    // justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#fff",
     marginHorizontal: 30,
     flex: 1,
@@ -58,8 +57,8 @@ const styles = StyleSheet.create({
   img: {
     marginRight: 15,
     width: 90,
-    // aspectRatio: 1,
-    height: 100,
+    height: 90,
+    borderRadius: 2
   },
 
   h1: {

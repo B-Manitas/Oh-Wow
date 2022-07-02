@@ -4,9 +4,9 @@ import { Animated, StyleSheet, Text } from "react-native";
 import { controller } from "model/Main";
 import { fetchServices } from "../../redux/ActionsCreator";
 
-const Splash = ({ setShowSplash }) => {
+const Splash = ({ setShowSplash, setService }) => {
   useEffect(() => {
-    controller.fetchAllServices([fetchServices]);
+    controller.fetchAllServices([fetchServices, setService]);
     setShowSplash(false);
   }, []);
 

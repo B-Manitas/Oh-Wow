@@ -6,7 +6,6 @@ import {
   TextInput,
   ScrollView,
   Image,
-  Dimensions,
 } from "react-native";
 
 import Page from "../Container/Page";
@@ -36,7 +35,6 @@ const ConsultService = ({ navigation, route }) => {
     });
 
     if (!result.cancelled) {
-      console.log(typeof result.base64);
       setService((p) => ({
         ...p,
         img: "data:image/jpeg;base64," + result.base64,
@@ -49,7 +47,7 @@ const ConsultService = ({ navigation, route }) => {
       <Header
         type={"back"}
         title={service.name}
-        editable={true}
+        editable={controller.user_access}
         navigation={navigation}
         setValue={(t) => setService((p) => ({ ...p, name: t }))}
         is_valid={valid_format["name"]}
@@ -87,7 +85,7 @@ const ConsultService = ({ navigation, route }) => {
             flex={1}
             width={"25%"}
             setValue={(t) =>
-              setService((p) => ({ ...p, duration: parseInt(t == "" ? 0 : t) }))
+              setService((p) => ({ ...p, duration: parseInt(t) }))
             }
           />
           <ServiceInfo
@@ -97,9 +95,7 @@ const ConsultService = ({ navigation, route }) => {
             value={service.price.toString()}
             flex={1}
             width={"25%"}
-            setValue={(t) =>
-              setService((p) => ({ ...p, price: parseInt(t == "" ? 0 : t) }))
-            }
+            setValue={(t) => setService((p) => ({ ...p, price: parseInt(t) }))}
           />
           <ServiceInfo
             enabled={false}
@@ -138,7 +134,9 @@ const ConsultService = ({ navigation, route }) => {
         </View>
       </ScrollView>
 
-      <Absolute img={ICON.trash} bottom={30} left={30} />
+      {controller.user_access && (
+        <Absolute img={ICON.trash} bottom={30} left={30} />
+      )}
       <Absolute
         text={"Prendre RDV"}
         img={ICON.book}

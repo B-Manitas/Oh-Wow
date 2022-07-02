@@ -11,7 +11,10 @@ import Header from "../Parts/Header";
 import { controller } from "model/Main";
 
 const ConsultAllServices = ({ navigation }) => {
-  const services = controller.getAllServices();
+  const [services, setService] = useState([]);
+  useEffect(() => {
+    controller.getAllServices([setService]);
+  }, []);
 
   return (
     <Page>
