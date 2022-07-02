@@ -122,7 +122,7 @@ export class Frontend extends Approver {
   }
 
   async fetchAllServices(funcs) {
-    const data = await this.getAllServices();
-    funcs.forEach((func) => func(data));
+    // const data = await this.getAllServices();
+    // funcs.forEach((func) => func(data));
   }
 }

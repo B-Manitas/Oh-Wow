@@ -48,7 +48,7 @@ export default {
 
   removeKey(object, ...keys) {
     keys.forEach((key) => delete object[key]);
-    return object;
+    return this.copy(object);
   },
 
   isArrayEquals(arr1, arr2) {

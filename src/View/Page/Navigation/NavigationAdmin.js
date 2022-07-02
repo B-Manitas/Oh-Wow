@@ -5,11 +5,11 @@ import Link from "../../Buttons/Link";
 import { controller } from "model/Main";
 
 const NavigationAdmin = ({ navigation }) => {
-  // const is_admin = controller.isAdmin();
+  const is_admin = controller.getter.isAdmin();
 
   return (
     <View>
-      {true && (
+      {is_admin && (
         <View style={styles.nav}>
           <Link
             text={"Consulter le plannings des réservations"}

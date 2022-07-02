@@ -8,6 +8,7 @@ import {
   gainAccess,
   removeUserStore,
 } from "../redux/ActionsCreator";
+import { store } from "../redux/Store";
 
 export class OnPress extends ControllerMain {
   /**
@@ -20,8 +21,6 @@ export class OnPress extends ControllerMain {
   async signup(data, hookFuncAudit, navigation) {
     try {
       const user = await this.frontend.signup(data);
-      this.is_connected = true;
-
       addUserStore(Utils.removeKey(user, "status", "password"));
 
       navigation.navigate("Home");
@@ -41,8 +40,6 @@ export class OnPress extends ControllerMain {
   async login(data, hookFuncAudit, navigation) {
     try {
       const user = await this.frontend.login(data);
-      this.is_connected = true;
-
       addUserStore(user);
       if (this.isAdmin()) gainAccess("admin");
 
@@ -59,7 +56,6 @@ export class OnPress extends ControllerMain {
    */
   logout(navigation) {
     removeUserStore();
-    this.is_connected = false;
     navigation.navigate("Home");
     Alert.alert(`Bye, see you soon !`);
   }

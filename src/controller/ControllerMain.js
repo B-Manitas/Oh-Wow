@@ -1,5 +1,7 @@
 import { ErrorsCatcher } from "./ErrorsCatcher";
 import { store } from "redux-store/Store";
+import _ from "lodash";
+import { state_user } from "../redux/State";
 
 export class ControllerMain extends ErrorsCatcher {
   /**
@@ -11,7 +13,6 @@ export class ControllerMain extends ErrorsCatcher {
     super();
     this.backend = backend;
     this.frontend = frontend;
-    this.is_connected = false;
   }
 
   /** Get the user data in the redux state. */
@@ -21,8 +22,8 @@ export class ControllerMain extends ErrorsCatcher {
 
   /** Get the user access in the redux state. */
   get user_access() {
-    if (this.is_connected) return store.getState().access;
-    else return false;
+    if (this.isConnected()) return store.getState().access;
+    else return undefined;
   }
 
   async getAllSalons(...funcs) {
@@ -33,6 +34,10 @@ export class ControllerMain extends ErrorsCatcher {
   async getAllServices(...funcs) {
     const data = store.getState().services;
     funcs.forEach((func) => func(data));
+  }
+
+  isConnected() {
+    return !_.isEqual(this.user_data, state_user);
   }
 
   async isAdmin() {
