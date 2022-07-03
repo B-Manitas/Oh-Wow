@@ -135,7 +135,12 @@ const ConsultService = ({ navigation, route }) => {
       </ScrollView>
 
       {controller.getter.user_access && (
-        <Absolute img={ICON.trash} bottom={30} left={30} />
+        <Absolute
+          img={ICON.trash}
+          bottom={30}
+          left={30}
+          func={() => controller.onPress.deleteService(navigation, data._id)}
+        />
       )}
       <Absolute
         text={"Prendre RDV"}

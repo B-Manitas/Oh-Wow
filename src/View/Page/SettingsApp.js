@@ -20,7 +20,7 @@ const SettingsApp = ({ navigation }) => {
   );
 
   useEffect(() => {
-    controller.getter.getSalon([setSalon, setInitSalon]);
+    controller.getter.getAllSalons(setSalon, setInitSalon);
   }, []);
 
   return (

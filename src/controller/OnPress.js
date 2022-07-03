@@ -8,7 +8,6 @@ import {
   gainAccess,
   removeUserStore,
 } from "../redux/ActionsCreator";
-import { store } from "../redux/Store";
 
 export class OnPress extends ControllerMain {
   /**
@@ -60,8 +59,29 @@ export class OnPress extends ControllerMain {
     Alert.alert(`Bye, see you soon !`);
   }
 
+  async deleteUser() {
+    await this.deleteCustomUser(this.user_data._id);
+  }
+
+  async deleteCustomUser(user_id) {
+    await this.frontend.deleteUser(user_id);
+    removeUserStore();
+    navigation.navigate("Home");
+    Alert.alert(`Your account has been successfully removed.`);
+  }
+
   addService(navigation) {
     const data = this.frontend.schemaService();
-    return navigation.navigate("Service", { data });
+    navigation.navigate("Service", { data });
+  }
+
+  async removeService(navigation, service_id) {
+    await this.frontend.deleteService(service_id);
+    navigation.navigate("Home");
+    Alert.alert(`The service has been successfully removed.`);
+  }
+
+  userSearch(navigation, user) {
+    navigation.navigate("Client", { data: user });
   }
 }

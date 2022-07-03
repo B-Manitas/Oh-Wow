@@ -59,6 +59,10 @@ export class Backend extends Request {
     return resp["documents"];
   }
 
+  async deleteOne(collection, filter) {
+    await this.post("/deleteOne", { ...this._body, collection, filter });
+  }
+
   /**
    * Send a request to register a new user.
    * @param {Object} user The user's data to register .
@@ -114,6 +118,27 @@ export class Backend extends Request {
   }
 
   async updateService(data) {
-    await this._updateOne("service", { _id: data._id }, { $set: { ...data } }, true);
+    await this._updateOne(
+      "service",
+      { _id: data._id },
+      { $set: { ...data } },
+      true
+    );
+  }
+
+  async deleteUser(user_id) {
+    await this.deleteOne("user", { _id: user_id });
+  }
+
+  async deleteService(service_id) {
+    await this.deleteOne("service", { _id: service_id });
+  }
+
+  async getAllUsers() {
+    return this._find("user");
+  }
+
+  async getAllAccess() {
+    return this._find("staff");
   }
 }

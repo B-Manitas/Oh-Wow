@@ -1,9 +1,17 @@
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Searchbar from "../Componnent/Searchbar";
+import User from "../Container/User";
+import { useEffect, useState } from "react";
+import { controller } from "model/Main";
 
 const Search = ({ navigation }) => {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    controller.getter.getAllUsersWithAccess(setUsers);
+  }, []);
+
   return (
     <Page>
       <Header
@@ -13,48 +21,20 @@ const Search = ({ navigation }) => {
       />
       <Searchbar />
 
-      <TouchableOpacity style={styles.container}>
-        <Text style={styles.h1}>John Doe</Text>
-        <Text style={styles.h2}>employé</Text>
-      </TouchableOpacity>
+      <FlatList
+        data={users}
+        keyExtractor={(item, _) => item._id}
+        renderItem={(item) => <User navigation={navigation} data={item.item} />}
+        ListEmptyComponent={() => (
+          <View>
+            <Text>Empty</Text>
+          </View>
+        )}
+      />
     </Page>
   );
 };
 
 export default Search;
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    marginHorizontal: 30,
-    marginVertical: 5,
-    borderWidth: 1,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-    backgroundColor: "#fff",
-  },
-
-  h1: {
-    fontWeight: "500",
-    fontSize: 20,
-  },
-
-  h2: {
-    fontWeight: "300",
-    fontSize: 16,
-    marginLeft: 10,
-    position: "absolute",
-    right: 10,
-  },
-});
+const styles = StyleSheet.create({});

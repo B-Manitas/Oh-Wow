@@ -114,7 +114,7 @@ export class Frontend extends Approver {
   }
 
   async getAllServices() {
-    return this.backend.getAllServices();
+    return await this.backend.getAllServices();
   }
 
   async updateService(service) {
@@ -122,7 +122,26 @@ export class Frontend extends Approver {
   }
 
   async fetchAllServices(funcs) {
-    // const data = await this.getAllServices();
-    // funcs.forEach((func) => func(data));
+    const data = await this.getAllServices();
+    funcs.forEach((func) => func(data));
+  }
+
+  async deleteUser(user_id) {
+    await this._actions(user_id, this.backend.deleteUser.bind(this.backend));
+  }
+
+  async deleteService(service_id) {
+    await this._actions(
+      service_id,
+      this.backend.deleteService.bind(this.backend)
+    );
+  }
+
+  async getAllUsers() {
+    return await this.backend.getAllUsers();
+  }
+
+  async getAllAccess() {
+    return await this.backend.getAllAccess();
   }
 }

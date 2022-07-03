@@ -1,17 +1,31 @@
 import React from "react";
 import { View, TextInput, Text, StyleSheet } from "react-native";
 
-const TextEdit = ({ pre_text, plh, value, editable, keyboard_type, size }) => {
+const TextEdit = ({
+  pre_text,
+  plh,
+  value,
+  editable,
+  keyboard_type,
+  size,
+  setValue,
+  isValidFormat,
+}) => {
   return (
     <View style={styles.container}>
       <Text style={[styles.pre_text, { fontSize: size }]}>{pre_text}</Text>
       <TextInput
         editable={editable}
-        style={[styles.input, { fontSize: size }]}
+        style={[
+          styles.input,
+          { fontSize: size },
+          !isValidFormat && { color: "red" },
+        ]}
         value={value}
         placeholder={plh}
         keyboardType={keyboard_type}
         returnKeyType={"done"}
+        onChangeText={(t) => setValue(t)}
       />
     </View>
   );

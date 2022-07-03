@@ -80,7 +80,10 @@ const Settings = ({ navigation }) => {
             text={"Se déconnecter"}
             func={() => controller.onPress.logout(navigation)}
           />
-          <Chevron text={"Supprimer votre compte"} />
+          <Chevron
+            text={"Supprimer votre compte"}
+            func={() => controller.onPress.deleteUser(navigation)}
+          />
         </View>
       </ScrollView>
     </Page>

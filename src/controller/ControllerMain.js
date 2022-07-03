@@ -28,10 +28,10 @@ export class ControllerMain extends ErrorsCatcher {
 
   async getAllSalons(...funcs) {
     const data = await this.frontend.getSalonData();
-    funcs.forEach((func) => func(data));
+    funcs.forEach((func) => func(data[0]));
   }
 
-  async getAllServices(...funcs) {
+  getAllServices(...funcs) {
     const data = store.getState().services;
     funcs.forEach((func) => func(data));
   }
@@ -45,5 +45,17 @@ export class ControllerMain extends ErrorsCatcher {
       this.user_data._id != undefined &&
       (await this.frontend.isAdmin(this.user_data._id))
     );
+  }
+
+  async getAllUsers(...funcs) {
+    const data = await this.frontend.getAllUsers();
+    funcs.forEach((func) => func(data));
+  }
+
+  async getAllUsersWithAccess(...funcs) {
+    const user = await this.frontend.getAllUsers();
+    const access = await this.frontend.getAllAccess();
+    const data = user.map((item, i) => Object.assign({}, item, access[i]));
+    funcs.map((func) => func(data));
   }
 }
