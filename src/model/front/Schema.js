@@ -10,7 +10,7 @@ export class Schema {
    * Otherwise, return false.
    */
   isSchema(object, schema) {
-    return Utils.isArrayEquals(Object.keys(object), Object.keys(schema));
+    return Utils.isEquals(Object.keys(object), Object.keys(schema));
   }
 
   /**

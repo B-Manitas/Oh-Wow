@@ -111,7 +111,7 @@ const SignUp = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => controller.add.user(data, setAudit, navigation)}
+            func={() => controller.add.user(data, navigation, setAudit)}
             is_active={is_CGU_accepted}
           />
 

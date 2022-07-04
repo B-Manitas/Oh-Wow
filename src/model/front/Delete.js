@@ -6,8 +6,8 @@ export class Delete extends SuperFrontend {
     await this._actions(id, delete_back.user.bind(delete_back));
   }
 
-  async service(service_id) {
+  async service(id) {
     const delete_back = this.backend.delete;
-    await this._actions(service_id, delete_back.service.bind(delete_back));
+    await this._actions(id, delete_back.service.bind(delete_back));
   }
 }

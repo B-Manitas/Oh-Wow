@@ -18,7 +18,7 @@ const Settings = ({ navigation }) => {
         navigation={navigation}
         type={"close"}
         title={"Paramètres"}
-        func={() => controller.onClose.settings(data, setAudit, navigation)}
+        func={() => controller.onClose.settings(data, navigation, setAudit)}
       />
 
       <ScrollView>

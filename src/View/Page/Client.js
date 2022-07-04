@@ -11,7 +11,6 @@ const Client = ({ navigation, route }) => {
   const data_init = route.params.data;
   const [data, setData] = useState(data_init);
   const [audit, setAudit] = useState(controller.fakeAudit(data));
-  console.log(data);
 
   return (
     <Page>
@@ -20,7 +19,7 @@ const Client = ({ navigation, route }) => {
         title={"Information Client"}
         navigation={navigation}
         func={() =>
-          controller.onClose.client(data, data_init, setAudit, navigation)
+          controller.onClose.client(data, data_init, navigation, setAudit)
         }
       />
       <View style={styles.parts}>

@@ -25,7 +25,7 @@ const SettingsApp = ({ navigation }) => {
     <Page>
       <Header
         func={() =>
-          controller.onClose.settingsApp(data, data_init, setAudit, navigation)
+          controller.onClose.settingsApp(data, data_init, navigation, setAudit)
         }
         navigation={navigation}
         type={"close"}
@@ -84,7 +84,7 @@ const SettingsApp = ({ navigation }) => {
           <ToggleLong
             text={"Prise de nouveau RDV"}
             value={data.is_opened}
-            func={(b) => setData((p) => ({ ...p, is_opened: !b }))}
+            func={(b) => setData((p) => ({ ...p, is_opened: b }))}
           />
           <Chevron text={"Réinitialiser la base de donnée"} />
           <Chevron text={"Réinitialiser l'état de l'application"} />

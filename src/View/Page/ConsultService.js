@@ -53,8 +53,8 @@ const ConsultService = ({ navigation, route }) => {
           controller.onClose.service(
             service,
             service_init,
-            setAudit,
-            navigation
+            navigation,
+            setAudit
           )
         }
       />

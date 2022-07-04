@@ -1,12 +1,10 @@
 import _ from "lodash";
 import Utils from "model/Utils";
 import { state_user } from "store/State";
-import { ErrorsCatcher } from "./ErrorsCatcher";
 import { store } from "store/Store";
 
-export class SuperController extends ErrorsCatcher {
+export class SuperController {
   constructor(backend, frontend) {
-    super();
     this.backend = backend;
     this.frontend = frontend;
   }

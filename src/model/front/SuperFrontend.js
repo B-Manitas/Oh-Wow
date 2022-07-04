@@ -1,5 +1,5 @@
 import { Approver } from "./Approver";
-import InvalidDataError from "exceptions/InvalidDataError";
+import InvalidData from "exceptions/data_error/InvalidData";
 
 export class SuperFrontend extends Approver {
   constructor(backend) {
@@ -13,16 +13,15 @@ export class SuperFrontend extends Approver {
    * @param {Function} func_backend The function to call in the backend.
    * @returns The response of the request made by the backend.
    *
-   * @throws {InvalidDataError} If the user data does not follow a valid format
+   * @throws {DataError} If the user data does not follow a valid format
    * imposed by the IsFormat class.
    */
-  async _actions(data, func_backend) {
+  async _actions(data, func_backend, setAudit) {
     const resume = this.approve(data);
-
     if (resume.is_valid) {
       data = this.formatDict(data);
       return await func_backend(data);
-    } else throw new InvalidDataError(resume.audit);
+    } else throw new InvalidData(resume.audit, setAudit);
   }
 
   /**
@@ -30,9 +29,14 @@ export class SuperFrontend extends Approver {
    * @param {Object} user The user data.
    * @returns true if the user exist. Otherwise, return false.
    */
-  async isExistingUser(user) {
+  async isExistingUser(user, setAudit) {
     const get_back = this.backend.get;
-    return (await this._actions(user, get_back.user.bind(get_back))) != null;
+    const resp = await this._actions(
+      user,
+      get_back.user.bind(get_back),
+      setAudit
+    );
+    return resp != null;
   }
 
   async isUserAdmin(id) {

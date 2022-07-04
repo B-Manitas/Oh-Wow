@@ -1,5 +1,5 @@
 // Import Custom Exceptions
-import NetworkStatusError from "exceptions/NetworkStatusError";
+import BadStatus from "exceptions/network_error/BadStatus";
 
 /**
  * Send primary request.
@@ -38,7 +38,7 @@ export class Request {
       headers: this._headers,
     });
 
-    if (!response.ok) throw new NetworkStatusError(response.status);
+    if (!response.ok) throw new BadStatus(response.status);
     return response.json();
   }
 

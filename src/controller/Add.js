@@ -2,7 +2,7 @@ import { SuperController } from "./SuperController";
 import { addUserStore } from "store/ActionsCreator";
 import Utils from "model/Utils";
 import { Alert } from "react-native";
-import { catchError } from "./ErrorsCatcher";
+import Catch from "exceptions/ErrorsCatcher";
 
 export class Add extends SuperController {
   /**
@@ -12,16 +12,13 @@ export class Add extends SuperController {
    * fields in the user data are missing.
    * @param {Function} navigation The navigation function for changing page.
    */
-  async user(data, funcAudit, navigation) {
-    try {
-      const user = await this.frontend.add.user(data);
-      addUserStore(Utils.removeKey(user, "status", "password"));
+  @Catch
+  async user(data, navigation, setAudit) {
+    const user = await this.frontend.add.user(data, setAudit);
+    addUserStore(Utils.removeKey(user, "status", "password"));
 
-      navigation.navigate("Home");
-      Alert.alert(`Welcome, ${user.firstname} !`);
-    } catch (error) {
-      this.manageAllErrors(error, funcAudit);
-    }
+    navigation.navigate("Home");
+    Alert.alert(`Welcome, ${user.firstname} !`);
   }
 
   service(navigation) {

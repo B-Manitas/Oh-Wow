@@ -56,7 +56,7 @@ const Login = ({ navigation }) => {
             height={10}
             font_size={20}
             func={() =>
-              controller.get.connect(data, setAudit, navigation)
+              controller.get.connect(data, navigation, setAudit)
             }
             is_active={true}
           />

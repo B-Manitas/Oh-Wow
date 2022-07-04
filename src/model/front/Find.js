@@ -1,4 +1,4 @@
-import LogginError from "exceptions/LogginError";
+import FailedLogin from "exceptions/data_error/FailedLogin";
 import { SuperFrontend } from "./SuperFrontend";
 
 export class Find extends SuperFrontend {
@@ -33,13 +33,13 @@ export class Find extends SuperFrontend {
    * @param {Object} user The data entered by the user.
    * @returns The user's ID after connection.
    *
-   * @throws {LogginError} If the user has not yet been registered.
+   * @throws {FailedLogin} If the user has not yet been registered.
    */
-  async connect(user) {
+  async connect(user, setAudit) {
     const get_back = this.backend.get;
-    const resp = await this._actions(user, get_back.user.bind(get_back));
+    const resp = await this._actions(user, get_back.user.bind(get_back), setAudit);
 
-    if (resp == null) throw new LogginError();
+    if (resp == null) throw new FailedLogin();
     else return resp;
   }
 }
