@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { Animated, StyleSheet, Text } from "react-native";
 
 import { controller } from "model/Main";
-import { fetchServices } from "../../redux/ActionsCreator";
+import { fetchServices } from "store/ActionsCreator";
 
 const Splash = ({ setShowSplash, setService }) => {
   useEffect(() => {
-    controller.frontend.fetchAllServices([fetchServices, setService]);
+    controller.get.allServices(fetchServices, setService);
     setShowSplash(false);
   }, []);
 

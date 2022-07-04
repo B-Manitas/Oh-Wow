@@ -10,7 +10,8 @@ import { controller } from "model/Main";
 const Client = ({ navigation, route }) => {
   const data_init = route.params.data;
   const [data, setData] = useState(data_init);
-  const [is_valid, setIsValid] = useState(controller.frontend.fakeAudit(data));
+  const [audit, setAudit] = useState(controller.fakeAudit(data));
+  console.log(data);
 
   return (
     <Page>
@@ -19,7 +20,7 @@ const Client = ({ navigation, route }) => {
         title={"Information Client"}
         navigation={navigation}
         func={() =>
-          controller.onClose.client(data, data_init, setIsValid, navigation)
+          controller.onClose.client(data, data_init, setAudit, navigation)
         }
       />
       <View style={styles.parts}>
@@ -27,34 +28,34 @@ const Client = ({ navigation, route }) => {
           <TextEdit
             size={26}
             plh={"Firstname"}
-            value={data["firstname"]}
+            value={data.firstname}
             setValue={(t) => setData((p) => ({ ...p, firstname: t }))}
-            isValidFormat={is_valid["firstname"]}
+            isValidFormat={audit.firstname}
           />
           <TextEdit
             size={26}
             plh={"LASTNAME"}
-            value={data["lastname"]}
+            value={data.lastname}
             setValue={(t) => setData((p) => ({ ...p, lastname: t }))}
-            isValidFormat={is_valid["lastname"]}
+            isValidFormat={audit.lastname}
           />
         </View>
 
         <TextEdit
           size={16}
           pre_text={"Tél :"}
-          value={data["phone"]}
+          value={data.phone}
           plh={"0600000000"}
           setValue={(t) => setData((p) => ({ ...p, phone: t }))}
-          isValidFormat={is_valid["phone"]}
+          isValidFormat={audit.phone}
         />
         <TextEdit
           size={16}
           pre_text={"Mail :"}
           plh={"address@example.com"}
-          value={data["mail"]}
+          value={data.mail}
           setValue={(t) => setData((p) => ({ ...p, mail: t }))}
-          isValidFormat={is_valid["mail"]}
+          isValidFormat={audit.mail}
         />
       </View>
 
@@ -62,12 +63,12 @@ const Client = ({ navigation, route }) => {
         <Text style={styles.h1}>Actions</Text>
         <ToggleLong
           text={"Administrateur"}
-          value={data["access"] == "admin"}
+          value={data.access == "admin"}
           func={(b) => setData((p) => ({ ...p, access: b ? "admin" : null }))}
         />
         <Chevron
           text={"Supprimer le compte"}
-          func={() => controller.onPress.deleteUser(navigation, user)}
+          func={() => controller.delete.user(navigation, user)}
         />
       </View>
     </Page>

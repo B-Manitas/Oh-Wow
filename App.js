@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 
 // Imports store
-import { store, persistor } from "redux-store/Store";
+import { store, persistor } from "store/Store";
 import { PersistGate } from "redux-persist/integration/react";
 
 // Imports pages

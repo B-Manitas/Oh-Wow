@@ -1,4 +1,4 @@
-import Utils from "../Utils";
+import Utils from "model/Utils";
 
 /** The Schema class contains all the tables in the database. */
 export class Schema {

@@ -9,10 +9,8 @@ import InputSecondary from "../Input/InputSecondary";
 import Chevron from "../Buttons/Chevron";
 
 const Settings = ({ navigation }) => {
-  const [data, setData] = useState(controller.getter.user_data);
-  const [valid_format, setValidFormat] = useState(
-    controller.frontend.audit(data)
-  );
+  const [data, setData] = useState(controller.get.this_user_data);
+  const [audit, setAudit] = useState(controller.fakeAudit(data));
 
   return (
     <Page>
@@ -20,9 +18,7 @@ const Settings = ({ navigation }) => {
         navigation={navigation}
         type={"close"}
         title={"Paramètres"}
-        func={() =>
-          controller.onClose.settings(data, setValidFormat, navigation)
-        }
+        func={() => controller.onClose.settings(data, setAudit, navigation)}
       />
 
       <ScrollView>
@@ -35,9 +31,9 @@ const Settings = ({ navigation }) => {
             returnKeyType={"next"}
             maxLength={12}
             keyboardType={"default"}
-            value={data["firstname"]}
+            value={data.firstname}
             setValue={(t) => setData((p) => ({ ...p, firstname: t }))}
-            isValidFormat={valid_format["firstname"]}
+            isValidFormat={audit.firstname}
           />
           <InputSecondary
             plh={"Nom"}
@@ -46,9 +42,9 @@ const Settings = ({ navigation }) => {
             returnKeyType={"next"}
             maxLength={12}
             keyboardType={"default"}
-            value={data["lastname"]}
+            value={data.lastname}
             setValue={(t) => setData((p) => ({ ...p, lastname: t }))}
-            isValidFormat={valid_format["lastname"]}
+            isValidFormat={audit.lastname}
           />
           <InputSecondary
             plh={"Mail"}
@@ -57,9 +53,9 @@ const Settings = ({ navigation }) => {
             returnKeyType={"next"}
             maxLength={50}
             keyboardType={"email-address"}
-            value={data["mail"]}
+            value={data.mail}
             setValue={(t) => setData((p) => ({ ...p, mail: t }))}
-            isValidFormat={valid_format["mail"]}
+            isValidFormat={audit.mail}
           />
           <InputSecondary
             plh={"0600000000"}
@@ -68,9 +64,9 @@ const Settings = ({ navigation }) => {
             returnKeyType={"done"}
             maxLength={10}
             keyboardType={"phone-pad"}
-            value={data["phone"]}
+            value={data.phone}
             setValue={(t) => setData((p) => ({ ...p, phone: t }))}
-            isValidFormat={valid_format["phone"]}
+            isValidFormat={audit.phone}
           />
         </View>
 
@@ -78,11 +74,11 @@ const Settings = ({ navigation }) => {
           <Text style={styles.h1}>Actions :</Text>
           <Chevron
             text={"Se déconnecter"}
-            func={() => controller.onPress.logout(navigation)}
+            func={() => controller.update.logout(navigation)}
           />
           <Chevron
             text={"Supprimer votre compte"}
-            func={() => controller.onPress.deleteUser(navigation)}
+            func={() => controller.delete.user(navigation)}
           />
         </View>
       </ScrollView>

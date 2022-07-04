@@ -4,7 +4,7 @@ const ToggleLong = ({ text, value, func }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{text}</Text>
-      <Switch value={value} style={styles.switch} onChange={() => func(value)} />
+      <Switch value={value} style={styles.switch} onChange={() => func(!value)} />
     </View>
   );
 };

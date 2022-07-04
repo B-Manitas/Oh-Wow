@@ -13,26 +13,19 @@ import InputHours from "../Input/InputHours";
 const SettingsApp = ({ navigation }) => {
   var schema = controller.frontend.schemaSalon();
 
-  const [salon, setSalon] = useState(schema);
-  const [init_salon, setInitSalon] = useState(schema);
-  const [valid_format, setValidFormat] = useState(
-    controller.frontend.fakeAudit(schema)
-  );
+  const [data_init, setDataInit] = useState(schema);
+  const [data, setData] = useState(schema);
+  const [audit, setAudit] = useState(controller.fakeAudit(schema));
 
   useEffect(() => {
-    controller.getter.getAllSalons(setSalon, setInitSalon);
+    controller.get.allSalons(setData, setDataInit);
   }, []);
 
   return (
     <Page>
       <Header
         func={() =>
-          controller.onClose.settingsApp(
-            salon,
-            init_salon,
-            setValidFormat,
-            navigation
-          )
+          controller.onClose.settingsApp(data, data_init, setAudit, navigation)
         }
         navigation={navigation}
         type={"close"}
@@ -40,27 +33,24 @@ const SettingsApp = ({ navigation }) => {
       />
       <ScrollView style={styles.container}>
         <View style={styles.parts}>
-          <Text style={styles.h1}>Jours de fermeture du salon</Text>
+          <Text style={styles.h1}>Jours de fermeture du data</Text>
           <View style={styles.container_days}>
             <DaysCheckBoxList
-              value={salon["day_off"]}
+              value={data.day_off}
               setValue={(v) =>
-                setSalon((p) => ({ ...p, day_off: { ...p.day_off, ...v } }))
+                setData((p) => ({ ...p, day_off: { ...p.day_off, ...v } }))
               }
             />
           </View>
         </View>
 
         <View style={styles.parts}>
-          <Text style={styles.h1}>Date de fermeture du salon</Text>
+          <Text style={styles.h1}>Date de fermeture du data</Text>
           <TextInput
-            style={[
-              styles.input,
-              !valid_format["date_off"] && { borderColor: "red" },
-            ]}
+            style={[styles.input, !audit.date_off && { borderColor: "red" }]}
             placeholder={"14/07;25/12"}
-            value={salon["date_off"]}
-            onChangeText={(t) => setSalon((p) => ({ ...p, date_off: t }))}
+            value={data.date_off}
+            onChangeText={(t) => setData((p) => ({ ...p, date_off: t }))}
           />
         </View>
 
@@ -69,36 +59,32 @@ const SettingsApp = ({ navigation }) => {
             text={"Horaire du matin"}
             plh_1={"8h00"}
             plh_2={"12h00"}
-            value_1={salon["morning_opening_hours"]}
-            value_2={salon["morning_closing_hours"]}
-            func_1={(t) =>
-              setSalon((p) => ({ ...p, morning_opening_hours: t }))
-            }
-            func_2={(t) =>
-              setSalon((p) => ({ ...p, morning_closing_hours: t }))
-            }
-            isValidFormat_1={valid_format["morning_opening_hours"]}
-            isValidFormat_2={valid_format["morning_closing_hours"]}
+            value_1={data.morning_opening_hours}
+            value_2={data.morning_closing_hours}
+            func_1={(t) => setData((p) => ({ ...p, morning_opening_hours: t }))}
+            func_2={(t) => setData((p) => ({ ...p, morning_closing_hours: t }))}
+            isValidFormat_1={audit.morning_opening_hours}
+            isValidFormat_2={audit.morning_closing_hours}
           />
           <InputHours
             text={"Horaire de l'après-midi"}
             plh_1={"13h00"}
             plh_2={"18h00"}
-            value_1={salon["afternoon_opening_hours"]}
-            value_2={salon["afternoon_closing_hours"]}
+            value_1={data.afternoon_opening_hours}
+            value_2={data.afternoon_closing_hours}
             func_1={(t) =>
-              setSalon((p) => ({ ...p, afternoon_opening_hours: t }))
+              setData((p) => ({ ...p, afternoon_opening_hours: t }))
             }
             func_2={(t) =>
-              setSalon((p) => ({ ...p, afternoon_closing_hours: t }))
+              setData((p) => ({ ...p, afternoon_closing_hours: t }))
             }
-            isValidFormat_1={valid_format["afternoon_opening_hours"]}
-            isValidFormat_2={valid_format["afternoon_closing_hours"]}
+            isValidFormat_1={audit.afternoon_opening_hours}
+            isValidFormat_2={audit.afternoon_closing_hours}
           />
           <ToggleLong
             text={"Prise de nouveau RDV"}
-            value={salon["is_opened"]}
-            func={(b) => setSalon((p) => ({ ...p, is_opened: !b }))}
+            value={data.is_opened}
+            func={(b) => setData((p) => ({ ...p, is_opened: !b }))}
           />
           <Chevron text={"Réinitialiser la base de donnée"} />
           <Chevron text={"Réinitialiser l'état de l'application"} />

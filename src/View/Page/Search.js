@@ -9,7 +9,7 @@ import { controller } from "model/Main";
 const Search = ({ navigation }) => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    controller.getter.getAllUsersWithAccess(setUsers);
+    controller.get.allUsersWithAccess(setUsers);
   }, []);
 
   return (
@@ -25,11 +25,6 @@ const Search = ({ navigation }) => {
         data={users}
         keyExtractor={(item, _) => item._id}
         renderItem={(item) => <User navigation={navigation} data={item.item} />}
-        ListEmptyComponent={() => (
-          <View>
-            <Text>Empty</Text>
-          </View>
-        )}
       />
     </Page>
   );

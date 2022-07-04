@@ -6,7 +6,6 @@ import Header from "../../Parts/Header";
 
 import HomeHeader from "./HomeHeader";
 import ServiceLarge from "../../Container/Service/ServiceLarge";
-import { controller } from "model/Main";
 import Splash from "../Splash";
 
 const Home = ({ navigation }) => {

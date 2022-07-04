@@ -13,11 +13,10 @@ import CheckBoxText from "../Componnent/CheckBoxText";
 import { controller } from "model/Main";
 
 const SignUp = ({ navigation }) => {
+  const schema_user = controller.frontend.schemaUser();
   const [is_CGU_accepted, setIsCGUAccepted] = useState(false);
-  const [data, setData] = useState(controller.frontend.schemaUser());
-  const [valid_format, setValidFormat] = useState(
-    controller.frontend.fakeAudit(controller.frontend.schemaUser())
-  );
+  const [data, setData] = useState(schema_user);
+  const [audit, setAudit] = useState(controller.fakeAudit(schema_user));
 
   return (
     <Page>
@@ -34,8 +33,8 @@ const SignUp = ({ navigation }) => {
           keyboardType={"default"}
           secureTextEntry={false}
           onChangeText={(t) => setData({ ...data, firstname: t })}
-          value={data["firstname"]}
-          isValidFormat={valid_format["firstname"]}
+          value={data.firstname}
+          isValidFormat={audit.firstname}
         />
         <InputPrimary
           info={"Nom *"}
@@ -47,8 +46,8 @@ const SignUp = ({ navigation }) => {
           keyboardType={"default"}
           secureTextEntry={false}
           onChangeText={(t) => setData({ ...data, lastname: t })}
-          value={data["lastname"]}
-          isValidFormat={valid_format["lastname"]}
+          value={data.lastname}
+          isValidFormat={audit.lastname}
         />
         <InputPrimary
           info={"Mail *"}
@@ -60,8 +59,8 @@ const SignUp = ({ navigation }) => {
           keyboardType={"email-address"}
           secureTextEntry={false}
           onChangeText={(t) => setData({ ...data, mail: t })}
-          value={data["mail"]}
-          isValidFormat={valid_format["mail"]}
+          value={data.mail}
+          isValidFormat={audit.mail}
         />
         <InputPrimary
           info={"Télephone"}
@@ -73,8 +72,8 @@ const SignUp = ({ navigation }) => {
           keyboardType={"phone-pad"}
           secureTextEntry={false}
           onChangeText={(t) => setData({ ...data, phone: t })}
-          value={data["phone"]}
-          isValidFormat={valid_format["phone"]}
+          value={data.phone}
+          isValidFormat={audit.phone}
         />
         <InputPrimary
           info={"Mot de passe *"}
@@ -86,8 +85,8 @@ const SignUp = ({ navigation }) => {
           keyboardType={"default"}
           secureTextEntry={true}
           onChangeText={(t) => setData({ ...data, password: t })}
-          value={data["password"]}
-          isValidFormat={valid_format["password"]}
+          value={data.password}
+          isValidFormat={audit.password}
         />
 
         <View style={styles.content_tou}>
@@ -112,7 +111,7 @@ const SignUp = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => controller.onPress.signup(data, setValidFormat, navigation)}
+            func={() => controller.add.user(data, setAudit, navigation)}
             is_active={is_CGU_accepted}
           />
 

@@ -35,7 +35,7 @@ export const accessReducer = (state = state_access, action) => {
       return { ...state, ...action.payload };
 
     case LOSS_ACCESS:
-      return state;
+      return state_access;
 
     default:
       return state;

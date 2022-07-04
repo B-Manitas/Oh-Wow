@@ -1,5 +1,5 @@
 // Super-class import
-import Utils from "../Utils";
+import Utils from "model/Utils";
 import { IsFormat } from "./IsFormat";
 
 /**

@@ -1,44 +1,55 @@
 // Super-class import
-import { ControllerMain } from "./ControllerMain";
 
 import _ from "lodash";
-import Utils from "../model/Utils";
+import Utils from "model/Utils";
+import { SuperController } from "./SuperController";
 
-export class OnClose extends ControllerMain {
-  async service(service, init_service, func, navigation) {
+export class OnClose extends SuperController {
+  async service(data, data_init, funcAudit, navigation) {
     try {
-      if (!_.isEqual(service, init_service) && (await this.isAdmin()))
-        await this.frontend.updateService(service);
+      if (!Utils.isEquals(data, data_init) && this.this_is_admin)
+        await this.frontend.update.service(data);
 
-      if (navigation) navigation.goBack();
+      navigation.goBack();
     } catch (error) {
-      this.manageAllErrors(error, func);
+      this.manageAllErrors(error, funcAudit);
     }
   }
 
-  async client(data, data_init, func, navigation) {
+  async client(data, data_init, funcAudit, navigation) {
     try {
-      if (!_.isEqual(data, data_init) && (await this.isAdmin())) {
-        await this.frontend.updateUser(Utils.removeKey(data, "access"));
+      if (!Utils.isEquals(data, data_init) && this.this_is_admin) {
+        await this.frontend.update.user(Utils.removeKey(data, "access"));
 
         if (data.access == "admin")
-          await this.frontend.setAccess(data["_id"], "admin");
+          await this.frontend.update.access(data._id, "admin");
       }
 
-      if (navigation) navigation.goBack();
+      navigation.goBack();
     } catch (error) {
-      this.manageAllErrors(error, func);
+      this.manageAllErrors(funcAudit, funcAudit);
     }
   }
 
-  async settingsApp(salon, init_salon, func, navigation) {
+  async settingsApp(data, data_init, funcAudit, navigation) {
     try {
-      if (salon != init_salon && this.isAdmin())
-        await this.frontend.updateSalon(salon);
+      if (!Utils.isEquals(data, data_init) && this.this_is_admin)
+        await this.frontend.update.salon(data);
 
-      if (navigation) navigation.navigate("Home");
+      navigation.navigate("Home");
     } catch (error) {
-      this.manageAllErrors(error, func);
+      this.manageAllErrors(error, funcAudit);
+    }
+  }
+
+  async settings(data, funcAudit, navigation) {
+    try {
+      if (!Utils.isEquals(data, this.this_user_data))
+        await this.frontend.update.user(data);
+
+      navigation.navigate("Home");
+    } catch (error) {
+      this.manageAllErrors(error, funcAudit);
     }
   }
 }

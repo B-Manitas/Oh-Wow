@@ -21,9 +21,7 @@ import * as ImagePicker from "expo-image-picker";
 const ConsultService = ({ navigation, route }) => {
   const service_init = route.params.data;
   const [service, setService] = useState(service_init);
-  const [valid_format, setValidFormat] = useState(
-    controller.frontend.fakeAudit(service_init)
-  );
+  const [audit, setAudit] = useState(controller.fakeAudit(service_init));
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -47,15 +45,15 @@ const ConsultService = ({ navigation, route }) => {
       <Header
         type={"back"}
         title={service.name}
-        editable={controller.getter.user_access}
+        editable={controller.get.user_access}
         navigation={navigation}
         setValue={(t) => setService((p) => ({ ...p, name: t }))}
-        is_valid={valid_format["name"]}
+        is_valid={audit.name}
         func={() =>
           controller.onClose.service(
             service,
             service_init,
-            setValidFormat,
+            setAudit,
             navigation
           )
         }
@@ -114,7 +112,7 @@ const ConsultService = ({ navigation, route }) => {
             multiline={true}
             onChangeText={(t) => setService((p) => ({ ...p, description: t }))}
             placeholder={"Click to edit the description..."}
-            placeholderTextColor={!valid_format["description"] && "red"}
+            placeholderTextColor={!audit.description && "red"}
           />
         </View>
 
@@ -122,7 +120,7 @@ const ConsultService = ({ navigation, route }) => {
           <Text style={styles.h2}>En tendance</Text>
           <View style={styles.container_trend}>
             <CheckBoxText
-              state={service["is_trend"]}
+              state={service.is_trend}
               size={25}
               color_bg_active={"#383838"}
               func={(b) => setService((p) => ({ ...p, is_trend: !b }))}
@@ -134,12 +132,12 @@ const ConsultService = ({ navigation, route }) => {
         </View>
       </ScrollView>
 
-      {controller.getter.user_access && (
+      {controller.get.user_access && (
         <Absolute
           img={ICON.trash}
           bottom={30}
           left={30}
-          func={() => controller.onPress.deleteService(navigation, data._id)}
+          func={() => controller.delete.service(navigation, data._id)}
         />
       )}
       <Absolute

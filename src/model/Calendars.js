@@ -91,16 +91,16 @@ export default {
     let morning = [];
     let afternoon = [];
 
-    for (let i = 0; i < open["morning"].length; i++) {
+    for (let i = 0; i < open.morning.length; i++) {
       morning[i] = {
-        date: new Date(year, month, day, open["morning"][i]),
+        date: new Date(year, month, day, open.morning[i]),
         is_available: Utils.randomBool(),
       };
     }
 
-    for (let i = 0; i < open["morning"].length; i++) {
+    for (let i = 0; i < open.morning.length; i++) {
       afternoon[i] = {
-        date: new Date(year, month, day, open["afternoon"][i]),
+        date: new Date(year, month, day, open.afternoon[i]),
         is_available: Utils.randomBool(),
       };
     }

@@ -14,9 +14,7 @@ import { controller } from "model/Main";
 const Login = ({ navigation }) => {
   const schema = controller.frontend.schemaLogin();
   const [data, setData] = useState(schema);
-  const [valid_format, setValidFormat] = useState(
-    controller.frontend.fakeAudit(schema)
-  );
+  const [audit, setAudit] = useState(controller.fakeAudit(schema));
 
   return (
     <Page>
@@ -31,9 +29,9 @@ const Login = ({ navigation }) => {
           maxLength={50}
           keyboardType={"email-address"}
           secureTextEntry={false}
-          value={data["mail"]}
+          value={data.mail}
           onChangeText={(mail) => setData((props) => ({ ...props, mail }))}
-          isValidFormat={valid_format["mail"]}
+          isValidFormat={audit.mail}
         />
         <InputPrimary
           info={"Mot de passe *"}
@@ -44,11 +42,11 @@ const Login = ({ navigation }) => {
           returnKeyType={"done"}
           maxLength={20}
           keyboardType={"default"}
-          value={data["password"]}
+          value={data.password}
           onChangeText={(password) =>
             setData((props) => ({ ...props, password }))
           }
-          isValidFormat={valid_format["password"]}
+          isValidFormat={audit.password}
         />
 
         <View style={styles.content_valid_btn}>
@@ -58,7 +56,7 @@ const Login = ({ navigation }) => {
             height={10}
             font_size={20}
             func={() =>
-              controller.onPress.login(data, setValidFormat, navigation)
+              controller.get.connect(data, setAudit, navigation)
             }
             is_active={true}
           />

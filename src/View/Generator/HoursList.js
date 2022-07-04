@@ -10,12 +10,12 @@ const HoursList = ({ date }) => {
   return (
     <View>
       <View style={styles.container}>
-        {hours["morning"].map((h_info, id) => (
+        {hours.morning.map((h_info, id) => (
           <Hour key={id} hour={h_info.date.getHours()} is_available={h_info.is_available} />
         ))}
       </View>
       <View style={styles.container}>
-        {hours["afternoon"].map((h_info, id) => (
+        {hours.afternoon.map((h_info, id) => (
           <Hour key={id} hour={h_info.date.getHours()} is_available={h_info.is_available} />
         ))}
       </View>

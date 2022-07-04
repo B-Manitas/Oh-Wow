@@ -8,7 +8,7 @@ import NavigationDisconnect from "./NavigationDisconnect";
 const NavigationBody = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      {controller.getter.isConnected() ? (
+      {controller.this_is_connected ? (
         <NavigationConnect navigation={navigation} />
       ) : (
         <NavigationDisconnect navigation={navigation} />

@@ -5,7 +5,7 @@ import Link from "../../Buttons/Link";
 import { controller } from "model/Main";
 
 const NavigationAdmin = ({ navigation }) => {
-  const is_admin = controller.getter.isAdmin();
+  const is_admin = controller.this_is_admin;
 
   return (
     <View>

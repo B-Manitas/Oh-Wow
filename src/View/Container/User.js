@@ -5,12 +5,12 @@ const User = ({ navigation, data }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => controller.onPress.userSearch(navigation, data)}
+      onPress={() => controller.navigation.searchToUser(navigation, data)}
     >
       <Text style={styles.h1}>
-        {data["firstname"]} {data["lastname"]}
+        {data.firstname} {data.lastname}
       </Text>
-      <Text style={styles.h2}>{data["access"]}</Text>
+      <Text style={styles.h2}>{data.access}</Text>
     </TouchableOpacity>
   );
 };

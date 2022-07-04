@@ -10,6 +10,7 @@ export class Request {
   constructor(options = {}) {
     this._url = options.url || "";
     this._headers = options.headers || {};
+    this._body = options.body || {};
   }
 
   /**
@@ -37,12 +38,8 @@ export class Request {
       headers: this._headers,
     });
 
-    if (!response.ok) throw new NetworkStatusError();
+    if (!response.ok) throw new NetworkStatusError(response.status);
     return response.json();
-  }
-
-  async get(endpoint, options = {}) {
-    return await this._fetch(endpoint, { ...options, method: "GET" });
   }
 
   /**
@@ -60,11 +57,64 @@ export class Request {
     });
   }
 
+  async get(endpoint, options = {}) {
+    return await this._fetch(endpoint, { ...options, method: "GET" });
+  }
+
   async delete(endpoint, options = {}) {
     return await this._fetch(endpoint, { ...options, method: "DELETE" });
   }
 
   async put(endpoint, options = {}) {
     return await this._fetch(endpoint, { ...options, method: "PUT" });
+  }
+
+  async insertOne(collection, data = {}) {
+    const document = { _id: Date.now().toString(), ...data };
+
+    const resp = await this.post("/insertOne", {
+      ...this._body,
+      collection,
+      document,
+    });
+
+    return resp.insertedId;
+  }
+
+  async findOne(collection, filter = {}, projection = {}) {
+    const resp = await this.post("/findOne", {
+      ...this._body,
+      collection,
+      filter,
+      projection,
+    });
+
+    return resp.document;
+  }
+
+  async updateOne(collection, filter, update, upsert = false) {
+    const resp = await this.post("/updateOne", {
+      ...this._body,
+      collection,
+      filter,
+      update,
+      upsert,
+    });
+
+    if (upsert) return resp.insertedId;
+  }
+
+  async find(collection, options = {}) {
+    const resp = await this.post("/find", {
+      ...this._body,
+      collection,
+      ...(options.filter || {}),
+      ...(options.projection || {}),
+    });
+    return resp.documents;
+  }
+
+  async deleteOne(collection, filter) {
+    await this.post("/deleteOne", { ...this._body, collection, filter });
   }
 }
