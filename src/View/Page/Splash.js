@@ -6,7 +6,7 @@ import { fetchServices } from "store/ActionsCreator";
 
 const Splash = ({ setShowSplash, setService }) => {
   useEffect(() => {
-    controller.get.allServices(fetchServices, setService);
+    controller.get.allServices(undefined, fetchServices, setService);
     setShowSplash(false);
   }, []);
 

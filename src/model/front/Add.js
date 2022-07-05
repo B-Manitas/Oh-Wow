@@ -17,6 +17,7 @@ export class Add extends SuperFrontend {
     );
 
     if (is_existing_user) throw new ExistingUser(user);
+
     const add_back = this.backend.add;
     const id = await this._actions(
       user,

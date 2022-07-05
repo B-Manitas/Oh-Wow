@@ -1,6 +1,3 @@
-import Utils from "model/Utils";
-import { PHOTO } from "./IMAGES";
-
 export const APPOINTMENTS = [
   {
     id_appt: 0,

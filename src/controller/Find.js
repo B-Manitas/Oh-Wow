@@ -3,14 +3,18 @@ import { SuperController } from "./SuperController";
 import { addUserStore, gainAccess } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
+import Utils from "model/Utils";
 
 export class Find extends SuperController {
   @Catch
-  allServices(...funcs) {
+  allServices(setIsRefreshing, ...funcs) {
+    if (setIsRefreshing) setIsRefreshing(true);
     const data_store = store.getState().services;
 
-    // if (Utils.isEquals(data_store, [])) this.frontend.get.allServices(...funcs);
-    // else funcs.forEach((func) => func(data_store));
+    if (Utils.isEquals(data_store, [])) this.frontend.get.allServices(...funcs);
+    else funcs.forEach((func) => func(data_store));
+
+    if (setIsRefreshing) setIsRefreshing(false);
   }
 
   @Catch

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { View, Text, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
 import Page from "../Container/Page";
@@ -15,11 +17,8 @@ const Contact = ({ navigation }) => {
           pre_text={"Tél:"}
           value={"+216 09.00.00.00.00"}
           plh={"+216 09.00.00.00.00"}
-        />
-        <TextEdit
-          pre_text={"Mail"}
-          value={"ohwow@address.com"}
-          plh={"ohwow@address.com"}
+          editable={false}
+          isValidFormat={true}
         />
       </View>
 
@@ -30,8 +29,8 @@ const Contact = ({ navigation }) => {
           region={{
             latitude: 36.8065,
             longitude: 10.1815,
-            latitudeDelta: .7,
-            longitudeDelta: .7,
+            latitudeDelta: 0.7,
+            longitudeDelta: 0.7,
           }}
         />
       </View>
@@ -59,5 +58,6 @@ const styles = StyleSheet.create({
   map: {
     width: "100%",
     height: "70%",
+    borderRadius: 5,
   },
 });

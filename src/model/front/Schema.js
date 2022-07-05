@@ -63,6 +63,7 @@ export class Schema {
       afternoon_opening_hours: "13h00",
       afternoon_closing_hours: "18h00",
       is_opened: true,
+      phone: "",
     };
   }
 

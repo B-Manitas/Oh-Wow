@@ -8,6 +8,8 @@ import {
   GAIN_ACCESS,
   LOSS_ACCESS,
   FETCH_SERVICES,
+  DELETE_SERVICES,
+  ADD_SERVICES,
 } from "./ActionsTypes";
 
 /**
@@ -46,6 +48,12 @@ export const serviceReducer = (state = state_service, action) => {
   switch (action.type) {
     case FETCH_SERVICES:
       return [...action.payload];
+
+    case ADD_SERVICES:
+      return [...state, action.payload.service];
+
+    case DELETE_SERVICES:
+      return state.filter((item) => item._id !== action.payload.id);
 
     default:
       return state;

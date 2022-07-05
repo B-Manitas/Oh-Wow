@@ -2,6 +2,7 @@ import { SuperController } from "./SuperController";
 import { removeUserStore, lossAccess } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
+import { deleteService } from "../redux/ActionsCreator";
 
 export class Delete extends SuperController {
   async thisUser() {
@@ -20,7 +21,8 @@ export class Delete extends SuperController {
   @Catch
   async service(id, navigation) {
     await this.frontend.delete.service(id);
-    navigation.navigate("Home");
+    deleteService(id);
+    navigation.navigate("AllServices");
     Alert.alert(`The service has been successfully removed.`);
   }
 }

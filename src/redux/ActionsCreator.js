@@ -3,7 +3,9 @@ import { store } from "./Store";
 
 // Import actions types.
 import {
+  ADD_SERVICES,
   CONNECTION,
+  DELETE_SERVICES,
   DISCONNECTION,
   FETCH_SERVICES,
   GAIN_ACCESS,
@@ -42,4 +44,12 @@ export const lossAccess = () => {
 
 export const fetchServices = (services) => {
   creator(FETCH_SERVICES, services);
+};
+
+export const deleteService = (id) => {
+  creator(DELETE_SERVICES, { id });
+};
+
+export const addService = (service) => {
+  creator(ADD_SERVICES, { service });
 };

@@ -8,7 +8,10 @@ import HomeHeader from "./HomeHeader";
 import ServiceLarge from "../../Container/Service/ServiceLarge";
 import Splash from "../Splash";
 
+import { controller } from "model/Main";
+
 const Home = ({ navigation }) => {
+  const [is_refreshing, setIsRefreshing] = useState(false);
   const [show_splash, setShowSplash] = useState(true);
   const [services, setService] = useState([]);
 
@@ -29,6 +32,10 @@ const Home = ({ navigation }) => {
         ListHeaderComponent={<HomeHeader navigation={navigation} />}
         showsVerticalScrollIndicator={false}
         style={styles.container}
+        refreshing={is_refreshing}
+        onRefresh={() =>
+          controller.get.allServices(setIsRefreshing, setService)
+        }
       />
     </Page>
   );

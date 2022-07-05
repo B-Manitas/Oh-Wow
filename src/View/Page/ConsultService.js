@@ -16,36 +16,19 @@ import Absolute from "../Buttons/Absolute";
 import CheckBoxText from "../Componnent/CheckBoxText";
 
 import { controller } from "model/Main";
-import * as ImagePicker from "expo-image-picker";
 
 const ConsultService = ({ navigation, route }) => {
+  const is_admin = controller.this_is_admin;
   const service_init = route.params.data;
   const [service, setService] = useState(service_init);
   const [audit, setAudit] = useState(controller.fakeAudit(service_init));
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      base64: true,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      setService((p) => ({
-        ...p,
-        img: "data:image/jpeg;base64," + result.base64,
-      }));
-    }
-  };
 
   return (
     <Page>
       <Header
         type={"back"}
         title={service.name}
-        editable={controller.get.user_access}
+        editable={is_admin}
         navigation={navigation}
         setValue={(t) => setService((p) => ({ ...p, name: t }))}
         is_valid={audit.name}
@@ -70,7 +53,7 @@ const ConsultService = ({ navigation, route }) => {
             top={10}
             left={10}
             ctn_style={styles.btn_edit}
-            func={() => pickImage()}
+            func={() => controller.update.image(setService)}
           />
         </View>
 
@@ -132,12 +115,12 @@ const ConsultService = ({ navigation, route }) => {
         </View>
       </ScrollView>
 
-      {controller.get.user_access && (
+      {is_admin && (
         <Absolute
           img={ICON.trash}
           bottom={30}
           left={30}
-          func={() => controller.delete.service(navigation, data._id)}
+          func={() => controller.delete.service(service._id, navigation)}
         />
       )}
       <Absolute

@@ -11,9 +11,12 @@ import Header from "../Parts/Header";
 import { controller } from "model/Main";
 
 const ConsultAllServices = ({ navigation }) => {
+  const is_admin = controller.this_is_admin;
   const [services, setService] = useState([]);
+  const [is_refreshing, setIsRefreshing] = useState(false);
+
   useEffect(() => {
-    controller.get.allServices(setService);
+    controller.get.allServices(setIsRefreshing, setService);
   }, []);
 
   return (
@@ -28,16 +31,22 @@ const ConsultAllServices = ({ navigation }) => {
         renderItem={(item) => (
           <Service navigation={navigation} data={item.item} />
         )}
+        refreshing={is_refreshing}
+        onRefresh={() =>
+          controller.get.allServices(setIsRefreshing, setService)
+        }
       />
 
-      <Round
-        text={"+"}
-        size={60}
-        enabled={true}
-        style_txt_enabled={styles.txt_add}
-        style_ctn_enabled={styles.btn_add}
-        func={() => controller.add.service(navigation)}
-      />
+      {is_admin && (
+        <Round
+          text={"+"}
+          size={60}
+          enabled={true}
+          style_txt_enabled={styles.txt_add}
+          style_ctn_enabled={styles.btn_add}
+          func={() => controller.add.service(navigation)}
+        />
+      )}
     </Page>
   );
 };

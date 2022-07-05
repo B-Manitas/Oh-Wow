@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Alert,
+} from "react-native";
 
 import NavRound from "../../Buttons/NavRound";
 
@@ -27,7 +34,7 @@ const HomeHeader = ({ navigation }) => {
           title={"Le catalogue"}
         />
         <NavRound
-          func={() => navigation.navigate("Appointments")}
+          func={() => Alert.alert("Work in progress")}
           img={PHOTO.plannings}
           title={"Mes RDV"}
         />
