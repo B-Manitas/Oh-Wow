@@ -10,4 +10,9 @@ export class Delete extends SuperFrontend {
     const delete_back = this.backend.delete;
     await this._actions(id, delete_back.service.bind(delete_back));
   }
+
+  async staff(id) {
+    const delete_back = this.backend.delete;
+    await this._actions(id, delete_back.staff.bind(delete_back));
+  }
 }

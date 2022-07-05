@@ -48,8 +48,9 @@ export default {
   },
 
   removeKey(object, ...keys) {
-    keys.forEach((key) => delete object[key]);
-    return this.copy(object);
+    object = this.copy(object)
+    keys.map((key) => delete object[key]);
+    return object;
   },
 
   isEquals(o1, o2) {

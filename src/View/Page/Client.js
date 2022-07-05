@@ -4,13 +4,18 @@ import TextEdit from "../Input/TextEdit";
 import Header from "../Parts/Header";
 import ToggleLong from "../Componnent/ToggleLong";
 import Chevron from "../Buttons/Chevron";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { controller } from "model/Main";
 
 const Client = ({ navigation, route }) => {
   const data_init = route.params.data;
   const [data, setData] = useState(data_init);
   const [audit, setAudit] = useState(controller.fakeAudit(data));
+  const [salon, setSalon] = useState([]);
+
+  useEffect(() => {
+    controller.get.allSalons(setSalon);
+  }, []);
 
   return (
     <Page>
@@ -61,9 +66,16 @@ const Client = ({ navigation, route }) => {
       <View style={styles.parts}>
         <Text style={styles.h1}>Actions</Text>
         <ToggleLong
+          text={"Employer"}
+          value={data.is_admin || data.id_salon != null}
+          func={(b) =>
+            setData((p) => ({ ...p, id_salon: b ? salon._id : null }))
+          }
+        />
+        <ToggleLong
           text={"Administrateur"}
-          value={data.access == "admin"}
-          func={(b) => setData((p) => ({ ...p, access: b ? "admin" : null }))}
+          value={data.is_admin}
+          func={(b) => setData((p) => ({ ...p, is_admin: b }))}
         />
         <Chevron
           text={"Supprimer le compte"}

@@ -9,4 +9,8 @@ export class Delete extends Request {
   async service(service_id) {
     await this.deleteOne(SERVICE, { _id: service_id });
   }
+
+  async staff(id) {
+    await this.deleteOne(SERVICE, { _id: id });
+  }
 }

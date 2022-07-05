@@ -21,11 +21,12 @@ export class Update extends SuperFrontend {
     await this._actions(service, update_back.service.bind(update_back), setAudit);
   }
 
-  async access(id_user, access) {
+  async staff(id_user, id_salon, is_admin) {
     const is_existing_user = await this.isExistingUser({ _id: id_user });
 
-    if (is_existing_user)
-      await this.backend.update.access(this.schemaStaff(id_user, access));
-    else throw new UnknowUser();
+    if (is_existing_user) {
+      const staff_schema = this.schemaStaff(id_user, id_salon, is_admin);
+      await this.backend.update.access(staff_schema);
+    } else throw new UnknowUser();
   }
 }

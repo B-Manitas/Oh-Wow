@@ -2,6 +2,12 @@ import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { controller } from "model/Main";
 
 const User = ({ navigation, data }) => {
+  const status = () => {
+    if (data.is_admin) return "admin";
+    else if (data.id_salon != null) return "employer";
+    else return "";
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -10,7 +16,7 @@ const User = ({ navigation, data }) => {
       <Text style={styles.h1}>
         {data.firstname} {data.lastname}
       </Text>
-      <Text style={styles.h2}>{data.access}</Text>
+      <Text style={styles.h2}>{status()}</Text>
     </TouchableOpacity>
   );
 };

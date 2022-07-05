@@ -108,9 +108,10 @@ export class Request {
     const resp = await this.post("/find", {
       ...this._body,
       collection,
-      ...(options.filter || {}),
-      ...(options.projection || {}),
+      filter: options.filter || {},
+      projection: options.projection || {},
     });
+
     return resp.documents;
   }
 
