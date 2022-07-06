@@ -1,4 +1,4 @@
-import { accessReducer, serviceReducer, userReducer } from "./Reducer";
+import { statusReducer, serviceReducer, userReducer } from "./Reducer";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistStore, persistReducer } from "redux-persist";
@@ -8,7 +8,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 // Define the reducers of the store.
 const reducers = combineReducers({
   user: userReducer,
-  access: accessReducer,
+  status: statusReducer,
   services: serviceReducer,
 });
 
@@ -16,7 +16,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["user", "access"],
+  whitelist: ["user", "status"],
 };
 
 // Combine reducers and persist config.

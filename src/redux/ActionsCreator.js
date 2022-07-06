@@ -8,8 +8,8 @@ import {
   DELETE_SERVICES,
   DISCONNECTION,
   FETCH_SERVICES,
-  GAIN_ACCESS,
-  LOSS_ACCESS,
+  UPDATE_STATUS,
+  DEFAULT_STATUS,
 } from "./ActionsTypes";
 
 /**
@@ -34,12 +34,12 @@ export const removeUserStore = () => {
   creator(DISCONNECTION);
 };
 
-export const gainAccess = (access) => {
-  creator(GAIN_ACCESS, { access });
+export const updateStatus = (status) => {
+  creator(UPDATE_STATUS, { status });
 };
 
-export const lossAccess = () => {
-  creator(LOSS_ACCESS);
+export const defaultStatus = () => {
+  creator(DEFAULT_STATUS);
 };
 
 export const fetchServices = (services) => {

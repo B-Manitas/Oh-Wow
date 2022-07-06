@@ -36,7 +36,6 @@ export class Schema {
       mail: "",
       phone: "",
       birthdate: "2000-01-01",
-      status: "valid",
       password: "",
     };
   }
@@ -77,5 +76,8 @@ export class Schema {
       is_trend: false,
       img: "data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=",
     };
+  }
+  schemaAccess(_id = "", password = "") {
+    return { _id, password };
   }
 }

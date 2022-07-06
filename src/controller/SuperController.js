@@ -2,6 +2,7 @@ import _ from "lodash";
 import Utils from "model/Utils";
 import { state_user } from "store/State";
 import { store } from "store/Store";
+import { ADMIN, EMPLOYEE } from "src/UserStatus";
 
 export class SuperController {
   constructor(backend, frontend) {
@@ -14,9 +15,9 @@ export class SuperController {
     return store.getState().user;
   }
 
-  /** Get the user access in the redux state. */
+  /** Get the user status in the redux state. */
   get this_user_access() {
-    if (this.this_is_connected) return store.getState().access;
+    if (this.this_is_connected) return store.getState().status;
     else return undefined;
   }
 
@@ -28,6 +29,10 @@ export class SuperController {
   }
 
   get this_is_admin() {
-    return this.this_is_connected && this.this_user_access.access == "admin";
+    return this.this_is_connected && this.this_user_access.status == ADMIN;
+  }
+
+  get this_is_employee() {
+    return this.this_is_connected && this.this_user_access.status == EMPLOYEE;
   }
 }

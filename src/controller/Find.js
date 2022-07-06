@@ -1,9 +1,10 @@
 import { store } from "../redux/Store";
 import { SuperController } from "./SuperController";
-import { addUserStore, gainAccess } from "store/ActionsCreator";
+import { addUserStore, updateStatus } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
 import Utils from "model/Utils";
+import { CLIENT, ADMIN, EMPLOYEE } from "src/UserStatus";
 
 export class Find extends SuperController {
   @Catch
@@ -29,10 +30,10 @@ export class Find extends SuperController {
   }
 
   @Catch
-  async allUsersWithAccess(...funcs) {
+  async allUsersWithFunction(...funcs) {
     const user = await this.frontend.get.allUsers();
-    const access = await this.frontend.get.allAccess();
-    const data = user.map((item, i) => Object.assign({}, item, access[i]));
+    const staff = await this.frontend.get.allStaff();
+    const data = user.map((item, i) => Object.assign({}, item, staff[i]));
     funcs.forEach((func) => func(data));
   }
 
@@ -47,8 +48,7 @@ export class Find extends SuperController {
   async connect(data, navigation, setAudit) {
     const user = await this.frontend.get.connect(data, setAudit);
     addUserStore(user);
-
-    if (await this.frontend.get.isUserAdmin(user._id)) gainAccess("admin");
+    await this.frontend.get.status(updateStatus);
 
     navigation.navigate("Home");
     Alert.alert(`Welcome back, ${user.firstname} !`);

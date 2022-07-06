@@ -37,9 +37,23 @@ export class Find extends SuperFrontend {
    */
   async connect(user, setAudit) {
     const get_back = this.backend.get;
-    const resp = await this._actions(user, get_back.user.bind(get_back), setAudit);
+    const data = await this._actions(
+      user,
+      get_back.connect.bind(get_back),
+      setAudit
+    );
 
-    if (resp == null) throw new FailedLogin();
-    else return resp;
+    if (data == null) throw new FailedLogin();
+    else return data;
+  }
+  async status(...funcs) {
+    const get_back = this.backend.get;
+    const resp = await this._get(get_back.staff.bind(get_back));
+
+    var status = CLIENT;
+    if (resp !== null && resp.is_admin) status = ADMIN;
+    else if (resp !== null) status = EMPLOYEE;
+
+    funcs.map((func) => func(status));
   }
 }

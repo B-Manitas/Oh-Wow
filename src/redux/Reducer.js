@@ -1,12 +1,12 @@
 // Import default state.
-import { state_access, state_user, state_service } from "./State";
+import { state_status, state_user, state_service } from "./State";
 
 // Import actions types.
 import {
   CONNECTION,
   DISCONNECTION,
-  GAIN_ACCESS,
-  LOSS_ACCESS,
+  UPDATE_STATUS,
+  DEFAULT_STATUS,
   FETCH_SERVICES,
   DELETE_SERVICES,
   ADD_SERVICES,
@@ -31,13 +31,13 @@ export const userReducer = (state = state_user, action) => {
   }
 };
 
-export const accessReducer = (state = state_access, action) => {
+export const statusReducer = (state = state_status, action) => {
   switch (action.type) {
-    case GAIN_ACCESS:
+    case UPDATE_STATUS:
       return { ...state, ...action.payload };
 
-    case LOSS_ACCESS:
-      return state_access;
+    case DEFAULT_STATUS:
+      return state_status;
 
     default:
       return state;

@@ -69,7 +69,7 @@ export default class ErrorHandler {
   manageBadStatus() {
     Alert.alert(
       "Network Status Error",
-      `Please contact the developer for the error code 0-${this.error.status}`
+      `Please contact the developer for the error status code ${this.error.status}`
     );
   }
 

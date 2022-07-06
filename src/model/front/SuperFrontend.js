@@ -7,6 +7,11 @@ export class SuperFrontend extends Approver {
     this.backend = backend;
   }
 
+  _approveData(data, setAudit) {
+    const resume = this.approve(data);
+    if (!resume.is_valid) throw new InvalidData(resume.audit, setAudit);
+  }
+
   /**
    * To call a function in the backend.
    * @param {Object} data The data entered by the user.
@@ -17,11 +22,10 @@ export class SuperFrontend extends Approver {
    * imposed by the IsFormat class.
    */
   async _actions(data, func_backend, setAudit) {
-    const resume = this.approve(data);
-    if (resume.is_valid) {
-      data = this.formatDict(data);
-      return await func_backend(data);
-    } else throw new InvalidData(resume.audit, setAudit);
+    if (setAudit != undefined) this._approveData(data, setAudit);
+
+    data = this.formatDict(data);
+    return await func_backend(data);
   }
 
   /**
@@ -40,7 +44,12 @@ export class SuperFrontend extends Approver {
   }
 
   async isUserAdmin(id) {
-    const resp = await this.backend.get.access(id);
-    return resp != null && resp.access == "admin";
+    const resp = await this.backend.get.status(id);
+    return resp != null && resp.is_admin;
+  }
+
+  async isUserEmployee(id) {
+    const resp = await this.backend.get.status(id);
+    return resp != null;
   }
 }

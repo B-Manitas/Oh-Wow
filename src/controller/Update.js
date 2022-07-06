@@ -1,6 +1,6 @@
 import { Alert } from "react-native";
 import { SuperController } from "./SuperController";
-import { removeUserStore, lossAccess } from "store/ActionsCreator";
+import { removeUserStore, defaultStatus } from "store/ActionsCreator";
 import * as ImagePicker from "expo-image-picker";
 
 export class Update extends SuperController {
@@ -10,7 +10,7 @@ export class Update extends SuperController {
    */
   logout(navigation) {
     removeUserStore();
-    lossAccess();
+    defaultStatus();
     navigation.navigate("Home");
     Alert.alert(`Bye, see you soon !`);
   }

@@ -118,4 +118,14 @@ export class Request {
   async deleteOne(collection, filter) {
     await this.post("/deleteOne", { ...this._body, collection, filter });
   }
+
+  async aggregate(collection, pipeline) {
+    const resp = await this.post("/aggregate", {
+      ...this._body,
+      collection,
+      pipeline,
+    });
+
+    return resp["documents"];
+  }
 }

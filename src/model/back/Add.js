@@ -18,4 +18,8 @@ export class Add extends Request {
   async service(service) {
     return await this.insertOne(SERVICE, service);
   }
+
+  async access(access) {
+    return await this.insertOne(ACCESS, access);
+  }
 }

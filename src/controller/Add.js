@@ -3,7 +3,6 @@ import { addUserStore } from "store/ActionsCreator";
 import Utils from "model/Utils";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
-import { addService } from "store/ActionsCreator";
 
 export class Add extends SuperController {
   /**
@@ -16,7 +15,7 @@ export class Add extends SuperController {
   @Catch
   async user(data, navigation, setAudit) {
     const user = await this.frontend.add.user(data, setAudit);
-    addUserStore(Utils.removeKey(user, "status", "password"));
+    addUserStore(user);
 
     navigation.navigate("Home");
     Alert.alert(`Welcome, ${user.firstname} !`);

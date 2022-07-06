@@ -115,10 +115,6 @@ export class IsFormat extends Formatter {
     return status === "valid" || status === "pending";
   }
 
-  isAccess(access) {
-    return access === "employee" || access === "admin";
-  }
-
   isDayOff(day_off) {
     return (
       this.isSchema(day_off, this.schemaSalon().day_off) &&

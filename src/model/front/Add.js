@@ -10,19 +10,19 @@ export class Add extends SuperFrontend {
    * @throws {ExistingUser} If the user already is already registered
    * in the databse.
    */
-  async user(user, setAudit) {
-    const is_existing_user = await this.isExistingUser(
-      { mail: user.mail },
-      setAudit
-    );
+  async user(data, setAudit) {
+    this._approveData(data, setAudit);
 
-    if (is_existing_user) throw new ExistingUser(user);
+    const is_existing_user = await this.isExistingUser({ mail: data.mail });
+    if (is_existing_user) throw new ExistingUser(data);
 
     const add_back = this.backend.add;
-    const id = await this._actions(
-      user,
-      add_back.user.bind(add_back),
-      setAudit
+    const user = Utils.removeKey(data, "password", "status");
+    const id = await this._actions(user, add_back.user.bind(add_back));
+
+    await this._actions(
+      this.schemaAccess(id, data.password),
+      add_back.access.bind(add_back)
     );
 
     return { ...id, ...user };

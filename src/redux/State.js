@@ -10,6 +10,6 @@ export const state_user = Utils.removeKey(
   "password"
 );
 
-export const state_access = { access: null };
+export const state_status = { status: null };
 
 export const state_service = [];
