@@ -20,8 +20,7 @@ export class Add extends Request {
   }
 
   async appointment(appointment) {
-    console.log("h", appointment);
-    // return await this.insertOne(APPT, appointment);
+    return await this.insertOne(APPT, appointment);
   }
 
   async access(access) {

@@ -9,7 +9,6 @@ export class SuperFrontend extends Approver {
 
   _approveData(data, setAudit) {
     const resume = this.approve(data);
-    console.log(resume);
     if (!resume.is_valid) throw new InvalidData(resume.audit, setAudit);
   }
 

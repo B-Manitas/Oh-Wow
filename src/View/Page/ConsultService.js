@@ -48,13 +48,15 @@ const ConsultService = ({ navigation, route }) => {
             source={{ uri: service.img }}
             style={{ width: "100%", height: "100%" }}
           />
-          <Absolute
-            text="Editer"
-            top={10}
-            left={10}
-            ctn_style={styles.btn_edit}
-            func={() => controller.update.image(setService)}
-          />
+          {is_admin && (
+            <Absolute
+              text="Editer"
+              top={10}
+              left={10}
+              ctn_style={styles.btn_edit}
+              func={() => controller.update.image(setService)}
+            />
+          )}
         </View>
 
         <View style={styles.container_info}>
@@ -99,20 +101,22 @@ const ConsultService = ({ navigation, route }) => {
           />
         </View>
 
-        <View style={styles.parts}>
-          <Text style={styles.h2}>En tendance</Text>
-          <View style={styles.container_trend}>
-            <CheckBoxText
-              state={service.is_trend}
-              size={25}
-              color_bg_active={"#383838"}
-              func={(b) => setService((p) => ({ ...p, is_trend: !b }))}
-            />
-            <Text style={styles.text_trend}>
-              Afficher la prestation en tendance
-            </Text>
+        {is_admin && (
+          <View style={styles.parts}>
+            <Text style={styles.h2}>En tendance</Text>
+            <View style={styles.container_trend}>
+              <CheckBoxText
+                state={service.is_trend}
+                size={25}
+                color_bg_active={"#383838"}
+                func={(b) => setService((p) => ({ ...p, is_trend: !b }))}
+              />
+              <Text style={styles.text_trend}>
+                Afficher la prestation en tendance
+              </Text>
+            </View>
           </View>
-        </View>
+        )}
       </ScrollView>
 
       {is_admin && (

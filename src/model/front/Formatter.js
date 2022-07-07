@@ -83,7 +83,7 @@ export class Formatter extends Schema {
       return {
         ...offer,
         firstname: this.formatFirstname(offer.firstname),
-        lastname: this.formatFirstname(offer.lastname),
+        lastname: this.formatLastname(offer.lastname),
       };
   }
 }

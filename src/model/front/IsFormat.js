@@ -159,11 +159,13 @@ export class IsFormat extends Formatter {
   isOffer(offer) {
     if (offer == null) return true;
     else if (!this.isSchema(offer, this.schemaAnonymous())) return false;
-    else
-      return {
-        firstname: this.isName(offer.firstname),
-        lastname: this.isName(offer.lastname),
-        phone: this.isPhone(offer.phone),
-      };
+    else {
+      const firstname = this.isName(offer.firstname);
+      const lastname = this.isName(offer.lastname);
+      const phone = this.isName(offer.phone);
+
+      if (firstname && lastname && phone) return true;
+      else return { firstname, lastname, phone };
+    }
   }
 }
