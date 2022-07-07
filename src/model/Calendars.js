@@ -64,13 +64,17 @@ export default {
   },
 
   // Calcule le calendar pour un salon et un mois d'une année
-  calendar(date, salon, dur) {
+  calendar(date, setDate, salon, dur) {
+    if (!salon) return [];
+
     const am_opening_hours = salon.morning_opening_hours;
     const am_closing_hours = salon.morning_closing_hours;
     const pm_opening_hours = salon.afternoon_opening_hours;
     const pm_closing_hours = salon.afternoon_closing_hours;
     const is_opened_salon = salon.is_opened;
+    var set_date = true;
 
+    if (date === undefined) date = this.today();
     const month = date.getMonth();
     const year = date.getFullYear();
     const nb_day = this.numberOfDays(year, month + 1);
@@ -79,13 +83,20 @@ export default {
     let calendar = new Array(42).fill(0);
 
     for (var d = 0; d < nb_day; d++) {
-      const is_available_day = Utils.randomBool() && is_opened_salon;
+      const day_date = new Date(year, month, d + 1);
+      const is_available = !this.isPast(day_date) && is_opened_salon;
+      const is_available_day = is_available && Utils.randomBool();
+
+      if (set_date && is_available_day) {
+        set_date = false;
+        setDate(day_date);
+      }
 
       var am_hours = [];
       for (let t = am_opening_hours; t <= am_closing_hours - dur; t += dur) {
         am_hours.push({
           time: t,
-          is_available: Utils.randomBool() && is_opened_salon,
+          is_available: is_available && Utils.randomBool(),
         });
       }
 
@@ -93,12 +104,12 @@ export default {
       for (let t = pm_opening_hours; t <= pm_closing_hours - dur; t += dur) {
         pm_hours.push({
           time: t,
-          is_available: Utils.randomBool() && is_opened_salon,
+          is_available: is_available && Utils.randomBool(),
         });
       }
 
       calendar[d + day] = {
-        date: new Date(year, month, d + 1),
+        date: day_date,
         is_available_day,
         am_hours,
         pm_hours,
@@ -106,33 +117,6 @@ export default {
     }
 
     return calendar;
-  },
-
-  onChangeCalendarPicker(month, year, cal) {
-    month.func(month.val);
-    year.func(year.val);
-    cal.func(this.calendar(year.val, month.val));
-  },
-
-  computeApptHours(m_opening, m_closing, a_opening, a_closing, duration) {
-    let morning = [];
-    let afternoon = [];
-
-    for (let min = m_opening; min <= m_closing - duration; min += duration) {
-      morning.push({
-        time: min,
-        is_available: true,
-      });
-    }
-
-    for (let min = a_opening; min < a_closing - duration; min += duration) {
-      afternoon.push({
-        time: min,
-        is_available: true,
-      });
-    }
-
-    return { morning, afternoon };
   },
 
   isZeroTime(date) {
@@ -179,6 +163,10 @@ export default {
     const day = date.getDate().toString().padStart(2, "0");
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
 
-    return `${day}\\${month}`;
+    return `${day}/${month}`;
+  },
+
+  getFirstDate(calendar) {
+    return calendar?.find((day) => day?.is_available_day)?.date;
   },
 };

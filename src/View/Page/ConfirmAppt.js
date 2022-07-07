@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import Primary from "../Buttons/Primary";
 import RadioBox from "../Componnent/RadioBox";
 
@@ -7,28 +7,19 @@ import Page from "../Container/Page";
 import InputSecondary from "../Input/InputSecondary";
 import Header from "../Parts/Header";
 
-import { controller } from "model/Main";
+import { controller as ctrl } from "model/Main";
 import Calendars from "../../model/Calendars";
 
 const ConfirmAppt = ({ navigation, route }) => {
   const service = route.params.service;
   const salon = route.params.salon;
+  const apt_init = route.params.appointment;
 
-  const init_appointment = route.params.appointment;
-  var schema_anonymous = controller.frontend.schemaAnonymous();
+  const [appointment, setApt] = useState(apt_init);
+  const [audit, setAudit] = useState(ctrl.fakeAudit(apt_init));
+  const [radio, setRadio] = useState(0);
 
-  const [box_selected, setBoxSelected] = useState(0);
-
-  const [appointment, setAppointment] = useState(init_appointment);
-  const [audit, setAudit] = useState(controller.fakeAudit(init_appointment));
-
-  const pressRadioBox = (id_radio) => {
-    if (id_radio == 1) schema_anonymous = controller.frontend.schemaAnonymous();
-    else schema_anonymous = null;
-
-    setAppointment((p) => ({ ...p, offer: schema_anonymous }));
-    setBoxSelected(id_radio);
-  };
+  const radioOffer = (id) => ctrl.onPress.radioOffer(setApt, setRadio, id);
 
   return (
     <Page>
@@ -42,26 +33,18 @@ const ConfirmAppt = ({ navigation, route }) => {
 
         <View style={styles.container_offer}>
           <View style={styles.container_radio}>
-            <RadioBox
-              id_selected={box_selected}
-              id={0}
-              onPress={pressRadioBox}
-            />
+            <RadioBox id_selected={radio} id={0} onPress={radioOffer} />
             <Text style={styles.text_radio}>Moi</Text>
           </View>
           <View style={styles.container_radio}>
-            <RadioBox
-              id_selected={box_selected}
-              id={1}
-              onPress={pressRadioBox}
-            />
+            <RadioBox id_selected={radio} id={1} onPress={radioOffer} />
             <Text style={styles.text_radio}>Un proche</Text>
           </View>
 
-          {box_selected == 1 && (
+          {radio == 1 && (
             <View style={styles.container_input}>
               <InputSecondary
-                disabled={box_selected == 0}
+                disabled={radio == 0}
                 plh={"Prénom"}
                 typeAndroid={"name-given"}
                 typeIOS={"givenName"}
@@ -71,14 +54,14 @@ const ConfirmAppt = ({ navigation, route }) => {
                 isValidFormat={audit.offer?.firstname}
                 value={appointment.offer?.firstname}
                 setValue={(t) =>
-                  setAppointment((p) => ({
+                  setApt((p) => ({
                     ...p,
                     offer: { ...p.offer, firstname: t },
                   }))
                 }
               />
               <InputSecondary
-                disabled={box_selected == 0}
+                disabled={radio == 0}
                 plh={"Nom"}
                 typeAndroid={"name-family"}
                 typeIOS={"familyName"}
@@ -88,14 +71,14 @@ const ConfirmAppt = ({ navigation, route }) => {
                 isValidFormat={audit.offer?.lastname}
                 value={appointment.offer?.lastname}
                 setValue={(t) =>
-                  setAppointment((p) => ({
+                  setApt((p) => ({
                     ...p,
                     offer: { ...p.offer, lastname: t },
                   }))
                 }
               />
               <InputSecondary
-                disabled={box_selected == 0}
+                disabled={radio == 0}
                 plh={"Téléphone"}
                 typeAndroid={"tel"}
                 typeIOS={"telephoneNumber"}
@@ -106,7 +89,7 @@ const ConfirmAppt = ({ navigation, route }) => {
                 isValidFormat={audit.offer?.phone}
                 value={appointment.offer?.phone}
                 setValue={(t) =>
-                  setAppointment((p) => ({
+                  setApt((p) => ({
                     ...p,
                     offer: { ...p.offer, phone: t },
                   }))
@@ -131,9 +114,7 @@ const ConfirmAppt = ({ navigation, route }) => {
           height={10}
           font_size={18}
           style={styles.button_appt}
-          func={() =>
-            controller.add.appointment(navigation, appointment, setAudit)
-          }
+          func={() => ctrl.add.appointment(navigation, appointment, setAudit)}
           is_active={true}
         />
       </View>

@@ -9,49 +9,29 @@ import BookingFooter from "./BookingFooter";
 
 import Calendars from "model/Calendars";
 
-import { controller } from "model/Main";
+import { controller as ctrl } from "model/Main";
+import Utils from "../../../model/Utils";
 
 const Booking = ({ navigation, route }) => {
-  const id_user = controller.this_user_data._id;
+  const id_user = ctrl.this_user_data._id;
 
   const service = route.params.data;
   const [salon, setSalon] = useState(undefined);
-
-  const schema_appointment = controller.frontend.schemaAppointment(id_user);
-  const [appointment, setAppointment] = useState(schema_appointment);
-
-  const [date_, setDate_] = useState(Calendars.today());
   const [calendar, setCalendar] = useState(undefined);
 
-  useEffect(() => {
-    const setIdSalon = (data) =>
-      setAppointment((p) => ({ ...p, id_salon: data._id }));
+  const apt_schema = ctrl.frontend.schemaAppointment(id_user);
+  const [appointment, setApt] = useState(apt_schema);
 
-    setAppointment((p) => ({
-      ...p,
-      id_service: service._id,
-      date: date_.getTime(),
-    }));
-    controller.get.allSalons(setSalon, setIdSalon);
+  const [date, setDate] = useState(Calendars.today());
+
+  useEffect(() => {
+    setApt((p) => ({ ...p, id_service: service._id, date: date.getTime() }));
+    ctrl.get.allSalons(setSalon, (v) => Utils.setValue(setApt, "id_salon", v));
   }, []);
 
   useEffect(() => {
-    if (salon != undefined)
-      setCalendar(Calendars.calendar(date_, salon, service.duration));
-  }, [date_.getMonth(), date_.getFullYear(), appointment?.id_staff, salon]);
-
-  const onPressDay = (date) => {
-    setDate_(date);
-    setAppointment((p) => ({ ...p, date: date.getTime() }));
-  };
-
-  const onChangeStaff = (id) => setAppointment((p) => ({ ...p, id_staff: id }));
-  const onPressHours = (t) => {
-    setAppointment((p) => ({
-      ...p,
-      date: Calendars.setTime(date_, t).getTime(),
-    }));
-  };
+    setCalendar(Calendars.calendar(date, setDate, salon, service.duration));
+  }, [date.getMonth(), date.getFullYear(), appointment?.id_staff, salon]);
 
   if (salon == undefined || calendar == undefined)
     return <Text>Loading data....</Text>;
@@ -61,22 +41,22 @@ const Booking = ({ navigation, route }) => {
         <Header type={"back"} title={service.name} navigation={navigation} />
         <Calendar
           data={calendar}
-          date={date_}
-          onPressDay={onPressDay}
+          date={date}
+          onPressDay={(d) => ctrl.onPress.aptDay(setApt, setDate, d)}
           header={
             <BookingHeader
-              date={date_}
-              setDate={setDate_}
+              date={date}
+              setDate={setDate}
               staff={appointment.id_staff}
-              setStaff={onChangeStaff}
+              setStaff={(s) => ctrl.onPress.aptStaff(setApt, s)}
             />
           }
           footer={
             <BookingFooter
-              date={appointment.date}
+              date={date}
               calendar={calendar}
               navigation={navigation}
-              onPress={(t) => onPressHours(t)}
+              onPress={(h) => ctrl.onPress.aptHours(setApt, h, date)}
               data={{ service, appointment, salon }}
             />
           }

@@ -20,7 +20,7 @@ export default {
   },
 
   randomBool() {
-    return Math.round(Math.random());
+    return Math.random() < 0.5;
   },
 
   randomInt(max) {
@@ -48,7 +48,7 @@ export default {
   },
 
   removeKey(object, ...keys) {
-    object = this.copy(object)
+    object = this.copy(object);
     keys.map((key) => delete object[key]);
     return object;
   },
@@ -59,5 +59,9 @@ export default {
 
   copy(object) {
     return JSON.parse(JSON.stringify(object));
+  },
+
+  setValue(func, key, value) {
+    func((p) => ({ ...p, [key]: value }));
   },
 };

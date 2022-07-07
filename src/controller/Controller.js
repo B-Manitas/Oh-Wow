@@ -5,6 +5,8 @@ import { Navigation } from "./Navigation";
 import { SuperController } from "./SuperController";
 import { Update } from "./Update";
 import { Delete } from "./Delete";
+import { OnPress } from "./OnPress";
+import { OnChange } from "./OnChange";
 
 export class Controller extends SuperController {
   /**
@@ -22,6 +24,8 @@ export class Controller extends SuperController {
     this.update = new Update(backend, frontend);
     this.delete = new Delete(backend, frontend);
     this.onClose = new OnClose(backend, frontend);
+    this.onPress = new OnPress(backend, frontend);
+    this.onChange = new OnChange(backend, frontend);
     this.navigation = new Navigation(backend, frontend);
   }
 

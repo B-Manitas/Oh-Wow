@@ -22,6 +22,7 @@ const Service = ({ data, navigation }) => {
         style_txt_enabled={styles.txt_rdv}
         size={40}
         enabled={true}
+        func={() => navigation.navigate("Booking", { data })}
       />
     </View>
   );

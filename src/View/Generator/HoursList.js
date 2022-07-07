@@ -4,9 +4,7 @@ import Calendars from "../../model/Calendars";
 
 import Hour from "../Buttons/Hour";
 
-const HoursList = ({ date, onPress, calendar }) => {
-  date = new Date(date);
-
+const HoursList = ({ date, onPress, calendar, selected }) => {
   const am_hour = calendar.find((day) =>
     day === 0 ? 0 : Calendars.isEqualDate(day.date, date)
   )?.am_hours;
@@ -24,7 +22,7 @@ const HoursList = ({ date, onPress, calendar }) => {
             hour={Calendars.timesFormat(h_info.time)}
             func={() => onPress(h_info.time)}
             is_available={h_info.is_available}
-            is_selected={Calendars.timeOfDate(date) == h_info.time}
+            is_selected={Calendars.timeOfDate(selected) === h_info.time}
           />
         ))}
       </View>
@@ -35,7 +33,7 @@ const HoursList = ({ date, onPress, calendar }) => {
             hour={Calendars.timesFormat(h_info.time)}
             func={() => onPress(h_info.time)}
             is_available={h_info.is_available}
-            is_selected={Calendars.timeOfDate(date) == h_info.time}
+            is_selected={Calendars.timeOfDate(selected) === h_info.time}
           />
         ))}
       </View>

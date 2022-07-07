@@ -10,22 +10,25 @@ const Day = ({ day, date, onPressDay }) => {
   if (day == 0) return <Round size={size} colors="#fff" enabled={false} />;
   else {
     const day_date = day.date;
-    const isPast = Calendars.isPast(day_date);
     const isToday = Calendars.isToday(day_date);
 
-    if (!isPast && date.getTime() === day_date.getTime()) {
+    if (date.getTime() === day_date.getTime()) {
       return (
         <Round
           size={size}
           text={day_date.getDate()}
           enabled={day.is_available_day}
           func={() => onPressDay(day_date)}
-          style_ctn_enabled={{ backgroundColor: "#4489C5", borderColor: "#4489C5" }}
+          style_ctn_enabled={{
+            backgroundColor: "#4489C5",
+            borderColor: "#4489C5",
+          }}
           style_txt_enabled={{ color: "#fff" }}
           colors={"#4489C5"}
         />
       );
-    } else if (isToday) {
+    }
+    else if (isToday) {
       return (
         <Round
           size={size}
@@ -35,14 +38,15 @@ const Day = ({ day, date, onPressDay }) => {
           func={() => onPressDay(day_date)}
         />
       );
-    } else {
+    }
+    else {
       return (
         <Round
           size={size}
           text={day_date.getDate()}
           style_ctn_enabled={styles.enabled_ctn}
           style_txt_enabled={styles.enabled_txt}
-          enabled={!isPast && day.is_available_day}
+          enabled={day.is_available_day}
           colors="#CECECE"
           func={() => onPressDay(day_date)}
         />
