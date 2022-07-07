@@ -4,7 +4,6 @@ import { addUserStore, updateStatus } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
 import Utils from "model/Utils";
-import { CLIENT, ADMIN, EMPLOYEE } from "src/UserStatus";
 
 export class Find extends SuperController {
   @Catch
@@ -48,9 +47,14 @@ export class Find extends SuperController {
   async connect(data, navigation, setAudit) {
     const user = await this.frontend.get.connect(data, setAudit);
     addUserStore(user);
-    await this.frontend.get.status(updateStatus);
+    await this.frontend.get.status(user._id, updateStatus);
 
     navigation.navigate("Home");
     Alert.alert(`Welcome back, ${user.firstname} !`);
+  }
+
+  @Catch
+  async allEmployed(...funcs) {
+    await this.frontend.get.allEmployed(...funcs);
   }
 }

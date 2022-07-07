@@ -2,14 +2,16 @@ import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Day from "../Buttons/Day";
 
-const Calendar = ({ arr, header, footer, state_day }) => {
+const Calendar = ({ data, header, footer, onPressDay, date }) => {
   return (
     <FlatList
-      data={arr}
+      data={data}
       style={styles.container}
       ListHeaderComponent={header}
       ListFooterComponent={footer}
-      renderItem={(day) => <Day day={day.item} state_day={state_day} />}
+      renderItem={(day) => (
+        <Day day={day.item} onPressDay={onPressDay} date={date} />
+      )}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
       numColumns={7}
@@ -23,6 +25,6 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
 });

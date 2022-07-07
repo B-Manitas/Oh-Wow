@@ -18,7 +18,11 @@ export class Update extends SuperFrontend {
 
   async service(service, setAudit) {
     const update_back = this.backend.update;
-    await this._actions(service, update_back.service.bind(update_back), setAudit);
+    await this._actions(
+      service,
+      update_back.service.bind(update_back),
+      setAudit
+    );
   }
 
   async staff(id_user, id_salon, is_admin) {
@@ -26,7 +30,7 @@ export class Update extends SuperFrontend {
 
     if (is_existing_user) {
       const staff_schema = this.schemaStaff(id_user, id_salon, is_admin);
-      await this.backend.update.access(staff_schema);
+      await this.backend.update.staff(staff_schema);
     } else throw new UnknowUser();
   }
 }

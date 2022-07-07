@@ -60,6 +60,8 @@ export class Auditor extends IsFormat {
       case "price":
       case "duration":
         return this.isNumber(data[key]);
+      case "offer":
+        return this.isOffer(data[key]);
       default:
         return true;
     }

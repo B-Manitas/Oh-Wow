@@ -3,6 +3,19 @@ Contact page
 ☐ Ajouter features pour modifier l'addresse.
 ☐ Connecter l'adresse avec la map
 
+ConsultService
+☐ Ajouter les salons ayant cette prestation
+☐ La durée d'un service doit pouvoir rentrer dans la matinée ou l'après-midi
+☐ Afficher en tendance seulement pour admin
+☐ Prendre rdv uniquement pour user connecter
+
+Client
+☐ Ajouter confirmation du set admin et employer
+
+Settings
+☐ Faire en sorte qu'un employer ne puisse pas changer son mdp et supprimer son compte.
+☐ Un admin puisse deconnecter un employer de force
+
 Question Générale
 ☐ Y a t-il un mail ?
     => Si oui, un pour chaque salon ?

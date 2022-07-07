@@ -1,4 +1,6 @@
-import { ACCESS, SALON, SERVICE, USER } from "./Collection";
+import _ from "lodash";
+import Utils from "../Utils";
+import { STAFF, SALON, SERVICE, USER, ACCESS } from "./Collection";
 import { Request } from "./Request";
 
 export class Find extends Request {
@@ -6,8 +8,8 @@ export class Find extends Request {
     return await this.find(USER, { projection: { status: 0, password: 0 } });
   }
 
-  async allAccess() {
-    return await this.find(ACCESS);
+  async allStaff() {
+    return await this.find(STAFF);
   }
 
   async allServices() {
@@ -18,6 +20,25 @@ export class Find extends Request {
     return await this.find(SALON);
   }
 
+  async allEmployed() {
+    const resp = await this.aggregate(STAFF, [
+      {
+        $lookup: {
+          from: USER,
+          localField: "_id",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: "$user",
+      },
+      { $match: { is_admin: false } },
+    ]);
+
+    return resp;
+  }
+
   /**
    * Send a request to get the user's data for the login.
    * @param {Object} user The user's data to log.
@@ -26,6 +47,9 @@ export class Find extends Request {
   async user(user) {
     return await this.findOne(USER, { ...user });
   }
+
+  async staff(id_user) {
+    return await this.findOne(STAFF, { _id: id_user });
   }
 
   async connect(data) {
@@ -46,5 +70,9 @@ export class Find extends Request {
     if (resp.length == 1 && !_.isEmpty(resp))
       return Utils.removeKey(resp[0], "connection");
     else return null;
+  }
+
+  async salon(id) {
+    return await this.findOne(SALON, { _id: id });
   }
 }

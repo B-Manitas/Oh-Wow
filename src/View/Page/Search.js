@@ -9,7 +9,7 @@ import { controller } from "model/Main";
 const Search = ({ navigation }) => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    controller.get.allUsersWithAccess(setUsers);
+    controller.get.allUsersWithFunction(setUsers);
   }, []);
 
   return (

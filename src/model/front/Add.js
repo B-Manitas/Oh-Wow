@@ -1,4 +1,5 @@
 import ExistingUser from "exceptions/user_error/ExistingUser";
+import Utils from "../Utils";
 import { SuperFrontend } from "./SuperFrontend";
 
 export class Add extends SuperFrontend {
@@ -31,5 +32,14 @@ export class Add extends SuperFrontend {
   async salon(salon) {
     const add_back = this.backend.add;
     await this._actions(salon, add_back.salon.bind(add_back));
+  }
+
+  async appointment(appointment, setAudit) {
+    const add_back = this.backend.add;
+    await this._actions(
+      appointment,
+      add_back.appointment.bind(add_back),
+      setAudit
+    );
   }
 }

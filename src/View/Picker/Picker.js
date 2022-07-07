@@ -1,24 +1,22 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import _ from "lodash";
-import { ItemsStaff } from "../Generator/ItemsStaff";
+import { Picker as ReactPicker } from "@react-native-picker/picker";
 
-const PickerEmployee = ({ onChange, value }) => {
+const Picker = ({ generator, value, onChange }) => {
   return (
-    <Picker
+    <ReactPicker
       style={styles.picker}
       itemStyle={styles.item}
       numberOfLines={1}
       selectedValue={value}
       onValueChange={(v) => onChange(v)}
     >
-      {ItemsStaff({onChange})}
-    </Picker>
+      {generator()}
+    </ReactPicker>
   );
 };
 
-export default PickerEmployee;
+export default Picker;
 
 const styles = StyleSheet.create({
   picker: {

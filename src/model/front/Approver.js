@@ -16,7 +16,9 @@ export class Approver extends Auditor {
    * Otherwise, return false.
    */
   isApprovedAudit(audit) {
-    return Object.keys(audit).every((val) => audit[val] == true);
+    return Object.values(audit).every((val) =>
+      typeof val === "object" ? this.isApprovedAudit(val) : audit[val] == true
+    );
   }
 
   /**

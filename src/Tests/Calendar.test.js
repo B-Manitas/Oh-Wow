@@ -27,6 +27,8 @@ test("NumberOfdays", () => {
   expect(Calendars.numberOfDays(2022, 2)).toEqual(28);
   expect(Calendars.numberOfDays(2022, 6)).toEqual(30);
   expect(Calendars.numberOfDays(2022, 7)).toEqual(31);
+  expect(Calendars.numberOfDays(2022, 8)).toEqual(31);
+  expect(Calendars.numberOfDays(2022, 12)).toEqual(31);
 });
 
 test("ConvertIdDay", () => {

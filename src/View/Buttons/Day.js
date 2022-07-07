@@ -4,44 +4,47 @@ import Calendars from "model/Calendars";
 
 import Round from "./Round";
 
-const Day = ({ day, state_day }) => {
-  if (day == 0) {
-    return <Round size={40} colors="#fff" enabled={false} />;
-  } else {
-    var date = day.date;
-    var isPast = Calendars.isPast(date);
-    var isToday = Calendars.isToday(date);
+const Day = ({ day, date, onPressDay }) => {
+  const size = 40;
 
-    if (state_day.val == day.date.getDate()) {
+  if (day == 0) return <Round size={size} colors="#fff" enabled={false} />;
+  else {
+    const day_date = day.date;
+    const isPast = Calendars.isPast(day_date);
+    const isToday = Calendars.isToday(day_date);
+
+    if (!isPast && date.getTime() === day_date.getTime()) {
       return (
         <Round
-          size={40}
-          text={date.getDate()}
-          colors="#4489C5"
-          enabled={day.is_available}
-          func={() => state_day.func(date.getDate())}
+          size={size}
+          text={day_date.getDate()}
+          enabled={day.is_available_day}
+          func={() => onPressDay(day_date)}
+          style_ctn_enabled={{ backgroundColor: "#4489C5", borderColor: "#4489C5" }}
+          style_txt_enabled={{ color: "#fff" }}
+          colors={"#4489C5"}
         />
       );
     } else if (isToday) {
       return (
         <Round
-          size={40}
-          text={date.getDate()}
+          size={size}
+          text={day_date.getDate()}
           colors="#D95959"
-          enabled={day.is_available}
-          func={() => state_day.func(date.getDate())}
+          enabled={day.is_available_day}
+          func={() => onPressDay(day_date)}
         />
       );
     } else {
       return (
         <Round
-          size={40}
-          text={date.getDate()}
+          size={size}
+          text={day_date.getDate()}
           style_ctn_enabled={styles.enabled_ctn}
           style_txt_enabled={styles.enabled_txt}
-          enabled={!isPast && day.is_available}
+          enabled={!isPast && day.is_available_day}
           colors="#CECECE"
-          func={() => state_day.func(date.getDate())}
+          func={() => onPressDay(day_date)}
         />
       );
     }

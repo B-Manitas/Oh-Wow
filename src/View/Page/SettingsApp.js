@@ -59,8 +59,8 @@ const SettingsApp = ({ navigation }) => {
             text={"Horaire du matin"}
             plh_1={"8h00"}
             plh_2={"12h00"}
-            value_1={data.morning_opening_hours}
-            value_2={data.morning_closing_hours}
+            value_1={data.morning_opening_hours.toString()}
+            value_2={data.morning_closing_hours.toString()}
             func_1={(t) => setData((p) => ({ ...p, morning_opening_hours: t }))}
             func_2={(t) => setData((p) => ({ ...p, morning_closing_hours: t }))}
             isValidFormat_1={audit.morning_opening_hours}
@@ -70,8 +70,8 @@ const SettingsApp = ({ navigation }) => {
             text={"Horaire de l'après-midi"}
             plh_1={"13h00"}
             plh_2={"18h00"}
-            value_1={data.afternoon_opening_hours}
-            value_2={data.afternoon_closing_hours}
+            value_1={data.afternoon_opening_hours.toString()}
+            value_2={data.afternoon_closing_hours.toString()}
             func_1={(t) =>
               setData((p) => ({ ...p, afternoon_opening_hours: t }))
             }

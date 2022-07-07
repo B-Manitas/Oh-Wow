@@ -40,6 +40,8 @@ export class Formatter extends Schema {
       case "name":
       case "description":
         return dict[key];
+      case "offer":
+        return this.formatOffer(dict[key]);
       default:
         return this.formatDefaultValue(dict[key]);
     }
@@ -73,5 +75,15 @@ export class Formatter extends Schema {
    */
   formatFirstname([first, ...rest]) {
     return [first.toUpperCase(), ...rest].join("").trim();
+  }
+
+  formatOffer(offer) {
+    if (offer == null) return null;
+    else
+      return {
+        ...offer,
+        firstname: this.formatFirstname(offer.firstname),
+        lastname: this.formatFirstname(offer.lastname),
+      };
   }
 }

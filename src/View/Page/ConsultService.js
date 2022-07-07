@@ -128,7 +128,7 @@ const ConsultService = ({ navigation, route }) => {
         img={ICON.book}
         bottom={30}
         right={30}
-        func={() => navigation.navigate("Booking")}
+        func={() => navigation.navigate("Booking", { data: service_init })}
       />
     </Page>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import Primary from "../Buttons/Primary";
 import RadioBox from "../Componnent/RadioBox";
@@ -7,8 +7,28 @@ import Page from "../Container/Page";
 import InputSecondary from "../Input/InputSecondary";
 import Header from "../Parts/Header";
 
-const ConfirmAppt = ({ navigation }) => {
-  const [box_selected, setBox_selected] = useState(0);
+import { controller } from "model/Main";
+import Calendars from "../../model/Calendars";
+
+const ConfirmAppt = ({ navigation, route }) => {
+  const service = route.params.service;
+  const salon = route.params.salon;
+
+  const init_appointment = route.params.appointment;
+  var schema_anonymous = controller.frontend.schemaAnonymous();
+
+  const [box_selected, setBoxSelected] = useState(0);
+
+  const [appointment, setAppointment] = useState(init_appointment);
+  const [audit, setAudit] = useState(controller.fakeAudit(init_appointment));
+
+  const pressRadioBox = (id_radio) => {
+    if (id_radio == 1) schema_anonymous = controller.frontend.schemaAnonymous();
+    else schema_anonymous = null;
+
+    setAppointment((p) => ({ ...p, offer: schema_anonymous }));
+    setBoxSelected(id_radio);
+  };
 
   return (
     <Page>
@@ -25,7 +45,7 @@ const ConfirmAppt = ({ navigation }) => {
             <RadioBox
               id_selected={box_selected}
               id={0}
-              onPress={setBox_selected}
+              onPress={pressRadioBox}
             />
             <Text style={styles.text_radio}>Moi</Text>
           </View>
@@ -33,47 +53,88 @@ const ConfirmAppt = ({ navigation }) => {
             <RadioBox
               id_selected={box_selected}
               id={1}
-              onPress={setBox_selected}
+              onPress={pressRadioBox}
             />
             <Text style={styles.text_radio}>Un proche</Text>
           </View>
 
-          <View style={styles.container_input}>
-            <InputSecondary
-              disabled={box_selected == 0}
-              plh={"Nom: Maria"}
-              typeAndroid={"name-family"}
-              typeIOS={"familyName"}
-              returnKeyType={"next"}
-              maxLength={20}
-              keyboardType={"default"}
-            />
-            <InputSecondary
-              disabled={box_selected == 0}
-              plh={"Tél: +216 00.00.00.00.00"}
-              typeAndroid={"tel"}
-              typeIOS={"telephoneNumber"}
-              returnKeyType={"done"}
-              maxLength={14}
-              keyboardType={"phone-pad"}
-              secureTextEntry={false}
-            />
-          </View>
+          {box_selected == 1 && (
+            <View style={styles.container_input}>
+              <InputSecondary
+                disabled={box_selected == 0}
+                plh={"Prénom"}
+                typeAndroid={"name-given"}
+                typeIOS={"givenName"}
+                returnKeyType={"next"}
+                maxLength={20}
+                keyboardType={"default"}
+                isValidFormat={audit.offer?.firstname}
+                value={appointment.offer?.firstname}
+                setValue={(t) =>
+                  setAppointment((p) => ({
+                    ...p,
+                    offer: { ...p.offer, firstname: t },
+                  }))
+                }
+              />
+              <InputSecondary
+                disabled={box_selected == 0}
+                plh={"Nom"}
+                typeAndroid={"name-family"}
+                typeIOS={"familyName"}
+                returnKeyType={"next"}
+                maxLength={20}
+                keyboardType={"default"}
+                isValidFormat={audit.offer?.lastname}
+                value={appointment.offer?.lastname}
+                setValue={(t) =>
+                  setAppointment((p) => ({
+                    ...p,
+                    offer: { ...p.offer, lastname: t },
+                  }))
+                }
+              />
+              <InputSecondary
+                disabled={box_selected == 0}
+                plh={"Téléphone"}
+                typeAndroid={"tel"}
+                typeIOS={"telephoneNumber"}
+                returnKeyType={"done"}
+                maxLength={10}
+                keyboardType={"phone-pad"}
+                secureTextEntry={false}
+                isValidFormat={audit.offer?.phone}
+                value={appointment.offer?.phone}
+                setValue={(t) =>
+                  setAppointment((p) => ({
+                    ...p,
+                    offer: { ...p.offer, phone: t },
+                  }))
+                }
+              />
+            </View>
+          )}
         </View>
 
         <View style={styles.container_resume}>
-          <Text style={styles.text_resume}>Prestation: Pose d'ongles</Text>
-          <Text style={styles.text_resume}>Durée: 1h</Text>
-          <Text style={styles.text_resume}>Tarifs: 20€</Text>
+          <Text style={styles.text_resume}>Prestation: {service.name}</Text>
+          <Text style={styles.text_resume}>Durée: {service.duration}</Text>
+          <Text style={styles.text_resume}>Tarifs: {service.price}€</Text>
           <Text style={styles.text_resume}>Esthéticienne: Indéfini</Text>
+          <Text style={styles.text_resume}>Salon: {salon.addresse}</Text>
         </View>
 
         <Primary
-          text={"Valider le RDV le 13/03 à 12h"}
+          text={`Valider le RDV le ${Calendars.shortDateFormat(
+            appointment.date
+          )} à ${Calendars.timeOfDateFormat(appointment.date)}`}
           height={10}
           font_size={18}
           style={styles.button_appt}
-          func={() => navigation.navigate("Home")}
+          func={() =>
+            controller.add.appointment(navigation, appointment, setAudit)
+          }
+          is_active={true}
         />
       </View>
     </Page>

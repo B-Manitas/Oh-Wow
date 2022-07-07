@@ -75,7 +75,13 @@ const Client = ({ navigation, route }) => {
         <ToggleLong
           text={"Administrateur"}
           value={data.is_admin}
-          func={(b) => setData((p) => ({ ...p, is_admin: b }))}
+          func={(b) =>
+            setData((p) => ({
+              ...p,
+              id_salon: b ? salon._id : null,
+              is_admin: b,
+            }))
+          }
         />
         <Chevron
           text={"Supprimer le compte"}

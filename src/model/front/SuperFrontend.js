@@ -9,6 +9,7 @@ export class SuperFrontend extends Approver {
 
   _approveData(data, setAudit) {
     const resume = this.approve(data);
+    console.log(resume);
     if (!resume.is_valid) throw new InvalidData(resume.audit, setAudit);
   }
 
@@ -28,6 +29,10 @@ export class SuperFrontend extends Approver {
     return await func_backend(data);
   }
 
+  async _isExisting(funck_backend, id) {
+    return (await funck_backend.call(this, id)) != null;
+  }
+
   /**
    * Test if the user exist in the database.
    * @param {Object} user The user data.
@@ -41,6 +46,14 @@ export class SuperFrontend extends Approver {
       setAudit
     );
     return resp != null;
+  }
+
+  async isExistingSalon(id) {
+    return (await this.backend.get.salon(id)) != null;
+  }
+
+  async isExistingService(id) {
+    return (await this.backend.get.service(id)) != null;
   }
 
   async isUserAdmin(id) {

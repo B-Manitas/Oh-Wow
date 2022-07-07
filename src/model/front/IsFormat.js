@@ -151,8 +151,19 @@ export class IsFormat extends Formatter {
   isBool(bool) {
     return bool === true || bool === false;
   }
-  
+
   isNumber(n) {
-    return _.isInteger(n)
+    return _.isInteger(n);
+  }
+
+  isOffer(offer) {
+    if (offer == null) return true;
+    else if (!this.isSchema(offer, this.schemaAnonymous())) return false;
+    else
+      return {
+        firstname: this.isName(offer.firstname),
+        lastname: this.isName(offer.lastname),
+        phone: this.isPhone(offer.phone),
+      };
   }
 }

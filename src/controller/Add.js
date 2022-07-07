@@ -25,4 +25,12 @@ export class Add extends SuperController {
     const data = this.frontend.schemaService();
     navigation.navigate("Service", { data });
   }
+
+  // check existing id_service, id_salon
+  @Catch
+  async appointment(navigation, appointment, setAudit) {
+    await this.frontend.add.appointment(appointment, setAudit);
+    Alert.alert(`Your appointment has been validated.`);
+    navigation.navigate("Home");
+  }
 }

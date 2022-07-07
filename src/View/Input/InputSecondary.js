@@ -20,7 +20,7 @@ const InputSecondary = ({
       style={[
         styles.input,
         disabled && styles.disabled,
-        !isValidFormat && { borderColor: "red" },
+        isValidFormat === false && { borderColor: "red" },
       ]}
       keyboardType={keyboardType}
       autoComplete={typeAndroid}

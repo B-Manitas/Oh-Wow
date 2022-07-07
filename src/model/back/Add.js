@@ -1,5 +1,5 @@
 import { Request } from "./Request";
-import { SALON, SERVICE, USER } from "./Collection";
+import { ACCESS, APPT, SALON, SERVICE, USER } from "./Collection";
 
 export class Add extends Request {
   /**
@@ -17,6 +17,11 @@ export class Add extends Request {
 
   async service(service) {
     return await this.insertOne(SERVICE, service);
+  }
+
+  async appointment(appointment) {
+    console.log("h", appointment);
+    // return await this.insertOne(APPT, appointment);
   }
 
   async access(access) {

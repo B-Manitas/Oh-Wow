@@ -1,27 +1,19 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import Calendars from "model/Calendars";
-
-import Utils from "model/Utils";
 
 import DaysList from "../../Generator/DaysList";
-import PickerMonths from "../../Picker/PickerMonths";
-import PickerYears from "../../Picker/PickerYears";
+import PickerEmployee from "../../Picker/PickerEmployee";
+import Picker from "../../Picker/Picker";
+import { MONTHS, YEARS } from "../../../constants/DAYS";
 
-const BookingHeader = (props) => {
+import GeneratePickItems from "../../Generator/GeneratePickItems";
+
+const BookingHeader = ({ date, setDate, staff, setStaff }) => {
   const onChangeMonth = (v) =>
-    Calendars.onChangeCalendarPicker(
-      Utils.dictState(v, props.month.func),
-      props.year,
-      props.calendar
-    );
+    setDate(new Date(date.getFullYear(), v, date.getDate() + 1));
 
   const onChangeYear = (v) =>
-    Calendars.onChangeCalendarPicker(
-      props.month,
-      Utils.dictState(v, props.year.func),
-      props.calendar
-    );
+    setDate(new Date(YEARS[v], date.getMonth(), date.getDate() + 1));
 
   return (
     <View style={styles.container}>
@@ -36,14 +28,17 @@ const BookingHeader = (props) => {
         <Text style={styles.text_slot}>Autres créneaux</Text>
 
         <View style={styles.container_picker}>
-          <PickerMonths
-            value={props.month.val}
+          <Picker
+            generator={() => GeneratePickItems({ data: MONTHS })}
+            value={date.getMonth()}
             onChange={(v) => onChangeMonth(v)}
           />
-          <PickerYears
-            value={props.year.val}
+          <Picker
+            generator={() => GeneratePickItems({ data: YEARS })}
+            value={YEARS.findIndex((year) => year == date.getFullYear())}
             onChange={(v) => onChangeYear(v)}
           />
+          <PickerEmployee value={staff} onChange={(v) => setStaff(v)} />
         </View>
       </View>
 

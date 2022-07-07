@@ -1,5 +1,7 @@
 import FailedLogin from "exceptions/data_error/FailedLogin";
+import { bind } from "lodash";
 import { SuperFrontend } from "./SuperFrontend";
+import { CLIENT, ADMIN, EMPLOYEE } from "src/UserStatus";
 
 export class Find extends SuperFrontend {
   async _get(backendGetFunc, ...funcs) {
@@ -13,9 +15,9 @@ export class Find extends SuperFrontend {
     return await this._get(get_back.allUsers.bind(get_back), ...funcs);
   }
 
-  async allAccess(...funcs) {
+  async allStaff(...funcs) {
     const get_back = this.backend.get;
-    return await this._get(get_back.allAccess.bind(get_back), ...funcs);
+    return await this._get(get_back.allStaff.bind(get_back), ...funcs);
   }
 
   async allServices(...funcs) {
@@ -46,9 +48,14 @@ export class Find extends SuperFrontend {
     if (data == null) throw new FailedLogin();
     else return data;
   }
-  async status(...funcs) {
+
+  async allEmployed(...funcs) {
     const get_back = this.backend.get;
-    const resp = await this._get(get_back.staff.bind(get_back));
+    return await this._get(get_back.allEmployed.bind(get_back), ...funcs);
+  }
+
+  async status(id, ...funcs) {
+    const resp = await this.backend.get.staff(id);
 
     var status = CLIENT;
     if (resp !== null && resp.is_admin) status = ADMIN;

@@ -40,8 +40,8 @@ export class Schema {
     };
   }
 
-  schemaStaff(_id = "", access = "") {
-    return { _id, access };
+  schemaStaff(_id = "", id_salon = null, is_admin = false) {
+    return { _id, id_salon, is_admin };
   }
 
   schemaSalon() {
@@ -57,10 +57,10 @@ export class Schema {
         sunday: false,
       },
       date_off: "",
-      morning_opening_hours: "8h00",
-      morning_closing_hours: "12h00",
-      afternoon_opening_hours: "13h00",
-      afternoon_closing_hours: "18h00",
+      morning_opening_hours: 480,
+      morning_closing_hours: 720,
+      afternoon_opening_hours: 780,
+      afternoon_closing_hours: 1080,
       is_opened: true,
       phone: "",
     };
@@ -74,9 +74,30 @@ export class Schema {
       price: 0,
       duration: 0,
       is_trend: false,
-      img: "data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=",
+      img: "data:image/jpg;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
     };
   }
+
+  schemaAnonymous() {
+    return {
+      firstname: "",
+      lastname: "",
+      phone: "",
+    };
+  }
+
+  schemaAppointment(id_user = "", id_salon = "", id_service = "") {
+    return {
+      _id: Date.now().toString(),
+      id_user,
+      offer: null,
+      id_salon,
+      id_service,
+      id_staff: "",
+      date: 0,
+    };
+  }
+
   schemaAccess(_id = "", password = "") {
     return { _id, password };
   }
