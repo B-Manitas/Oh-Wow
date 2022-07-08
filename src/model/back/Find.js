@@ -1,6 +1,6 @@
 import _ from "lodash";
 import Utils from "../Utils";
-import { STAFF, SALON, SERVICE, USER, ACCESS } from "./Collection";
+import { STAFF, SALON, SERVICE, USER, ACCESS, APPT } from "./Collection";
 import { Request } from "./Request";
 
 export class Find extends Request {
@@ -74,5 +74,23 @@ export class Find extends Request {
 
   async salon(id) {
     return await this.findOne(SALON, { _id: id });
+  }
+
+  async appointment(id_salon, id_staff) {
+    const resp = await this.aggregate(APPT, [
+      { $match: { id_staff, id_salon } },
+      {
+        $lookup: {
+          from: SERVICE,
+          localField: "id_service",
+          foreignField: "_id",
+          as: "service",
+        },
+      },
+      { $unwind: "$service" },
+      { $project: { _id: 0, date: 1, duration: "$service.duration" } },
+    ]);
+
+    return resp;
   }
 }

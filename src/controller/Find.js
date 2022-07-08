@@ -57,4 +57,9 @@ export class Find extends SuperController {
   async allEmployed(...funcs) {
     await this.frontend.get.allEmployed(...funcs);
   }
+
+  @Catch
+  async appointment(id_salon, id_staff, ...funcs) {
+    await this.frontend.get.appointment(id_salon, id_staff, ...funcs);
+  }
 }

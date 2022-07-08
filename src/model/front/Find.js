@@ -1,5 +1,4 @@
 import FailedLogin from "exceptions/data_error/FailedLogin";
-import { bind } from "lodash";
 import { SuperFrontend } from "./SuperFrontend";
 import { CLIENT, ADMIN, EMPLOYEE } from "src/UserStatus";
 
@@ -62,5 +61,12 @@ export class Find extends SuperFrontend {
     else if (resp !== null) status = EMPLOYEE;
 
     funcs.map((func) => func(status));
+  }
+
+  async appointment(id_salon, id_staff, ...funcs) {
+    if (id_salon != "" && id_staff != "") {
+      var resp = await this.backend.get.appointment(id_salon, id_staff);
+      funcs.map((func) => func(resp));
+    }
   }
 }

@@ -18,23 +18,28 @@ const Booking = ({ navigation, route }) => {
   const service = route.params.data;
   const [salon, setSalon] = useState(undefined);
   const [calendar, setCalendar] = useState(undefined);
+  const [plannings, setPlannings] = useState([]);
 
   const apt_schema = ctrl.frontend.schemaAppointment(id_user);
-  const [appointment, setApt] = useState(apt_schema);
+  const [apt, setApt] = useState(apt_schema);
 
   const [date, setDate] = useState(Calendars.today());
 
   useEffect(() => {
     setApt((p) => ({ ...p, id_service: service._id, date: date.getTime() }));
-    ctrl.get.allSalons(setSalon, (v) => Utils.setValue(setApt, "id_salon", v));
+    ctrl.get.allSalons(setSalon, (v) =>
+      Utils.setValue(setApt, "id_salon", v._id)
+    );
   }, []);
 
   useEffect(() => {
-    setCalendar(Calendars.calendar(date, setDate, salon, service.duration));
-  }, [date.getMonth(), date.getFullYear(), appointment?.id_staff, salon]);
+    setCalendar(
+      Calendars.calendar(date, setDate, plannings, salon, service.duration)
+    );
+    ctrl.get.appointment(apt.id_salon, apt.id_staff, setPlannings);
+  }, [date.getMonth(), date.getFullYear(), apt?.id_staff, salon]);
 
-  if (salon == undefined || calendar == undefined)
-    return <Text>Loading data....</Text>;
+  if (!salon || !calendar) return <Text>Loading data....</Text>;
   else
     return (
       <Page>
@@ -47,7 +52,7 @@ const Booking = ({ navigation, route }) => {
             <BookingHeader
               date={date}
               setDate={setDate}
-              staff={appointment.id_staff}
+              staff={apt.id_staff}
               setStaff={(s) => ctrl.onPress.aptStaff(setApt, s)}
             />
           }
@@ -57,7 +62,7 @@ const Booking = ({ navigation, route }) => {
               calendar={calendar}
               navigation={navigation}
               onPress={(h) => ctrl.onPress.aptHours(setApt, h, date)}
-              data={{ service, appointment, salon }}
+              data={{ service, appointment: apt, salon }}
             />
           }
         />

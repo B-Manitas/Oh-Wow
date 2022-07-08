@@ -1,4 +1,4 @@
-import Utils from "./Utils";
+const SECONDS_IN_DAY = 8.64e7;
 
 export default {
   getISODateFormat(date) {
@@ -64,8 +64,8 @@ export default {
   },
 
   // Calcule le calendar pour un salon et un mois d'une année
-  calendar(date, setDate, salon, dur) {
-    if (!salon) return [];
+  calendar(date, setDate, plannings, salon, dur) {
+    if (!salon || !plannings) return [];
 
     const am_opening_hours = salon.morning_opening_hours;
     const am_closing_hours = salon.morning_closing_hours;
@@ -99,7 +99,9 @@ export default {
       for (let t = am_opening_hours; t <= am_closing_hours - dur; t += dur) {
         am_hours.push({
           time: t,
-          is_available: is_available && Utils.randomBool(),
+          is_available:
+            is_available &&
+            this.isAvailableDay(plannings, day_date.getTime(), t, dur),
         });
       }
 
@@ -107,7 +109,9 @@ export default {
       for (let t = pm_opening_hours; t <= pm_closing_hours - dur; t += dur) {
         pm_hours.push({
           time: t,
-          is_available: is_available && Utils.randomBool(),
+          is_available:
+            is_available &&
+            this.isAvailableDay(plannings, day_date.getTime(), t, dur),
         });
       }
 
@@ -128,6 +132,22 @@ export default {
       !this.isDayOff(day_off, date.getDay()) &&
       !this.isDateOff(date_off, date)
     );
+  },
+
+  isAvailableDay(dates_list, date, time, dur) {
+    const day = dates_list.find(
+      (d) => Math.abs(d.date - date) <= SECONDS_IN_DAY
+    );
+
+    if (day) {
+      const min_apt = Math.abs(day.date - date) / 60000;
+      return (
+        (time < min_apt && time + dur < min_apt + day.duration) ||
+        (time > min_apt && time + dur > min_apt + day.duration)
+      );
+    }
+
+    return true;
   },
 
   idDayOff(day_off) {

@@ -38,6 +38,7 @@ export class Formatter extends Schema {
       case "password":
       case "is_trend":
       case "name":
+      case "date":
       case "description":
         return dict[key];
       case "offer":
