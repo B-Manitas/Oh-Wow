@@ -71,8 +71,11 @@ export default {
     const am_closing_hours = salon.morning_closing_hours;
     const pm_opening_hours = salon.afternoon_opening_hours;
     const pm_closing_hours = salon.afternoon_closing_hours;
-    const is_opened_salon = salon.is_opened;
-    var set_date = true;
+    const is_opened = salon.is_opened;
+    var set_first_date = true;
+
+    const id_off = this.idDayOff(salon.day_off);
+    const date_off = this.parseDateOff(salon.date_off);
 
     if (date === undefined) date = this.today();
     const month = date.getMonth();
@@ -84,11 +87,11 @@ export default {
 
     for (var d = 0; d < nb_day; d++) {
       const day_date = new Date(year, month, d + 1);
-      const is_available = !this.isPast(day_date) && is_opened_salon;
-      const is_available_day = is_available && Utils.randomBool();
+      const is_available =
+        this.isAvailableDate(date_off, id_off, day_date) && is_opened;
 
-      if (set_date && is_available_day) {
-        set_date = false;
+      if (set_first_date && is_available) {
+        set_first_date = false;
         setDate(day_date);
       }
 
@@ -110,13 +113,37 @@ export default {
 
       calendar[d + day] = {
         date: day_date,
-        is_available_day,
+        is_available_day: is_available,
         am_hours,
         pm_hours,
       };
     }
 
     return calendar;
+  },
+
+  isAvailableDate(date_off, day_off, date) {
+    return (
+      !this.isPast(date) &&
+      !this.isDayOff(day_off, date.getDay()) &&
+      !this.isDateOff(date_off, date)
+    );
+  },
+
+  idDayOff(day_off) {
+    return Object.keys(day_off).filter((k) => day_off[k]);
+  },
+
+  isDayOff(id_off, day) {
+    return id_off.includes(this.convertIdDay(day).toString());
+  },
+
+  parseDateOff(date_off) {
+    return date_off.split(";");
+  },
+
+  isDateOff(date_off, date) {
+    return date_off.includes(this.shortDateFormat(date));
   },
 
   isZeroTime(date) {

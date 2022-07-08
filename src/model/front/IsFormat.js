@@ -127,8 +127,8 @@ export class IsFormat extends Formatter {
   isDateOff(date_off) {
     if (date_off == "") return true;
     else if (/[^0-9\/;]/.test(date_off)) return false;
-    else
-      return date_off.split(";").map((date) => {
+    else {
+      const audit_date = date_off.split(";").map((date) => {
         if (!this._FORMAT_MMDD.test(date)) return false;
 
         date = date.split("/");
@@ -141,7 +141,10 @@ export class IsFormat extends Formatter {
         const nb_days = Calendars.numberOfDays(year, month);
         if (day > nb_days) return false;
         else return true;
-      })[0];
+      });
+
+      return audit_date.every((v) => v);
+    }
   }
 
   isHours(hours) {

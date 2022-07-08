@@ -10,7 +10,7 @@ import BookingFooter from "./BookingFooter";
 import Calendars from "model/Calendars";
 
 import { controller as ctrl } from "model/Main";
-import Utils from "../../../model/Utils";
+import Utils from "model/Utils";
 
 const Booking = ({ navigation, route }) => {
   const id_user = ctrl.this_user_data._id;
