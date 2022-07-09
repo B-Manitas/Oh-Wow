@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Calendars from "../../../model/Calendars";
 
 import Primary from "../../Buttons/Primary";
 import HoursList from "../../Generator/HoursList";
@@ -22,7 +21,7 @@ const BookingFooter = ({ date, calendar, navigation, onPress, data }) => {
         height={10}
         font_size={18}
         style={styles.button_appt}
-        is_active={!Calendars.isZeroTime(new Date(date_appointment))}
+        is_active={!date_appointment.isZeroTime()}
         func={() => navigation.navigate("ConfirmAppt", data)}
       />
     </View>

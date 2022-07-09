@@ -17,8 +17,8 @@ const BookingHeader = ({ date, setDate, staff, setStaff }) => {
         <View style={styles.container_picker}>
           <Picker
             generator={() => GeneratePickItems({ data: MONTHS })}
-            value={date.getMonth()}
-            onChange={(m) => controller.onChange.month(setDate, m)}
+            value={date.getMonth() - 1}
+            onChange={(m) => controller.onChange.month(setDate, m + 1)}
           />
           <Picker
             generator={() => GeneratePickItems({ data: YEARS })}

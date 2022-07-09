@@ -88,7 +88,7 @@ test("isDateOff", () => {
   expect(is_format.isDateOff("32/01")).toBe(false);
   expect(is_format.isDateOff("30/06")).toBe(true);
   expect(is_format.isDateOff("31/06")).toBe(false);
-  expect(is_format.isDateOff("14/07;25/12;")).toBe(true);
+  expect(is_format.isDateOff("14/07;25/12;")).toBe(false);
   expect(is_format.isDateOff("14/07;25/12")).toBe(true);
   expect(is_format.isDateOff("32/01;25/12")).toBe(false);
   expect(is_format.isDateOff("14;25/12")).toBe(false);

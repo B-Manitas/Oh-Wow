@@ -3,49 +3,60 @@ import { StyleSheet, Text } from "react-native";
 
 import Page from "../../Container/Page";
 import Header from "../../Parts/Header";
-import Calendar from "../../Componnent/Calendar";
+import PickerCalendar from "../../Componnent/PickerCalendar";
 import BookingHeader from "./BookingHeader";
 import BookingFooter from "./BookingFooter";
 
-import Calendars from "model/Calendars";
+import Calendar from "model/utils/Calendar";
 
 import { controller as ctrl } from "model/Main";
 import Utils from "model/Utils";
+import CDate from "model/utils/CDate";
 
 const Booking = ({ navigation, route }) => {
   const id_user = ctrl.this_user_data._id;
-
   const service = route.params.data;
-  const [salon, setSalon] = useState(undefined);
+
   const [calendar, setCalendar] = useState(undefined);
+
+  const [salon, setSalon] = useState(undefined);
+  const [schedule, setSchedule] = useState(undefined);
   const [plannings, setPlannings] = useState([]);
 
-  const apt_schema = ctrl.frontend.schemaAppointment(id_user);
-  const [apt, setApt] = useState(apt_schema);
+  const [apt, setApt] = useState(ctrl.frontend.schemaAppointment(id_user));
+  const [date, setDate] = useState(new CDate(2022, 7, 9));
 
-  const [date, setDate] = useState(Calendars.today());
+  const setAptSalon = (s) => setApt((p) => ({ ...p, id_salon: s._id }));
+  const getCalendars = () =>
+    calendar?.getCalendars(date, setDate, plannings, salon, service.duration);
 
   useEffect(() => {
-    setApt((p) => ({ ...p, id_service: service._id, date: date.getTime() }));
-    ctrl.get.allSalons(setSalon, (v) =>
-      Utils.setValue(setApt, "id_salon", v._id)
-    );
+    setCalendar(new Calendar());
+    setApt((p) => ({ ...p, id_service: service._id, date: date }));
+    ctrl.get.allSalons(setSalon, setAptSalon);
   }, []);
 
   useEffect(() => {
-    setCalendar(
-      Calendars.calendar(date, setDate, plannings, salon, service.duration)
-    );
-    ctrl.get.appointment(apt.id_salon, apt.id_staff, setPlannings);
-  }, [date.getMonth(), date.getFullYear(), apt?.id_staff, salon]);
+    setSchedule(getCalendars);
+  }, [salon, plannings]);
 
-  if (!salon || !calendar) return <Text>Loading data....</Text>;
+  useEffect(() => {
+    ctrl.get.appointment(apt.id_salon, apt.id_staff, setPlannings);
+  }, [
+    date.getMonth(),
+    date.getFullYear(),
+    apt.id_salon,
+    apt.id_service,
+    apt.id_staff,
+  ]);
+
+  if (!salon || !schedule || !apt) return <Text>Loading data....</Text>;
   else
     return (
       <Page>
         <Header type={"back"} title={service.name} navigation={navigation} />
-        <Calendar
-          data={calendar}
+        <PickerCalendar
+          data={schedule}
           date={date}
           onPressDay={(d) => ctrl.onPress.aptDay(setApt, setDate, d)}
           header={
@@ -59,7 +70,7 @@ const Booking = ({ navigation, route }) => {
           footer={
             <BookingFooter
               date={date}
-              calendar={calendar}
+              calendar={schedule}
               navigation={navigation}
               onPress={(h) => ctrl.onPress.aptHours(setApt, h, date)}
               data={{ service, appointment: apt, salon }}

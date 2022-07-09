@@ -8,7 +8,6 @@ import InputSecondary from "../Input/InputSecondary";
 import Header from "../Parts/Header";
 
 import { controller as ctrl } from "model/Main";
-import Calendars from "../../model/Calendars";
 
 const ConfirmAppt = ({ navigation, route }) => {
   const service = route.params.service;
@@ -108,9 +107,9 @@ const ConfirmAppt = ({ navigation, route }) => {
         </View>
 
         <Primary
-          text={`Valider le RDV le ${Calendars.shortDateFormat(
-            appointment.date
-          )} à ${Calendars.timeOfDateFormat(appointment.date)}`}
+          text={`Valider le RDV le ${appointment.date.toDateString(
+            true
+          )} à ${appointment.date.toTimeString()}`}
           height={10}
           font_size={18}
           style={styles.button_appt}

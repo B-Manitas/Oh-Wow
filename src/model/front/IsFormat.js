@@ -2,8 +2,8 @@
 import { Formatter } from "./Formatter";
 
 // Other import
-import Calendars from "../Calendars";
 import _ from "lodash";
+import CDate from "../utils/CDate";
 
 /**
  * IsFormat class contains methods to test if value respects specific value
@@ -41,8 +41,8 @@ export class IsFormat extends Formatter {
   isDate(date) {
     return (
       this._FORMAT_DATE.test(date) &&
-      Calendars.isValid(new Date(date)) &&
-      Calendars.isPast(new Date(date))
+      CDate.isValid(new CDate(date)) &&
+      CDate.isPast(new CDate(date))
     );
   }
 
@@ -138,7 +138,7 @@ export class IsFormat extends Formatter {
 
         if (day <= 0 || month <= 0) return false;
 
-        const nb_days = Calendars.numberOfDays(year, month);
+        const nb_days = CDate.getMonthLength(year, month);
         if (day > nb_days) return false;
         else return true;
       });

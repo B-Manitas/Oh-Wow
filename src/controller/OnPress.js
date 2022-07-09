@@ -1,10 +1,9 @@
-import Calendars from "../model/Calendars";
 import { SuperController } from "./SuperController";
 
 export class OnPress extends SuperController {
   aptDay(setApt, setDate, date) {
     setDate(date);
-    setApt((p) => ({ ...p, date: date.getTime() }));
+    setApt((p) => ({ ...p, date: date }));
   }
 
   aptStaff(setApt, id) {
@@ -12,7 +11,7 @@ export class OnPress extends SuperController {
   }
 
   aptHours(setApt, hours, date) {
-    setApt((p) => ({ ...p, date: Calendars.setTime(date, hours).getTime() }));
+    setApt((p) => ({ ...p, date: date.setTime(hours) }));
   }
 
   radioOffer(setApt, setRadio, id) {

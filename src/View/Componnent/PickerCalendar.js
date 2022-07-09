@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Day from "../Buttons/Day";
 
-const Calendar = ({ data, header, footer, onPressDay, date }) => {
+const PickerCalendar = ({ data, header, footer, onPressDay, date }) => {
   return (
     <FlatList
       data={data}
@@ -19,7 +19,7 @@ const Calendar = ({ data, header, footer, onPressDay, date }) => {
   );
 };
 
-export default Calendar;
+export default PickerCalendar;
 
 const styles = StyleSheet.create({
   container: {

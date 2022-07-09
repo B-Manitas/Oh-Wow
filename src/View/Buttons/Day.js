@@ -1,58 +1,47 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import Calendars from "model/Calendars";
 
 import Round from "./Round";
 
 const Day = ({ day, date, onPressDay }) => {
-  const size = 40;
+  const day_date = day.date;
+  const is_today = day_date?.isToday();
+  const is_selected = day_date?.isSameDate(date);
 
-  if (day == 0) return <Round size={size} colors="#fff" enabled={false} />;
-  else {
-    const day_date = day.date;
-    const isToday = Calendars.isToday(day_date);
+  var params = {
+    size: 40,
+    text: day_date?.getDate(),
+    enabled: day.is_on,
+    func: () => onPressDay(day_date),
+    style_ctn_enabled: styles.enabled_ctn,
+    style_txt_enabled: styles.enabled_txt,
+    colors: "#CECECE",
+  };
 
-    if (date.getTime() === day_date.getTime()) {
-      return (
-        <Round
-          size={size}
-          text={day_date.getDate()}
-          enabled={day.is_available_day}
-          func={() => onPressDay(day_date)}
-          style_ctn_enabled={{
-            backgroundColor: "#4489C5",
-            borderColor: "#4489C5",
-          }}
-          style_txt_enabled={{ color: "#fff" }}
-          colors={"#4489C5"}
-        />
-      );
-    }
-    else if (isToday) {
-      return (
-        <Round
-          size={size}
-          text={day_date.getDate()}
-          colors="#D95959"
-          enabled={day.is_available_day}
-          func={() => onPressDay(day_date)}
-        />
-      );
-    }
-    else {
-      return (
-        <Round
-          size={size}
-          text={day_date.getDate()}
-          style_ctn_enabled={styles.enabled_ctn}
-          style_txt_enabled={styles.enabled_txt}
-          enabled={day.is_available_day}
-          colors="#CECECE"
-          func={() => onPressDay(day_date)}
-        />
-      );
-    }
-  }
+  if (!day) params = { ...params, colors: "#fff", enabled: false };
+  else if (!is_today && !day_date.isPast() && is_selected)
+    params = {
+      ...params,
+      style_txt_enabled: styles.selected_txt,
+      style_ctn_enabled: styles.selected_ctn,
+      colors: "#4489C5",
+    };
+  else if (is_today && is_selected)
+    params = {
+      ...params,
+      style_txt_enabled: styles.selected_txt,
+      style_ctn_enabled: styles.selected_ctn,
+      colors: "#D95959",
+    };
+  else if (is_today && !is_selected)
+    params = {
+      ...params,
+      colors: "#D95959",
+      style_ctn_enabled: undefined,
+      style_txt_enabled: undefined,
+    };
+
+  return <Round {...params} />;
 };
 
 export default Day;
@@ -64,5 +53,14 @@ const styles = StyleSheet.create({
 
   enabled_txt: {
     color: "#383838",
+  },
+
+  selected_ctn: {
+    backgroundColor: "#4489C5",
+    borderColor: "#4489C5",
+  },
+
+  selected_txt: {
+    color: "#fff",
   },
 });
