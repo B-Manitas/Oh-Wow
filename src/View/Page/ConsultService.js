@@ -80,13 +80,6 @@ const ConsultService = ({ navigation, route }) => {
             width={"25%"}
             setValue={(t) => setService((p) => ({ ...p, price: parseInt(t) }))}
           />
-          <ServiceInfo
-            enabled={false}
-            text={"Prochain créneau"}
-            value={"25/02 à 12h30"}
-            flex={2}
-            width={"40%"}
-          />
         </View>
 
         <View style={styles.parts}>
@@ -128,7 +121,7 @@ const ConsultService = ({ navigation, route }) => {
         />
       )}
       <Absolute
-        text={"Prendre RDV"}
+        text={"Disponibilité et RDV"}
         img={ICON.book}
         bottom={30}
         right={30}

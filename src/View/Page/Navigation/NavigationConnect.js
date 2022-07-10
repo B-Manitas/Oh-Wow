@@ -2,25 +2,27 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Link from "../../Buttons/Link";
 import NavigationAdmin from "./NavigationAdmin";
+import NavigationStaff from "./NavigationStaff";
 
 const NavigationConnect = ({ navigation }) => {
   return (
     <View>
       <View style={styles.nav}>
         <Link
-          text={"Consulter les services proposées"}
+          text={"Notre catalogues"}
           style_container={styles.button_nav}
           style_text={styles.text_nav}
           func={() => navigation.navigate("AllServices")}
         />
         <Link
-          text={"Consulter mes rendez-vous"}
+          text={"Mes rendez-vous"}
           style_container={styles.button_nav}
           style_text={styles.text_nav}
           func={() => navigation.navigate("Appointments")}
         />
       </View>
 
+      <NavigationStaff navigation={navigation} />
       <NavigationAdmin navigation={navigation} />
 
       <View style={styles.nav}>

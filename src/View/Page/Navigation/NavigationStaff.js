@@ -4,24 +4,19 @@ import Link from "../../Buttons/Link";
 
 import { controller } from "model/Main";
 
-const NavigationAdmin = ({ navigation }) => {
+const NavigationStaff = ({ navigation }) => {
+  const is_staff = controller.this_is_staff;
   const is_admin = controller.this_is_admin;
 
   return (
     <View>
-      {is_admin && (
+      {(is_staff || is_admin) && (
         <View style={styles.nav}>
           <Link
-            text={"Rechercher un utilisateur"}
+            text={"Le plannings des réservations"}
             style_container={styles.button_nav}
             style_text={styles.text_nav}
-            func={() => navigation.navigate("Search")}
-          />
-          <Link
-            text={"Paramètres de l'application"}
-            style_container={styles.button_nav}
-            style_text={styles.text_nav}
-            func={() => navigation.navigate("SettingsApp")}
+            func={() => navigation.navigate("Plannings")}
           />
         </View>
       )}
@@ -29,7 +24,7 @@ const NavigationAdmin = ({ navigation }) => {
   );
 };
 
-export default NavigationAdmin;
+export default NavigationStaff;
 
 const styles = StyleSheet.create({
   nav: {

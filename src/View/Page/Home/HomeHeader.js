@@ -26,17 +26,17 @@ const HomeHeader = ({ navigation }) => {
         <NavRound
           func={() => navigation.navigate("AllServices")}
           img={PHOTO.services}
-          title={"Les prestations"}
+          title={"Notre catalogue"}
         />
         <NavRound
-          func={() => navigation.navigate("AllServices")}
-          img={PHOTO.nails}
-          title={"Le catalogue"}
-        />
-        <NavRound
-          func={() => Alert.alert("Work in progress")}
+          func={() => navigation.navigate("Appointments")}
           img={PHOTO.plannings}
-          title={"Mes RDV"}
+          title={"Mes rendez-vous"}
+        />
+        <NavRound
+          func={() => navigation.navigate("Contact")}
+          img={PHOTO.nails}
+          title={"Nous contacter"}
         />
       </View>
 

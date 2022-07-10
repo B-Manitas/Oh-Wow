@@ -77,8 +77,17 @@ export class Find extends SuperFrontend {
     }
   }
 
-  async plannings(...funcs) {
-    const resp = await this.backend.get.allAppointments();
+  async plannings(id_staff, date_str, date_end, ...funcs) {
+    const resp = await this.backend.get.allAppointments(
+      id_staff,
+      date_str,
+      date_end
+    );
+    funcs.map((func) => func(resp));
+  }
+
+  async aptUpcoming(id, ...funcs) {
+    const resp = await this.backend.get.aptUpcoming(id);
     funcs.map((func) => func(resp));
   }
 }

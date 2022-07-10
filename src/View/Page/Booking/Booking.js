@@ -73,7 +73,11 @@ const Booking = ({ navigation, route }) => {
               calendar={schedule}
               navigation={navigation}
               onPress={(h) => ctrl.onPress.aptHours(setApt, h, date)}
-              data={{ service, appointment: apt, salon }}
+              data={{
+                service,
+                apt: { ...apt, date: apt.date.getTimestamp() },
+                salon,
+              }}
             />
           }
         />

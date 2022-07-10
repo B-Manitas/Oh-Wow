@@ -1,11 +1,13 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import CDate from "../../../model/utils/CDate";
 
 import Primary from "../../Buttons/Primary";
 import HoursList from "../../Generator/HoursList";
 
 const BookingFooter = ({ date, calendar, navigation, onPress, data }) => {
-  const date_appointment = data.appointment.date;
+  // console.log(data.appointment.date);
+  const date_appointment = new CDate(data.apt.date);
 
   return (
     <View style={styles.container}>

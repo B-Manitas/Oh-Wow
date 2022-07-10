@@ -11,7 +11,7 @@ export class Update extends Request {
   }
 
   async service(data) {
-    await this.updateOne(
+    return await this.updateOne(
       SERVICE,
       { _id: data._id },
       { $set: { ...data } },

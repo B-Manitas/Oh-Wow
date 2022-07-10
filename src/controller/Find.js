@@ -70,7 +70,12 @@ export class Find extends SuperController {
   }
 
   @Catch
-  async plannings(...funcs) {
-    await this.frontend.get.plannings(...funcs);
+  async plannings(id_staff, date_str, date_end, ...funcs) {
+    await this.frontend.get.plannings(id_staff, date_str, date_end, ...funcs);
+  }
+
+  @Catch
+  async aptUpcoming(id, ...funcs) {
+    await this.frontend.get.aptUpcoming(id, ...funcs);
   }
 }

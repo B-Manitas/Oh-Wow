@@ -1,12 +1,28 @@
 import React from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
-const RadioBox = ({ id, id_selected, onPress }) => {
+const RadioBox = ({
+  id,
+  id_selected,
+  onPress,
+  text,
+  style,
+  style_active,
+  style_txt,
+}) => {
+  if (!style_active) style_active = styles.container_active;
+
   return (
     <Pressable
       onPress={() => onPress(id)}
-      style={[styles.container, id == id_selected && styles.container_active]}
-    ></Pressable>
+      style={[
+        styles.container,
+        style && style,
+        id == id_selected && style_active,
+      ]}
+    >
+      <Text style={style_txt}>{text}</Text>
+    </Pressable>
   );
 };
 
@@ -22,5 +38,7 @@ const styles = StyleSheet.create({
     margin: 2,
   },
 
-  container_active: { backgroundColor: "#383838" },
+  container_active: {
+    backgroundColor: "#383838",
+  },
 });

@@ -28,7 +28,7 @@ import Settings from "./src/View/Page/Settings";
 import SettingsApp from "./src/View/Page/SettingsApp";
 import Contact from "./src/View/Page/Contact";
 import Client from "./src/View/Page/Client";
-import Plannings from "./src/View/Page/Plannings";
+import Plannings from "./src/View/Page/Plannings/Plannings";
 
 const Stack = createNativeStackNavigator();
 

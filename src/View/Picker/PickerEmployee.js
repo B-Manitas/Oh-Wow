@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import _ from "lodash";
 import { ItemsStaff } from "../Generator/ItemsStaff";
 
-const PickerEmployee = ({ onChange, value }) => {
+const PickerEmployee = ({ onChange, value, all }) => {
   return (
     <Picker
       style={styles.picker}
@@ -13,7 +13,7 @@ const PickerEmployee = ({ onChange, value }) => {
       selectedValue={value}
       onValueChange={(v) => onChange(v)}
     >
-      {ItemsStaff({onChange})}
+      {ItemsStaff({onChange, all})}
     </Picker>
   );
 };

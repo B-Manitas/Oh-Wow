@@ -18,7 +18,7 @@ export class Update extends SuperFrontend {
 
   async service(service, setAudit) {
     const update_back = this.backend.update;
-    await this._actions(
+    return await this._actions(
       service,
       update_back.service.bind(update_back),
       setAudit

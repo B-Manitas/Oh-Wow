@@ -61,12 +61,12 @@ const Login = ({ navigation }) => {
             is_active={true}
           />
 
-          <Link
+          {/* <Link
             pad_top={7}
             text={"Mot de passe oubliée"}
             style_text={styles.link}
             func={() => navigation.navigate("Forgotten")}
-          />
+          /> */}
           <Link
             text={"Pas encore client ?"}
             style_text={styles.link}

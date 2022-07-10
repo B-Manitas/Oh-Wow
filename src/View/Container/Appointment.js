@@ -1,19 +1,32 @@
 import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { SERVICES } from "constants/DATA";
 import { ICON } from "constants/IMAGES";
+import CDate from "../../model/utils/CDate";
 
 const Appointment = ({ data }) => {
+  const date = new CDate(data.date);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.btn_img}>
         <Image source={ICON.trash} style={styles.img} />
       </TouchableOpacity>
 
-      <Text style={styles.h1}>{SERVICES[data.id_appt].name}</Text>
-      <Text style={styles.h2}>
-        Le {data.date} de {data.hours}h à {data.hours}h
-        {SERVICES[data.id_appt].duration}.
-      </Text>
+      <View style={styles.ctn_h1}>
+        <Text style={styles.h1}>{data.service}</Text>
+        <Text style={styles.h2}>
+          le {date.toDateString(true)} à {date.toTimeString()}
+        </Text>
+      </View>
+
+      <Text style={styles.h3}>Salon : {data.salon}.</Text>
+      <Text style={styles.h3}>Esthéticienne : {data.staff}.</Text>
+
+      {data.offer && (
+        <Text style={styles.h3}>
+          Client : {data.offer.firstname} {data.offer.lastname}.
+        </Text>
+      )}
     </View>
   );
 };
@@ -42,12 +55,25 @@ const styles = StyleSheet.create({
     height: 20,
   },
 
+  ctn_h1: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
   h1: {
     fontWeight: "400",
     fontSize: 18,
+    marginRight: 5,
+    textDecorationLine: "underline",
   },
 
   h2: {
+    fontWeight: "400",
+    fontSize: 18,
+    textDecorationLine: "underline",
+  },
+
+  h3: {
     marginTop: 5,
     fontWeight: "200",
     fontSize: 16,

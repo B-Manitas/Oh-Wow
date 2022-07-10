@@ -45,6 +45,14 @@ export default class CDate extends Date {
     return new CDate(date.getFullYear(), date.getMonth(), date.getDate());
   }
 
+  getFirstDate() {
+    return new CDate(this.getFullYear(), this.getMonth(), 1);
+  }
+
+  getLastDate() {
+    return new CDate(this.getFullYear(), this.getMonth() + 1, 0);
+  }
+
   getTimestamp() {
     return Math.floor(super.getTime() / this.#DAY_MS);
   }
@@ -85,7 +93,7 @@ export default class CDate extends Date {
   }
 
   isSameDate(date) {
-    date = new CDate(date);
+    date = date instanceof CDate ? date : new CDate(date);
     return (
       this.getDate() === date.getDate() &&
       this.getMonth() === date.getMonth() &&

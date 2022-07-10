@@ -21,10 +21,10 @@ const Home = ({ navigation }) => {
         <Splash setShowSplash={setShowSplash} setService={setService} />
       )}
       <Header title={"Oh Wow"} type={"menu"} navigation={navigation} />
-
+      
       <FlatList
         extraData={services}
-        data={services}
+        data={services.filter((s) => s.is_trend)}
         keyExtractor={(item, id) => item._id}
         renderItem={(item) => (
           <ServiceLarge data={item.item} navigation={navigation} />

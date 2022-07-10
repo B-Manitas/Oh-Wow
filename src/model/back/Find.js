@@ -1,5 +1,6 @@
 import _ from "lodash";
 import Utils from "../Utils";
+import CDate from "../utils/CDate";
 import { STAFF, SALON, SERVICE, USER, ACCESS, APPT } from "./Collection";
 import { Request } from "./Request";
 
@@ -34,6 +35,13 @@ export class Find extends Request {
         $unwind: "$user",
       },
       { $match: { is_admin: false } },
+      {
+        $project: {
+          id_salon: 1,
+          firstname: "$user.firstname",
+          lastname: "$user.lastname",
+        },
+      },
     ]);
 
     return resp;
@@ -94,8 +102,13 @@ export class Find extends Request {
     return resp;
   }
 
-  async allAppointments() {
+  async allAppointments(id_staff, date_str, date_end) {
+    const staff_mathch = id_staff
+      ? { $match: { id_staff, date: { $gte: date_str, $lt: date_end } } }
+      : { $match: { date: { $gte: date_str, $lt: date_end } } };
+
     return await this.aggregate(APPT, [
+      staff_mathch,
       {
         $lookup: {
           from: SERVICE,
@@ -114,6 +127,48 @@ export class Find extends Request {
       },
       { $unwind: "$service" },
       { $unwind: "$user" },
+    ]);
+  }
+
+  async aptUpcoming(id) {
+    return await this.aggregate(APPT, [
+      { $match: { id_user: id, date: { $gte: new CDate().getTimestamp() } } },
+      {
+        $lookup: {
+          from: SALON,
+          localField: "id_salon",
+          foreignField: "_id",
+          as: "salon",
+        },
+      },
+      {
+        $lookup: {
+          from: SERVICE,
+          localField: "id_service",
+          foreignField: "_id",
+          as: "service",
+        },
+      },
+      {
+        $lookup: {
+          from: USER,
+          localField: "id_staff",
+          foreignField: "_id",
+          as: "staff",
+        },
+      },
+      { $unwind: "$salon" },
+      { $unwind: "$staff" },
+      { $unwind: "$service" },
+      {
+        $project: {
+          date: 1,
+          offer: 1,
+          salon: "$salon.name",
+          service: "$service.name",
+          staff: "$staff.firstname",
+        },
+      },
     ]);
   }
 }

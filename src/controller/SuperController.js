@@ -32,7 +32,7 @@ export class SuperController {
     return this.this_is_connected && this.this_user_access.status == ADMIN;
   }
 
-  get this_is_employee() {
+  get this_is_staff() {
     return this.this_is_connected && this.this_user_access.status == EMPLOYEE;
   }
 }

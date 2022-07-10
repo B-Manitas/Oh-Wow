@@ -19,7 +19,7 @@ const Day = ({ day, date, onPressDay }) => {
   };
 
   if (!day) params = { ...params, colors: "#fff", enabled: false };
-  else if (!is_today && !day_date.isPast() && is_selected)
+  else if (!is_today && is_selected && day.is_on)
     params = {
       ...params,
       style_txt_enabled: styles.selected_txt,

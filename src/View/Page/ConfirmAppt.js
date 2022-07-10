@@ -8,16 +8,18 @@ import InputSecondary from "../Input/InputSecondary";
 import Header from "../Parts/Header";
 
 import { controller as ctrl } from "model/Main";
+import CDate from "../../model/utils/CDate";
 
 const ConfirmAppt = ({ navigation, route }) => {
   const service = route.params.service;
   const salon = route.params.salon;
-  const apt_init = route.params.appointment;
+  const apt_init = route.params.apt;
 
-  const [appointment, setApt] = useState(apt_init);
+  const [apt, setApt] = useState(apt_init);
   const [audit, setAudit] = useState(ctrl.fakeAudit(apt_init));
   const [radio, setRadio] = useState(0);
 
+  const apt_date = new CDate(apt.date);
   const radioOffer = (id) => ctrl.onPress.radioOffer(setApt, setRadio, id);
 
   return (
@@ -51,7 +53,7 @@ const ConfirmAppt = ({ navigation, route }) => {
                 maxLength={20}
                 keyboardType={"default"}
                 isValidFormat={audit.offer?.firstname}
-                value={appointment.offer?.firstname}
+                value={apt.offer?.firstname}
                 setValue={(t) =>
                   setApt((p) => ({
                     ...p,
@@ -68,7 +70,7 @@ const ConfirmAppt = ({ navigation, route }) => {
                 maxLength={20}
                 keyboardType={"default"}
                 isValidFormat={audit.offer?.lastname}
-                value={appointment.offer?.lastname}
+                value={apt.offer?.lastname}
                 setValue={(t) =>
                   setApt((p) => ({
                     ...p,
@@ -86,7 +88,7 @@ const ConfirmAppt = ({ navigation, route }) => {
                 keyboardType={"phone-pad"}
                 secureTextEntry={false}
                 isValidFormat={audit.offer?.phone}
-                value={appointment.offer?.phone}
+                value={apt.offer?.phone}
                 setValue={(t) =>
                   setApt((p) => ({
                     ...p,
@@ -107,13 +109,13 @@ const ConfirmAppt = ({ navigation, route }) => {
         </View>
 
         <Primary
-          text={`Valider le RDV le ${appointment.date.toDateString(
+          text={`Valider le RDV le ${apt_date.toDateString(
             true
-          )} à ${appointment.date.toTimeString()}`}
+          )} à ${apt_date.toTimeString()}`}
           height={10}
           font_size={18}
           style={styles.button_appt}
-          func={() => ctrl.add.appointment(navigation, appointment, setAudit)}
+          func={() => ctrl.add.appointment(navigation, apt, setAudit)}
           is_active={true}
         />
       </View>

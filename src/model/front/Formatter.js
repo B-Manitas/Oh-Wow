@@ -39,6 +39,10 @@ export class Formatter extends Schema {
       case "is_trend":
       case "name":
       case "date":
+      case "am_on":
+      case "am_off":
+      case "pm_on":
+      case "pm_off":
       case "description":
         return dict[key];
       case "offer":

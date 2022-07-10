@@ -10,17 +10,21 @@ ConsultService
 ☐ Afficher en tendance seulement pour admin
 ☐ Prendre rdv uniquement pour user connecter
 ☐ Service disponnible dans un salon
+☐ BUGS lorsqu'on modifie le service à cause de addUserStore 
 
 Client
 ☐ Ajouter confirmation du set admin et employer
 
 Settings
-☐ Faire en sorte qu'un employer ne puisse pas changer son mdp et supprimer son compte.
+☐ Faire en sorte qu'un employer ne puisse pas changer son mdp et supprimer son compte ?
 ☐ Un admin puisse deconnecter un employer de force
+
+CAS LIMITE
+☐ lookup request après une supression
 
 Question Générale
 ☐ Y a t-il un mail dans les contacts ?
     => Si oui, un pour chaque salon ?
 ☐ Un numero de tel par salon ou pour l'app ?
 ☐ Quels est l'index des numéros de teléphone ?
-☐ A quoi correspond le menu catalogue ?
+☐ Que faire si supresion d'un staff
