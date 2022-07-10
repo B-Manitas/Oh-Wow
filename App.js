@@ -28,6 +28,7 @@ import Settings from "./src/View/Page/Settings";
 import SettingsApp from "./src/View/Page/SettingsApp";
 import Contact from "./src/View/Page/Contact";
 import Client from "./src/View/Page/Client";
+import Plannings from "./src/View/Page/Plannings";
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +60,7 @@ export default function App() {
             <Stack.Screen name="Authcode" component={Authcode} />
             <Stack.Screen name="ModifyPass" component={ModifyPass} />
             <Stack.Screen name="ValidationMail" component={ValidationMail} />
+            <Stack.Screen name="Plannings" component={Plannings} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

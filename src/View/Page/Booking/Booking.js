@@ -24,7 +24,7 @@ const Booking = ({ navigation, route }) => {
   const [plannings, setPlannings] = useState([]);
 
   const [apt, setApt] = useState(ctrl.frontend.schemaAppointment(id_user));
-  const [date, setDate] = useState(new CDate(2022, 7, 9));
+  const [date, setDate] = useState(CDate.today());
 
   const setAptSalon = (s) => setApt((p) => ({ ...p, id_salon: s._id }));
   const getCalendars = () =>
@@ -33,7 +33,7 @@ const Booking = ({ navigation, route }) => {
   useEffect(() => {
     setCalendar(new Calendar());
     setApt((p) => ({ ...p, id_service: service._id, date: date }));
-    ctrl.get.allSalons(setSalon, setAptSalon);
+    ctrl.get.salon(setSalon, setAptSalon);
   }, []);
 
   useEffect(() => {

@@ -20,6 +20,12 @@ export class Find extends SuperController {
   @Catch
   async allSalons(...funcs) {
     const data = await this.frontend.get.allSalons();
+    funcs.forEach((func) => func(data));
+  }
+
+  @Catch
+  async salon(...funcs) {
+    const data = await this.frontend.get.allSalons();
     funcs.forEach((func) => func(data[0]));
   }
 
@@ -61,5 +67,10 @@ export class Find extends SuperController {
   @Catch
   async appointment(id_salon, id_staff, ...funcs) {
     await this.frontend.get.appointment(id_salon, id_staff, ...funcs);
+  }
+
+  @Catch
+  async plannings(...funcs) {
+    await this.frontend.get.plannings(...funcs);
   }
 }

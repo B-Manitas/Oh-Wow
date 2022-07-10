@@ -46,6 +46,7 @@ export class Schema {
 
   schemaSalon() {
     return {
+      name: "",
       address: "",
       day_off: {
         0: false,

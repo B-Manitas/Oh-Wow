@@ -15,7 +15,7 @@ const NavigationAdmin = ({ navigation }) => {
             text={"Consulter le plannings des réservations"}
             style_container={styles.button_nav}
             style_text={styles.text_nav}
-            func={() => navigation.navigate("AllServices")}
+            func={() => navigation.navigate("Plannings")}
           />
           <Link
             text={"Rechercher un utilisateur"}

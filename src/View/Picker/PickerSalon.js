@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import _ from "lodash";
-import { ItemsStaff } from "../Generator/ItemsStaff";
+import { ItemsSalon } from "../Generator/ItemsSalon";
 
-const PickerEmployee = ({ onChange, value }) => {
+const PickerSalon = ({ value, onChange }) => {
   return (
     <Picker
       style={styles.picker}
@@ -13,23 +13,27 @@ const PickerEmployee = ({ onChange, value }) => {
       selectedValue={value}
       onValueChange={(v) => onChange(v)}
     >
-      {ItemsStaff({onChange})}
+      {ItemsSalon({ onChange })}
     </Picker>
   );
 };
 
-export default PickerEmployee;
+export default PickerSalon;
 
 const styles = StyleSheet.create({
   picker: {
     flex: 2,
   },
-
+  
   item: {
     height: 130,
     fontSize: 15,
     fontWeight: "400",
     marginHorizontal: -5,
     marginVertical: -8,
+    // backgroundColor: "red",
+    marginLeft: -5,
+    // marginRight: -15,
+    // width: 60
   },
 });

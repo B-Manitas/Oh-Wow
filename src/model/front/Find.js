@@ -69,4 +69,16 @@ export class Find extends SuperFrontend {
       funcs.map((func) => func(resp));
     }
   }
+
+  async appointment(id_salon, id_staff, ...funcs) {
+    if (id_salon != "" && id_staff != "") {
+      var resp = await this.backend.get.appointment(id_salon, id_staff);
+      funcs.map((func) => func(resp));
+    }
+  }
+
+  async plannings(...funcs) {
+    const resp = await this.backend.get.allAppointments();
+    funcs.map((func) => func(resp));
+  }
 }

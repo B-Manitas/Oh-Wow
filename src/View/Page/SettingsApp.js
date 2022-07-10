@@ -18,7 +18,7 @@ const SettingsApp = ({ navigation }) => {
   const [audit, setAudit] = useState(controller.fakeAudit(schema));
 
   useEffect(() => {
-    controller.get.allSalons(setData, setDataInit);
+    controller.get.salon(setData, setDataInit);
   }, []);
 
   return (

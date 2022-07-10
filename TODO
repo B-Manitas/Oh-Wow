@@ -9,6 +9,7 @@ ConsultService
 ☐ La durée d'un service doit pouvoir rentrer dans la matinée ou l'après-midi
 ☐ Afficher en tendance seulement pour admin
 ☐ Prendre rdv uniquement pour user connecter
+☐ Service disponnible dans un salon
 
 Client
 ☐ Ajouter confirmation du set admin et employer

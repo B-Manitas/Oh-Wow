@@ -126,4 +126,21 @@ export default class Calendar {
 
     return this.#days_list;
   }
+
+  getPlanning(date, plannings) {
+    this.#bookings = plannings;
+
+    this.setDate(date);
+    this.initCalendars();
+
+    for (var day = 0; day < date.getMonthLength(); day++) {
+      const date = new CDate(this.#date.year, this.#date.month, day + 1);
+
+      const apt = this.#bookings?.find((b) => date.isSameDate(b.date));
+      const shift = CDate.getFirstDay(date.year, date.month);
+      this.#days_list[shift + day] = { date, is_on: apt != undefined };
+    }
+
+    return this.#days_list;
+  }
 }

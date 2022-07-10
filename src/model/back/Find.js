@@ -93,4 +93,27 @@ export class Find extends Request {
 
     return resp;
   }
+
+  async allAppointments() {
+    return await this.aggregate(APPT, [
+      {
+        $lookup: {
+          from: SERVICE,
+          localField: "id_service",
+          foreignField: "_id",
+          as: "service",
+        },
+      },
+      {
+        $lookup: {
+          from: USER,
+          localField: "id_user",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      { $unwind: "$service" },
+      { $unwind: "$user" },
+    ]);
+  }
 }

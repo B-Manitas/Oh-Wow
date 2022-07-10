@@ -14,7 +14,7 @@ const Client = ({ navigation, route }) => {
   const [salon, setSalon] = useState([]);
 
   useEffect(() => {
-    controller.get.allSalons(setSalon);
+    controller.get.salon(setSalon);
   }, []);
 
   return (

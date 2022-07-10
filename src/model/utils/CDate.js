@@ -70,6 +70,10 @@ export default class CDate extends Date {
     return this;
   }
 
+  tomorow() {
+    return new CDate(this.getFullYear(), this.getMonth(), this.getDate() + 1);
+  }
+
   isPast() {
     return this.getTimestamp() < new CDate().getTimestamp();
   }
@@ -81,8 +85,8 @@ export default class CDate extends Date {
   }
 
   isSameDate(date) {
+    date = new CDate(date);
     return (
-      date instanceof CDate &&
       this.getDate() === date.getDate() &&
       this.getMonth() === date.getMonth() &&
       this.getFullYear() === date.getFullYear()
@@ -94,8 +98,8 @@ export default class CDate extends Date {
   }
 
   toTimeString() {
-    const hours = this.getMinutes().toString().padStart(2, "0");
-    const minute = this.getHours();
+    const minute = this.getMinutes().toString().padStart(2, "0");
+    const hours = this.getHours();
     return `${hours}h${minute}`;
   }
 

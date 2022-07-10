@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 
 import DaysList from "../../Generator/DaysList";
 import PickerEmployee from "../../Picker/PickerEmployee";
+import PickerSalon from "../../Picker/PickerSalon";
 import Picker from "../../Picker/Picker";
 import { MONTHS, YEARS } from "../../../constants/DAYS";
 
