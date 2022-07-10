@@ -75,7 +75,7 @@ export class Find extends SuperController {
   }
 
   @Catch
-  async aptUpcoming(id, ...funcs) {
-    await this.frontend.get.aptUpcoming(id, ...funcs);
+  async userApt(id, is_historic, ...funcs) {
+    await this.frontend.get.userApt(id, is_historic, ...funcs);
   }
 }

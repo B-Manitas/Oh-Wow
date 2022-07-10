@@ -8,10 +8,11 @@ export const ItemsStaff = ({ onChange, all }) => {
   const [is_init, setIsInit] = useState(true);
 
   useEffect(() => {
-    const setDefaultValue = (staff) => onChange(staff[0]._id);
-
     if (all) controller.get.allEmployed(setStaff);
-    else controller.get.allEmployed(setStaff, setDefaultValue);
+    else {
+      const setDefaultValue = (staff) => onChange(staff[0]._id);
+      controller.get.allEmployed(setStaff, setDefaultValue);
+    }
   }, []);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export const ItemsStaff = ({ onChange, all }) => {
   if (staff == undefined)
     return <Picker.Item key={0} value={null} label={"Chargement..."} />;
   else
-    return staff.map((item, id) => (
-      <Picker.Item key={id} value={item._id} label={item.firstname} />
-    ));
+    return staff.map((item, id) => {
+      return <Picker.Item key={id} value={item._id} label={item.firstname} />;
+    });
 };

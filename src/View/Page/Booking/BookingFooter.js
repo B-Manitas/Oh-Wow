@@ -6,7 +6,6 @@ import Primary from "../../Buttons/Primary";
 import HoursList from "../../Generator/HoursList";
 
 const BookingFooter = ({ date, calendar, navigation, onPress, data }) => {
-  // console.log(data.appointment.date);
   const date_appointment = new CDate(data.apt.date);
 
   return (

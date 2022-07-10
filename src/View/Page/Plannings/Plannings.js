@@ -18,7 +18,7 @@ const Plannings = ({ navigation }) => {
   const [schedule, setSchedule] = useState(undefined);
   const [plannings, setPlannings] = useState([]);
   const [selected_plannings, setSelectedPlanning] = useState([]);
-  const [staff, setStaff] = useState([]);
+  const [staff, setStaff] = useState(ctrl.this_user_data._id);
   const [is_active, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -28,11 +28,9 @@ const Plannings = ({ navigation }) => {
   useEffect(() => {
     const date_str = date.getFirstDate().getTimestamp();
     const date_end = date.getLastDate().getTimestamp();
-    const getPlanning = (id_staff) =>
-      ctrl.get.plannings(id_staff, date_str, date_end, setPlannings);
 
-    setStaff(ctrl.this_user_data._id);
-    getPlanning(staff);
+    if (ctrl.this_is_staff) setStaff(ctrl.this_user_data._id);
+    ctrl.get.plannings(staff, date_str, date_end, setPlannings);
   }, [staff]);
 
   useEffect(() => {
@@ -76,14 +74,21 @@ const Plannings = ({ navigation }) => {
         {selected_plannings.map((apt) => (
           <View key={apt._id} style={styles.ctn_apt}>
             <Text style={styles.apt_h1}>
-              {new CDate(apt.date).toTimeString()} - {apt?.service.name}
+              {new CDate(apt.date).toTimeString()} - {apt.service}
             </Text>
             <View style={styles.apt_h2}>
               <Text>
-                Clients: {apt?.user.firstname} {apt?.user.lastname} - Tél:{" "}
-                {apt?.user.phone}
+                Clients: {apt.firstname} {apt.lastname} - Tél: {apt.phone}
               </Text>
             </View>
+            {apt.offer && (
+              <View style={styles.apt_h2}>
+                <Text>
+                  Pour: {apt.offer.firstname} {apt.offer.lastname} - Tél:{" "}
+                  {apt.offer.phone}
+                </Text>
+              </View>
+            )}
           </View>
         ))}
       </SwipeablePanel>
@@ -138,5 +143,6 @@ const styles = StyleSheet.create({
   apt_h2: {
     fontSize: 15,
     fontWeight: "300",
+    paddingTop: 5,
   },
 });

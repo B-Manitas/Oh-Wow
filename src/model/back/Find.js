@@ -127,12 +127,26 @@ export class Find extends Request {
       },
       { $unwind: "$service" },
       { $unwind: "$user" },
+      {
+        $project: {
+          date: 1,
+          offer: 1,
+          service: "$service.name",
+          firstname: "$user.firstname",
+          lastname: "$user.lastname",
+          phone: "$user.phone",
+        },
+      },
     ]);
   }
 
-  async aptUpcoming(id) {
+  async userApt(id, is_historic) {
+    const date = is_historic
+      ? { $gte: new CDate().getTimestamp() }
+      : { $lt: new CDate().getTimestamp() };
+
     return await this.aggregate(APPT, [
-      { $match: { id_user: id, date: { $gte: new CDate().getTimestamp() } } },
+      { $match: { id_user: id, date } },
       {
         $lookup: {
           from: SALON,
