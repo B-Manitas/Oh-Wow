@@ -5,14 +5,15 @@ import Utils from "model/Utils";
 import Catch from "exceptions/ErrorsCatcher";
 import { SuperController } from "./SuperController";
 import { addService } from "store/ActionsCreator";
+import { updateService } from "store/ActionsCreator";
 
 export class OnClose extends SuperController {
   @Catch
   async service(data, data_init, navigation, setAudit) {
     if (!Utils.isEquals(data, data_init) && this.this_is_admin) {
-      const resp = await this.frontend.update.service(data, setAudit);
-
-      if (resp?.upsertedId) addService(data);
+      await this.frontend.update.service(data, setAudit);
+      // addService(data);
+      updateService(data);
     }
 
     navigation.goBack();

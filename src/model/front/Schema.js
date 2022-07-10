@@ -75,6 +75,7 @@ export class Schema {
       price: 0,
       duration: 0,
       is_trend: false,
+      is_hidden: false,
       img: "data:image/jpg;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
     };
   }

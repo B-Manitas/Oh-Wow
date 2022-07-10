@@ -25,8 +25,6 @@ const Plannings = ({ navigation }) => {
     setCalendar(new Calendar());
   }, []);
 
-  console.log(staff);
-
   useEffect(() => {
     const date_str = date.getFirstDate().getTimestamp();
     const date_end = date.getLastDate().getTimestamp();

@@ -10,6 +10,7 @@ import {
   FETCH_SERVICES,
   DELETE_SERVICES,
   ADD_SERVICES,
+  UPDATE_SERVICES,
 } from "./ActionsTypes";
 
 /**
@@ -51,6 +52,15 @@ export const serviceReducer = (state = state_service, action) => {
 
     case ADD_SERVICES:
       return [...state, action.payload.service];
+
+    case UPDATE_SERVICES:
+      const id = state.findIndex((s) => s._id === action.payload.service._id);
+      if (id == -1) return [...state, action.payload.service];
+      else
+        return state.map((item, i) => {
+          if (id == i) return action.payload.service;
+          else return item;
+        });
 
     case DELETE_SERVICES:
       return state.filter((item) => item._id !== action.payload.id);

@@ -10,6 +10,7 @@ import {
   FETCH_SERVICES,
   UPDATE_STATUS,
   DEFAULT_STATUS,
+  UPDATE_SERVICES,
 } from "./ActionsTypes";
 
 /**
@@ -52,4 +53,8 @@ export const deleteService = (id) => {
 
 export const addService = (service) => {
   creator(ADD_SERVICES, { service });
+};
+
+export const updateService = (service) => {
+  creator(UPDATE_SERVICES, { service });
 };
