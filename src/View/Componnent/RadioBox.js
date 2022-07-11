@@ -21,7 +21,7 @@ const RadioBox = ({
         id == id_selected && style_active,
       ]}
     >
-      <Text style={style_txt}>{text}</Text>
+      <Text adjustsFontSizeToFit numberOfLines={1} style={style_txt} >{text}</Text>
     </Pressable>
   );
 };

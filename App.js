@@ -29,6 +29,7 @@ import SettingsApp from "./src/View/Page/SettingsApp";
 import Contact from "./src/View/Page/Contact";
 import Client from "./src/View/Page/Client";
 import Plannings from "./src/View/Page/Plannings/Plannings";
+import Salons from "./src/View/Page/Salons";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,9 +39,10 @@ export default function App() {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Salons"
             screenOptions={{ headerShown: false }}
           >
+            <Stack.Screen name="Salon" component={Salons} />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Navigation" component={Navigation} />
             <Stack.Screen name="Login" component={Login} />

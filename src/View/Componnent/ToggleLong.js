@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 18,
+    fontSize: 20,
   },
 
   switch: {

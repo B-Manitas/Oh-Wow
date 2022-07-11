@@ -28,4 +28,11 @@ export class Update extends SuperController {
     if (!result.cancelled)
       return func((p) => ({ ...p, img: base64 + result.base64 }));
   }
+
+  @Catch
+  async salon(data, data_init, setAudit) {
+    if (!Utils.isEquals(data, data_init))
+      await this.frontend.update.salon(data, setAudit);
+    Alert.alert("Modifications sauvegardées");
+  }
 }

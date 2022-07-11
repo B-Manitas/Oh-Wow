@@ -24,7 +24,7 @@ const CheckBoxText = ({
       ]}
     >
       <Text
-        style={state && { color: color_txt_active }}
+        style={[styles.text, state && { color: color_txt_active }]}
         adjustsFontSizeToFit={true}
         numberOfLines={1}
       >
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 3,
     borderWidth: 2,
-    backgroundColor: "#fafafa",
+    borderColor: "#D0D0D0",
+    backgroundColor: "#fff",
     width: 30,
     height: 30,
     justifyContent: "center",
@@ -51,11 +52,14 @@ const styles = StyleSheet.create({
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    shadowOpacity: 0.18,
+    shadowRadius: 1.0,
 
-    elevation: 2,
+    elevation: 1,
   },
 
-  text: {},
+  text: {
+    color: "#474747",
+    fontWeight: "600",
+  },
 });

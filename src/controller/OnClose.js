@@ -12,7 +12,6 @@ export class OnClose extends SuperController {
   async service(data, data_init, navigation, setAudit) {
     if (!Utils.isEquals(data, data_init) && this.this_is_admin) {
       await this.frontend.update.service(data, setAudit);
-      // addService(data);
       updateService(data);
     }
 

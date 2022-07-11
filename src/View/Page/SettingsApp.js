@@ -42,7 +42,7 @@ const SettingsApp = ({ navigation }) => {
       />
       <ScrollView style={styles.container}>
         <View style={styles.parts}>
-          <Text style={styles.h1}>Jours de fermeture du data</Text>
+          <Text style={styles.h1}>Jours de fermeture</Text>
           <View style={styles.container_days}>
             <DaysCheckBoxList
               value={data.day_off}
@@ -54,7 +54,7 @@ const SettingsApp = ({ navigation }) => {
         </View>
 
         <View style={styles.parts}>
-          <Text style={styles.h1}>Date de fermeture du data</Text>
+          <Text style={styles.h1}>Date de fermeture</Text>
           <TextInput
             style={[styles.input, !audit.date_off && { borderColor: "red" }]}
             placeholder={"14/07;25/12"}

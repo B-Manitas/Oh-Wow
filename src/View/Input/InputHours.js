@@ -8,27 +8,26 @@ const InputHours = ({
   value_2,
   func_1,
   func_2,
-  isValidFormat_1,
-  isValidFormat_2,
+  is_bad_format_1,
+  is_bad_format_2,
 }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.h1}>{text}</Text>
-      <View style={styles.container_inputs}>
+      <Text style={styles.text}>{text}</Text>
+      <View style={styles.ctn_input}>
         <TextInput
+          style={styles.input}
           placeholder={plh_1}
-          style={[styles.input, !isValidFormat_1 && { color: "red" }]}
-          maxLength={5}
+          maxLength={20}
           value={value_1}
-          onChangeText={(t) => func_1(t)}
+          onChangeText={func_1}
         />
-        <Text style={styles.input}>à</Text>
         <TextInput
+          style={styles.input}
           placeholder={plh_2}
-          style={[styles.input, !isValidFormat_2 && { color: "red" }]}
-          maxLength={5}
+          maxLength={20}
           value={value_2}
-          onChangeText={(t) => func_2(t)}
+          onChangeText={func_2}
         />
       </View>
     </View>
@@ -44,19 +43,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  h1: {
-    fontSize: 18,
+  text: {
+    fontSize: 20,
   },
 
-  container_inputs: {
+  ctn_input: {
     flexDirection: "row",
     position: "absolute",
-    right: 10,
+    right: 0,
   },
 
   input: {
-    marginHorizontal: 5,
-    fontSize: 18,
-    fontWeight: "400",
+    fontSize: 16,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    minWidth: "20%",
+    backgroundColor: "#f5f5f5",
+    borderRadius: 5,
+    marginLeft: 10,
   },
 });

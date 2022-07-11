@@ -3,10 +3,10 @@ import { Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import { ICON } from "constants/IMAGES";
 
-const Chevron = ({ text, func }) => {
+const Chevron = ({ text, func, color, fontWeight }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={func}>
-      <Text style={styles.text}>{text}</Text>
+      <Text style={[styles.text, { color, fontWeight }]}>{text}</Text>
       <Image source={ICON.chevron} style={styles.img} />
     </TouchableOpacity>
   );
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 18,
+    fontSize: 20,
   },
 });

@@ -25,4 +25,13 @@ export class Delete extends SuperController {
     navigation.navigate("AllServices");
     Alert.alert(`The service has been successfully removed.`);
   }
+
+  @Catch
+  async salon(id, salons, salons_init, setSalons, setSelect) {
+    if (salons.length > salons_init.length && id === salons.length - 1)
+      setSalons(salons.filter((_, i) => i !== id));
+    else this.frontend.delete.salon(salons[id]._id);
+
+    setSelect(id - 1);
+  }
 }
