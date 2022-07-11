@@ -49,16 +49,16 @@ export class Auditor extends IsFormat {
         return this.isDayOff(data[key]);
       case "date_off":
         return this.isDateOff(data[key]);
-      // case "am_on":
-      // case "am_off":
-      // case "pm_on":
-      // case "pm_off":
-      //   return this.isHours(data[key]);
+      case "am_on":
+      case "am_off":
+      case "pm_on":
+      case "pm_off":
+      case "duration":
+        return this.isHours(data[key]);
       case "is_opened":
       case "is_trend":
         return this.isBool(data[key]);
       case "price":
-      case "duration":
         return this.isNumber(data[key]);
       case "offer":
         return this.isOffer(data[key]);

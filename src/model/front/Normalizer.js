@@ -2,19 +2,19 @@
 import { Schema } from "./Schema";
 
 /**
- * The Formatter class is used to format the data entered by the user before sending 
+ * The Normalizer class is used to format the data entered by the user before sending 
  * it to the database.
 
  * @methods {@link formatDefaultValue}, {@link formatDictByKey}, {@link formatDict}, 
  * {@link formatDefaultValue}, {@link formatLastname}, {@link formatFirstname}.
  */
-export class Formatter extends Schema {
+export class Normalizer extends Schema {
   /**
    * Format general value.
    * @param {String} val The value to clean.
    * @returns The value in lowercase and without leading and ending white space.
    */
-  formatDefaultValue(value) {
+  defaultValue(value) {
     return value.toString().trim().toLowerCase();
   }
 
@@ -25,30 +25,40 @@ export class Formatter extends Schema {
    * @returns The value formetted.
    */
   formatDictByKey(dict, key) {
+    const value = dict[key];
+
     switch (key) {
       case "lastname":
-        return this.formatLastname(dict[key]);
+        return this.lastname(value);
+
       case "firstname":
-        return this.formatFirstname(dict[key]);
-      case "day_off":
-      case "is_opened":
-      case "img":
-      case "price":
+        return this.firstname(value);
+
+      case "offer":
+        return this.offer(value);
+
       case "duration":
-      case "password":
-      case "is_trend":
-      case "name":
-      case "date":
       case "am_on":
       case "am_off":
       case "pm_on":
       case "pm_off":
+        return this.time(value);
+
+      case "day_off":
+      case "is_opened":
+      case "img":
+      case "password":
+      case "is_trend":
+      case "name":
+      case "date":
       case "description":
-        return dict[key];
-      case "offer":
-        return this.formatOffer(dict[key]);
+        return value;
+
+      case "price":
+        return this.number(value);
+
       default:
-        return this.formatDefaultValue(dict[key]);
+        return this.defaultValue(dict[key]);
     }
   }
 
@@ -69,7 +79,7 @@ export class Formatter extends Schema {
    * @param {String} lastname The lastname string.
    * @returns The value in uppercase and without leading and ending white space.
    */
-  formatLastname(lastname) {
+  lastname(lastname) {
     return lastname.trim().toUpperCase();
   }
 
@@ -78,11 +88,11 @@ export class Formatter extends Schema {
    * @param {String} args The firstname value.
    * @returns The value in capitalize and without leading and ending white space.
    */
-  formatFirstname([first, ...rest]) {
+  firstname([first, ...rest]) {
     return [first.toUpperCase(), ...rest].join("").trim();
   }
 
-  formatOffer(offer) {
+  offer(offer) {
     if (offer == null) return null;
     else
       return {
@@ -90,5 +100,17 @@ export class Formatter extends Schema {
         firstname: this.formatFirstname(offer.firstname),
         lastname: this.formatLastname(offer.lastname),
       };
+  }
+
+  time(time) {
+    if (typeof time === "number") return time;
+
+    time = time.replace(/[^h0-9]/g, "");
+    const [minutes, hours] = time.split("h").reverse();
+    return 60 * parseInt(hours || 0) + parseInt(minutes);
+  }
+
+  number(value) {
+    return parseInt(value);
   }
 }

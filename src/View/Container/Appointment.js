@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { SERVICES } from "constants/DATA";
 import { ICON } from "constants/IMAGES";
 import CDate from "../../model/utils/CDate";
 

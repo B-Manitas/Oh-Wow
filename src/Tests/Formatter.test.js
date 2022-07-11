@@ -1,13 +1,13 @@
-import { Formatter } from "model/front/Formatter";
+import { Normalizer } from "model/front/Normalizer";
 
-const formatter = new Formatter();
+const normalizer = new Normalizer();
 
 test("formattingFirstname", () => {
-  expect(formatter.formatFirstname("user")).toEqual("User");
-  expect(formatter.formatFirstname("user name")).toEqual("User name");
+  expect(normalizer.firstname("user")).toEqual("User");
+  expect(normalizer.firstname("user name")).toEqual("User name");
 });
 
 test("formattingLastname", () => {
-  expect(formatter.formatLastname("user")).toEqual("USER");
-  expect(formatter.formatLastname("user name")).toEqual("USER NAME");
+  expect(normalizer.lastname("user")).toEqual("USER");
+  expect(normalizer.lastname("user name")).toEqual("USER NAME");
 });

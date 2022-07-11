@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 
-const ServiceInfo = ({ text, value, unit, enabled, flex, setValue }) => {
+const ServiceInfo = ({ text, value, unit, enabled, flex, setValue, type }) => {
   return (
     <View style={[styles.container, { flex }]}>
       <Text style={styles.h2}>{text}</Text>
@@ -9,10 +9,10 @@ const ServiceInfo = ({ text, value, unit, enabled, flex, setValue }) => {
         <TextInput
           style={styles.h1}
           value={value}
-          maxLength={4}
+          maxLength={5}
           editable={enabled}
           returnKeyType={"done"}
-          keyboardType={"number-pad"}
+          keyboardType={type}
           allowFontScaling={true}
           onChangeText={(t) => setValue(t)}
         />
@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 18,
     paddingTop: 5,
+    minWidth: 30,
+    textAlign: "center"
   },
 
   h2: {

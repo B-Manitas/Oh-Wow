@@ -1,21 +1,11 @@
-import Calendars from "model/Calendars";
 import { IsFormat } from "../model/front/IsFormat";
+import CDate from "../model/utils/CDate";
 
 const is_format = new IsFormat();
 
 test("isName", () => {
   expect(is_format.isName("")).toBe(false);
   expect(is_format.isName("user")).toBe(true);
-});
-
-test("isDate", () => {
-  expect(is_format.isDate("")).toBe(false);
-  expect(is_format.isDate("date")).toBe(false);
-  expect(is_format.isDate(Calendars.ISOToday())).toBe(false);
-  expect(is_format.isDate(Calendars.ISOTomorrow().toString())).toBe(false);
-  expect(is_format.isDate(Calendars.ISOYesterday().toString())).toBe(true);
-  expect(is_format.isDate("01-01-2000")).toBe(false);
-  expect(is_format.isDate("2000-01-01")).toBe(true);
 });
 
 test("isPassword", () => {
@@ -43,9 +33,9 @@ test("isPhone", () => {
   expect(is_format.isPhone("")).toBe(false);
   expect(is_format.isPhone("phone")).toBe(false);
   expect(is_format.isPhone("070000")).toBe(false);
-  expect(is_format.isPhone("0700000000")).toBe(true);
-  // expect(is_format.isPhone("+216O700000000")).toBe(true);
-  // expect(is_format.isPhone("+33O700000000")).toBe(true);
+  expect(is_format.isPhone("07.00.00.00 00")).toBe(false);
+  expect(is_format.isPhone("07.00.00.00.a0")).toBe(false);
+  expect(is_format.isPhone("07.00.00.00.00")).toBe(true);
 });
 
 test("isAuthcode", () => {

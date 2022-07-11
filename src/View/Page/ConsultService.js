@@ -15,13 +15,22 @@ import ServiceInfo from "../Container/ServiceInfo";
 import Absolute from "../Buttons/Absolute";
 import CheckBoxText from "../Componnent/CheckBoxText";
 
-import { controller } from "model/Main";
+import { controller as ctrl } from "model/Main";
+import CDate from "../../model/utils/CDate";
 
 const ConsultService = ({ navigation, route }) => {
-  const is_admin = controller.this_is_admin;
+  const is_admin = ctrl.this_is_admin;
   const service_init = route.params.data;
   const [service, setService] = useState(service_init);
-  const [audit, setAudit] = useState(controller.fakeAudit(service_init));
+  const [audit, setAudit] = useState(ctrl.fakeAudit(service_init));
+
+  const formatDur = (dur) =>
+    typeof dur === "number" ? CDate.toTimeString(dur) : dur;
+
+  const setDur = (t) => setService((p) => ({ ...p, duration: t }));
+  const setPrice = (t) => setService((p) => ({ ...p, price: t }));
+  const onClose = () =>
+    ctrl.onClose.service(service, service_init, navigation, setAudit);
 
   return (
     <Page>
@@ -32,14 +41,7 @@ const ConsultService = ({ navigation, route }) => {
         navigation={navigation}
         setValue={(t) => setService((p) => ({ ...p, name: t }))}
         is_valid={audit.name}
-        func={() =>
-          controller.onClose.service(
-            service,
-            service_init,
-            navigation,
-            setAudit
-          )
-        }
+        func={onClose}
       />
 
       <ScrollView style={styles.main_container}>
@@ -54,7 +56,7 @@ const ConsultService = ({ navigation, route }) => {
               top={10}
               left={10}
               ctn_style={styles.btn_edit}
-              func={() => controller.update.image(setService)}
+              func={() => ctrl.update.image(setService)}
             />
           )}
         </View>
@@ -62,23 +64,21 @@ const ConsultService = ({ navigation, route }) => {
         <View style={styles.container_info}>
           <ServiceInfo
             text={"Durée"}
-            unit={"min"}
             enabled={true}
-            value={service.duration.toString()}
-            flex={1}
+            value={formatDur(service.duration)}
+            flex={1} // backgroundColor: "#f5f5f5",
             width={"25%"}
-            setValue={(t) =>
-              setService((p) => ({ ...p, duration: parseInt(t) }))
-            }
+            setValue={(t) => ctrl.onFormat.time(t, setDur)}
           />
           <ServiceInfo
             text={"Tarifs"}
+            type={"number-pad"}
             unit={"€"}
             enabled={true}
             value={service.price.toString()}
             flex={1}
             width={"25%"}
-            setValue={(t) => setService((p) => ({ ...p, price: parseInt(t) }))}
+            setValue={(t) => ctrl.onFormat.price(t, setPrice)}
           />
         </View>
 
@@ -117,7 +117,7 @@ const ConsultService = ({ navigation, route }) => {
           img={ICON.trash}
           bottom={30}
           left={30}
-          func={() => controller.delete.service(service._id, navigation)}
+          func={() => ctrl.delete.service(service._id, navigation)}
         />
       )}
       <Absolute

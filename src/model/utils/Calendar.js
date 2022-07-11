@@ -118,7 +118,7 @@ export default class Calendar {
 
       this.#days_list[shift + day] = {
         date,
-        is_on: is_date_on && am.is_on && pm.is_on,
+        is_on: is_date_on && (am.is_on || pm.is_on),
         am_hours: am.hours,
         pm_hours: pm.hours,
       };

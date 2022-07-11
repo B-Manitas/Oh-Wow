@@ -9,7 +9,13 @@ const NavigationConnect = ({ navigation }) => {
     <View>
       <View style={styles.nav}>
         <Link
-          text={"Notre catalogues"}
+          text={"Accueil"}
+          style_container={styles.button_nav}
+          style_text={styles.text_nav}
+          func={() => navigation.navigate("Home")}
+        />
+        <Link
+          text={"Notre catalogue"}
           style_container={styles.button_nav}
           style_text={styles.text_nav}
           func={() => navigation.navigate("AllServices")}

@@ -8,9 +8,12 @@ ConsultService
 ☐ Ajouter les salons ayant cette prestation
 ☐ La durée d'un service doit pouvoir rentrer dans la matinée ou l'après-midi
 ☐ Afficher en tendance seulement pour admin
-☐ Prendre rdv uniquement pour user connecter
+✔ Prendre rdv uniquement pour user connecter @done(22-07-11 13:59)
 ☐ Service disponnible dans un salon
-☐ BUGS lorsqu'on modifie le service à cause de addUserStore 
+✔ BUGS lorsqu'on modifie le service à cause de addUserStore @done(22-07-11 13:59) @lasted(35s)
+
+Staff
+☐ Ajouter toggle droit de supression
 
 Client
 ☐ Ajouter confirmation du set admin et employer

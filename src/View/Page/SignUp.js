@@ -10,13 +10,15 @@ import Link from "../Buttons/Link";
 import InputPrimary from "../Input/InputPrimary";
 import CheckBoxText from "../Componnent/CheckBoxText";
 
-import { controller } from "model/Main";
+import { controller as ctrl } from "model/Main";
 
 const SignUp = ({ navigation }) => {
-  const schema_user = controller.frontend.schemaUser();
+  const schema_user = ctrl.frontend.schemaUser();
   const [is_CGU_accepted, setIsCGUAccepted] = useState(false);
   const [data, setData] = useState(schema_user);
-  const [audit, setAudit] = useState(controller.fakeAudit(schema_user));
+  const [audit, setAudit] = useState(ctrl.fakeAudit(schema_user));
+
+  const setPhone = (t) => setData((p) => ({ ...p, phone: t }));
 
   return (
     <Page>
@@ -68,10 +70,10 @@ const SignUp = ({ navigation }) => {
           typeAndroid={"tel"}
           typeIOS={"telephoneNumber"}
           returnKeyType={"next"}
-          maxLength={10}
+          maxLength={14}
           keyboardType={"phone-pad"}
           secureTextEntry={false}
-          onChangeText={(t) => setData({ ...data, phone: t })}
+          onChangeText={(t) => ctrl.onFormat.phone(data.phone, t, setPhone)}
           value={data.phone}
           isValidFormat={audit.phone}
         />
@@ -111,7 +113,7 @@ const SignUp = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => controller.add.user(data, navigation, setAudit)}
+            func={() => ctrl.add.user(data, navigation, setAudit)}
             is_active={is_CGU_accepted}
           />
 

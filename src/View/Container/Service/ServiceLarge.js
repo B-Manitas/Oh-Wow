@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
+import CDate from "../../../model/utils/CDate";
 
 const ServiceLarge = ({ navigation, data }) => {
   return (
@@ -17,7 +18,7 @@ const ServiceLarge = ({ navigation, data }) => {
         </Text>
 
         <Text style={styles.info}>
-          {data.price}€ - {data.duration}min
+          {data.price}€ - {CDate.toTimeString(data.duration)}
         </Text>
       </View>
     </TouchableOpacity>

@@ -28,7 +28,7 @@ export default class CDate extends Date {
   }
 
   static getMonthLength(year, month) {
-    return new Date(year, month - 1, 0).getDate();
+    return new Date(year, month, 0).getDate();
   }
 
   static getFirstDay(year, month) {
@@ -38,7 +38,8 @@ export default class CDate extends Date {
   static toTimeString(time) {
     const minutes = time % 60;
     const hours = Math.floor(time / 60);
-    return `${hours}h${minutes.toString().padStart(2, "0")}`;
+    if (hours) return `${hours}h${minutes.toString().padStart(2, "0")}`;
+    else return `${minutes.toString().padStart(2, "0")}min`;
   }
 
   static removeTime(date) {

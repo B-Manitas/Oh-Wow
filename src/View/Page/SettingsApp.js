@@ -7,25 +7,34 @@ import Page from "../Container/Page";
 import DaysCheckBoxList from "../Generator/DaysCheckBoxList";
 import Header from "../Parts/Header";
 
-import { controller } from "model/Main";
+import { controller as ctrl } from "model/Main";
 import InputHours from "../Input/InputHours";
+import CDate from "../../model/utils/CDate";
 
 const SettingsApp = ({ navigation }) => {
-  var schema = controller.frontend.schemaSalon();
+  var schema = ctrl.frontend.schemaSalon();
 
   const [data_init, setDataInit] = useState(schema);
   const [data, setData] = useState(schema);
-  const [audit, setAudit] = useState(controller.fakeAudit(schema));
+  const [audit, setAudit] = useState(ctrl.fakeAudit(schema));
+
+  const formatDur = (dur) =>
+    typeof dur === "number" ? CDate.toTimeString(dur) : dur;
+
+  const setAMOn = (t) => setData((p) => ({ ...p, am_on: t }));
+  const setAMOff = (t) => setData((p) => ({ ...p, am_off: t }));
+  const setPMOn = (t) => setData((p) => ({ ...p, pm_on: t }));
+  const setPMOff = (t) => setData((p) => ({ ...p, pm_off: t }));
 
   useEffect(() => {
-    controller.get.salon(setData, setDataInit);
+    ctrl.get.salon(setData, setDataInit);
   }, []);
 
   return (
     <Page>
       <Header
         func={() =>
-          controller.onClose.settingsApp(data, data_init, navigation, setAudit)
+          ctrl.onClose.settingsApp(data, data_init, navigation, setAudit)
         }
         navigation={navigation}
         type={"close"}
@@ -59,10 +68,10 @@ const SettingsApp = ({ navigation }) => {
             text={"Horaire du matin"}
             plh_1={"8h00"}
             plh_2={"12h00"}
-            value_1={data.am_on.toString()}
-            value_2={data.am_off.toString()}
-            func_1={(t) => setData((p) => ({ ...p, am_on: t }))}
-            func_2={(t) => setData((p) => ({ ...p, am_off: t }))}
+            value_1={formatDur(data.am_on)}
+            value_2={formatDur(data.am_off)}
+            func_1={(t) => ctrl.onFormat.time(t, setAMOn)}
+            func_2={(t) => ctrl.onFormat.time(t, setAMOff)}
             isValidFormat_1={audit.am_on}
             isValidFormat_2={audit.am_off}
           />
@@ -70,14 +79,10 @@ const SettingsApp = ({ navigation }) => {
             text={"Horaire de l'après-midi"}
             plh_1={"13h00"}
             plh_2={"18h00"}
-            value_1={data.pm_on.toString()}
-            value_2={data.pm_off.toString()}
-            func_1={(t) =>
-              setData((p) => ({ ...p, pm_on: t }))
-            }
-            func_2={(t) =>
-              setData((p) => ({ ...p, pm_off: t }))
-            }
+            value_1={formatDur(data.pm_on)}
+            value_2={formatDur(data.pm_off)}
+            func_1={(t) => ctrl.onFormat.time(t, data.am_on, setPMOn)}
+            func_2={(t) => ctrl.onFormat.time(t, data.am_on, setPMOff)}
             isValidFormat_1={audit.pm_on}
             isValidFormat_2={audit.pm_off}
           />

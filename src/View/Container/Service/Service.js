@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import CDate from "../../../model/utils/CDate";
 import Round from "../../Buttons/Round";
 
 const Service = ({ data, navigation }) => {
@@ -11,7 +12,7 @@ const Service = ({ data, navigation }) => {
         <View style={styles.info}>
           <Text style={styles.info_h1}>{data.name}</Text>
           <Text style={styles.info_h2}>
-            {data.price}€ - {data.duration}min
+            {data.price}€ - {CDate.toTimeString(data.duration)}
           </Text>
         </View>
         <Image source={{ uri: data.img }} style={styles.img} />
