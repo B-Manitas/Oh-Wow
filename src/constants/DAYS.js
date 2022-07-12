@@ -9,6 +9,16 @@ export const DAYS = [
   "saturday",
   "sunday",
 ];
+
+export const FR_DAYS = [
+  "lundis",
+  "mardis",
+  "mercredis",
+  "jeudis",
+  "vendredis",
+  "samedi",
+  "dimanches",
+];
 export const SHORT_DAYS = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
 
 export const MONTHS = [

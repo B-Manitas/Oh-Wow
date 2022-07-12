@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { DAYS, FR_DAYS } from "../constants/DAYS";
 import { ICON } from "../constants/IMAGES";
 
 export default {
@@ -63,5 +64,24 @@ export default {
 
   setValue(func, key, value) {
     func((p) => ({ ...p, [key]: value }));
+  },
+
+  openDaysText(days) {
+    const keys = Object.keys(days);
+    const schema = ["0", "1", "2", "3", "4", "5", "6"];
+    if (!_.isEqual(schema, keys)) return { key: "", value: "" };
+
+    const open = keys.filter((i) => days[i] === false);
+    if (open.length == 7) return { key: "Ouvert", value: "tous les jours." };
+
+    var fr_day = open.map((i) => FR_DAYS[i]);
+
+    if (fr_day.length === 0) return { key: "Fermé", value: "tous les jours." };
+    if (fr_day.length === 1)
+      return { key: "Ouvert le", value: fr_day[0] + "." };
+
+    var last_day = fr_day.pop();
+    var text = fr_day.join(", ") + " et le " + last_day + ".";
+    return { key: "Ouvert les", value: text };
   },
 };
