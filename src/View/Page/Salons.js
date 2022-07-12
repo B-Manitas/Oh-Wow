@@ -21,6 +21,7 @@ import ToggleLong from "../Componnent/ToggleLong";
 import CDate from "../../model/utils/CDate";
 import Chevron from "../Buttons/Chevron";
 import Primary from "../Buttons/Primary";
+import Utils from "model/Utils";
 
 const Salons = ({ navigation }) => {
   const schema = ctrl.frontend.schemaSalon();
@@ -31,6 +32,11 @@ const Salons = ({ navigation }) => {
   const [audit, setAudit] = useState(ctrl.fakeAudit(schema));
 
   const formatTime = (t) => (typeof t === "number" ? CDate.toTimeString(t) : t);
+  const is_saved = (id) =>
+    salons_init &&
+    salons &&
+    id < salons_init.length &&
+    Utils.isEquals(salons[id], salons_init[id]);
 
   const updateTime = (id, key, value) =>
     setSalons((p) =>
@@ -59,18 +65,44 @@ const Salons = ({ navigation }) => {
       })
     );
 
+  const onPressSalon = (id) => {
+    setSelect(id);
+    setAudit(ctrl.fakeAudit(schema));
+  };
+
+  const onPressSave = () => {
+    ctrl.update.salon(salons[select], salons_init, setSalonsInit, setAudit);
+    setAudit(ctrl.fakeAudit(schema));
+  };
+
+  const onPressDelete = () => {
+    ctrl.delete.salon(
+      salons[select],
+      salons_init,
+      setSalons,
+      setSalonsInit,
+      setSelect
+    );
+
+    setAudit(ctrl.fakeAudit(schema));
+  };
+
   useEffect(() => {
     ctrl.get.allSalons(setSalons, setSalonsInit);
   }, []);
 
   useEffect(() => {
     if (select == salons?.length) setSalons((p) => [...p, schema]);
-  }, [salons?.length]);
+  }, [select, salons?.length]);
 
   if (!salons || select == salons?.length) return <Text>Fecthing data...</Text>;
   return (
     <Page>
-      <Header title={"Gestion des salons"} type={"close"} />
+      <Header
+        title={"Gestion des salons"}
+        type={"close"}
+        navigation={navigation}
+      />
       <View style={styles.ctn_nav_button}>
         {salons.map((salon, id) => (
           <RadioBox
@@ -78,9 +110,12 @@ const Salons = ({ navigation }) => {
             id={id}
             id_selected={select}
             text={salon.name}
-            onPress={setSelect}
+            onPress={onPressSalon}
             style={styles.radio}
-            style_txt={styles.txt_radio}
+            style_txt={[
+              styles.txt_radio,
+              !is_saved(id) && styles.txt_radio_modified,
+            ]}
             style_active={styles.radio_on}
           />
         ))}
@@ -88,7 +123,7 @@ const Salons = ({ navigation }) => {
           id={salons.length}
           id_selected={select}
           text={"+"}
-          onPress={setSelect}
+          onPress={onPressSalon}
           style={styles.radio}
           style_txt={styles.txt_radio}
           style_active={styles.radio_on}
@@ -109,14 +144,29 @@ const Salons = ({ navigation }) => {
               value={salons[select].name}
               setValue={(t) => update(select, "name", t)}
               length={12}
-              is_bad_format={audit.name}
+              is_valid={audit.name}
             />
             <InputLong
               text={"Adresse"}
               placeholder={"1 rue du salon"}
               value={salons[select].address}
               setValue={(t) => update(select, "address", t)}
-              is_bad_format={audit.address}
+              is_valid={audit.address}
+            />
+            <InputLong
+              text={"Téléphone"}
+              placeholder={"00 00 00 00 00"}
+              key_type={"numeric"}
+              length={14}
+              value={salons[select].phone}
+              setValue={(t) =>
+                update(
+                  select,
+                  "phone",
+                  ctrl.onFormat.phone(salons[select].phone, t)
+                )
+              }
+              is_valid={audit.phone}
             />
           </View>
 
@@ -125,18 +175,24 @@ const Salons = ({ navigation }) => {
             <InputLong
               text={"Longitude"}
               placeholder={"10.0000"}
-              setValue={(t) => update(select, "longitute", t)}
+              setValue={(t) =>
+                update(select, "longitude", ctrl.onFormat.float(t))
+              }
               length={10}
               key_type={"numeric"}
-              is_bad_format={audit.longitute}
+              value={salons[select].longitude.toString()}
+              is_valid={audit.longitude}
             />
             <InputLong
               text={"Latitude"}
               placeholder={"10.0000"}
-              setValue={(t) => update(select, "latitude", t)}
+              value={salons[select].latitude.toString()}
+              setValue={(t) =>
+                update(select, "latitude", ctrl.onFormat.float(t))
+              }
               key_type={"numeric"}
               length={10}
-              is_bad_format={audit.latitude}
+              is_valid={audit.latitude}
             />
           </View>
 
@@ -150,8 +206,8 @@ const Salons = ({ navigation }) => {
               value_2={formatTime(salons[select].am_off)}
               func_1={(t) => updateTime(select, "am_on", t)}
               func_2={(t) => updateTime(select, "am_off", t)}
-              is_bad_format_1={audit.am_on}
-              is_bad_format_2={audit.am_off}
+              is_valid_1={audit.am_on}
+              is_valid_2={audit.am_off}
             />
             <InputHours
               text={"L'après-midi"}
@@ -161,8 +217,8 @@ const Salons = ({ navigation }) => {
               value_2={formatTime(salons[select].pm_off)}
               func_1={(t) => updateTime(select, "pm_on", t)}
               func_2={(t) => updateTime(select, "pm_off", t)}
-              is_bad_format_1={audit.pm_on}
-              is_bad_format_2={audit.pm_off}
+              is_valid_1={audit.pm_on}
+              is_valid_2={audit.pm_off}
             />
           </View>
 
@@ -177,7 +233,10 @@ const Salons = ({ navigation }) => {
           <View style={styles.section}>
             <Text style={styles.section_h1}>Les dates de fermeture :</Text>
             <TextInput
-              style={styles.input}
+              style={[
+                styles.input,
+                !audit.date_off && { borderColor: "#DA573D" },
+              ]}
               placeholder={"14/07;15/08"}
               multiline={true}
               value={salons[select].date_off}
@@ -193,15 +252,7 @@ const Salons = ({ navigation }) => {
             />
             <Chevron
               text={"Supprimer définitivement le salon"}
-              func={() =>
-                ctrl.delete.salon(
-                  select,
-                  salons,
-                  salons_init,
-                  setSalons,
-                  setSelect
-                )
-              }
+              func={onPressDelete}
               fontWeight={"500"}
               color={"#DA573D"}
             />
@@ -209,7 +260,10 @@ const Salons = ({ navigation }) => {
           <View style={styles.section}>
             <Primary
               text={"Sauvegarder"}
-              func={() => ctrl.update.salon(salons, salons_init, setAudit)}
+              height={10}
+              font_size={20}
+              is_active={!is_saved(select)}
+              func={onPressSave}
             />
           </View>
         </ScrollView>
@@ -223,7 +277,7 @@ export default Salons;
 const styles = StyleSheet.create({
   ctn_nav_button: {
     flexDirection: "row",
-    marginHorizontal: 10,
+    marginHorizontal: 30,
   },
 
   radio: {
@@ -249,6 +303,10 @@ const styles = StyleSheet.create({
   txt_radio: {
     fontSize: 20,
     fontWeight: "300",
+  },
+
+  txt_radio_modified: {
+    color: "#DA573D",
   },
 
   radio_on: {
@@ -294,5 +352,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     borderRadius: 5,
     flex: 1,
+    borderWidth: 2,
+    borderColor: "transparent",
   },
 });

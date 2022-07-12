@@ -7,12 +7,13 @@ const InputLong = ({
   setValue,
   length,
   key_type,
+  is_valid,
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{text}</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, !is_valid && styles.error]}
         placeholder={placeholder}
         maxLength={length}
         value={value}
@@ -28,7 +29,7 @@ export default InputLong;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    marginVertical: 10,
+    marginVertical: 12,
     alignItems: "center",
   },
 
@@ -46,5 +47,11 @@ const styles = StyleSheet.create({
     right: 0,
     position: "absolute",
     maxWidth: 210,
+    borderWidth: 2,
+    borderColor: "transparent",
+  },
+
+  error: {
+    borderColor: "#DA573D",
   },
 });

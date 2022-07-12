@@ -8,22 +8,22 @@ const InputHours = ({
   value_2,
   func_1,
   func_2,
-  is_bad_format_1,
-  is_bad_format_2,
+  is_valid_1,
+  is_valid_2,
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{text}</Text>
       <View style={styles.ctn_input}>
         <TextInput
-          style={styles.input}
+          style={[styles.input, !is_valid_1 && styles.bad_format]}
           placeholder={plh_1}
           maxLength={20}
           value={value_1}
           onChangeText={func_1}
         />
         <TextInput
-          style={styles.input}
+          style={[styles.input, !is_valid_2 && styles.bad_format]}
           placeholder={plh_2}
           maxLength={20}
           value={value_2}
@@ -39,7 +39,7 @@ export default InputHours;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    marginVertical: 10,
+    marginVertical: 12,
     alignItems: "center",
   },
 
@@ -61,5 +61,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     borderRadius: 5,
     marginLeft: 10,
+    borderWidth: 2,
+    borderColor: "transparent",
+  },
+
+  bad_format: {
+    borderColor: "#DA573D",
   },
 });

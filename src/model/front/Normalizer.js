@@ -54,6 +54,10 @@ export class Normalizer extends Schema {
       case "description":
         return value;
 
+      case "longitude":
+      case "latitude":
+        return this.float(value);
+
       case "price":
         return this.number(value);
 
@@ -112,5 +116,9 @@ export class Normalizer extends Schema {
 
   number(value) {
     return parseInt(value);
+  }
+
+  float(value) {
+    return parseFloat(value);
   }
 }

@@ -2,6 +2,8 @@ import { Alert } from "react-native";
 import { SuperController } from "./SuperController";
 import { removeUserStore, defaultStatus } from "store/ActionsCreator";
 import * as ImagePicker from "expo-image-picker";
+import Catch from "exceptions/ErrorsCatcher";
+import Utils from "model/Utils";
 
 export class Update extends SuperController {
   /**
@@ -30,9 +32,15 @@ export class Update extends SuperController {
   }
 
   @Catch
-  async salon(data, data_init, setAudit) {
-    if (!Utils.isEquals(data, data_init))
-      await this.frontend.update.salon(data, setAudit);
+  async salon(salon, salons_init, setSalonsInit, setAudit) {
+    const id = salons_init.findIndex((item) => item._id === salon._id);
+
+    if (!Utils.isEquals(salon, salons_init[id]))
+      await this.frontend.update.salon(salon, setAudit);
+
+    if (id == -1) setSalonsInit([...salons_init, salon]);
+    else setSalonsInit((p) => p.map((item, i) => (id === i ? salon : item)));
+
     Alert.alert("Modifications sauvegardées");
   }
 }

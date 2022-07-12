@@ -20,7 +20,7 @@ export class Update extends Request {
   }
 
   async salon(data) {
-    await this.updateOne(SALON, { _id: data._id }, { $set: { ...data } });
+    await this.updateOne(SALON, { _id: data._id }, { $set: { ...data } }, true);
   }
 
   async staff(data) {

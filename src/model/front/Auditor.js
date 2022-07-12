@@ -29,39 +29,44 @@ export class Auditor extends IsFormat {
    * Otherwise, return false.
    */
   auditKey(data, key) {
+    const value = data[key];
+
     switch (key) {
       case "firstname":
       case "lastname":
       case "name":
       case "description":
-        return this.isName(data[key]);
+        return this.isName(value);
       case "mail":
-        return this.isMail(data[key]);
+        return this.isMail(value);
       case "phone":
-        return this.isPhone(data[key]);
+        return this.isPhone(value);
       case "birthdate":
-        return this.isDate(data[key]);
+        return this.isDate(value);
       case "password":
-        return this.isPassword(data[key]);
+        return this.isPassword(value);
       case "status":
-        return this.isStatus(data[key]);
+        return this.isStatus(value);
       case "day_off":
-        return this.isDayOff(data[key]);
+        return this.isDayOff(value);
       case "date_off":
-        return this.isDateOff(data[key]);
+        return this.isDateOff(value);
       case "am_on":
       case "am_off":
       case "pm_on":
       case "pm_off":
       case "duration":
-        return this.isHours(data[key]);
+        return this.isHours(value);
       case "is_opened":
       case "is_trend":
-        return this.isBool(data[key]);
+        return this.isBool(value);
       case "price":
-        return this.isNumber(data[key]);
+        return this.isNumber(value);
+      case "longitude":
+      case "latitude":
+        return this.isFloat(value);
       case "offer":
-        return this.isOffer(data[key]);
+        return this.isOffer(value);
       default:
         return true;
     }

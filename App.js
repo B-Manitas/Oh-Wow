@@ -39,14 +39,14 @@ export default function App() {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Salons"
+            initialRouteName="Home"
             screenOptions={{ headerShown: false }}
           >
-            <Stack.Screen name="Salon" component={Salons} />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Navigation" component={Navigation} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Salons" component={Salons} />
             <Stack.Screen name="Contact" component={Contact} />
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="AllServices" component={ConsultAllServices} />

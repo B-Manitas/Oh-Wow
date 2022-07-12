@@ -46,6 +46,7 @@ export class Schema {
 
   schemaSalon() {
     return {
+      _id: Date.now().toString(),
       name: "",
       address: "",
       day_off: {
@@ -64,6 +65,8 @@ export class Schema {
       pm_off: 1080,
       is_opened: true,
       phone: "",
+      longitude: 0,
+      latitude: 0
     };
   }
 

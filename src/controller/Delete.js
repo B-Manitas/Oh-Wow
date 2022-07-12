@@ -27,11 +27,15 @@ export class Delete extends SuperController {
   }
 
   @Catch
-  async salon(id, salons, salons_init, setSalons, setSelect) {
-    if (salons.length > salons_init.length && id === salons.length - 1)
-      setSalons(salons.filter((_, i) => i !== id));
-    else this.frontend.delete.salon(salons[id]._id);
+  salon(salon, salons_init, setSalons, setSalonsInit, setSelect) {
+    const id = salons_init.findIndex((item) => item._id === salon._id);
 
-    setSelect(id - 1);
+    if (id === -1) setSalons((p) => p.filter((s) => s._id !== salon._id));
+    else {
+      this.frontend.delete.salon(salon._id);
+      setSalonsInit(salons_init.filter((s) => s._id !== salon._id));
+    }
+
+    setSelect(id > 0 ? id - 1 : 0);
   }
 }

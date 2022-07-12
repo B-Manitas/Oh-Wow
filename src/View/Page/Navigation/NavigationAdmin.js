@@ -12,16 +12,16 @@ const NavigationAdmin = ({ navigation }) => {
       {is_admin && (
         <View style={styles.nav}>
           <Link
+            text={"Gérer les salons"}
+            style_container={styles.button_nav}
+            style_text={styles.text_nav}
+            func={() => navigation.navigate("Salons")}
+          />
+          <Link
             text={"Rechercher un utilisateur"}
             style_container={styles.button_nav}
             style_text={styles.text_nav}
             func={() => navigation.navigate("Search")}
-          />
-          <Link
-            text={"Paramètres de l'application"}
-            style_container={styles.button_nav}
-            style_text={styles.text_nav}
-            func={() => navigation.navigate("SettingsApp")}
           />
         </View>
       )}

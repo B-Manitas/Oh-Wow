@@ -50,8 +50,6 @@ const Booking = ({ navigation, route }) => {
     apt.id_staff,
   ]);
 
-  console.log(schedule);
-
   if (!salon || !schedule || !apt) return <Text>Loading data....</Text>;
   else
     return (
