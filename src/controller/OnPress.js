@@ -33,6 +33,7 @@ export class OnPress extends SuperController {
       await this.frontend.update.service(data, setAudit);
       updateService(data);
       setServiceInit(data);
+      setAudit(this.frontend.fakeAudit(data));
       Alert.alert("Modification sauvegardées");
     }
   }

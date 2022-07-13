@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 import Page from "../../Container/Page";
-import Header from "../../Parts/Header";
-import { ICON } from "../../../constants/IMAGES";
-import ServiceInfo from "../../Container/ServiceInfo";
+import { ICON, PHOTO } from "../../../constants/IMAGES";
 import Absolute from "../../Buttons/Absolute";
 import ConsultServiceSettings from "./ConsultServiceSettings";
 
 import { controller as ctrl } from "model/Main";
-import CDate from "../../../model/utils/CDate";
+import ConsultServiceMain from "./ConsultServiceMain";
 
 const ConsultService = ({ navigation, route }) => {
   const is_admin = ctrl.this_is_admin;
@@ -18,157 +16,142 @@ const ConsultService = ({ navigation, route }) => {
   const [service, setService] = useState(service_init);
   const [init, setInit] = useState(service_init);
   const [setting, setSetting] = useState(false);
-  const [salons, setSalons] = useState([]);
 
-  useState(() => {
-    ctrl.get.allSalons(setSalons);
-  }, []);
+  const [isEdit, setIsEdit] = useState(false);
 
-  if (!salons) return <Text>Fecthing data...</Text>;
-  else
-    return (
-      <Page>
-        <Header
-          type={"back"}
-          title={service.name}
-          navigation={navigation}
-          func={() => ctrl.onClose.service(service, init, navigation)}
+  const onClose = () => ctrl.onClose.service(service, service_init, navigation);
+
+  const openSetting = () => {
+    setIsEdit(false);
+    setSetting(true);
+  };
+
+  const openImage = () => {
+    setIsEdit(false);
+    ctrl.update.image(setService);
+  };
+
+  return (
+    <Page>
+      <View style={styles.ctn_img}>
+        <Image source={PHOTO.service_1} style={styles.img} />
+        <Absolute
+          img={ICON.back}
+          top={60}
+          left={0}
+          ctn_style={styles.close}
+          func={onClose}
         />
 
-        <ScrollView
-          style={styles.main_container}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={styles.img}>
-            <Image
-              source={{ uri: service.img }}
-              style={{ width: "100%", height: "100%" }}
-            />
-            {is_admin && (
-              <Absolute
-                text="Editer"
-                top={10}
-                left={10}
-                ctn_style={styles.btn_edit}
-                func={() => ctrl.update.image(setService)}
-              />
+        {is_admin && (
+          <View style={styles.ctn_edit}>
+            <TouchableOpacity
+              style={styles.btn_drop}
+              onPress={() => setIsEdit((b) => !b)}
+            >
+              <Text style={styles.txt_drop}>
+                {isEdit ? "Fermer" : "Modifier"}
+              </Text>
+            </TouchableOpacity>
+            {isEdit && (
+              <View style={styles.drop}>
+                <TouchableOpacity style={styles.btn_drop} onPress={openSetting}>
+                  <Text style={styles.txt_drop}>Paramètre</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btn_drop} onPress={openImage}>
+                  <Text style={styles.txt_drop}>Nouvelle photo</Text>
+                </TouchableOpacity>
+              </View>
             )}
           </View>
-
-          <View style={styles.container_info}>
-            <ServiceInfo
-              text={"Durée"}
-              value={CDate.toTimeString(service.duration)}
-              flex={1}
-            />
-            <ServiceInfo
-              text={"Tarifs"}
-              unit={"€"}
-              value={service.price.toString()}
-              flex={1}
-            />
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.h2}>Description :</Text>
-            <Text style={styles.h3} multiline>
-              {service.description}
-            </Text>
-          </View>
-        </ScrollView>
-
-        {is_admin && (
-          <Absolute
-            left={30}
-            bottom={30}
-            img={ICON.setting}
-            func={() => setSetting((b) => !b)}
-          />
         )}
-        {is_admin && setting && (
-          <ConsultServiceSettings
-            salons={salons}
-            service={service}
-            init={init}
-            setInit={setInit}
-            setService={setService}
-          />
-        )}
+      </View>
 
-        {!setting && (
-          <Absolute
-            text={"Disponibilité et RDV"}
-            img={ICON.book}
-            txt_style={styles.txt_apt}
-            bottom={30}
-            right={30}
-            func={() => navigation.navigate("Booking", { data: init })}
-          />
-        )}
-      </Page>
-    );
+      {setting ? (
+        <ConsultServiceSettings
+          close={() => setSetting(false)}
+          service={service}
+          init={init}
+          setInit={setInit}
+          setService={setService}
+        />
+      ) : (
+        <ConsultServiceMain service={service} />
+      )}
+
+      {!setting && (
+        <Absolute
+          bottom={35}
+          right={35}
+          left={35}
+          text={"Prendre rendez-vous"}
+          ctn_style={styles.btn_apt}
+          txt_style={styles.txt_apt}
+          func={() => navigation.navigate("Booking", { data: init })}
+        />
+      )}
+    </Page>
+  );
 };
 
 export default ConsultService;
 
 const styles = StyleSheet.create({
-  main_container: {
-    marginHorizontal: 30,
+  ctn_img: {
+    height: "45%",
+    top: -50,
   },
 
   img: {
-    borderWidth: 2,
-    backgroundColor: "#fff",
     width: "100%",
-    height: 200,
-    resizeMode: "cover",
+    height: "100%",
   },
 
-  btn_edit: {
-    backgroundColor: "#ffffff80",
-    paddingVertical: 5,
+  close: {
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderWidth: 1,
+    borderColor: "#f5f5f5",
+    paddingLeft: 38,
+    height: 40,
   },
 
-  container_info: {
-    flexDirection: "row",
-    marginVertical: 10,
-    marginHorizontal: -5,
-    justifyContent: "center",
-  },
-
-  section: {
-    marginVertical: 20,
-  },
-
-  parts: {
-    paddingVertical: 10,
-    marginHorizontal: 15,
-  },
-
-  h2: {
-    fontSize: 23,
-    fontWeight: "500",
-    width: "100%",
-    borderBottomWidth: 2,
-    textDecorationLine: "underline",
-    marginBottom: 10,
-  },
-
-  h3: {
-    fontSize: 20,
-    fontWeight: "300",
-    textAlign: "justify",
-  },
-
-  ctn_admin: {
+  ctn_edit: {
     position: "absolute",
-    bottom: 30,
-    left: 30,
-    flexDirection: "row",
+    top: 60,
+    right: 15,
+  },
+
+  btn_drop: {
+    backgroundColor: "#fff",
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    margin: 1,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+    borderWidth: 1,
+    borderColor: "#383838",
+  },
+
+  txt_drop: {
+    textAlign: "center",
+  },
+
+  btn_apt: {
+    borderColor: "#d5d5d5",
+    borderWidth: 2,
   },
 
   txt_apt: {
-    fontSize: 18,
     fontWeight: "500",
+    fontSize: 22,
   },
 });
