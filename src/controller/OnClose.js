@@ -10,26 +10,11 @@ export class OnClose extends SuperController {
   @Catch
   async service(data, data_init, navigation, setAudit) {
     if (data.img != data_init.img && this.this_is_admin) {
-      await this.frontend.update.service({ img: data.img }, setAudit);
+      await this.frontend.update.service(
+        { _id: data._id, img: data.img },
+        setAudit
+      );
       updateService(data);
-    }
-
-    navigation.goBack();
-  }
-
-  @Catch
-  async client(data, data_init, navigation, setAudit) {
-    if (!Utils.isEquals(data, data_init) && this.this_is_admin) {
-      const user = Utils.removeKey(data, "is_admin", "id_salon");
-      await this.frontend.update.user(user, setAudit);
-
-      if (data.id_salon == null) await this.frontend.delete.staff(data._id);
-      else if (data.id_salon != null || data.is_admin)
-        await this.frontend.update.staff(
-          data._id,
-          data.id_salon,
-          data.is_admin
-        );
     }
 
     navigation.goBack();

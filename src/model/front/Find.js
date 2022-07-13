@@ -90,4 +90,9 @@ export class Find extends SuperFrontend {
     const resp = await this.backend.get.userApt(id, is_historic);
     funcs.map((func) => func(resp));
   }
+
+  async userAllApts(id, ...funcs) {
+    const resp = await this.backend.get.userApt(id);
+    funcs.map((func) => func(resp));
+  }
 }

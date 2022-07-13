@@ -8,11 +8,13 @@ const InputLong = ({
   length,
   key_type,
   is_valid,
+  editable,
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{text}</Text>
       <TextInput
+        editable={editable}
         style={[styles.input, !is_valid && styles.error]}
         placeholder={placeholder}
         maxLength={length}

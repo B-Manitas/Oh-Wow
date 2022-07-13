@@ -25,9 +25,8 @@ import Forgotten from "./src/View/Page/Forgotten";
 import Appointments from "./src/View/Page/Appointments";
 import Search from "./src/View/Page/Search";
 import Settings from "./src/View/Page/Settings";
-import SettingsApp from "./src/View/Page/SettingsApp";
 import Contact from "./src/View/Page/Contact";
-import Client from "./src/View/Page/Client";
+import Client from "./src/View/Page/Client/Client";
 import Plannings from "./src/View/Page/Plannings/Plannings";
 import Salons from "./src/View/Page/Salons";
 
@@ -54,7 +53,6 @@ export default function App() {
             <Stack.Screen name="Forgotten" component={Forgotten} />
             <Stack.Screen name="Appointments" component={Appointments} />
             <Stack.Screen name="Search" component={Search} />
-            <Stack.Screen name="SettingsApp" component={SettingsApp} />
             <Stack.Screen name="Client" component={Client} />
             <Stack.Screen name="Connection" component={Connection} />
             <Stack.Screen name="Booking" component={Booking} />

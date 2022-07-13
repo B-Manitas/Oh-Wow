@@ -78,4 +78,9 @@ export class Find extends SuperController {
   async userApt(id, is_historic, ...funcs) {
     await this.frontend.get.userApt(id, is_historic, ...funcs);
   }
+
+  @Catch
+  async userAllApts(id, ...funcs) {
+    await this.frontend.get.userAllApts(id, ...funcs);
+  }
 }

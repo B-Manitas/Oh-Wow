@@ -196,4 +196,46 @@ export class Find extends Request {
       },
     ]);
   }
+
+  async userAllApts(id) {
+    return await this.aggregate(APPT, [
+      { $match: { id_user: id } },
+      {
+        $lookup: {
+          from: SALON,
+          localField: "id_salon",
+          foreignField: "_id",
+          as: "salon",
+        },
+      },
+      {
+        $lookup: {
+          from: SERVICE,
+          localField: "id_service",
+          foreignField: "_id",
+          as: "service",
+        },
+      },
+      {
+        $lookup: {
+          from: USER,
+          localField: "id_staff",
+          foreignField: "_id",
+          as: "staff",
+        },
+      },
+      { $unwind: "$salon" },
+      { $unwind: "$staff" },
+      { $unwind: "$service" },
+      {
+        $project: {
+          date: 1,
+          offer: 1,
+          salon: "$salon.name",
+          service: "$service.name",
+          staff: "$staff.firstname",
+        },
+      },
+    ]);
+  }
 }

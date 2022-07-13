@@ -6,7 +6,7 @@ const Appointment = ({ data }) => {
   const date = new CDate(data.date);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, date.isPast() && {opacity: .5}]}>
       <TouchableOpacity style={styles.btn_img}>
         <Image source={ICON.trash} style={styles.img} />
       </TouchableOpacity>

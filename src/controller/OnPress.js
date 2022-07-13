@@ -4,6 +4,7 @@ import { updateService } from "store/ActionsCreator";
 import Catch from "exceptions/ErrorsCatcher";
 import _ from "lodash";
 import { Alert } from "react-native";
+import Utils from "model/Utils";
 
 export class OnPress extends SuperController {
   aptDay(setApt, setDate, date) {
@@ -32,6 +33,25 @@ export class OnPress extends SuperController {
       await this.frontend.update.service(data, setAudit);
       updateService(data);
       setServiceInit(data);
+      Alert.alert("Modification sauvegardées");
+    }
+  }
+
+  @Catch
+  async client(data, data_init, setInit, setAudit) {
+    if (!_.isEqual(data, data_init) && this.this_is_admin) {
+      const user = Utils.removeKey(data, "is_admin", "id_salon");
+      await this.frontend.update.user(user, setAudit);
+
+      if (data.id_salon == null) await this.frontend.delete.staff(data._id);
+      else if (data.id_salon != null || data.is_admin)
+        await this.frontend.update.staff(
+          data._id,
+          data.id_salon,
+          data.is_admin
+        );
+
+      setInit(data);
       Alert.alert("Modification sauvegardées");
     }
   }
