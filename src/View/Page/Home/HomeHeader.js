@@ -35,7 +35,7 @@ const HomeHeader = ({ navigation }) => {
         />
         <NavRound
           func={() => navigation.navigate("Contact")}
-          img={PHOTO.nails}
+          img={PHOTO.contact}
           title={"Nous contacter"}
         />
       </View>

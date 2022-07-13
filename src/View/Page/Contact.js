@@ -10,6 +10,7 @@ import Footer from "../Parts/Footer";
 import { controller } from "model/Main";
 import Absolute from "../Buttons/Absolute";
 import ContactSalon from "../Container/ContactSalon";
+import { ICON } from "../../constants/IMAGES";
 
 const Contact = ({ navigation }) => {
   const [salons, setSalons] = useState(undefined);
@@ -47,7 +48,7 @@ const Contact = ({ navigation }) => {
             ))}
           </MapView>
           <Absolute
-            text={"Retourner à l'acceuil"}
+            img={ICON.close}
             left={10}
             top={10}
             ctn_style={styles.btn_back}

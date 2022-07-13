@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 import Page from "../../Container/Page";
@@ -21,10 +21,10 @@ const Home = ({ navigation }) => {
         <Splash setShowSplash={setShowSplash} setService={setService} />
       )}
       <Header title={"Oh Wow"} type={"menu"} navigation={navigation} />
-      
+
       <FlatList
         extraData={services}
-        data={services.filter((s) => s.is_trend)}
+        data={services.filter((s) => s.is_trend && !s.is_hidden)}
         keyExtractor={(item, id) => item._id}
         renderItem={(item) => (
           <ServiceLarge data={item.item} navigation={navigation} />

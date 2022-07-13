@@ -49,6 +49,7 @@ export class Normalizer extends Schema {
       case "img":
       case "password":
       case "is_trend":
+      case "is_hidden":
       case "name":
       case "date":
       case "description":

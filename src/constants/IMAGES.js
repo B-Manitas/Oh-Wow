@@ -19,4 +19,5 @@ export const PHOTO = {
   services: require("img/services.png"),
   nails: require("img/nails.png"),
   plannings: require("img/plannings.png"),
+  contact: require("img/contact.png"),
 };

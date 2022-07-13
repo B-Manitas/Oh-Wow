@@ -23,6 +23,7 @@ export class IsFormat extends Normalizer {
     this._FORMAT_HOURS = /^(?:([01]?[0-9]|2[0-3])h)?[0-5][0-9](?:min)?$/;
     this._FORMAT_MMDD = /^[0-3][0-9]\/[01][0-9]$/;
     this._FORMAT_FLOAT = /^[0-9\.]{1,}$/;
+    this._FORMAT_INT = /^[0-9]{1,}$/;
   }
 
   /**
@@ -157,7 +158,7 @@ export class IsFormat extends Normalizer {
   }
 
   isNumber(n) {
-    return _.isInteger(n);
+    return this._FORMAT_INT.test(n);
   }
 
   isFloat(x) {

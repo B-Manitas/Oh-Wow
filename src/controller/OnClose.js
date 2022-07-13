@@ -1,16 +1,16 @@
 // Super-class import
+import { SuperController } from "./SuperController";
 
 import _ from "lodash";
 import Utils from "model/Utils";
 import Catch from "exceptions/ErrorsCatcher";
-import { SuperController } from "./SuperController";
 import { updateService } from "store/ActionsCreator";
 
 export class OnClose extends SuperController {
   @Catch
   async service(data, data_init, navigation, setAudit) {
-    if (!Utils.isEquals(data, data_init) && this.this_is_admin) {
-      await this.frontend.update.service(data, setAudit);
+    if (data.img != data_init.img && this.this_is_admin) {
+      await this.frontend.update.service({ img: data.img }, setAudit);
       updateService(data);
     }
 

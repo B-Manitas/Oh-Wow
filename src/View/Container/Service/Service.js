@@ -5,7 +5,7 @@ import Round from "../../Buttons/Round";
 
 const Service = ({ data, navigation }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, data.is_hidden && { opacity: 0.7 }]}>
       <TouchableOpacity
         onPress={() => navigation.navigate("Service", { data })}
       >

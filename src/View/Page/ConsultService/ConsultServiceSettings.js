@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -15,9 +15,10 @@ import Chevron from "../../Buttons/Chevron";
 import Primary from "../../Buttons/Primary";
 import { controller as ctrl } from "model/Main";
 import CDate from "../../../model/utils/CDate";
+import _ from "lodash";
 
-const ConsultService = ({ salons, service, service_init, setService }) => {
-  const [audit, setAudit] = useState(ctrl.fakeAudit(service_init));
+const ConsultService = ({ salons, service, setService, init, setInit }) => {
+  const [audit, setAudit] = useState(ctrl.fakeAudit(init));
 
   const duration = (t) => (typeof t == "number" ? CDate.toTimeString(t) : t);
   const setDur = (t) => setService((p) => ({ ...p, duration: t }));
@@ -37,7 +38,7 @@ const ConsultService = ({ salons, service, service_init, setService }) => {
             placeholder={"Volupta"}
             is_valid={audit.name}
             value={service.name}
-            func={(t) => setService((p) => ({ ...p, name: t }))}
+            setValue={(t) => setService((p) => ({ ...p, name: t }))}
           />
           <InputLong
             text={"Prix en euro"}
@@ -45,15 +46,14 @@ const ConsultService = ({ salons, service, service_init, setService }) => {
             placeholder={"60"}
             is_valid={audit.price}
             value={service.price.toString()}
-            func={setDur}
+            setValue={(t) => ctrl.onFormat.price(t, setPrice)}
           />
           <InputLong
             text={"Durée"}
-            key_type={"numeric"}
             placeholder={"1h10"}
             is_valid={audit.duration}
             value={duration(service.duration)}
-            func={setPrice}
+            setValue={(t) => ctrl.onFormat.time(t, setDur)}
           />
         </View>
 
@@ -62,12 +62,12 @@ const ConsultService = ({ salons, service, service_init, setService }) => {
           <TextInput
             style={[
               styles.input,
-              !audit.date_off && { borderColor: "#DA573D" },
+              !audit.description && { borderColor: "#DA573D" },
             ]}
-            placeholder={"Cliquer pour modifier..."}
+            placeholder={"Cliquer pour ajouter une description..."}
             multiline={true}
             value={service.description}
-            func={(t) => setService((p) => ({ ...p, description: t }))}
+            onChangeText={(t) => setService((p) => ({ ...p, description: t }))}
           />
         </View>
 
@@ -75,8 +75,8 @@ const ConsultService = ({ salons, service, service_init, setService }) => {
           <Text style={styles.section_h1}>Visibilité :</Text>
           <ToggleLong
             text={"Afficher"}
-            value={service.is_hidden}
-            func={(b) => setService((p) => ({ ...p, is_hidden: b }))}
+            value={!service.is_hidden}
+            func={(b) => setService((p) => ({ ...p, is_hidden: !b }))}
           />
           <ToggleLong
             text={"Afficher en page d'accueil"}
@@ -105,11 +105,10 @@ const ConsultService = ({ salons, service, service_init, setService }) => {
         <View style={styles.section}>
           <Primary
             text={"Sauvegarder"}
+            is_active={!_.isEqual(service, init)}
             height={10}
             font_size={20}
-            func={() =>
-              ctrl.onPress.service(service, service_init, navigation, setAudit)
-            }
+            func={() => ctrl.onPress.service(service, init, setInit, setAudit)}
           />
         </View>
       </ScrollView>

@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 
 import Page from "../../Container/Page";
@@ -14,17 +14,10 @@ import CDate from "../../../model/utils/CDate";
 const ConsultService = ({ navigation, route }) => {
   const is_admin = ctrl.this_is_admin;
   const service_init = route.params.data;
+
   const [service, setService] = useState(service_init);
-  const [audit, setAudit] = useState(ctrl.fakeAudit(service_init));
+  const [init, setInit] = useState(service_init);
   const [setting, setSetting] = useState(false);
-
-  const duration = (t) => (typeof t == "number" ? CDate.toTimeString(t) : t);
-
-  const setDur = (t) => setService((p) => ({ ...p, duration: t }));
-  const setPrice = (t) => setService((p) => ({ ...p, price: t }));
-  const onClose = () =>
-    ctrl.onClose.service(service, service_init, navigation, setAudit);
-
   const [salons, setSalons] = useState([]);
 
   useState(() => {
@@ -35,7 +28,12 @@ const ConsultService = ({ navigation, route }) => {
   else
     return (
       <Page>
-        <Header type={"back"} title={service.name} navigation={navigation} />
+        <Header
+          type={"back"}
+          title={service.name}
+          navigation={navigation}
+          func={() => ctrl.onClose.service(service, init, navigation)}
+        />
 
         <ScrollView
           style={styles.main_container}
@@ -62,14 +60,12 @@ const ConsultService = ({ navigation, route }) => {
               text={"Durée"}
               value={CDate.toTimeString(service.duration)}
               flex={1}
-              width={"25%"}
             />
             <ServiceInfo
               text={"Tarifs"}
               unit={"€"}
               value={service.price.toString()}
               flex={1}
-              width={"25%"}
             />
           </View>
 
@@ -89,16 +85,26 @@ const ConsultService = ({ navigation, route }) => {
             func={() => setSetting((b) => !b)}
           />
         )}
-        {is_admin && setting && <ConsultServiceSettings salons={salons} />}
+        {is_admin && setting && (
+          <ConsultServiceSettings
+            salons={salons}
+            service={service}
+            init={init}
+            setInit={setInit}
+            setService={setService}
+          />
+        )}
 
-        <Absolute
-          text={"Disponibilité et RDV"}
-          img={ICON.book}
-          txt_style={styles.txt_apt}
-          bottom={30}
-          right={30}
-          func={() => navigation.navigate("Booking", { data: service_init })}
-        />
+        {!setting && (
+          <Absolute
+            text={"Disponibilité et RDV"}
+            img={ICON.book}
+            txt_style={styles.txt_apt}
+            bottom={30}
+            right={30}
+            func={() => navigation.navigate("Booking", { data: init })}
+          />
+        )}
       </Page>
     );
 };

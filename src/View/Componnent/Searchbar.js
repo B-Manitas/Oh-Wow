@@ -8,19 +8,17 @@ import {
 } from "react-native";
 import { ICON } from "constants/IMAGES";
 
-const Searchbar = ({ plh }) => {
-  const [text, setText] = useState("");
-
+const Searchbar = ({ query, setQuery }) => {
   return (
     <View style={styles.container_search}>
       <TextInput
         style={styles.search}
-        value={text}
+        value={query}
         returnKeyType="search"
         placeholder="Rechercher un service"
-        onChangeText={(v) => setText(v)}
+        onChangeText={(t) => setQuery(t)}
       />
-      <TouchableOpacity style={styles.btn_clear} onPress={() => setText("")}>
+      <TouchableOpacity style={styles.btn_clear} onPress={() => setQuery("")}>
         <Image source={ICON.close} style={styles.img_clear} />
       </TouchableOpacity>
     </View>

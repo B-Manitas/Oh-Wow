@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, Text } from "react-native";
 import Round from "../Buttons/Round";
 import Searchbar from "../Componnent/Searchbar";
 
@@ -11,17 +11,38 @@ import { controller } from "model/Main";
 
 const ConsultAllServices = ({ navigation }) => {
   const is_admin = controller.this_is_admin;
-  const [services, setService] = useState([]);
+  const [services, setService] = useState(undefined);
   const [is_refreshing, setIsRefreshing] = useState(false);
+  const [query, setQuery] = useState("");
+  const [fetch, setFetch] = useState([]);
 
   useEffect(() => {
-    controller.get.allServices(setIsRefreshing, setService);
+    controller.get.allServices(setIsRefreshing, setFetch);
   }, []);
 
+  useEffect(() => {
+    if (!is_admin) setService(fetch.filter((s) => s.is_hidden === false));
+    else setService(fetch);
+  }, [fetch, query, is_refreshing]);
+
+  const contains = (service, query) => {
+    const query_formatted = query.toLowerCase();
+    return (
+      !service.is_hidden && service.name.toLowerCase().includes(query_formatted)
+    );
+  };
+
+  const search = (query) => {
+    if (query != "") setService((p) => p.filter((s) => contains(s, query)));
+    else setService(fetch);
+    setQuery(query);
+  };
+
+  if (!services) return <Text>Fecthing data...</Text>;
   return (
     <Page>
       <Header type="menu" title="Nos prestations" navigation={navigation} />
-      <Searchbar />
+      <Searchbar query={query} setQuery={search} />
 
       <FlatList
         data={services}
@@ -31,9 +52,7 @@ const ConsultAllServices = ({ navigation }) => {
           <Service navigation={navigation} data={item.item} />
         )}
         refreshing={is_refreshing}
-        onRefresh={() =>
-          controller.get.allServices(setIsRefreshing, setService)
-        }
+        onRefresh={() => controller.get.allServices(setIsRefreshing, setFetch)}
       />
 
       {is_admin && (

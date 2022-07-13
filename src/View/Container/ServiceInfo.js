@@ -1,21 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
-const ServiceInfo = ({ text, value, unit, enabled, flex, setValue, type }) => {
+const ServiceInfo = ({ text, value, unit, flex }) => {
   return (
     <View style={[styles.container, { flex }]}>
-      <Text style={styles.h2}>{text}</Text>
+      <Text style={styles.h1}>{text}</Text>
       <View style={styles.container_value}>
-        <TextInput
-          style={styles.h1}
-          value={value}
-          maxLength={5}
-          editable={enabled}
-          returnKeyType={"done"}
-          keyboardType={type}
-          onChangeText={(t) => setValue(t)}
-        />
-        <Text style={styles.h3}>{unit}</Text>
+        <Text style={styles.h2}>{value}</Text>
+        <Text style={styles.h2}>{unit}</Text>
       </View>
     </View>
   );
@@ -36,25 +28,18 @@ const styles = StyleSheet.create({
   container_value: {
     flexDirection: "row",
     alignItems: "baseline",
-    marginLeft: 2
-  },
-
-  h1: {
-    fontWeight: "500",
-    fontSize: 18,
-    paddingTop: 5,
-    minWidth: 30,
-    textAlign: "center",
-    paddingHorizontal: 10,
+    marginLeft: 2,
+    justifyContent: "center",
   },
 
   h2: {
-    fontWeight: "200",
-    fontSize: 15,
+    fontWeight: "500",
+    fontSize: 18,
+    paddingTop: 5,
   },
 
-  h3: {
-    fontWeight: "500",
+  h1: {
+    fontWeight: "200",
     fontSize: 15,
   },
 });
