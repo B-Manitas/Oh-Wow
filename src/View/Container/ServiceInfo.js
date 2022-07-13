@@ -13,7 +13,6 @@ const ServiceInfo = ({ text, value, unit, enabled, flex, setValue, type }) => {
           editable={enabled}
           returnKeyType={"done"}
           keyboardType={type}
-          allowFontScaling={true}
           onChangeText={(t) => setValue(t)}
         />
         <Text style={styles.h3}>{unit}</Text>
@@ -37,6 +36,7 @@ const styles = StyleSheet.create({
   container_value: {
     flexDirection: "row",
     alignItems: "baseline",
+    marginLeft: 2
   },
 
   h1: {
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingTop: 5,
     minWidth: 30,
-    textAlign: "center"
+    textAlign: "center",
+    paddingHorizontal: 10,
   },
 
   h2: {

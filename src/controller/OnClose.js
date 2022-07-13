@@ -4,7 +4,6 @@ import _ from "lodash";
 import Utils from "model/Utils";
 import Catch from "exceptions/ErrorsCatcher";
 import { SuperController } from "./SuperController";
-import { addService } from "store/ActionsCreator";
 import { updateService } from "store/ActionsCreator";
 
 export class OnClose extends SuperController {

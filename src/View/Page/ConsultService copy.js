@@ -18,6 +18,9 @@ import CheckBoxText from "../Componnent/CheckBoxText";
 import { controller as ctrl } from "model/Main";
 import CDate from "../../model/utils/CDate";
 
+import ToggleLong from "../Componnent/ToggleLong";
+import InputLong from "../Input/InputLong";
+
 const ConsultService = ({ navigation, route }) => {
   const is_admin = ctrl.this_is_admin;
   const service_init = route.params.data;
@@ -44,7 +47,10 @@ const ConsultService = ({ navigation, route }) => {
         func={onClose}
       />
 
-      <ScrollView style={styles.main_container}>
+      <ScrollView
+        style={styles.main_container}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.img}>
           <Image
             source={{ uri: service.img }}
@@ -82,11 +88,11 @@ const ConsultService = ({ navigation, route }) => {
           />
         </View>
 
-        <View style={styles.parts}>
+        <View style={styles.section}>
           <Text style={styles.h2}>Description :</Text>
           <TextInput
             value={service.description}
-            style={styles.h3}
+            style={[styles.h3, styles.parts]}
             multiline={true}
             onChangeText={(t) => setService((p) => ({ ...p, description: t }))}
             placeholder={"Click to edit the description..."}
@@ -95,31 +101,52 @@ const ConsultService = ({ navigation, route }) => {
         </View>
 
         {is_admin && (
-          <View style={styles.parts}>
-            <Text style={styles.h2}>En tendance</Text>
-            <View style={styles.container_trend}>
-              <CheckBoxText
-                state={service.is_trend}
-                size={25}
-                color_bg_active={"#383838"}
-                func={(b) => setService((p) => ({ ...p, is_trend: !b }))}
-              />
-              <Text style={styles.text_trend}>
-                Afficher la prestation en tendance
-              </Text>
+          <View>
+            <View style={styles.section}>
+              <Text style={styles.h2}>Information :</Text>
+
+              <View style={styles.parts}>
+                <InputLong text={"Nom de la préstation"} is_valid={true} />
+                <InputLong text={"Prix en euro"} is_valid={true} />
+                <InputLong text={"Prix en euro"} is_valid={true} />
+              </View>
+            </View>
+
+            <View style={styles.section}>
+              <Text style={styles.h2}>Paramètre de la prestation :</Text>
+
+              <View style={styles.parts}>
+                <ToggleLong
+                  value={service.is_trend}
+                  text={"Afficher"}
+                  func={(b) => setService((p) => ({ ...p, is_trend: !b }))}
+                />
+                <ToggleLong
+                  value={service.is_trend}
+                  text={"Afficher en page d'accueil"}
+                  func={(b) => setService((p) => ({ ...p, is_trend: !b }))}
+                />
+              </View>
             </View>
           </View>
         )}
       </ScrollView>
 
       {is_admin && (
-        <Absolute
-          img={ICON.trash}
-          bottom={30}
-          left={30}
-          func={() => ctrl.delete.service(service._id, navigation)}
-        />
-      )}
+          <Absolute
+            img={ICON.trash}
+            bottom={30}
+            left={0}
+            func={() => ctrl.delete.service(service._id, navigation)}
+          />
+        ) && (
+          <Absolute
+            img={ICON.trash}
+            bottom={30}
+            left={30}
+            func={() => ctrl.delete.service(service._id, navigation)}
+          />
+        )}
       <Absolute
         text={"Disponibilité et RDV"}
         img={ICON.book}
@@ -158,33 +185,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  parts: {
+  section: {
     marginVertical: 20,
   },
 
-  h2: {
-    fontSize: 22,
-    fontWeight: "400",
+  parts: {
+    paddingVertical: 10,
     marginHorizontal: 15,
-    marginVertical: 0,
+  },
+
+  h2: {
+    fontSize: 23,
+    fontWeight: "500",
+    width: "100%",
+    borderBottomWidth: 2,
     textDecorationLine: "underline",
+    marginBottom: 10,
   },
 
   h3: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "300",
     textAlign: "justify",
-  },
-
-  container_trend: {
-    marginVertical: 10,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  text_trend: {
-    marginLeft: 20,
-    fontWeight: "300",
-    fontSize: 18,
   },
 });

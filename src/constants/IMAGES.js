@@ -7,6 +7,7 @@ export const ICON = {
   trash: require("icon/trash.png"),
   book: require("icon/book.png"),
   chevron: require("icon/chevron.png"),
+  setting: require("icon/setting.png"),
 };
 
 export const PHOTO = {

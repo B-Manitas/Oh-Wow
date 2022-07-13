@@ -20,7 +20,7 @@ import ModifyPass from "./src/View/Page/ModifyPass";
 import Booking from "./src/View/Page/Booking/Booking";
 import ConfirmAppt from "./src/View/Page/ConfirmAppt";
 import ConsultAllServices from "./src/View/Page/ConsultAllServices";
-import ConsultService from "./src/View/Page/ConsultService";
+import ConsultService from "./src/View/Page/ConsultService/ConsultService";
 import Forgotten from "./src/View/Page/Forgotten";
 import Appointments from "./src/View/Page/Appointments";
 import Search from "./src/View/Page/Search";

@@ -103,12 +103,13 @@ export class Find extends Request {
   }
 
   async allAppointments(id_staff, date_str, date_end) {
-    const staff_mathch = id_staff
-      ? { $match: { id_staff, date: { $gte: date_str, $lt: date_end } } }
-      : { $match: { date: { $gte: date_str, $lt: date_end } } };
+    const staff_match =
+      id_staff == "0"
+        ? { $match: { date: { $gte: date_str, $lt: date_end } } }
+        : { $match: { id_staff, date: { $gte: date_str, $lt: date_end } } };
 
     return await this.aggregate(APPT, [
-      staff_mathch,
+      staff_match,
       {
         $lookup: {
           from: SERVICE,
@@ -125,8 +126,17 @@ export class Find extends Request {
           as: "user",
         },
       },
+      {
+        $lookup: {
+          from: SALON,
+          localField: "id_salon",
+          foreignField: "_id",
+          as: "salon",
+        },
+      },
       { $unwind: "$service" },
       { $unwind: "$user" },
+      { $unwind: "$salon" },
       {
         $project: {
           date: 1,
@@ -135,6 +145,7 @@ export class Find extends Request {
           firstname: "$user.firstname",
           lastname: "$user.lastname",
           phone: "$user.phone",
+          salon: "$salon.name",
         },
       },
     ]);

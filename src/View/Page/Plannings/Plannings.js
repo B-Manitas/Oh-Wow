@@ -89,6 +89,9 @@ const Plannings = ({ navigation }) => {
                 </Text>
               </View>
             )}
+            <View style={styles.apt_h2}>
+              <Text>Salon: {apt.salon}</Text>
+            </View>
           </View>
         ))}
       </SwipeablePanel>
