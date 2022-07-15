@@ -10,6 +10,7 @@ import Header from "../Parts/Header";
 import { controller } from "model/Main";
 import Footer from "../Parts/Footer";
 import Absolute from "../Buttons/Absolute";
+import Loader from "./Loader";
 
 const ConsultAllServices = ({ navigation }) => {
   const is_admin = controller.this_is_admin;
@@ -40,7 +41,7 @@ const ConsultAllServices = ({ navigation }) => {
     setQuery(query);
   };
 
-  if (!services) return <Text>Fecthing data...</Text>;
+  if (!services) return <Loader />;
   return (
     <Page>
       <Header type="menu" title="Nos prestations" navigation={navigation} />
@@ -69,6 +70,7 @@ const ConsultAllServices = ({ navigation }) => {
           left={150}
           ctn_style={styles.btn_add}
           txt_style={styles.txt_add}
+          func={() => controller.add.service(navigation)}
         />
       )}
 

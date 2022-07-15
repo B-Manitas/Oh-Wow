@@ -22,7 +22,7 @@ export class Delete extends SuperController {
   async service(id, navigation) {
     await this.frontend.delete.service(id);
     deleteService(id);
-    navigation.navigate("AllServices");
+    navigation.navigate("Home");
     Alert.alert(`The service has been successfully removed.`);
   }
 

@@ -11,6 +11,7 @@ import { controller } from "model/Main";
 import Absolute from "../Buttons/Absolute";
 import ContactSalon from "../Container/ContactSalon";
 import { ICON } from "../../constants/IMAGES";
+import Loader from "./Loader";
 
 const Contact = ({ navigation }) => {
   const [salons, setSalons] = useState(undefined);
@@ -19,7 +20,7 @@ const Contact = ({ navigation }) => {
     controller.get.allSalons(setSalons);
   }, []);
 
-  if (!salons) return <Text>Fecthing data...</Text>;
+  if (!salons) return <Loader />;
   else
     return (
       <Page>

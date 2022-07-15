@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 import Page from "../../Container/Page";
-import { ICON, PHOTO } from "../../../constants/IMAGES";
+import { ICON } from "constants/IMAGES";
 import Absolute from "../../Buttons/Absolute";
 import ConsultServiceSettings from "./ConsultServiceSettings";
 
 import { controller as ctrl } from "model/Main";
 import ConsultServiceMain from "./ConsultServiceMain";
+import _ from "lodash";
 
 const ConsultService = ({ navigation, route }) => {
   const is_admin = ctrl.this_is_admin;
@@ -74,6 +75,7 @@ const ConsultService = ({ navigation, route }) => {
           init={init}
           setInit={setInit}
           setService={setService}
+          navigation={navigation}
         />
       ) : (
         <ConsultServiceMain service={service} />
@@ -81,6 +83,10 @@ const ConsultService = ({ navigation, route }) => {
 
       {!setting && (
         <Absolute
+          disabled={
+            _.isEqual(service, service_init) ||
+            _.isEqual(service, ctrl.schema.schemaService())
+          }
           bottom={35}
           right={35}
           left={35}

@@ -18,14 +18,19 @@ import _ from "lodash";
 import Absolute from "../../Buttons/Absolute";
 import { ICON } from "../../../constants/IMAGES";
 
-const ConsultService = ({ service, setService, init, setInit, close }) => {
+const ConsultServiceSettings = ({
+  service,
+  setService,
+  init,
+  setInit,
+  close,
+  navigation,
+}) => {
   const [audit, setAudit] = useState(ctrl.fakeAudit(init));
 
   const duration = (t) => (typeof t == "number" ? CDate.toTimeString(t) : t);
   const setDur = (t) => setService((p) => ({ ...p, duration: t }));
   const setPrice = (t) => setService((p) => ({ ...p, price: t }));
-
-  console.log(service.duration);
 
   return (
     <KeyboardAvoidingView
@@ -113,7 +118,7 @@ const ConsultService = ({ service, setService, init, setInit, close }) => {
   );
 };
 
-export default ConsultService;
+export default ConsultServiceSettings;
 
 const styles = StyleSheet.create({
   container: {

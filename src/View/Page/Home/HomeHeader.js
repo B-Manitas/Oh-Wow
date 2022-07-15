@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-import { PHOTO } from "constants/IMAGES";
 import Absolute from "../../Buttons/Absolute";
 
 import { controller as ctrl } from "model/Main";
@@ -15,13 +14,15 @@ const HomeHeader = ({ refreshing, app, setApp }) => {
         </Text>
       </View>
       <Image source={{ uri: app?.img }} style={styles.image} />
-      <Absolute
-        text={"Modifier"}
-        top={60}
-        right={20}
-        ctn_style={styles.btn_edit}
-        func={() => ctrl.update.image(setApp)}
-      />
+      {ctrl.this_is_admin && (
+        <Absolute
+          text={"Modifier"}
+          top={60}
+          right={20}
+          ctn_style={styles.btn_edit}
+          func={() => ctrl.update.image(setApp)}
+        />
+      )}
       <Text style={styles.h1}>Oh Wow</Text>
     </View>
   );

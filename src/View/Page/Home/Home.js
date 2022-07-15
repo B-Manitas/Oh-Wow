@@ -18,6 +18,7 @@ import Footer from "../../Parts/Footer";
 import Absolute from "../../Buttons/Absolute";
 import { ICON } from "../../../constants/IMAGES";
 import _ from "lodash";
+import Loader from "../Loader";
 
 const Home = ({ navigation }) => {
   const [is_refreshing, setIsRefreshing] = useState(false);
@@ -26,8 +27,6 @@ const Home = ({ navigation }) => {
   const fetchService = () => ctrl.get.allServices(setIsRefreshing, setService);
   const [fetch, setFetch] = useState(undefined);
   const [app, setApp] = useState(undefined);
-
-  // console.log(fetch);
 
   useEffect(() => {
     fetchService();
@@ -42,7 +41,7 @@ const Home = ({ navigation }) => {
     }
   }, [app]);
 
-  if (!services || !app) return <Text>Fetching data...</Text>;
+  if (!services || !app) return <Loader />;
   return (
     <Page>
       <FlatList

@@ -22,6 +22,7 @@ import CDate from "../../model/utils/CDate";
 import Chevron from "../Buttons/Chevron";
 import Primary from "../Buttons/Primary";
 import Utils from "model/Utils";
+import Loader from "./Loader";
 
 const Salons = ({ navigation }) => {
   const schema = ctrl.frontend.schemaSalon();
@@ -95,7 +96,7 @@ const Salons = ({ navigation }) => {
     if (select == salons?.length) setSalons((p) => [...p, schema]);
   }, [select, salons?.length]);
 
-  if (!salons || select == salons?.length) return <Text>Fecthing data...</Text>;
+  if (!salons || select == salons?.length) return <Loader />;
   return (
     <Page>
       <Header

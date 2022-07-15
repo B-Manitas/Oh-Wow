@@ -11,6 +11,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { SwipeablePanel } from "rn-swipeable-panel";
 import _ from "lodash";
 import PlanningsHeader from "./PlanningsHeader";
+import Loader from "../Loader";
 
 const Plannings = ({ navigation }) => {
   const [date, setDate] = useState(CDate.today());
@@ -46,7 +47,7 @@ const Plannings = ({ navigation }) => {
     setIsActive(true);
   };
 
-  if (!plannings) return <Text>Loading data...</Text>;
+  if (!plannings) return <Loader />;
   return (
     <Page>
       <Header

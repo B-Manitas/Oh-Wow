@@ -12,9 +12,11 @@ const Absolute = ({
   ctn_style,
   txt_style,
   func,
+  disabled,
 }) => {
   return (
     <TouchableOpacity
+      disabled={disabled}
       onPress={func}
       style={[
         { position: "absolute", bottom, top, right, left },

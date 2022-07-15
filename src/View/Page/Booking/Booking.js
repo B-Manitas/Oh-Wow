@@ -12,6 +12,7 @@ import Calendar from "model/utils/Calendar";
 import { controller as ctrl } from "model/Main";
 import Utils from "model/Utils";
 import CDate from "model/utils/CDate";
+import Loader from "../Loader";
 
 const Booking = ({ navigation, route }) => {
   const id_user = ctrl.this_user_data._id;
@@ -50,7 +51,7 @@ const Booking = ({ navigation, route }) => {
     apt.id_staff,
   ]);
 
-  if (!salon || !schedule || !apt) return <Text>Loading data....</Text>;
+  if (!salon || !schedule || !apt) return <Loader />;
   else
     return (
       <Page>
