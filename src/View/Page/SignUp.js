@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, ScrollView } from "react-native";
 
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
-import Footer from "../Parts/Footer";
+import FooterSocial from "../Parts/FooterSocial";
 
 import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
@@ -126,7 +126,7 @@ const SignUp = ({ navigation }) => {
         </View>
       </ScrollView>
 
-      <Footer />
+      <FooterSocial />
     </Page>
   );
 };

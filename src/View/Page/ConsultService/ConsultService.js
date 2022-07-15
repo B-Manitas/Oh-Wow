@@ -34,7 +34,7 @@ const ConsultService = ({ navigation, route }) => {
   return (
     <Page>
       <View style={styles.ctn_img}>
-        <Image source={PHOTO.service_1} style={styles.img} />
+        <Image source={{ uri: service.img }} style={styles.img} />
         <Absolute
           img={ICON.back}
           top={60}

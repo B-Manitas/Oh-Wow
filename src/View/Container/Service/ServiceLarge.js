@@ -32,12 +32,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderRadius: 2,
     borderWidth: 2,
-    padding: 10,
-    paddingBottom: 5,
-    marginVertical: 5,
+    borderColor: "#f5f5f5",
+    marginVertical: 3,
     alignItems: "center",
     backgroundColor: "#fff",
-    marginHorizontal: 30,
+    marginHorizontal: 10,
     flex: 1,
     shadowColor: "#000",
     shadowOffset: {
@@ -48,6 +47,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
 
     elevation: 8,
+    paddingRight: 10,
+    // height: 150,
   },
 
   container_text: {
@@ -57,9 +58,9 @@ const styles = StyleSheet.create({
 
   img: {
     marginRight: 15,
-    width: 90,
-    height: 90,
-    borderRadius: 2
+    width: 115,
+    height: 115,
+    // borderRadius: 2,
   },
 
   h1: {

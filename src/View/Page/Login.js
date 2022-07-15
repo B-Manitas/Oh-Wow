@@ -3,7 +3,7 @@ import { ScrollView, View, StyleSheet } from "react-native";
 
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
-import Footer from "../Parts/Footer";
+import FooterSocial from "../Parts/FooterSocial";
 
 import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
@@ -75,7 +75,7 @@ const Login = ({ navigation }) => {
         </View>
       </ScrollView>
 
-      <Footer />
+      <FooterSocial />
     </Page>
   );
 };

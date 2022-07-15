@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import Primary from "../Buttons/Primary";
-import Footer from "../Parts/Footer";
+import FooterSocial from "../Parts/FooterSocial";
 import Header from "../Parts/Header";
 import Page from "../Container/Page";
 
@@ -33,7 +33,7 @@ const Connection = ({ navigation }) => {
         />
       </View>
 
-      <Footer />
+      <FooterSocial />
     </Page>
   );
 };

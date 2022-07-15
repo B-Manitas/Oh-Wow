@@ -9,11 +9,10 @@ export class Find extends SuperController {
   @Catch
   allServices(setIsRefreshing, ...funcs) {
     if (setIsRefreshing) setIsRefreshing(true);
-    const data_store = store.getState().services;
-
-    if (Utils.isEquals(data_store, [])) this.frontend.get.allServices(...funcs);
-    else funcs.forEach((func) => func(data_store));
-
+    // const data_store = store.getState().services;
+    // if (Utils.isEquals(data_store, []))
+    // else funcs.forEach((func) => func(data_store));
+    this.frontend.get.allServices(...funcs);
     if (setIsRefreshing) setIsRefreshing(false);
   }
 

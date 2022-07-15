@@ -14,7 +14,7 @@ export class OnClose extends SuperController {
         { _id: data._id, img: data.img },
         setAudit
       );
-      updateService(data);
+      updateService({ ...data_init, img: data.img });
     }
 
     navigation.goBack();

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Page from "../Container/Page";
-import Footer from "../Parts/Footer";
+import FooterSocial from "../Parts/FooterSocial";
 
 import { controller } from "model/Main";
 import Absolute from "../Buttons/Absolute";
@@ -64,7 +64,7 @@ const Contact = ({ navigation }) => {
           renderItem={(item) => <ContactSalon salon={item.item} />}
         />
 
-        <Footer />
+        <FooterSocial />
       </Page>
     );
 };

@@ -1,106 +1,62 @@
 import React from "react";
-import {
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Alert,
-} from "react-native";
-
-import NavRound from "../../Buttons/NavRound";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 import { PHOTO } from "../../../constants/IMAGES";
 
-const HomeHeader = ({ navigation }) => {
+const Home = ({ refreshing }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.container_img}
-        onPress={() => navigation.navigate("Contact")}
-      >
-        <Image source={PHOTO.home} style={styles.img} />
-      </TouchableOpacity>
-
-      <View style={styles.nav}>
-        <NavRound
-          func={() => navigation.navigate("AllServices")}
-          img={PHOTO.services}
-          title={"Notre catalogue"}
-        />
-        <NavRound
-          func={() => navigation.navigate("Appointments")}
-          img={PHOTO.plannings}
-          title={"Mes rendez-vous"}
-        />
-        <NavRound
-          func={() => navigation.navigate("Contact")}
-          img={PHOTO.contact}
-          title={"Nous contacter"}
-        />
+      <View style={styles.refresh}>
+        <Text style={styles.refresh_text}>
+          {refreshing ? "Chargement..." : "Tirer pour rafraichir"}
+        </Text>
       </View>
-
-      <View style={styles.trend}>
-        <Text style={styles.text_trend}>Nos soins tendances</Text>
-      </View>
+      <Image source={PHOTO.home} style={styles.image} />
+      <Text style={styles.h1}>Oh Wow</Text>
     </View>
   );
 };
 
-export default HomeHeader;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    paddingTop: 10,
-  },
-
-  container_img: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "85%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 2,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
-    backgroundColor: "#fff",
-    borderRadius: 2,
-    borderWidth: 3,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginBottom: 50,
   },
 
-  img: {
-    width: "100%",
-    height: 169,
-    resizeMode: "cover",
-    // aspectRatio: 1
+  refresh: {
+    top: -60,
+    right: 0,
+    left: 0,
+    padding: 0,
+    position: "absolute",
   },
 
-  nav: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 10,
-  },
-
-  trend: {
-    borderTopWidth: 2,
-    borderTopColor: "#000",
-    width: "85%",
-    marginTop: 8,
-    paddingVertical: 10,
-  },
-
-  text_trend: {
-    marginTop: 15,
-    marginBottom: 5,
+  refresh_text: {
     fontSize: 25,
+    textAlign: "center",
+  },
+
+  image: {
+    width: "100%",
+    height: "100%",
+    marginBottom: 20,
+    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 15,
+  },
+
+  h1: {
+    fontSize: 40,
+    textDecorationLine: "underline",
     fontWeight: "300",
-    paddingHorizontal: 20,
+    textAlign: "center",
   },
 });
