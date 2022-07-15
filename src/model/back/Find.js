@@ -1,10 +1,14 @@
 import _ from "lodash";
 import Utils from "../Utils";
 import CDate from "../utils/CDate";
-import { STAFF, SALON, SERVICE, USER, ACCESS, APPT } from "./Collection";
+import { STAFF, SALON, SERVICE, USER, ACCESS, APPT, APP } from "./Collection";
 import { Request } from "./Request";
 
 export class Find extends Request {
+  async app() {
+    return await this.findOne(APP, { _id: "0" });
+  }
+
   async allUsers() {
     return await this.find(USER, { projection: { status: 0, password: 0 } });
   }

@@ -8,6 +8,8 @@ import Service from "../Container/Service/Service";
 import Header from "../Parts/Header";
 
 import { controller } from "model/Main";
+import Footer from "../Parts/Footer";
+import Absolute from "../Buttons/Absolute";
 
 const ConsultAllServices = ({ navigation }) => {
   const is_admin = controller.this_is_admin;
@@ -23,7 +25,7 @@ const ConsultAllServices = ({ navigation }) => {
   useEffect(() => {
     if (!is_admin) setService(fetch.filter((s) => s.is_hidden === false));
     else setService(fetch);
-  }, [fetch, query, is_refreshing]);
+  }, [fetch, is_refreshing]);
 
   const contains = (service, query) => {
     const query_formatted = query.toLowerCase();
@@ -33,7 +35,7 @@ const ConsultAllServices = ({ navigation }) => {
   };
 
   const search = (query) => {
-    if (query != "") setService((p) => p.filter((s) => contains(s, query)));
+    if (query != "") setService(services.filter((s) => contains(s, query)));
     else setService(fetch);
     setQuery(query);
   };
@@ -42,7 +44,11 @@ const ConsultAllServices = ({ navigation }) => {
   return (
     <Page>
       <Header type="menu" title="Nos prestations" navigation={navigation} />
-      <Searchbar query={query} setQuery={search} />
+      <Searchbar
+        query={query}
+        setQuery={search}
+        plh={"Rechercher un service"}
+      />
 
       <FlatList
         data={services}
@@ -56,15 +62,17 @@ const ConsultAllServices = ({ navigation }) => {
       />
 
       {is_admin && (
-        <Round
+        <Absolute
           text={"+"}
-          size={60}
-          enabled={true}
-          style_txt_enabled={styles.txt_add}
-          style_ctn_enabled={styles.btn_add}
-          func={() => controller.add.service(navigation)}
+          bottom={118}
+          right={150}
+          left={150}
+          ctn_style={styles.btn_add}
+          txt_style={styles.txt_add}
         />
       )}
+
+      <Footer navigation={navigation} current={"AllServices"} />
     </Page>
   );
 };
@@ -78,13 +86,11 @@ const styles = StyleSheet.create({
   },
 
   btn_add: {
-    position: "absolute",
-    bottom: 30,
-    right: 30,
+    borderColor: "#f5f5f5",
   },
 
   txt_add: {
-    fontSize: 25,
-    top: -1,
+    fontWeight: "600",
+    fontSize: 20,
   },
 });

@@ -8,14 +8,14 @@ import {
 } from "react-native";
 import { ICON } from "constants/IMAGES";
 
-const Searchbar = ({ query, setQuery }) => {
+const Searchbar = ({ query, setQuery, plh }) => {
   return (
     <View style={styles.container_search}>
       <TextInput
         style={styles.search}
         value={query}
         returnKeyType="search"
-        placeholder="Rechercher un service"
+        placeholder={plh}
         onChangeText={(t) => setQuery(t)}
       />
       <TouchableOpacity style={styles.btn_clear} onPress={() => setQuery("")}>

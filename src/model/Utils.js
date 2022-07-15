@@ -78,10 +78,10 @@ export default {
 
     if (fr_day.length === 0) return { key: "Fermé", value: "tous les jours." };
     if (fr_day.length === 1)
-      return { key: "Ouvert le", value: fr_day[0] + "." };
+      return { key: "Ouvert les", value: fr_day[0] + "." };
 
     var last_day = fr_day.pop();
-    var text = fr_day.join(", ") + " et le " + last_day + ".";
+    var text = fr_day.join(", ") + " et " + last_day + ".";
     return { key: "Ouvert les", value: text };
   },
 };

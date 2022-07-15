@@ -3,8 +3,14 @@ import { TouchableOpacity, Image, StyleSheet, Linking } from "react-native";
 import { ICON } from "constants/IMAGES";
 
 const Social = () => {
+  const onPress = async () => {
+    const url = "https://www.instagram.com/oh.wow.rades/";
+    await Linking.canOpenURL(url);
+    Linking.openURL(url);
+  };
+
   return (
-    <TouchableOpacity style={styles.link}>
+    <TouchableOpacity style={styles.link} onPress={onPress}>
       <Image style={styles.icon} source={ICON.insta} />
     </TouchableOpacity>
   );

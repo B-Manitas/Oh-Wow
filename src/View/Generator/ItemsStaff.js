@@ -27,7 +27,7 @@ export const ItemsStaff = ({ onChange, all }) => {
   if (staff == undefined)
     return <Picker.Item key={0} value={null} label={"Chargement..."} />;
   else
-    return staff.map((item, id) => {
-      return <Picker.Item key={id} value={item._id} label={item.firstname} />;
-    });
+    return staff.map((item, id) => (
+      <Picker.Item key={id} value={item._id} label={item.firstname} />
+    ));
 };

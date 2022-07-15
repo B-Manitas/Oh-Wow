@@ -9,22 +9,20 @@ const Service = ({ data, navigation }) => {
       <TouchableOpacity
         onPress={() => navigation.navigate("Service", { data })}
       >
+        <Image source={{ uri: data.img }} style={styles.img} />
         <View style={styles.info}>
           <Text style={styles.info_h1}>{data.name}</Text>
           <Text style={styles.info_h2}>
             {data.price}€ - {CDate.toTimeString(data.duration)}
           </Text>
         </View>
-        <Image source={{ uri: data.img }} style={styles.img} />
       </TouchableOpacity>
-      <Round
-        text="RDV"
-        style_ctn_enabled={styles.btn_rdv}
-        style_txt_enabled={styles.txt_rdv}
-        size={40}
-        enabled={true}
-        func={() => navigation.navigate("Booking", { data })}
-      />
+      <TouchableOpacity
+        style={styles.btn_apt}
+        onPress={() => navigation.navigate("Booking", { data })}
+      >
+        <Text style={styles.txt_apt}>Prendre rendez-vous</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -51,13 +49,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 50,
-    borderWidth: 1,
+    borderWidth: 2,
     paddingHorizontal: 10,
     paddingVertical: 2,
-    borderTopLeftRadius: 3,
-    borderTopRightRadius: 3,
     borderBottomWidth: 0,
     backgroundColor: "#fff",
+    borderColor: "#f5f5f5",
   },
 
   info_h1: {
@@ -69,22 +66,24 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    borderWidth: 1,
+    borderColor: "#f5f5f5",
+    borderWidth: 2,
     backgroundColor: "#fff",
     width: "100%",
     height: 100,
     resizeMode: "cover",
   },
 
-  btn_rdv: {
-    position: "absolute",
+  btn_apt: {
     backgroundColor: "#fff",
-    bottom: 0,
-    right: 0,
-    borderColor: "#383838",
+    borderWidth: 2,
+    borderColor: "#f5f5f5",
+    paddingVertical: 8,
+    borderTopWidth: 1,
   },
 
-  txt_rdv: {
-    fontWeight: "300",
+  txt_apt: {
+    textAlign: "center",
+    fontWeight: "500",
   },
 });

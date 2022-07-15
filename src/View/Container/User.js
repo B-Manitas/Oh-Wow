@@ -4,7 +4,7 @@ import { controller } from "model/Main";
 const User = ({ navigation, data }) => {
   const status = () => {
     if (data.is_admin) return "admin";
-    else if (data.id_salon != null) return "employer";
+    else if (data.id_salon != null) return "employé";
     else return "";
   };
 
@@ -31,23 +31,25 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginHorizontal: 30,
     marginVertical: 5,
-    borderWidth: 1,
-    borderRadius: 5,
+    borderWidth: 2,
+    borderRadius: 2,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
 
-    elevation: 5,
+    elevation: 2,
     backgroundColor: "#fff",
+    borderColor: "#f5f5f5",
   },
 
   h1: {
     fontWeight: "500",
     fontSize: 20,
+    color: "#383838",
   },
 
   h2: {

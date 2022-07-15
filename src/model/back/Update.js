@@ -1,4 +1,4 @@
-import { STAFF, SALON, SERVICE, USER } from "./Collection";
+import { STAFF, SALON, SERVICE, USER, APP } from "./Collection";
 import { Request } from "./Request";
 
 export class Update extends Request {
@@ -21,6 +21,10 @@ export class Update extends Request {
 
   async salon(data) {
     await this.updateOne(SALON, { _id: data._id }, { $set: { ...data } }, true);
+  }
+
+  async app(data) {
+    await this.updateOne(APP, { _id: data._id }, { $set: { ...data } }, true);
   }
 
   async staff(data) {

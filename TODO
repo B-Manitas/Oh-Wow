@@ -1,3 +1,7 @@
+ALL
+☐ Traduire les dates
+☐ Test longues phrases
+
 Appointment
 ☐ Suppresion rdv
 
@@ -28,12 +32,15 @@ Settings
 ☐ Faire en sorte qu'un employer ne puisse pas changer son mdp et supprimer son compte ?
 ☐ Un admin puisse deconnecter un employer de force
 
+Gestion Salons
+☐ PM après AM, vérifier overlap 
+
 CAS LIMITE
 ☐ lookup request après une supression
 
 Question Générale
 ☐ Y a t-il un mail dans les contacts ?
     => Si oui, un pour chaque salon ?
-☐ Un numero de tel par salon ou pour l'app ?
+✔ Un numero de tel par salon ou pour l'app ? @done(22-07-15 11:57)
 ☐ Quels est l'index des numéros de teléphone ?
 ☐ Que faire si supresion d'un staff

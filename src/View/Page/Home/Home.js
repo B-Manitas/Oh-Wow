@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Dimensions,
   FlatList,
   RefreshControl,
@@ -8,37 +9,52 @@ import {
 } from "react-native";
 
 import Page from "../../Container/Page";
-import Header from "../../Parts/Header";
 
 import HomeHeader from "./HomeHeader";
 import ServiceLarge from "../../Container/Service/ServiceLarge";
-import Splash from "../Splash";
 
 import { controller as ctrl } from "model/Main";
 import Footer from "../../Parts/Footer";
 import Absolute from "../../Buttons/Absolute";
 import { ICON } from "../../../constants/IMAGES";
+import _ from "lodash";
 
 const Home = ({ navigation }) => {
   const [is_refreshing, setIsRefreshing] = useState(false);
   const [services, setService] = useState(undefined);
 
   const fetchService = () => ctrl.get.allServices(setIsRefreshing, setService);
+  const [fetch, setFetch] = useState(undefined);
+  const [app, setApp] = useState(undefined);
+
+  // console.log(fetch);
+
   useEffect(() => {
     fetchService();
+    ctrl.get.app(setFetch, setApp);
   }, []);
 
-  if (!services) return <Text>Fetching data...</Text>;
+  useEffect(() => {
+    if (!_.isEqual(fetch, app)) {
+      ctrl.update.app(app);
+      setFetch(app);
+      Alert.alert("App updated");
+    }
+  }, [app]);
+
+  if (!services || !app) return <Text>Fetching data...</Text>;
   return (
     <Page>
       <FlatList
-        extraData={services}
-        data={services}
+        extraData={services.filter((s) => s.is_trend && !s.is_hidden)}
+        data={services.filter((s) => s.is_trend && !s.is_hidden)}
         renderItem={(item) => (
           <ServiceLarge navigation={navigation} data={item.item} />
         )}
         keyExtractor={(item) => item._id}
-        ListHeaderComponent={<HomeHeader refreshing={is_refreshing} />}
+        ListHeaderComponent={
+          <HomeHeader refreshing={is_refreshing} setApp={setApp} app={app} />
+        }
         ListHeaderComponentStyle={[styles.header, is_refreshing && { top: 90 }]}
         style={styles.container}
         refreshing={is_refreshing}

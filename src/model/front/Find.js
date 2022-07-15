@@ -95,4 +95,9 @@ export class Find extends SuperFrontend {
     const resp = await this.backend.get.userApt(id);
     funcs.map((func) => func(resp));
   }
+
+  async app(...funcs) {
+    const resp = await this.backend.get.app();
+    funcs.map((func) => func(resp));
+  }
 }

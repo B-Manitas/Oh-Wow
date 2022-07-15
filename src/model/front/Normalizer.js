@@ -53,6 +53,7 @@ export class Normalizer extends Schema {
       case "name":
       case "date":
       case "description":
+      case "address":
         return value;
 
       case "longitude":

@@ -1,9 +1,12 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-import { PHOTO } from "../../../constants/IMAGES";
+import { PHOTO } from "constants/IMAGES";
+import Absolute from "../../Buttons/Absolute";
 
-const Home = ({ refreshing }) => {
+import { controller as ctrl } from "model/Main";
+
+const HomeHeader = ({ refreshing, app, setApp }) => {
   return (
     <View style={styles.container}>
       <View style={styles.refresh}>
@@ -11,13 +14,20 @@ const Home = ({ refreshing }) => {
           {refreshing ? "Chargement..." : "Tirer pour rafraichir"}
         </Text>
       </View>
-      <Image source={PHOTO.home} style={styles.image} />
+      <Image source={{ uri: app?.img }} style={styles.image} />
+      <Absolute
+        text={"Modifier"}
+        top={60}
+        right={20}
+        ctn_style={styles.btn_edit}
+        func={() => ctrl.update.image(setApp)}
+      />
       <Text style={styles.h1}>Oh Wow</Text>
     </View>
   );
 };
 
-export default Home;
+export default HomeHeader;
 
 const styles = StyleSheet.create({
   container: {
@@ -51,6 +61,25 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
+  },
+
+  btn_edit: {
+    backgroundColor: "#fff",
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    margin: 1,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+    borderWidth: 0,
+    borderColor: "#383838",
   },
 
   h1: {

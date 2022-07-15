@@ -66,7 +66,7 @@ export class Schema {
       is_opened: true,
       phone: "",
       longitude: 0,
-      latitude: 0
+      latitude: 0,
     };
   }
 
@@ -105,5 +105,12 @@ export class Schema {
 
   schemaAccess(_id = "", password = "") {
     return { _id, password };
+  }
+
+  schemaApp() {
+    return {
+      _id: Date.now().toString(),
+      img: "data:image/jpg;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
+    };
   }
 }

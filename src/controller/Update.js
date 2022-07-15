@@ -43,4 +43,9 @@ export class Update extends SuperController {
 
     Alert.alert("Modifications sauvegardées");
   }
+
+  @Catch
+  async app(app) {
+    await this.frontend.update.app(app)
+  }
 }

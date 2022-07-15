@@ -11,6 +11,10 @@ export class Update extends SuperFrontend {
     await this._actions(user, update_back.user.bind(update_back), setAudit);
   }
 
+  async app(app) {
+    await this.backend.update.app(app);
+  }
+
   async salon(salon, setAudit) {
     const update_back = this.backend.update;
     await this._actions(salon, update_back.salon.bind(update_back), setAudit);

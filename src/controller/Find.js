@@ -4,16 +4,18 @@ import { addUserStore, updateStatus } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
 import Utils from "model/Utils";
+import _ from "lodash";
 
 export class Find extends SuperController {
   @Catch
   allServices(setIsRefreshing, ...funcs) {
-    if (setIsRefreshing) setIsRefreshing(true);
-    // const data_store = store.getState().services;
-    // if (Utils.isEquals(data_store, []))
-    // else funcs.forEach((func) => func(data_store));
-    this.frontend.get.allServices(...funcs);
-    if (setIsRefreshing) setIsRefreshing(false);
+    setIsRefreshing(true);
+
+    const data_store = store.getState().services;
+    if (_.isEmpty(data_store)) this.frontend.get.allServices(...funcs);
+    else funcs.forEach((func) => func(data_store));
+
+    setTimeout(() => setIsRefreshing(false), 1000);
   }
 
   @Catch
@@ -26,6 +28,11 @@ export class Find extends SuperController {
   async salon(...funcs) {
     const data = await this.frontend.get.allSalons();
     funcs.forEach((func) => func(data[0]));
+  }
+
+  @Catch
+  app(...funcs) {
+    this.frontend.get.app(...funcs);
   }
 
   @Catch
