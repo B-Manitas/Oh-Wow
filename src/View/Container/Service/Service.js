@@ -11,7 +11,9 @@ const Service = ({ data, navigation }) => {
       >
         <Image source={{ uri: data.img }} style={styles.img} />
         <View style={styles.info}>
-          <Text style={styles.info_h1}>{data.name}</Text>
+          <Text style={styles.info_h1} numberOfLines={2}>
+            {data.name}
+          </Text>
           <Text style={styles.info_h2}>
             {data.price}€ - {CDate.toTimeString(data.duration)}
           </Text>

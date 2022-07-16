@@ -3,6 +3,7 @@ import { addUserStore } from "store/ActionsCreator";
 import Utils from "model/Utils";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
+import CDate from "../model/utils/CDate";
 
 export class Add extends SuperController {
   /**

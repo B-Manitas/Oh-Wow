@@ -4,7 +4,7 @@
     "slug": "Oh-Wow",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon/logo.ico",
+    "icon": "./assets/img/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",

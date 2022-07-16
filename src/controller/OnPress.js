@@ -5,6 +5,7 @@ import Catch from "exceptions/ErrorsCatcher";
 import _ from "lodash";
 import { Alert } from "react-native";
 import Utils from "model/Utils";
+import CDate from "../model/utils/CDate";
 
 export class OnPress extends SuperController {
   aptDay(setApt, setDate, date) {

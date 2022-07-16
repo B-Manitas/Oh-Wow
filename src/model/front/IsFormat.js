@@ -20,7 +20,7 @@ export class IsFormat extends Normalizer {
     this._FORMAT_PHONE = /^([0-9]){2}( \d{2}){4}$/;
     this._FORMAT_DATE = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/;
     this._FORMAT_PASSWORD = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
-    this._FORMAT_HOURS = /^(?:([01]?[0-9]|2[0-3])h)?[0-5][0-9](?:min)?$/;
+    this._FORMAT_HOURS = /^(?:([01]?[0-9]|2[0-3])h)?(?:[0-5][0-9](?:min)?)?$/;
     this._FORMAT_MMDD = /^[0-3][0-9]\/[01][0-9]$/;
     this._FORMAT_FLOAT = /^[0-9\.]{1,}$/;
     this._FORMAT_INT = /^[0-9]{1,}$/;

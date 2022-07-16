@@ -19,8 +19,11 @@ const ConsultService = ({ navigation, route }) => {
   const [setting, setSetting] = useState(false);
 
   const [isEdit, setIsEdit] = useState(false);
+  const is_disabled_apt =
+    !_.isEqual(service, service_init) ||
+    _.isEqual(service, ctrl.frontend.schemaService());
 
-  const onClose = () => ctrl.onClose.service(service, service_init, navigation);
+  const onClose = () => ctrl.onClose.service(service, init, navigation);
 
   const openSetting = () => {
     setIsEdit(false);
@@ -83,15 +86,12 @@ const ConsultService = ({ navigation, route }) => {
 
       {!setting && (
         <Absolute
-          disabled={
-            _.isEqual(service, service_init) ||
-            _.isEqual(service, ctrl.schema.schemaService())
-          }
+          disabled={is_disabled_apt}
           bottom={35}
           right={35}
           left={35}
           text={"Prendre rendez-vous"}
-          ctn_style={styles.btn_apt}
+          ctn_style={[styles.btn_apt, is_disabled_apt && { opacity: 0.5 }]}
           txt_style={styles.txt_apt}
           func={() => navigation.navigate("Booking", { data: init })}
         />

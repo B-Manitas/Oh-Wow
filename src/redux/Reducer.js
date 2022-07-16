@@ -55,6 +55,7 @@ export const serviceReducer = (state = state_service, action) => {
 
     case UPDATE_SERVICES:
       const id = state.findIndex((s) => s._id === action.payload.service._id);
+
       if (id == -1) return [...state, action.payload.service];
       else
         return state.map((item, i) => {

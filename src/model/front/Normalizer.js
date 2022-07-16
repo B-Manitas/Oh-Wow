@@ -103,8 +103,8 @@ export class Normalizer extends Schema {
     else
       return {
         ...offer,
-        firstname: this.formatFirstname(offer.firstname),
-        lastname: this.formatLastname(offer.lastname),
+        firstname: this.firstname(offer.firstname),
+        lastname: this.lastname(offer.lastname),
       };
   }
 
@@ -113,7 +113,8 @@ export class Normalizer extends Schema {
 
     time = time.replace(/[^h0-9]/g, "");
     const [minutes, hours] = time.split("h").reverse();
-    return 60 * parseInt(hours || 0) + parseInt(minutes);
+
+    return 60 * parseInt(hours || 0) + parseInt(minutes || 0);
   }
 
   number(value) {

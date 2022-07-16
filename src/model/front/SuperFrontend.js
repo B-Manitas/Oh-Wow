@@ -24,8 +24,7 @@ export class SuperFrontend extends Approver {
   async _actions(data, func_backend, setAudit) {
     if (setAudit != undefined) this._approveData(data, setAudit);
 
-    data = this.formatDict(data);
-    return await func_backend(data);
+    return await func_backend(this.formatDict(data));
   }
 
   async _isExisting(funck_backend, id) {

@@ -3,13 +3,13 @@ import { SuperController } from "./SuperController";
 import { addUserStore, updateStatus } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
-import Utils from "model/Utils";
 import _ from "lodash";
 
 export class Find extends SuperController {
   @Catch
   allServices(setIsRefreshing, ...funcs) {
     setIsRefreshing(true);
+    this.frontend.get.allServices(...funcs);
 
     const data_store = store.getState().services;
     if (_.isEmpty(data_store)) this.frontend.get.allServices(...funcs);

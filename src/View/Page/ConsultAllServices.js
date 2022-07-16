@@ -36,7 +36,7 @@ const ConsultAllServices = ({ navigation }) => {
   };
 
   const search = (query) => {
-    if (query != "") setService(services.filter((s) => contains(s, query)));
+    if (query != "") setService(fetch.filter((s) => contains(s, query)));
     else setService(fetch);
     setQuery(query);
   };

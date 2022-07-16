@@ -5,7 +5,6 @@ import {
   FlatList,
   RefreshControl,
   StyleSheet,
-  Text,
 } from "react-native";
 
 import Page from "../../Container/Page";
@@ -19,17 +18,19 @@ import Absolute from "../../Buttons/Absolute";
 import { ICON } from "../../../constants/IMAGES";
 import _ from "lodash";
 import Loader from "../Loader";
+import { fetchServices } from "store/ActionsCreator";
 
 const Home = ({ navigation }) => {
   const [is_refreshing, setIsRefreshing] = useState(false);
   const [services, setService] = useState(undefined);
 
-  const fetchService = () => ctrl.get.allServices(setIsRefreshing, setService);
+  const fetchData = () =>
+    ctrl.get.allServices(setIsRefreshing, setService, fetchServices);
   const [fetch, setFetch] = useState(undefined);
   const [app, setApp] = useState(undefined);
 
   useEffect(() => {
-    fetchService();
+    fetchData();
     ctrl.get.app(setFetch, setApp);
   }, []);
 
@@ -61,7 +62,7 @@ const Home = ({ navigation }) => {
           <RefreshControl
             tintColor={"#fff"}
             refreshing={is_refreshing}
-            onRefresh={fetchService}
+            onRefresh={fetchData}
           />
         }
       />

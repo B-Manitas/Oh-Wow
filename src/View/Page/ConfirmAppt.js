@@ -23,7 +23,8 @@ const ConfirmAppt = ({ navigation, route }) => {
   const apt_date = new CDate(apt.date);
 
   const radioOffer = (id) => ctrl.onPress.radioOffer(setApt, setRadio, id);
-  const updateOffer = () => setApt((p) => ({ ...p, offer: { [key]: value } }));
+  const updateOffer = (k, t) =>
+    setApt((p) => ({ ...p, offer: { ...p.offer, [k]: t } }));
 
   return (
     <Page>
@@ -82,11 +83,13 @@ const ConfirmAppt = ({ navigation, route }) => {
           typeAndroid={"tel"}
           typeIOS={"telephoneNumber"}
           returnKeyType={"done"}
-          maxLength={10}
+          maxLength={14}
           keyboardType={"phone-pad"}
           isValidFormat={audit.offer?.phone}
           value={radio ? apt.offer?.phone : user.phone}
-          setValue={(t) => updateOffer("phone", t)}
+          setValue={(t) =>
+            updateOffer("phone", ctrl.onFormat.phone(apt.offer?.phone, t))
+          }
           disabled={!radio}
         />
       </View>
@@ -95,7 +98,9 @@ const ConfirmAppt = ({ navigation, route }) => {
         <Text style={styles.h1}>Récapitulatif :</Text>
         <View style={styles.field}>
           <Text style={styles.h2_key}>Prestation :</Text>
-          <Text style={styles.h2_val}>{service.name}</Text>
+          <Text style={styles.h2_val} numberOfLines={2}>
+            {service.name}
+          </Text>
         </View>
 
         <View style={styles.field}>
@@ -206,13 +211,14 @@ const styles = StyleSheet.create({
   h2_key: {
     fontSize: 18,
     fontWeight: "400",
-    // textDecorationLine: "underline",
   },
 
   h2_val: {
     marginLeft: 10,
     fontSize: 18,
     fontWeight: "500",
+    flex: 1,
+    flexWrap: "wrap",
   },
 
   button_appt: {

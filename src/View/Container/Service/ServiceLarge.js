@@ -11,7 +11,9 @@ const ServiceLarge = ({ navigation, data }) => {
       <Image source={{ uri: data.img }} style={styles.img} />
 
       <View style={styles.container_text}>
-        <Text style={styles.h1}>{data.name}</Text>
+        <Text style={styles.h1} numberOfLines={2}>
+          {data.name}
+        </Text>
 
         <Text style={styles.h2} numberOfLines={2}>
           {data.description}
@@ -48,7 +50,6 @@ const styles = StyleSheet.create({
 
     elevation: 8,
     paddingRight: 10,
-    // height: 150,
   },
 
   container_text: {
@@ -60,11 +61,10 @@ const styles = StyleSheet.create({
     marginRight: 15,
     width: 115,
     height: 115,
-    // borderRadius: 2,
   },
 
   h1: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "500",
   },
 
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 
   info: {
     position: "absolute",
-    bottom: 0,
+    bottom: -10,
     fontWeight: "bold",
   },
 });

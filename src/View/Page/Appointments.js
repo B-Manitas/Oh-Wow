@@ -7,7 +7,7 @@ import Header from "../Parts/Header";
 import { controller } from "model/Main";
 
 const Appointments = ({ navigation }) => {
-  const [is_historic, setIsHistoric] = useState(0);
+  const [is_historic, setIsHistoric] = useState(1);
 
   const [upcoming, setUpcoming] = useState([]);
   const [historic, setHistoric] = useState([]);

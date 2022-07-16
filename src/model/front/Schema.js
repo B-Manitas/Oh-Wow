@@ -35,7 +35,6 @@ export class Schema {
       lastname: "",
       mail: "",
       phone: "",
-      birthdate: "2000-01-01",
       password: "",
     };
   }

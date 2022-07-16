@@ -6,17 +6,17 @@ const Appointment = ({ data }) => {
   const date = new CDate(data.date);
 
   return (
-    <View style={[styles.container, date.isPast() && {opacity: .5}]}>
+    <View style={[styles.container, date.isPast() && { opacity: 0.5 }]}>
       <TouchableOpacity style={styles.btn_img}>
         <Image source={ICON.trash} style={styles.img} />
       </TouchableOpacity>
 
-      <View style={styles.ctn_h1}>
-        <Text style={styles.h1}>{data.service}</Text>
-        <Text style={styles.h2}>
-          le {date.toDateString(true)} à {date.toTimeString()}
-        </Text>
-      </View>
+      <Text style={styles.h2}>
+        Le {date.toDateString(true)} à {date.toTimeString()}
+      </Text>
+      <Text style={styles.h1} numberOfLines={1}>
+        {data.service}
+      </Text>
 
       <Text style={styles.h3}>Salon : {data.salon}.</Text>
       <Text style={styles.h3}>Esthéticienne : {data.staff}.</Text>
@@ -34,12 +34,14 @@ export default Appointment;
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 30,
+    marginHorizontal: 15,
     marginVertical: 5,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingLeft: 10,
+    paddingRight: 35,
     borderWidth: 1,
     borderRadius: 5,
+    borderColor: "#a5a5a5",
   },
 
   btn_img: {
@@ -64,6 +66,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginRight: 5,
     textDecorationLine: "underline",
+    flex: 1,
+    flexWrap: "wrap",
   },
 
   h2: {
