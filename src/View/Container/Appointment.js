@@ -2,12 +2,15 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { ICON } from "constants/IMAGES";
 import CDate from "../../model/utils/CDate";
 
-const Appointment = ({ data }) => {
+const Appointment = ({ data, deleteApt }) => {
   const date = new CDate(data.date);
 
   return (
     <View style={[styles.container, date.isPast() && { opacity: 0.5 }]}>
-      <TouchableOpacity style={styles.btn_img}>
+      <TouchableOpacity
+        style={styles.btn_img}
+        onPress={() => deleteApt(data._id)}
+      >
         <Image source={ICON.trash} style={styles.img} />
       </TouchableOpacity>
 

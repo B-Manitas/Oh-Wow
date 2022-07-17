@@ -12,6 +12,7 @@ import { SwipeablePanel } from "rn-swipeable-panel";
 import _ from "lodash";
 import PlanningsHeader from "./PlanningsHeader";
 import Loader from "../Loader";
+import ItemAptPlannings from "../../Container/ItemAptPlannings";
 
 const Plannings = ({ navigation }) => {
   const [date, setDate] = useState(CDate.today());
@@ -47,6 +48,12 @@ const Plannings = ({ navigation }) => {
     setIsActive(true);
   };
 
+  const deleteApt = (id) => {
+    ctrl.delete.appointment(id);
+    setPlannings((p) => p.filter((item) => item._id != id));
+    setSelectedPlanning((p) => p.filter((item) => item._id != id));
+  };
+
   if (!plannings) return <Loader />;
   return (
     <Page>
@@ -73,27 +80,7 @@ const Plannings = ({ navigation }) => {
         </Text>
 
         {selected_plannings.map((apt) => (
-          <View key={apt._id} style={styles.ctn_apt}>
-            <Text style={styles.apt_h1}>
-              {new CDate(apt.date).toTimeString()} - {apt.service}
-            </Text>
-            <View style={styles.apt_h2}>
-              <Text>
-                Clients: {apt.firstname} {apt.lastname} - Tél: {apt.phone}
-              </Text>
-            </View>
-            {apt.offer && (
-              <View style={styles.apt_h2}>
-                <Text>
-                  Pour: {apt.offer.firstname} {apt.offer.lastname} - Tél:{" "}
-                  {apt.offer.phone}
-                </Text>
-              </View>
-            )}
-            <View style={styles.apt_h2}>
-              <Text>Salon: {apt.salon}</Text>
-            </View>
-          </View>
+          <ItemAptPlannings key={apt._id} apt={apt} deleteApt={deleteApt} />
         ))}
       </SwipeablePanel>
     </Page>
@@ -126,17 +113,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: "#c3c3c3",
     borderWidth: 1,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.22,
-    // shadowRadius: 2.22,
-
-    // elevation: 3,
-
-    // elevation: 5,
     marginHorizontal: 15,
     marginBottom: 10,
   },

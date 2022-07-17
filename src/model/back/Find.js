@@ -157,8 +157,8 @@ export class Find extends Request {
 
   async userApt(id, is_historic) {
     const date = is_historic
-      ? { $gte: new CDate().getTimestamp() }
-      : { $lt: new CDate().getTimestamp() };
+      ? { $lt: new CDate().getTimestamp() }
+      : { $gte: new CDate().getTimestamp() };
 
     return await this.aggregate(APPT, [
       { $match: { id_user: id, date } },

@@ -38,4 +38,10 @@ export class Delete extends SuperController {
 
     setSelect(id > 0 ? id - 1 : 0);
   }
+
+  @Catch
+  async appointment(id) {
+    await this.frontend.delete.appointment(id);
+    Alert.alert(`Your appointment has been succesfully removed.`);
+  }
 }

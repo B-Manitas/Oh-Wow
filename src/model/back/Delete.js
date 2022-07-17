@@ -1,5 +1,5 @@
 import { Request } from "./Request";
-import { SALON, SERVICE, USER } from "./Collection";
+import { APPT, SALON, SERVICE, USER } from "./Collection";
 
 export class Delete extends Request {
   async user(user_id) {
@@ -16,5 +16,9 @@ export class Delete extends Request {
 
   async salon(id) {
     await this.deleteOne(SALON, { _id: id });
+  }
+
+  async appointment(id) {
+    await this.deleteOne(APPT, { _id: id });
   }
 }

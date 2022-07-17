@@ -67,6 +67,7 @@ export default class ErrorHandler {
 
   /** Catching the NetworkStatuError. */
   manageBadStatus() {
+    console.log(this.error);
     Alert.alert(
       "Network Status Error",
       `Please contact the developer for the error status code ${this.error.status}`

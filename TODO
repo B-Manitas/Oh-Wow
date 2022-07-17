@@ -4,7 +4,8 @@ ALL
 ☐ Ajouter alert audit error
 
 Appointment
-☐ Suppresion rdv
+✔ Suppresion rdv @done(22-07-17 11:05)
+☐ Redesign apt et ajouter "pour"
 
 Contact page
 ✔ Ajouter les horaires d'ouvertures et fermeture. @done(22-07-13 15:54)
@@ -20,6 +21,7 @@ ConsultService
 ✔ BUGS lorsqu'on modifie le service à cause de addUserStore @done(22-07-11 13:59) @lasted(35s)
 
 Booking
+☐ [IMPORTANT] BUGS RDV OVERLAP
 ☐ Fix size pour petite durée
 
 Staff

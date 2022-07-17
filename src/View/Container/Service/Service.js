@@ -3,13 +3,21 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import CDate from "../../../model/utils/CDate";
 import Round from "../../Buttons/Round";
 
+import { controller as ctrl } from "model/Main";
+
 const Service = ({ data, navigation }) => {
+  const onPressBook = () => {
+    if (ctrl.this_is_connected) navigation.navigate("Booking", { data });
+    else navigation.navigate("Connection");
+  };
+
   return (
     <View style={[styles.container, data.is_hidden && { opacity: 0.7 }]}>
       <TouchableOpacity
         onPress={() => navigation.navigate("Service", { data })}
       >
         <Image source={{ uri: data.img }} style={styles.img} />
+      
         <View style={styles.info}>
           <Text style={styles.info_h1} numberOfLines={2}>
             {data.name}
@@ -19,10 +27,8 @@ const Service = ({ data, navigation }) => {
           </Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.btn_apt}
-        onPress={() => navigation.navigate("Booking", { data })}
-      >
+
+      <TouchableOpacity style={styles.btn_apt} onPress={onPressBook}>
         <Text style={styles.txt_apt}>Prendre rendez-vous</Text>
       </TouchableOpacity>
     </View>

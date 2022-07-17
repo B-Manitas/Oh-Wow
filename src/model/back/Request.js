@@ -38,7 +38,7 @@ export class Request {
       headers: this._headers,
     });
 
-    if (!response.ok) throw new BadStatus(response.status);
+    if (!response.ok) throw new BadStatus(response);
     return response.json();
   }
 

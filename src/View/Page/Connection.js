@@ -20,16 +20,18 @@ const Connection = ({ navigation }) => {
         <Primary
           width={"75%"}
           font_size={28}
-          height={20}
+          height={15}
           text={"Créer un compte"}
           func={() => navigation.navigate("SignUp")}
-        />
+          is_active={true}
+          />
         <Primary
           width={"75%"}
           font_size={28}
-          height={20}
+          height={15}
           text={"Se connecter"}
           func={() => navigation.navigate("Login")}
+          is_active={true}
         />
       </View>
 
