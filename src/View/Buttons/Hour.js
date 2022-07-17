@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import Round from "./Round";
 
 const Hour = ({ hour, is_available, func, is_selected }) => {
-  const colors = is_available ? "#383838" : "#CECECE";
+  const colors = is_available ? "#383838" : "#faa4af";
 
   return (
     <Round
@@ -23,8 +23,8 @@ export default Hour;
 
 const styles = StyleSheet.create({
   ctn_enabled: {
-    backgroundColor: "#4489C5",
-    borderColor: "#4489C5",
+    backgroundColor: "#faa4af",
+    borderColor: "#faa4af",
   },
 
   txt_enabled: {

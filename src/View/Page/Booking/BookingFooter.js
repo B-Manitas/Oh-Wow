@@ -21,6 +21,7 @@ const BookingFooter = ({ date, calendar, navigation, onPress, data }) => {
         text={"Prendre RDV"}
         height={10}
         font_size={18}
+        
         style={styles.button_appt}
         is_active={!date_appointment.isZeroTime()}
         func={() => navigation.navigate("ConfirmAppt", data)}
@@ -36,5 +37,6 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     marginTop: 15,
     marginBottom: 30,
+    backgroundColor: "#faa4af"
   },
 });

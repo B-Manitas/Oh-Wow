@@ -63,7 +63,7 @@ const ConsultService = ({ navigation, route }) => {
                   <Text style={styles.txt_drop}>Paramètre</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btn_drop} onPress={openImage}>
-                  <Text style={styles.txt_drop}>Nouvelle photo</Text>
+                  <Text style={styles.txt_drop}>Ajout photo</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -152,12 +152,14 @@ const styles = StyleSheet.create({
   },
 
   btn_apt: {
-    borderColor: "#d5d5d5",
-    borderWidth: 2,
+    // borderColor: "#fff",
+    borderWidth: 0,
+    backgroundColor: "#faa4af"
   },
 
   txt_apt: {
-    fontWeight: "500",
+    fontWeight: "600",
+    color: "#fff",
     fontSize: 22,
   },
 });

@@ -19,6 +19,8 @@ const Search = ({ navigation }) => {
     setUsers(fetch);
   }, [fetch]);
 
+  console.log(fetch);
+
   const contains = (user, query) => {
     const query_formatted = query.toLowerCase();
 

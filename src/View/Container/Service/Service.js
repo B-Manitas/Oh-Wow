@@ -17,7 +17,7 @@ const Service = ({ data, navigation }) => {
         onPress={() => navigation.navigate("Service", { data })}
       >
         <Image source={{ uri: data.img }} style={styles.img} />
-      
+
         <View style={styles.info}>
           <Text style={styles.info_h1} numberOfLines={2}>
             {data.name}
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 5,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    
+    elevation: 10,
   },
 
   info: {
@@ -62,7 +62,10 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     borderBottomWidth: 0,
     backgroundColor: "#fff",
-    borderColor: "#f5f5f5",
+    borderColor: "#faa4af",
+    // borderRadius: 5,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
   },
 
   info_h1: {
@@ -74,7 +77,10 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    borderColor: "#f5f5f5",
+    // borderRadius: 15,
+    // borderBottomLeftRadius: 5,
+    // borderBottomRightRadius: 5,
+    borderColor: "#faa4af",
     borderWidth: 2,
     backgroundColor: "#fff",
     width: "100%",
@@ -85,13 +91,17 @@ const styles = StyleSheet.create({
   btn_apt: {
     backgroundColor: "#fff",
     borderWidth: 2,
-    borderColor: "#f5f5f5",
+    borderColor: "#faa4af",
     paddingVertical: 8,
     borderTopWidth: 1,
+    borderRadius: 0,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
   },
 
   txt_apt: {
     textAlign: "center",
-    fontWeight: "500",
+    fontWeight: "800",
+    color: "#faa4af"
   },
 });

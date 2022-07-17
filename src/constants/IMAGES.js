@@ -1,5 +1,5 @@
 export const ICON = {
-  menu: require("icon/menu.png"),
+  menu: require("icon/menu_.png"),
   back: require("icon/back.png"),
   close: require("icon/close.png"),
   insta: require("icon/instagram.png"),

@@ -1,3 +1,5 @@
+Ajouter Pris et dans mes RDV
+
 ALL
 ☐ Traduire les dates
 ☐ Test longues phrases
@@ -44,6 +46,11 @@ CAS LIMITE
 Question Générale
 ☐ Y a t-il un mail dans les contacts ?
     => Si oui, un pour chaque salon ?
-✔ Un numero de tel par salon ou pour l'app ? @done(22-07-15 11:57)
-☐ Quels est l'index des numéros de teléphone ?
+    ✔ Un numero de tel par salon ou pour l'app ? @done(22-07-15 11:57)
+    ☐ Quels est l'index des numéros de teléphone ?
 ☐ Que faire si supresion d'un staff
+☐ La modification des durée, h_am et h_pm entraine une incohérence des rdvs
+
+
+main #faa4af
+28 17 01 83 

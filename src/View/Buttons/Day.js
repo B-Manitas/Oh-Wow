@@ -24,19 +24,19 @@ const Day = ({ day, date, onPressDay }) => {
       ...params,
       style_txt_enabled: styles.selected_txt,
       style_ctn_enabled: styles.selected_ctn,
-      colors: "#4489C5",
+      colors: "#faa4af",
     };
   else if (is_today && is_selected)
     params = {
       ...params,
       style_txt_enabled: styles.selected_txt,
       style_ctn_enabled: styles.selected_ctn,
-      colors: "#D95959",
+      colors: "#faa4af",
     };
   else if (is_today && !is_selected)
     params = {
       ...params,
-      colors: "#D95959",
+      colors: "#000",
       style_ctn_enabled: undefined,
       style_txt_enabled: undefined,
     };
@@ -48,16 +48,16 @@ export default Day;
 
 const styles = StyleSheet.create({
   enabled_ctn: {
-    borderColor: "#383838",
+    borderColor: "#faa4af",
   },
 
   enabled_txt: {
-    color: "#383838",
+    color: "#faa4af",
   },
 
   selected_ctn: {
-    backgroundColor: "#4489C5",
-    borderColor: "#4489C5",
+    backgroundColor: "#faa4af",
+    borderColor: "#faa4af",
   },
 
   selected_txt: {

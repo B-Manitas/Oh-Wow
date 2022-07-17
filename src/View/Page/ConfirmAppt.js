@@ -42,10 +42,12 @@ const ConfirmAppt = ({ navigation, route }) => {
           text={"Pour moi"}
           id={0}
           id_selected={radio}
+          style_txt_active={styles.txt_radio_on}
           onPress={radioOffer}
-        />
+          />
         <RadioBox
           style={styles.radio}
+          style_txt_active={styles.txt_radio_on}
           style_txt={styles.txt_radio}
           style_active={styles.radio_on}
           text={"Pour un proche"}
@@ -126,7 +128,7 @@ const ConfirmAppt = ({ navigation, route }) => {
         </View>
 
         <View style={styles.field}>
-          <Text style={styles.h2_key}>Tarifs :</Text>
+          <Text style={styles.h2_key}>Tarif :</Text>
           <Text style={styles.h2_val}>{service.price}€</Text>
         </View>
       </View>
@@ -158,7 +160,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 40,
-    backgroundColor: "#fff",
+    backgroundColor: "#faa4af",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -169,17 +171,22 @@ const styles = StyleSheet.create({
 
     elevation: 2,
     margin: 5,
-    borderColor: "#f5f5f5",
+    borderColor: "#faa4af",
     minWidth: 90,
   },
 
   txt_radio: {
     fontSize: 20,
-    fontWeight: "300",
+    fontWeight: "500",
+    color: "#fff"
   },
-
+  
+  txt_radio_on: {
+    color: "#faa4af",
+  },
+  
   radio_on: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#fff",
     flex: 2,
   },
 
@@ -223,7 +230,8 @@ const styles = StyleSheet.create({
 
   button_appt: {
     borderWidth: 2,
-    borderColor: "#f5f5f5",
+    backgroundColor: "#faa4af",
+    borderColor: "#faa4af",
     marginVertical: 30,
     marginHorizontal: 30,
   },

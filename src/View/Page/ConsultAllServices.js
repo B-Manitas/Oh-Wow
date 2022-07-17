@@ -44,7 +44,7 @@ const ConsultAllServices = ({ navigation }) => {
   if (!services) return <Loader />;
   return (
     <Page>
-      <Header type="menu" title="Nos prestations" navigation={navigation} />
+      <Header type="close"  title="Nos prestations" navigation={navigation} />
       <Searchbar
         query={query}
         setQuery={search}
@@ -88,11 +88,12 @@ const styles = StyleSheet.create({
   },
 
   btn_add: {
-    borderColor: "#f5f5f5",
+    borderColor: "#faa4af",
   },
 
   txt_add: {
     fontWeight: "600",
     fontSize: 20,
+    color: "#faa4af"
   },
 });

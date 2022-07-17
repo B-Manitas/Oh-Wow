@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   nav: {
     paddingVertical: 10,
     borderBottomWidth: 1,
+    // borderColor: "#faa4af"
   },
 
   button_nav: {
@@ -44,5 +45,6 @@ const styles = StyleSheet.create({
 
   text_nav: {
     fontSize: 20,
+    // color: "#faa4af"
   },
 });

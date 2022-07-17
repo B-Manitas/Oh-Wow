@@ -12,6 +12,7 @@ const Header = ({
   func,
   setValue,
   is_valid,
+  color,
 }) => {
   return (
     <View style={styles.header}>
@@ -30,7 +31,7 @@ const Header = ({
         />
       ) : (
         <Text
-          style={styles.title}
+          style={[styles.title, { color }]}
           adjustsFontSizeToFit={true}
           numberOfLines={1}
         >

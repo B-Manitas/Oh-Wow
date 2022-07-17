@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   ScrollView,
@@ -15,10 +15,15 @@ import Primary from "../../Buttons/Primary";
 import _ from "lodash";
 
 const ClientInfo = ({ data_client, setInit }) => {
+  const [salon, setSalon] = useState(null);
   const [client, setClient] = useState(data_client);
   const [audit, setAudit] = useState(ctrl.fakeAudit(data_client));
 
   const update = (key, v) => setClient((p) => ({ ...p, [key]: v }));
+
+  useEffect(() => {
+    ctrl.get.salon(setSalon);
+  }, []);
 
   return (
     <KeyboardAvoidingView
@@ -69,14 +74,14 @@ const ClientInfo = ({ data_client, setInit }) => {
         <View style={styles.section}>
           <Text style={styles.section_h1}>Gestion des droits</Text>
           <ToggleLong
-            text={"Employer"}
+            text={"Employé"}
             value={client.is_admin || client.id_salon != null}
-            setValue={(b) => update("id_salon", b)}
+            func={(b) => update("id_salon", b ? salon._id : null)}
           />
           <ToggleLong
             text={"Administrateur"}
             value={client.is_admin}
-            setValue={(b) => update("is_admin", b)}
+            func={(b) => update("is_admin", b)}
           />
         </View>
 

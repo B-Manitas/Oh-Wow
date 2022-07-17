@@ -37,20 +37,20 @@ const styles = StyleSheet.create({
   search: {
     backgroundColor: "#fff",
     borderWidth: 1,
+    borderColor: "#a5a5a5",
     borderRadius: 7,
     paddingLeft: 15,
     paddingRight: 40,
     paddingVertical: 10,
-    borderColor: "#c4c4c4",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 3,
     },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
-
-    elevation: 1,
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    
+    elevation: 7,
   },
 
   btn_clear: {

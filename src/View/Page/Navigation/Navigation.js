@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
+import { PHOTO } from "../../../constants/IMAGES";
 import Link from "../../Buttons/Link";
 
 import Page from "../../Container/Page";

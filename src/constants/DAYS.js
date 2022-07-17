@@ -11,13 +11,13 @@ export const DAYS = [
 ];
 
 export const FR_DAYS = [
-  "lundis",
-  "mardis",
-  "mercredis",
-  "jeudis",
-  "vendredis",
+  "lundi",
+  "mardi",
+  "mercredi",
+  "jeudi",
+  "vendredi",
   "samedi",
-  "dimanches",
+  "dimanche ",
 ];
 export const SHORT_DAYS = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
 

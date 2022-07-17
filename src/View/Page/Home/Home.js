@@ -5,6 +5,8 @@ import {
   FlatList,
   RefreshControl,
   StyleSheet,
+  Text,
+  TouchableOpacity,
 } from "react-native";
 
 import Page from "../../Container/Page";
@@ -15,6 +17,7 @@ import ServiceLarge from "../../Container/Service/ServiceLarge";
 import { controller as ctrl } from "model/Main";
 import Footer from "../../Parts/Footer";
 import Absolute from "../../Buttons/Absolute";
+import Primary from "../../Buttons/Primary";
 import { ICON } from "../../../constants/IMAGES";
 import _ from "lodash";
 import Loader from "../Loader";
@@ -52,9 +55,20 @@ const Home = ({ navigation }) => {
           <ServiceLarge navigation={navigation} data={item.item} />
         )}
         keyExtractor={(item) => item._id}
+        ListFooterComponent={
+          <Primary
+            text={"Consulter toutes les prestations"}
+            is_active={true}
+            style={styles.btn_footer}
+            height={14}
+            font_size={20}
+            func={() => navigation.navigate("AllServices")}
+          />
+        }
         ListHeaderComponent={
           <HomeHeader refreshing={is_refreshing} setApp={setApp} app={app} />
         }
+        ListFooterComponentStyle={{marginBottom: 50}}
         ListHeaderComponentStyle={[styles.header, is_refreshing && { top: 90 }]}
         style={styles.container}
         refreshing={is_refreshing}
@@ -73,6 +87,7 @@ const Home = ({ navigation }) => {
         ctn_style={styles.menu}
         func={() => navigation.navigate("Navigation")}
       />
+
       <Footer navigation={navigation} current={"Home"} />
     </Page>
   );
@@ -87,15 +102,31 @@ const styles = StyleSheet.create({
 
   header: {
     height: Dimensions.get("window").width - 70,
-    marginBottom: 105,
+    marginBottom: 120,
   },
 
   menu: {
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
-    borderColor: "#f5f5f5",
+    borderColor: "#faa4af",
     paddingLeft: 40,
+    backgroundColor: "#faa4af",
     borderWidth: 1,
     borderLeftWidth: 0,
+  },
+
+  btn_footer: {
+    borderWidth: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+    borderColor: "#faa4af",
+    marginHorizontal: 15,
   },
 });

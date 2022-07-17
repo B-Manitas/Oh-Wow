@@ -44,7 +44,14 @@ export class Find extends SuperController {
   async allUsersWithFunction(...funcs) {
     const user = await this.frontend.get.allUsers();
     const staff = await this.frontend.get.allStaff();
-    const data = user.map((item, i) => Object.assign({}, item, staff[i]));
+
+    const data = user.map((item) => {
+      const access = staff.find((s) => s._id == item._id);
+      if (access === undefined)
+        return { ...item, id_salon: null, is_admin: false };
+      else return { ...item, ...access };
+    });
+
     funcs.forEach((func) => func(data));
   }
 

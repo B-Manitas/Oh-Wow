@@ -1,5 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Absolute from "../Buttons/Absolute";
+import Round from "../Buttons/Round";
 
 const Footer = ({ navigation, current }) => {
   const props_text = { numberOfLines: 1, adjustsFontSizeToFit: true };
@@ -16,9 +18,11 @@ const Footer = ({ navigation, current }) => {
           {...props_text}
           style={[styles.text, current == "Home" && styles.current_text]}
         >
-          Accueil
+          Oh WoW
         </Text>
       </TouchableOpacity>
+
+      {/* <Round text={"Consulter toutes les prestations"} style={{top: -75}} /> */}
 
       <TouchableOpacity
         style={[styles.button, styles.button_center]}
@@ -29,11 +33,11 @@ const Footer = ({ navigation, current }) => {
           {...props_text}
           style={[styles.text, current == "AllServices" && styles.current_text]}
         >
-          Catalogues
+          Prendre rendez-vous
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => nav("Appointments")}
         disabled={current == "Appointments"}
@@ -45,9 +49,9 @@ const Footer = ({ navigation, current }) => {
             current == "Appointments" && styles.current_text,
           ]}
         >
-          Rendez-vous
+          Mes rendez-vous
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -62,18 +66,18 @@ const styles = StyleSheet.create({
     left: 15,
     right: 15,
     borderRadius: 5,
-    backgroundColor: "#fff",
+    backgroundColor: "#faa4af",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 5,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    
+    elevation: 10,
     borderWidth: 2,
-    borderColor: "#f5f5f5",
+    borderColor: "transparent",
   },
 
   button: {
@@ -84,19 +88,20 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 18,
+    fontSize: 20,
     textAlign: "center",
-    color: "#383838",
+    color: "#fff",
+    fontWeight: "600",
   },
 
   button_center: {
-    borderRightWidth: 2,
     borderLeftWidth: 2,
     borderColor: "#f5f5f5",
   },
 
   current_text: {
-    fontWeight: "500",
-    textDecorationLine: "underline"
+    // fontWeight: "700",
+    color: "#fff",
+    textDecorationLine: "underline",
   },
 });

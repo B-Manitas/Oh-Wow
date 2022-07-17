@@ -23,7 +23,7 @@ const HomeHeader = ({ refreshing, app, setApp }) => {
           func={() => ctrl.update.image(setApp)}
         />
       )}
-      <Text style={styles.h1}>Oh Wow</Text>
+      <Text style={styles.h1}>Oh WoW...</Text>
     </View>
   );
 };
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
+    // backgroundColor: "#faa4af"
   },
 
   btn_edit: {
@@ -84,9 +85,10 @@ const styles = StyleSheet.create({
   },
 
   h1: {
-    fontSize: 40,
-    textDecorationLine: "underline",
-    fontWeight: "300",
+    fontSize: 45,
+    // textDecorationLine: "underline",
+    fontWeight: "500",
     textAlign: "center",
+    color: "#F87788"
   },
 });

@@ -15,7 +15,7 @@ const NavigationConnect = ({ navigation }) => {
           func={() => navigation.navigate("Home")}
         />
         <Link
-          text={"Notre catalogue"}
+          text={"Nos prestations"}
           style_container={styles.button_nav}
           style_text={styles.text_nav}
           func={() => navigation.navigate("AllServices")}
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   nav: {
     paddingVertical: 10,
     borderBottomWidth: 1,
+    // borderColor: "#faa4af"
   },
 
   button_nav: {
@@ -64,5 +65,6 @@ const styles = StyleSheet.create({
 
   text_nav: {
     fontSize: 20,
+    // color: "#faa4af"
   },
 });

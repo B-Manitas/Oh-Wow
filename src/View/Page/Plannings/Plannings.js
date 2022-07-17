@@ -58,7 +58,7 @@ const Plannings = ({ navigation }) => {
   return (
     <Page>
       <Header
-        title={"Plannings des réservations"}
+        title={"Planning des réservations"}
         type={"close"}
         navigation={navigation}
       />

@@ -40,14 +40,16 @@ const Appointments = ({ navigation }) => {
           onPress={setIsHistoric}
           style={styles.radio}
           style_txt={styles.txt_ratio}
+          style_txt_active={styles.txt_ratio_on}
           style_active={styles.ctn_radio_on}
-        />
+          />
         <RadioBox
           text={"Historique"}
           id={1}
           id_selected={is_historic}
           onPress={setIsHistoric}
           style={styles.radio}
+          style_txt_active={styles.txt_ratio_on}
           style_txt={styles.txt_ratio}
           style_active={styles.ctn_radio_on}
         />
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 40,
-    backgroundColor: "#fff",
+    backgroundColor: "#faa4af",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -95,17 +97,22 @@ const styles = StyleSheet.create({
 
     elevation: 2,
     margin: 5,
-    borderColor: "#f5f5f5",
+    borderColor: "#faa4af",
   },
 
   txt_ratio: {
     fontSize: 20,
-    fontWeight: "300",
+    color: "#fff",
+    fontWeight: "500"
   },
 
   ctn_radio_on: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#fff",
     flex: 2,
     height: 50,
+  },
+
+  txt_ratio_on: {
+    color: "#faa4af",
   },
 });

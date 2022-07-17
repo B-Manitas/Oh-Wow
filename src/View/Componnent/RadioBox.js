@@ -9,6 +9,7 @@ const RadioBox = ({
   style,
   style_active,
   style_txt,
+  style_txt_active,
 }) => {
   if (!style_active) style_active = styles.container_active;
 
@@ -21,7 +22,13 @@ const RadioBox = ({
         id == id_selected && style_active,
       ]}
     >
-      <Text adjustsFontSizeToFit numberOfLines={1} style={style_txt} >{text}</Text>
+      <Text
+        adjustsFontSizeToFit
+        numberOfLines={1}
+        style={[style_txt, id == id_selected && style_txt_active]}
+      >
+        {text}
+      </Text>
     </Pressable>
   );
 };
