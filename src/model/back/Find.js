@@ -150,6 +150,7 @@ export class Find extends Request {
           lastname: "$user.lastname",
           phone: "$user.phone",
           salon: "$salon.name",
+          price: "$service.price"
         },
       },
     ]);
@@ -196,6 +197,7 @@ export class Find extends Request {
           salon: "$salon.name",
           service: "$service.name",
           staff: "$staff.firstname",
+          price: "$service.price"
         },
       },
     ]);

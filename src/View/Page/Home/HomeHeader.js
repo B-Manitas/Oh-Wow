@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 import Absolute from "../../Buttons/Absolute";
 
 import { controller as ctrl } from "model/Main";
+import { useIsFocused } from "@react-navigation/native";
 
 const HomeHeader = ({ refreshing, app, setApp }) => {
+  const [is_admin, setIsAdmin] = useState(ctrl.this_is_admin());
+
+  const is_focused = useIsFocused();
+
+  useEffect(() => {
+    setIsAdmin(ctrl.this_is_admin());
+  }, [is_focused]);
+
   return (
     <View style={styles.container}>
       <View style={styles.refresh}>
@@ -14,7 +23,7 @@ const HomeHeader = ({ refreshing, app, setApp }) => {
         </Text>
       </View>
       <Image source={{ uri: app?.img }} style={styles.image} />
-      {ctrl.this_is_admin && (
+      {is_admin && (
         <Absolute
           text={"Modifier"}
           top={60}
@@ -89,6 +98,6 @@ const styles = StyleSheet.create({
     // textDecorationLine: "underline",
     fontWeight: "500",
     textAlign: "center",
-    color: "#F87788"
+    color: "#F87788",
   },
 });

@@ -20,7 +20,7 @@ const ServiceLarge = ({ navigation, data }) => {
         </Text>
 
         <Text style={styles.info}>
-          {data.price}€ - {CDate.toTimeString(data.duration)}
+          {data.price}DT - {CDate.toTimeString(data.duration)}
         </Text>
       </View>
     </TouchableOpacity>

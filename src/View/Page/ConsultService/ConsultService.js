@@ -11,7 +11,6 @@ import ConsultServiceMain from "./ConsultServiceMain";
 import _ from "lodash";
 
 const ConsultService = ({ navigation, route }) => {
-  const is_admin = ctrl.this_is_admin;
   const service_init = route.params.data;
 
   const [service, setService] = useState(service_init);
@@ -24,6 +23,10 @@ const ConsultService = ({ navigation, route }) => {
     _.isEqual(service, ctrl.frontend.schemaService());
 
   const onClose = () => ctrl.onClose.service(service, init, navigation);
+  const booking = () =>
+    ctrl.this_is_connected
+      ? navigation.navigate("Booking", { data: init })
+      : navigation.navigate("Connection");
 
   const openSetting = () => {
     setIsEdit(false);
@@ -47,7 +50,7 @@ const ConsultService = ({ navigation, route }) => {
           func={onClose}
         />
 
-        {is_admin && (
+        {ctrl.this_is_admin() && (
           <View style={styles.ctn_edit}>
             <TouchableOpacity
               style={styles.btn_drop}
@@ -93,7 +96,7 @@ const ConsultService = ({ navigation, route }) => {
           text={"Prendre rendez-vous"}
           ctn_style={[styles.btn_apt, is_disabled_apt && { opacity: 0.5 }]}
           txt_style={styles.txt_apt}
-          func={() => navigation.navigate("Booking", { data: init })}
+          func={booking}
         />
       )}
     </Page>
@@ -152,9 +155,8 @@ const styles = StyleSheet.create({
   },
 
   btn_apt: {
-    // borderColor: "#fff",
     borderWidth: 0,
-    backgroundColor: "#faa4af"
+    backgroundColor: "#faa4af",
   },
 
   txt_apt: {

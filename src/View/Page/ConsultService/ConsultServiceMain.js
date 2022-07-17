@@ -13,7 +13,7 @@ const ConsultServiceMain = ({ service }) => {
           <Text style={styles.h2}>{CDate.toTimeString(service.duration)}</Text>
         </View>
         <View style={styles.parts}>
-          <Text style={styles.h2}>{service.price}€</Text>
+          <Text style={styles.h2}>{service.price}DT</Text>
         </View>
       </View>
 

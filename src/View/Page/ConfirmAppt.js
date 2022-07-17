@@ -129,7 +129,7 @@ const ConfirmAppt = ({ navigation, route }) => {
 
         <View style={styles.field}>
           <Text style={styles.h2_key}>Tarif :</Text>
-          <Text style={styles.h2_val}>{service.price}€</Text>
+          <Text style={styles.h2_val}>{service.price}DT</Text>
         </View>
       </View>
 

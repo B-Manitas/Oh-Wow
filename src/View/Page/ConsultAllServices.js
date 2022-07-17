@@ -24,7 +24,7 @@ const ConsultAllServices = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    if (!is_admin) setService(fetch.filter((s) => s.is_hidden === false));
+    if (!controller.this_is_admin()) setService(fetch.filter((s) => s.is_hidden === false));
     else setService(fetch);
   }, [fetch, is_refreshing]);
 

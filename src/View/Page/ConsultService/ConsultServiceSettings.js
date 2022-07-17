@@ -49,7 +49,7 @@ const ConsultServiceSettings = ({
             setValue={(t) => setService((p) => ({ ...p, name: t }))}
           />
           <InputLong
-            text={"Prix en euro"}
+            text={"Prix en dinar tunisien"}
             key_type={"numeric"}
             placeholder={"60"}
             is_valid={audit.price}

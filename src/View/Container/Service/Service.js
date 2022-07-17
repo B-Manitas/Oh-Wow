@@ -23,7 +23,7 @@ const Service = ({ data, navigation }) => {
             {data.name}
           </Text>
           <Text style={styles.info_h2}>
-            {data.price}€ - {CDate.toTimeString(data.duration)}
+            {data.price}DT - {CDate.toTimeString(data.duration)}
           </Text>
         </View>
       </TouchableOpacity>

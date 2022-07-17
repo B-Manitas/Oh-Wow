@@ -30,6 +30,7 @@ const ItemAptPlannings = ({ apt, deleteApt }) => {
       )}
       <View style={styles.apt_h2}>
         <Text>Salon: {apt.salon}</Text>
+        <Text style={styles.apt_h2}>Prix: {apt.price}DT</Text>
       </View>
     </View>
   );

@@ -23,6 +23,7 @@ const Appointment = ({ data, deleteApt }) => {
 
       <Text style={styles.h3}>Salon : {data.salon}.</Text>
       <Text style={styles.h3}>Esthéticienne : {data.staff}.</Text>
+      <Text style={styles.h3}>Prix : {data.price}DT.</Text>
 
       {data.offer && (
         <Text style={styles.h3}>

@@ -28,7 +28,7 @@ export class SuperController {
     );
   }
 
-  get this_is_admin() {
+  this_is_admin() {
     return this.this_is_connected && this.this_user_access.status == ADMIN;
   }
 

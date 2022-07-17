@@ -27,7 +27,7 @@ const NavigationDisconnect = ({ navigation }) => {
       </View>
       <View style={styles.nav}>
         <Link
-          text={"Notre catalogue"}
+          text={"Nos prestations"}
           style_container={styles.button_nav}
           style_text={styles.text_nav}
           func={() => navigation.navigate("AllServices")}
