@@ -3,6 +3,7 @@ import { removeUserStore, defaultStatus } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
 import { deleteService } from "../redux/ActionsCreator";
+import PAGES from "../constants/PAGES";
 
 export class Delete extends SuperController {
   async thisUser() {
@@ -14,7 +15,7 @@ export class Delete extends SuperController {
     await this.frontend.delete.user(this.this_user_data._id);
     removeUserStore();
     defaultStatus();
-    navigation.navigate("Home");
+    navigation.navigate(PAGES.HOME);
     Alert.alert(`Your account has been successfully removed.`);
   }
 
@@ -22,7 +23,7 @@ export class Delete extends SuperController {
   async service(id, navigation) {
     await this.frontend.delete.service(id);
     deleteService(id);
-    navigation.navigate("Home");
+    navigation.navigate(PAGES.HOME);
     Alert.alert(`The service has been successfully removed.`);
   }
 

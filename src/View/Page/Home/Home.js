@@ -1,94 +1,91 @@
-import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  Dimensions,
-  FlatList,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+// React imports
+import React, { useEffect, useRef, useState } from "react";
+import { Dimensions, FlatList, RefreshControl, StyleSheet } from "react-native";
 
-import Page from "../../Container/Page";
-
+// Componnent imports
 import HomeHeader from "./HomeHeader";
-import ServiceLarge from "../../Container/Service/ServiceLarge";
-
-import { controller as ctrl } from "model/Main";
-import Footer from "../../Parts/Footer";
-import Absolute from "../../Buttons/Absolute";
-import Primary from "../../Buttons/Primary";
-import { ICON } from "../../../constants/IMAGES";
-import _ from "lodash";
+import Page from "container/Page";
+import ItemServiceLarge from "container/Service/ItemServiceLarge";
 import Loader from "../Loader";
-import { fetchServices } from "store/ActionsCreator";
+import Footer from "parts/Footer";
+import Secondary from "button/Secondary";
+import Button from "button/Button";
 
-const Home = ({ navigation }) => {
-  const [is_refreshing, setIsRefreshing] = useState(false);
-  const [services, setService] = useState(undefined);
+// Library imports
+import _ from "lodash";
+import { controller as ctrl } from "model/Main";
 
-  const fetchData = () =>
-    ctrl.get.allServices(setIsRefreshing, setService, fetchServices);
-  const [fetch, setFetch] = useState(undefined);
-  const [app, setApp] = useState(undefined);
+// Contants imports
+import { ICON } from "constants/IMAGES";
+import TEXTS from "constants/TEXTS";
 
+const Home = (...props) => {
+  // Destructur props
+  const [{ navigation: nav }] = props;
+  const refApp = useRef();
+
+  // Define componnent states
+  const [app, setApp] = useState();
+  const [services, setService] = useState();
+  const [refreshing, setRefresh] = useState(false);
+
+  // Define componnent functions
+  const fetchServices = () => ctrl.get.homeServices(setRefresh, setService);
+
+  // On load componnent.
   useEffect(() => {
-    fetchData();
-    ctrl.get.app(setFetch, setApp);
+    fetchServices();
+    ctrl.get.app(setApp, (e) => (refApp.current = e));
   }, []);
 
+  // On change app state.
   useEffect(() => {
-    if (!_.isEqual(fetch, app)) {
-      ctrl.update.app(app);
-      setFetch(app);
-      Alert.alert("App updated");
-    }
+    if (refApp.current === app) return;
+
+    ctrl.update.app(app);
+    refApp.current = app;
   }, [app]);
+
+  // Define flatlist props.
+  const propsList = {
+    data: services,
+    renderItem: (o) => <ItemServiceLarge nav={nav} service={o.item} />,
+    keyExtractor: (item) => item._id,
+    showsVerticalScrollIndicator: false,
+    refreshing,
+    refreshControl: (
+      <RefreshControl
+        {...{ tintColor: "#fff", refreshing, onRefresh: fetchServices }}
+      />
+    ),
+    ListHeaderComponent: <HomeHeader {...{ setApp, app, refreshing }} />,
+    ListFooterComponent: (
+      <Secondary
+        text={TEXTS.showAllServices}
+        onPress={() => ctrl.goTo.services(nav)}
+      />
+    ),
+    style: styleList.container,
+    ListHeaderComponentStyle: [
+      styleList.header,
+      refreshing && styleList.onRefresh,
+    ],
+    ListFooterComponentStyle: styleList.footer,
+  };
+
+  // Define button menu props.
+  const propsMenuBtn = {
+    image: ICON.menu,
+    style: styles.menuBtn,
+    onPress: () => ctrl.goTo.nav(nav),
+  };
 
   if (!services || !app) return <Loader />;
   return (
     <Page>
-      <FlatList
-        extraData={services.filter((s) => s.is_trend && !s.is_hidden)}
-        data={services.filter((s) => s.is_trend && !s.is_hidden)}
-        renderItem={(item) => (
-          <ServiceLarge navigation={navigation} data={item.item} />
-        )}
-        keyExtractor={(item) => item._id}
-        ListFooterComponent={
-          <Primary
-            text={"Consulter toutes les prestations"}
-            is_active={true}
-            style={styles.btn_footer}
-            height={14}
-            font_size={20}
-            func={() => navigation.navigate("AllServices")}
-          />
-        }
-        ListHeaderComponent={
-          <HomeHeader refreshing={is_refreshing} setApp={setApp} app={app} />
-        }
-        ListFooterComponentStyle={{marginBottom: 50}}
-        ListHeaderComponentStyle={[styles.header, is_refreshing && { top: 90 }]}
-        style={styles.container}
-        refreshing={is_refreshing}
-        refreshControl={
-          <RefreshControl
-            tintColor={"#fff"}
-            refreshing={is_refreshing}
-            onRefresh={fetchData}
-          />
-        }
-      />
-      <Absolute
-        top={60}
-        left={0}
-        img={ICON.menu}
-        ctn_style={styles.menu}
-        func={() => navigation.navigate("Navigation")}
-      />
-
-      <Footer navigation={navigation} current={"Home"} />
+      <FlatList {...propsList} />
+      <Button {...propsMenuBtn} />
+      <Footer nav={nav} isHome />
     </Page>
   );
 };
@@ -96,37 +93,31 @@ const Home = ({ navigation }) => {
 export default Home;
 
 const styles = StyleSheet.create({
-  container: {
-    top: -50,
+  menuBtn: {
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderColor: "#faa4af",
+    padding: 7,
+    paddingLeft: 35,
+    backgroundColor: "#faa4af",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    width: 80,
+    height: 45,
+    position: "absolute",
+    top: 60,
   },
+});
+
+const styleList = StyleSheet.create({
+  container: { top: -50, marginBottom: -80 },
 
   header: {
     height: Dimensions.get("window").width - 70,
     marginBottom: 120,
   },
 
-  menu: {
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderColor: "#faa4af",
-    paddingLeft: 40,
-    backgroundColor: "#faa4af",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-  },
+  footer: { marginBottom: 50 },
 
-  btn_footer: {
-    borderWidth: 2,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
-    borderColor: "#faa4af",
-    marginHorizontal: 15,
-  },
+  onRefresh: { top: 90 },
 });

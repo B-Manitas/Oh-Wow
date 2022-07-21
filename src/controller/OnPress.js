@@ -3,9 +3,9 @@ import { SuperController } from "./SuperController";
 import { updateService } from "store/ActionsCreator";
 import Catch from "exceptions/ErrorsCatcher";
 import _ from "lodash";
-import { Alert } from "react-native";
+import { Alert, Linking } from "react-native";
 import Utils from "model/Utils";
-import CDate from "../model/utils/CDate";
+import CDate from "../model/utils/CDate"
 
 export class OnPress extends SuperController {
   aptDay(setApt, setDate, date) {
@@ -29,14 +29,15 @@ export class OnPress extends SuperController {
   }
 
   @Catch
-  async service(data, data_init, setServiceInit, setAudit) {
+  async service(setSaving, data, data_init, setServiceInit, setAudit) {
+    setSaving(true);
     if (!_.isEqual(data, data_init) && this.this_is_admin) {
       await this.frontend.update.service(data, setAudit);
       updateService(data);
       setServiceInit(data);
       setAudit(this.frontend.fakeAudit(data));
-      Alert.alert("Modification sauvegardées");
     }
+    setSaving(false);
   }
 
   @Catch
@@ -56,5 +57,11 @@ export class OnPress extends SuperController {
       setInit(data);
       Alert.alert("Modification sauvegardées");
     }
+  }
+
+  @Catch
+  async link(url){
+    await Linking.canOpenURL(url);
+    Linking.openURL(url);
   }
 }

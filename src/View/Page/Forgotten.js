@@ -12,7 +12,7 @@ import { ICON } from "../../constants/IMAGES";
 const Forgotten = ({ navigation }) => {
   return (
     <Page>
-      <Header img={ICON.back} navigation={navigation} />
+      <Header img={ICON.back} nav={navigation} />
 
       <View style={styles.content_text}>
         <Text style={styles.text_h1}>
@@ -52,7 +52,6 @@ const Forgotten = ({ navigation }) => {
             width={"60%"}
             height={10}
             font_size={20}
-            func={() => navigation.navigate("Home")}
           />
         </View>
       </View>

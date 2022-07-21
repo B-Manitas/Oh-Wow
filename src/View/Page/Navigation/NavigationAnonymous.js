@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import PAGES from "../../../constants/PAGES";
 import Link from "../../Buttons/Link";
 
 const NavigationAnonymous = ({ navigation }) => {
@@ -9,13 +10,13 @@ const NavigationAnonymous = ({ navigation }) => {
         text={"Nous contacter"}
         style_container={styles.button_nav}
         style_text={styles.text_nav}
-        func={() => navigation.navigate("Contact")}
+        func={() => navigation.navigate(PAGES.CONTACT)}
       />
       <Link
         text={"Mes paramètres"}
         style_container={styles.button_nav}
         style_text={styles.text_nav}
-        func={() => navigation.navigate("Settings")}
+        func={() => navigation.navigate(PAGES.SETTINGS)}
       />
     </View>
   );

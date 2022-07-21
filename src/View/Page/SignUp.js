@@ -17,6 +17,7 @@ import InputPrimary from "../Input/InputPrimary";
 import CheckBoxText from "../Componnent/CheckBoxText";
 
 import { controller as ctrl } from "model/Main";
+import PAGES from "../../constants/PAGES";
 
 const SignUp = ({ navigation }) => {
   const schema_user = ctrl.frontend.schemaUser();
@@ -28,7 +29,7 @@ const SignUp = ({ navigation }) => {
 
   return (
     <Page>
-      <Header is_back={true} navigation={navigation} />
+      <Header type="close" nav={navigation} />
 
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : null}
@@ -135,7 +136,7 @@ const SignUp = ({ navigation }) => {
               text={"Déja Client ?"}
               pad_top={7}
               style_text={{ textDecorationLine: "underline" }}
-              func={() => navigation.navigate("Login")}
+              func={() => navigation.navigate(PAGES.LOGIN)}
             />
           </View>
         </ScrollView>

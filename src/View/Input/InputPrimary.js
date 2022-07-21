@@ -1,42 +1,32 @@
 import React from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
+import InputError from "./InputError";
 
-const InputPrimary = ({
-  info,
-  plh,
-  typeAndroid,
-  typeIOS,
-  returnKeyType,
-  keyboardType,
-  maxLength,
-  secureTextEntry,
-  value,
-  onChangeText,
-  isValidFormat,
-}) => {
+// info,
+// plh,
+// typeAndroid,
+// typeIOS,
+// returnKeyType,
+// keyboardType,
+// maxLength,
+// secureTextEntry,
+// value,
+// onChangeText,
+// isValidFormat,
+
+const InputPrimary = (...props) => {
+  const passwordRules =
+    "minlength: 8; required: lower; required: upper; required: digit;";
+
+  const propsInput = {
+    ...props,
+    style: [styles.input, props.error && { borderColor: "red" }],
+    passwordRules,
+  };
+
   return (
     <View style={styles.container}>
-      <TextInput
-        style={[styles.input, !isValidFormat && { borderColor: "red" }]}
-        keyboardType={keyboardType}
-        autoComplete={typeAndroid}
-        textContentType={typeIOS}
-        passwordRules={
-          "minlength: 8; required: lower; required: upper; required: digit; required: [%./?@]];"
-        }
-        placeholder={plh}
-        maxLength={maxLength}
-        secureTextEntry={secureTextEntry}
-        returnKeyType={returnKeyType}
-        value={value}
-        onChangeText={onChangeText}
-      />
-
-      <View
-        style={[styles.content_info, !isValidFormat && { borderColor: "red" }]}
-      >
-        <Text style={styles.text_info}>{info}</Text>
-      </View>
+      <InputError {...propsInput} placeholder={"Prénom"} />
     </View>
   );
 };
@@ -45,17 +35,8 @@ export default InputPrimary;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
-    marginHorizontal: 30,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
+    marginVertical: 5,
+    marginHorizontal: 40,
   },
 
   content_info: {
@@ -77,14 +58,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "#fff",
-    paddingLeft: 30,
-    paddingBottom: 10,
-    paddingTop: 15,
-    paddingRight: 10,
-    fontSize: 20,
-    borderWidth: 2,
-    borderRadius: 5,
-    fontWeight: "200",
+    borderRadius: 15,
+    height: 50,
   },
 });

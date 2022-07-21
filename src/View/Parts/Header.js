@@ -1,43 +1,47 @@
-import React from "react";
-import { View, StyleSheet, TextInput, Text } from "react-native";
+// React imports
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Text, Image } from "react-native";
+
+// Componnent imports
+import Button from "button/Button";
+
+// Libraries imports
 import Utils from "model/Utils";
 
-import Menu from "../Buttons/Menu";
+// Constants imports
+import { PHOTO } from "constants/IMAGES";
 
-const Header = ({
-  title,
-  type,
-  editable,
-  navigation,
-  func,
-  setValue,
-  is_valid,
-  color,
-}) => {
+const Header = (...props) => {
+  // Destructure props
+  const [{ text, type, nav, onPress, addLogo }] = props;
+  const [headerType, setHeaderType] = useState();
+
+  // On load componnent
+  useEffect(() => {
+    setHeaderType(Utils.headerType(type, nav));
+  }, []);
+
+  // Define text props
+  const propsText = {
+    style: styles.h1,
+    numberOfLines: 1,
+    adjustsFontSizeToFit: true,
+  };
+
+  // Define button props
+  const propsButton = {
+    image: headerType?.img,
+    onPress: onPress ? onPress : headerType?.onPress,
+    style: styles.button,
+    shadow: false,
+    visible: nav,
+  };
+
   return (
-    <View style={styles.header}>
-      <Menu type={type} navigation={navigation} func={func} />
-      {editable ? (
-        <TextInput
-          style={styles.title}
-          allowFontScaling={true}
-          numberOfLines={1}
-          value={title}
-          returnKeyType={"done"}
-          editable={!Utils.isNull(editable)}
-          onChangeText={(t) => setValue(t)}
-          placeholder={"Click to edit"}
-          placeholderTextColor={!is_valid && "red"}
-        />
-      ) : (
-        <Text
-          style={[styles.title, { color }]}
-          adjustsFontSizeToFit={true}
-          numberOfLines={1}
-        >
-          {title}
-        </Text>
-      )}
+    <View style={styles.container}>
+      <Button {...propsButton} />
+      {addLogo && <Image source={PHOTO.logo} style={styles.img} />}
+      <Text {...propsText}>{text}</Text>
     </View>
   );
 };
@@ -45,7 +49,7 @@ const Header = ({
 export default Header;
 
 const styles = StyleSheet.create({
-  header: {
+  container: {
     marginVertical: 20,
     marginHorizontal: 10,
     flexDirection: "row",
@@ -54,10 +58,24 @@ const styles = StyleSheet.create({
     minHeight: 40,
   },
 
-  title: {
+  img: {
+    width: 40,
+    height: 40,
+    alignSelf: "center",
+  },
+
+  h1: {
     paddingLeft: 20,
-    marginHorizontal: 30,
     fontWeight: "bold",
     fontSize: 32,
+    alignSelf: "center",
+  },
+
+  button: {
+    position: "absolute",
+    left: 20,
+    padding: 2,
+    width: 35,
+    height: 35,
   },
 });

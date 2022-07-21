@@ -14,7 +14,7 @@ Contact page
 ✔ Ajouter features pour modifier l'addresse. @done(22-07-13 15:54)
 ✔ Connecter l'adresse avec la map @done(22-07-13 15:54)
 
-ConsultService
+Service
 ☐ Ajouter les salons ayant cette prestation
 ✘ La durée d'un service doit pouvoir rentrer dans la matinée ou l'après-midi @cancelled(22-07-13 15:55)
 ✔ Afficher en btn tendance seulement pour admin @done(22-07-13 15:55)
@@ -47,10 +47,25 @@ Question Générale
 ☐ Y a t-il un mail dans les contacts ?
     => Si oui, un pour chaque salon ?
     ✔ Un numero de tel par salon ou pour l'app ? @done(22-07-15 11:57)
-    ☐ Quels est l'index des numéros de teléphone ?
+    ✔ Quels est l'index des numéros de teléphone ? @done(22-07-21 07:19)
 ☐ Que faire si supresion d'un staff
 ☐ La modification des durée, h_am et h_pm entraine une incohérence des rdvs
 
 
 main #faa4af
 28 17 01 83 
+https://www.instagram.com/oh.wow.rades/
+
+PAGE CLEAN
+✔ Secondary @done(22-07-18 22:20)
+✔ Home @done(22-07-18 22:52)
+✔ HomeHeader @done(22-07-19 09:19)
+✔ Searchbar @done(22-07-19 16:01)
+✔ ItemService @done(22-07-19 16:40)
+✔ ItemServiceLarge @done(22-07-19 16:57)
+✔ ServiceMain @done(22-07-19 19:33)
+✔ Service @done(22-07-19 20:17)
+✔ ServiceMain @done(22-07-20 11:28)
+✔ InputLong @done(22-07-20 11:28)
+✔ Navigation @done(22-07-21 07:49)
+✔ Contact @done(22-07-21 09:53)

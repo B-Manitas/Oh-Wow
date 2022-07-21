@@ -1,9 +1,8 @@
 import { SuperController } from "./SuperController";
 import { addUserStore } from "store/ActionsCreator";
-import Utils from "model/Utils";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
-import CDate from "../model/utils/CDate";
+import PAGES from "../constants/PAGES";
 
 export class Add extends SuperController {
   /**
@@ -18,19 +17,19 @@ export class Add extends SuperController {
     const user = await this.frontend.add.user(data, setAudit);
     addUserStore(user);
 
-    navigation.navigate("Home");
+    navigation.navigate(PAGES.HOME);
     Alert.alert(`Welcome, ${user.firstname} !`);
   }
 
   service(navigation) {
     const data = this.frontend.schemaService();
-    navigation.navigate("Service", { data });
+    navigation.navigate(PAGES.SERVICE, { data, isNew: true });
   }
 
   @Catch
   async appointment(navigation, appointment, setAudit) {
     await this.frontend.add.appointment(appointment, setAudit);
     Alert.alert(`Your appointment has been validated.`);
-    navigation.navigate("Home");
+    navigation.navigate(PAGES.HOME);
   }
 }

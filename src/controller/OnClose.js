@@ -5,6 +5,7 @@ import _ from "lodash";
 import Utils from "model/Utils";
 import Catch from "exceptions/ErrorsCatcher";
 import { updateService, addUserStore } from "store/ActionsCreator";
+import PAGES from "../constants/PAGES";
 
 export class OnClose extends SuperController {
   @Catch
@@ -23,7 +24,7 @@ export class OnClose extends SuperController {
     if (!Utils.isEquals(data, data_init) && this.this_is_admin)
       await this.frontend.update.salon(data, setAudit);
 
-    navigation.navigate("Home");
+    navigation.navigate(PAGES.HOME);
   }
 
   @Catch
@@ -33,6 +34,6 @@ export class OnClose extends SuperController {
       addUserStore(data);
     }
 
-    navigation.navigate("Home");
+    navigation.navigate(PAGES.HOME);
   }
 }

@@ -55,7 +55,7 @@ const Booking = ({ navigation, route }) => {
   else
     return (
       <Page>
-        <Header type={"back"} title={service.name} navigation={navigation} />
+        <Header type={"back"} text={service.name} nav={navigation} />
         <PickerCalendar
           data={schedule}
           date={date}

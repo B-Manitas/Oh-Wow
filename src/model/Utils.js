@@ -1,19 +1,15 @@
 import _ from "lodash";
-import { DAYS, FR_DAYS } from "../constants/DAYS";
+import { FR_DAYS } from "../constants/DAYS";
 import { ICON } from "../constants/IMAGES";
+import PAGES from "../constants/PAGES";
 
 export default {
-  getIconHeaders(type) {
-    switch (type) {
-      case "menu":
-        return ICON.menu;
-
-      case "back":
-        return ICON.back;
-
-      default:
-        return ICON.close;
-    }
+  headerType(type, nav) {
+    if (type == "close")
+      return { img: ICON.close, onPress: () => nav.popToTop() };
+    else if (type == "back")
+      return { img: ICON.back, onPress: () => nav.goBack() };
+    else return { img: ICON.menu_bl, onPress: () => nav.navigate(PAGES.NAV) };
   },
 
   isNull(value) {
@@ -30,22 +26,6 @@ export default {
 
   dictState(value, setValue) {
     return { val: value, func: setValue };
-  },
-
-  selectFuncHeader(navigation, type) {
-    switch (type) {
-      case "menu":
-        navigation.navigate("Navigation");
-        break;
-
-      case "back":
-        navigation.goBack();
-        break;
-
-      default:
-        navigation.popToTop();
-        break;
-    }
   },
 
   removeKey(object, ...keys) {
@@ -83,5 +63,13 @@ export default {
     var last_day = fr_day.pop();
     var text = fr_day.join(", ") + " et " + last_day + ".";
     return { key: "Ouvert les", value: text };
+  },
+
+  canBook(init, service, isNew) {
+    return _.isEqual(service, init) && !isNew;
+  },
+
+  cleanUp(...funcs) {
+    funcs.map((func) => func(undefined));
   },
 };

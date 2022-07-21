@@ -5,6 +5,7 @@ import Searchbar from "../Componnent/Searchbar";
 import User from "../Container/User";
 import { useEffect, useState } from "react";
 import { controller } from "model/Main";
+import { PLH } from "../../constants/TEXTS";
 
 const Search = ({ navigation }) => {
   const [fetch, setFetch] = useState([]);
@@ -18,8 +19,6 @@ const Search = ({ navigation }) => {
   useEffect(() => {
     setUsers(fetch);
   }, [fetch]);
-
-  console.log(fetch);
 
   const contains = (user, query) => {
     const query_formatted = query.toLowerCase();
@@ -49,11 +48,7 @@ const Search = ({ navigation }) => {
         type={"close"}
         title={"Rechercher un utilisateur"}
       />
-      <Searchbar
-        query={query}
-        setQuery={search}
-        plh={"Rechercher un nom, prénom, téléphone, employé..."}
-      />
+      <Searchbar value={query} setValue={search} plh={PLH.searchUser} />
 
       <FlatList
         style={styles.container}

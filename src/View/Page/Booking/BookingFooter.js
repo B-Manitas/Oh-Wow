@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import PAGES from "../../../constants/PAGES";
 import CDate from "../../../model/utils/CDate";
 
 import Primary from "../../Buttons/Primary";
@@ -24,7 +25,7 @@ const BookingFooter = ({ date, calendar, navigation, onPress, data }) => {
         
         style={styles.button_appt}
         is_active={!date_appointment.isZeroTime()}
-        func={() => navigation.navigate("ConfirmAppt", data)}
+        func={() => navigation.navigate(PAGES.CONFIRM_APT, data)}
       />
     </View>
   );

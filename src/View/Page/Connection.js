@@ -6,32 +6,26 @@ import FooterSocial from "../Parts/FooterSocial";
 import Header from "../Parts/Header";
 import Page from "../Container/Page";
 
+import PAGES from "constants/PAGES";
+
 const Connection = ({ navigation }) => {
   return (
     <Page>
-      <Header navigation={navigation} />
+      <Header nav={navigation} type="back" />
 
       <View style={styles.content_text}>
-        <Text style={styles.text}>Oh Wow !</Text>
         <Text style={styles.text}>Bienvenue</Text>
+        <Text style={styles.text}>Oh WoW</Text>
       </View>
 
       <View style={styles.content_btn}>
         <Primary
-          width={"75%"}
-          font_size={28}
-          height={15}
           text={"Créer un compte"}
-          func={() => navigation.navigate("SignUp")}
-          is_active={true}
-          />
+          onPress={() => navigation.navigate(PAGES.SIGNUP)}
+        />
         <Primary
-          width={"75%"}
-          font_size={28}
-          height={15}
           text={"Se connecter"}
-          func={() => navigation.navigate("Login")}
-          is_active={true}
+          onPress={() => navigation.navigate(PAGES.LOGIN)}
         />
       </View>
 
@@ -56,7 +50,6 @@ const styles = StyleSheet.create({
   },
 
   content_btn: {
-    width: "100%",
     height: "40%",
     justifyContent: "center",
     alignItems: "center",

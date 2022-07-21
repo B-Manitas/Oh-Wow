@@ -1,44 +1,53 @@
+// React imports
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import Link from "../../Buttons/Link";
+import { View } from "react-native";
 
-const NavigationDisconnect = ({ navigation }) => {
+// Buttons imports
+import Link from "button/Link";
+
+// Libraries imports
+import { controller as ctrl } from "model/Main";
+
+// Constants imports
+import { STYLES_NAV } from "constants/STYLES";
+
+const NavigationDisconnect = (...props) => {
+  const [{ nav }] = props;
+  const isConnected = ctrl.this_is_connected;
+
+  if (isConnected) return null;
   return (
     <View>
-      <View style={styles.nav}>
+      <View style={STYLES_NAV.section}>
         <Link
           text={"Accueil"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("Home")}
+          style_container={STYLES_NAV.navButton}
+          style_text={STYLES_NAV.navText}
+          func={() => ctrl.goTo.home(nav)}
         />
         <Link
-          text={"Créer un compte"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("SignUp")}
-        />
-        <Link
-          text={"Se connecter"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("Login")}
+          text={"Se connecter / Créer un compte"}
+          style_container={STYLES_NAV.navButton}
+          style_text={STYLES_NAV.navText}
+          func={() => ctrl.goTo.connection(nav)}
         />
       </View>
-      <View style={styles.nav}>
+
+      <View style={STYLES_NAV.section}>
         <Link
           text={"Nos prestations"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("AllServices")}
+          style_container={STYLES_NAV.navButton}
+          style_text={STYLES_NAV.navText}
+          func={() => ctrl.goTo.services(nav)}
         />
       </View>
-      <View style={styles.nav}>
+
+      <View style={STYLES_NAV.section}>
         <Link
           text={"Nous contacter"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("Contact")}
+          style_container={STYLES_NAV.navButton}
+          style_text={STYLES_NAV.navText}
+          func={() => ctrl.goTo.contact(nav)}
         />
       </View>
     </View>
@@ -46,19 +55,3 @@ const NavigationDisconnect = ({ navigation }) => {
 };
 
 export default NavigationDisconnect;
-
-const styles = StyleSheet.create({
-  nav: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-  },
-
-  button_nav: {
-    width: "100%",
-    marginVertical: 5,
-  },
-
-  text_nav: {
-    fontSize: 20,
-  },
-});

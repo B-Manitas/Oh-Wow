@@ -19,9 +19,14 @@ export class Find extends SuperFrontend {
     return await this._get(get_back.allStaff.bind(get_back), ...funcs);
   }
 
-  async allServices(...funcs) {
+  async allServices(isAdmin, ...funcs) {
+    const data = await this.backend.get.services(isAdmin);
+    funcs.map((func) => func(data));
+  }
+
+  async homeServices(...funcs) {
     const get_back = this.backend.get;
-    return await this._get(get_back.allServices.bind(get_back), ...funcs);
+    return await this._get(get_back.homeServices.bind(get_back), ...funcs);
   }
 
   async allSalons(...funcs) {

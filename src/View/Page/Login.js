@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 
 import Page from "../Container/Page";
@@ -10,67 +10,48 @@ import Primary from "../Buttons/Primary";
 import Link from "../Buttons/Link";
 
 import { controller } from "model/Main";
+import PAGES from "../../constants/PAGES";
+import { PLH } from "constants/TEXTS";
+import { INPUT_MAIL, INPUT_PASSWORD } from "../../constants/PROPS";
 
 const Login = ({ navigation }) => {
   const schema = controller.frontend.schemaLogin();
   const [data, setData] = useState(schema);
   const [audit, setAudit] = useState(controller.fakeAudit(schema));
+  const [send, setSend] = useState(false);
+
+  useEffect(() => {
+    setSend(false);
+  }, [audit]);
 
   return (
     <Page>
-      <Header is_back={true} navigation={navigation} />
+      <Header nav={navigation} type="close" />
       <ScrollView contentContainerStyle={styles.container}>
         <InputPrimary
-          info={"Mail *"}
-          plh={"john@doe.com"}
-          typeAndroid={"email"}
-          typeIOS={"emailAddress"}
-          returnKeyType={"next"}
-          maxLength={50}
-          keyboardType={"email-address"}
-          secureTextEntry={false}
-          value={data.mail}
-          onChangeText={(mail) => setData((props) => ({ ...props, mail }))}
-          isValidFormat={audit.mail}
+          {...INPUT_MAIL}
+          // value={data.mail}
+          // onChangeText={(mail) => setData((props) => ({ ...props, mail }))}
+          // isValidFormat={audit.mail}
         />
         <InputPrimary
-          info={"Mot de passe *"}
-          plh={"mY%Pa9ss."}
-          secureTextEntry={true}
-          typeAndroid={"password"}
-          typeIOS={"password"}
-          returnKeyType={"done"}
-          maxLength={20}
-          keyboardType={"default"}
-          value={data.password}
-          onChangeText={(password) =>
-            setData((props) => ({ ...props, password }))
-          }
-          isValidFormat={audit.password}
+          {...INPUT_PASSWORD}
+          // value={data.password}
+          // onChangeText={(t) => setData((props) => ({ ...props, password: t }))}
+          // isValidFormat={audit.password}
         />
 
         <View style={styles.content_valid_btn}>
           <Primary
             text={"Se connecter"}
-            width={"60%"}
-            height={10}
-            font_size={20}
-            func={() =>
-              controller.get.connect(data, navigation, setAudit)
-            }
-            is_active={true}
+            onPress={() => controller.get.connect(data, navigation, setAudit)}
+            disabled={send}
           />
 
-          {/* <Link
-            pad_top={7}
-            text={"Mot de passe oubliée"}
-            style_text={styles.link}
-            func={() => navigation.navigate("Forgotten")}
-          /> */}
           <Link
             text={"Pas encore client ?"}
             style_text={styles.link}
-            func={() => navigation.navigate("SignUp")}
+            func={() => navigation.navigate(PAGES.SIGNUP)}
           />
         </View>
       </ScrollView>
@@ -91,11 +72,12 @@ const styles = StyleSheet.create({
   content_valid_btn: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 25,
+    marginTop: 15,
   },
 
   link: {
     textDecorationLine: "underline",
     marginBottom: 4,
+    marginTop: 10,
   },
 });

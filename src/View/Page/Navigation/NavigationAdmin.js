@@ -1,50 +1,34 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import Link from "../../Buttons/Link";
+import { View } from "react-native";
+import Link from "button/Link";
 
 import { controller } from "model/Main";
 
-const NavigationAdmin = ({ navigation }) => {
-  const is_admin = controller.this_is_admin;
+// Constants imports
+import { STYLES_NAV } from "constants/STYLES";
+import PAGES from "constants/PAGES";
 
+const NavigationAdmin = (...props) => {
+  const [{ nav }] = props;
+  const isAdmin = controller.this_is_admin;
+
+  if (!isAdmin) return null;
   return (
-    <View>
-      {is_admin && (
-        <View style={styles.nav}>
-          <Link
-            text={"Gérer les salons"}
-            style_container={styles.button_nav}
-            style_text={styles.text_nav}
-            func={() => navigation.navigate("Salons")}
-          />
-          <Link
-            text={"Rechercher un utilisateur"}
-            style_container={styles.button_nav}
-            style_text={styles.text_nav}
-            func={() => navigation.navigate("Search")}
-          />
-        </View>
-      )}
+    <View style={styles.nav}>
+      <Link
+        text={"Gérer les salons"}
+        style_container={STYLES_NAV.navButton}
+        style_text={STYLES_NAV.navText}
+        func={() => nav.navigate(PAGES.SALONS)}
+      />
+      <Link
+        text={"Rechercher un utilisateur"}
+        style_container={STYLES_NAV.navButton}
+        style_text={STYLES_NAV.navText}
+        func={() => nav.navigate(PAGES.SEARCH)}
+      />
     </View>
   );
 };
 
 export default NavigationAdmin;
-
-const styles = StyleSheet.create({
-  nav: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    // borderColor: "#faa4af"
-  },
-
-  button_nav: {
-    width: "100%",
-    marginVertical: 5,
-  },
-
-  text_nav: {
-    fontSize: 20,
-    // color: "#faa4af"
-  },
-});

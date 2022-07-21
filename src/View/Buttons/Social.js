@@ -1,18 +1,18 @@
 import React from "react";
-import { TouchableOpacity, Image, StyleSheet, Linking } from "react-native";
-import { ICON } from "constants/IMAGES";
+import { StyleSheet, Linking } from "react-native";
+import Button from "./Button";
 
-const Social = () => {
-  const onPress = async () => {
-    const url = "https://www.instagram.com/oh.wow.rades/";
-    await Linking.canOpenURL(url);
-    Linking.openURL(url);
-  };
+import { controller as ctrl } from "model/Main";
+
+const Social = (...props) => {
+  const [{ url, icon }] = props;
 
   return (
-    <TouchableOpacity style={styles.link} onPress={onPress}>
-      <Image style={styles.icon} source={ICON.insta} />
-    </TouchableOpacity>
+    <Button
+      image={icon}
+      onPress={() => ctrl.onPress.link(url)}
+      style={styles.icon}
+    />
   );
 };
 
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   icon: {
     height: 32,
     width: 32,
+    borderRadius: 10,
     resizeMode: "contain",
   },
 });

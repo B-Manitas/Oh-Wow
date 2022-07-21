@@ -20,8 +20,8 @@ const Client = ({ navigation, route }) => {
     <Page>
       <Header
         type={"back"}
-        title={`${client.firstname} ${client.lastname}`}
-        navigation={navigation}
+        text={`${client.firstname} ${client.lastname}`}
+        nav={navigation}
       />
       <View style={styles.ctn_nav_button}>
         <RadioBox

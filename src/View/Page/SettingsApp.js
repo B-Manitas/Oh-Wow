@@ -33,12 +33,12 @@ const SettingsApp = ({ navigation }) => {
   return (
     <Page>
       <Header
-        func={() =>
+        onPress={() =>
           ctrl.onClose.settingsApp(data, data_init, navigation, setAudit)
         }
-        navigation={navigation}
-        type={"close"}
-        title={"Paramètres de l'applications"}
+        nav={navigation}
+        type="close"
+        text="Paramètres de l'applications"
       />
       <ScrollView style={styles.container}>
         <View style={styles.parts}>

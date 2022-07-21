@@ -32,7 +32,7 @@ export class IsFormat extends Normalizer {
    * @returns true if the name is not empty. Otherwise, return false.
    */
   isName(name) {
-    return name !== "";
+    return name.length > 1;
   }
 
   /**

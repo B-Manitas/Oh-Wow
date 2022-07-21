@@ -1,17 +1,22 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
-import { PHOTO } from "../../../constants/IMAGES";
-import Link from "../../Buttons/Link";
+import { StyleSheet, View } from "react-native";
 
-import Page from "../../Container/Page";
+import Page from "container/Page";
 import Header from "../../Parts/Header";
-import NavigationBody from "./NavigationBody";
+import NavigationConnect from "./NavigationConnect";
+import NavigationDisconnect from "./NavigationDisconnect";
 
-const Navigation = ({ navigation }) => {
+const Navigation = (...props) => {
+  const [{ navigation: nav }] = props;
+
   return (
     <Page is_safe_input={false}>
-      <Header title={"Oh Wow"} navigation={navigation} />
-      <NavigationBody navigation={navigation} />
+      <Header addLogo text="Oh Wow" nav={nav} type="back" />
+
+      <View style={styles.container}>
+        <NavigationDisconnect nav={nav} />
+        <NavigationConnect nav={nav} />
+      </View>
     </Page>
   );
 };
@@ -24,19 +29,5 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 50,
     paddingVertical: 10,
-  },
-
-  nav: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-  },
-
-  button_nav: {
-    width: "100%",
-    marginVertical: 5,
-  },
-
-  text_nav: {
-    fontSize: 20,
   },
 });

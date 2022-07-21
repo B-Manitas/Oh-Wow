@@ -1,19 +1,30 @@
+// React imports
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
+// Libraries import
 import CDate from "model/utils/CDate";
 
-const ConsultServiceMain = ({ service }) => {
+const ServiceMain = (...props) => {
+  // Destructure props
+  const [{ service, visible }] = props;
+
+  // Define text
+  const durationText = CDate.toTimeString(service.duration);
+  const priceText = `${service.price}DT`;
+
+  if (visible) return null;
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={styles.h1}>{service.name}</Text>
 
       <View style={styles.section}>
         <View style={styles.parts}>
-          <Text style={styles.h2}>{CDate.toTimeString(service.duration)}</Text>
+          <Text style={styles.h2}>{durationText}</Text>
         </View>
+
         <View style={styles.parts}>
-          <Text style={styles.h2}>{service.price}DT</Text>
+          <Text style={styles.h2}>{priceText}</Text>
         </View>
       </View>
 
@@ -22,7 +33,7 @@ const ConsultServiceMain = ({ service }) => {
   );
 };
 
-export default ConsultServiceMain;
+export default ServiceMain;
 
 const styles = StyleSheet.create({
   container: {

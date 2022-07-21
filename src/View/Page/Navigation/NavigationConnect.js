@@ -1,48 +1,61 @@
+// React imports
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import Link from "../../Buttons/Link";
+import { View } from "react-native";
+
+// Componnents imports
+import Link from "button/Link";
 import NavigationAdmin from "./NavigationAdmin";
 import NavigationStaff from "./NavigationStaff";
 
-const NavigationConnect = ({ navigation }) => {
+// Librairies imports
+import { controller as ctrl } from "model/Main";
+
+// Constants imports
+import { STYLES_NAV } from "constants/STYLES";
+
+const NavigationConnect = (...props) => {
+  const [{ nav }] = props;
+  const isConnected = ctrl.this_is_connected;
+
+  if (!isConnected) return null;
   return (
     <View>
-      <View style={styles.nav}>
+      <View style={STYLES_NAV.section}>
         <Link
           text={"Accueil"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("Home")}
+          style_container={STYLES_NAV.navButton}
+          style_text={STYLES_NAV.navText}
+          func={() => ctrl.goTo.home()}
         />
         <Link
           text={"Nos prestations"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("AllServices")}
+          style_container={styles.navButton}
+          style_text={styles.navText}
+          func={() => ctrl.goTo.services()}
         />
         <Link
           text={"Mes rendez-vous"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("Appointments")}
+          style_container={styles.navButton}
+          style_text={styles.navText}
+          func={() => ctrl.goTo.appointments()}
         />
       </View>
 
-      <NavigationStaff navigation={navigation} />
-      <NavigationAdmin navigation={navigation} />
+      <NavigationStaff nav={nav} />
+      <NavigationAdmin nav={nav} />
 
-      <View style={styles.nav}>
+      <View style={STYLES_NAV.section}>
         <Link
           text={"Mes paramètres"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("Settings")}
+          style_container={styles.navButton}
+          style_text={styles.navText}
+          func={() => ctrl.goTo.settings(nav)}
         />
         <Link
           text={"Nous contacter"}
-          style_container={styles.button_nav}
-          style_text={styles.text_nav}
-          func={() => navigation.navigate("Contact")}
+          style_container={styles.navButton}
+          style_text={styles.navText}
+          func={() => ctrl.goTo.contact(nav)}
         />
       </View>
     </View>
@@ -50,21 +63,3 @@ const NavigationConnect = ({ navigation }) => {
 };
 
 export default NavigationConnect;
-
-const styles = StyleSheet.create({
-  nav: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    // borderColor: "#faa4af"
-  },
-
-  button_nav: {
-    width: "100%",
-    marginVertical: 5,
-  },
-
-  text_nav: {
-    fontSize: 20,
-    // color: "#faa4af"
-  },
-});

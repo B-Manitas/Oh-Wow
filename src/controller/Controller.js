@@ -8,6 +8,7 @@ import { Delete } from "./Delete";
 import { OnPress } from "./OnPress";
 import { OnChange } from "./OnChange";
 import { OnFormat } from "./OnFormat";
+import { OnSearch } from "./OnSearch";
 
 export class Controller extends SuperController {
   /**
@@ -27,8 +28,9 @@ export class Controller extends SuperController {
     this.onClose = new OnClose(backend, frontend);
     this.onPress = new OnPress(backend, frontend);
     this.onChange = new OnChange(backend, frontend);
-    this.navigation = new Navigation(backend, frontend);
+    this.goTo = new Navigation(backend, frontend);
     this.onFormat = new OnFormat(backend, frontend);
+    this.onSearch = new OnSearch(backend, frontend);
   }
 
   fakeAudit(data) {

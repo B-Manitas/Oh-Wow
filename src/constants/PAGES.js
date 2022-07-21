@@ -1,0 +1,18 @@
+export default PAGES = {
+  HOME: "home",
+  CATALOGUE: "catalogue",
+  NAV: "nav",
+  LOGIN: "login",
+  SIGNUP: "signup",
+  SALONS: "salons",
+  CONTACT: "contact",
+  SETTINGS: "settings",
+  SERVICE: "service",
+  APTS: "appointments",
+  SEARCH: "search",
+  CLIENT: "client",
+  CONNECTION: "connection",
+  BOOKING: "booking",
+  CONFIRM_APT: "confirm_apt",
+  PLANNING: "plannings",
+};

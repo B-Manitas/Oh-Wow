@@ -15,10 +15,10 @@ const Settings = ({ navigation }) => {
   return (
     <Page>
       <Header
-        navigation={navigation}
+        nav={navigation}
         type={"close"}
-        title={"Paramètres"}
-        func={() => controller.onClose.settings(data, navigation, setAudit)}
+        text={"Paramètres"}
+        onPress={() => controller.onClose.settings(data, navigation, setAudit)}
       />
 
       <ScrollView>

@@ -4,18 +4,20 @@ import { addUserStore, updateStatus } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
 import _ from "lodash";
+import PAGES from "../constants/PAGES";
 
 export class Find extends SuperController {
   @Catch
-  allServices(setIsRefreshing, ...funcs) {
-    setIsRefreshing(true);
-    this.frontend.get.allServices(...funcs);
+  allServices(setRefresh, ...funcs) {
+    setRefresh(true);
 
+    const isAdmin = this.this_is_admin();
     const data_store = store.getState().services;
-    if (_.isEmpty(data_store)) this.frontend.get.allServices(...funcs);
+
+    if (_.isEmpty(data_store)) this.frontend.get.allServices(isAdmin, ...funcs);
     else funcs.forEach((func) => func(data_store));
 
-    setTimeout(() => setIsRefreshing(false), 1000);
+    setTimeout(() => setRefresh(false), 1000);
   }
 
   @Catch
@@ -63,12 +65,13 @@ export class Find extends SuperController {
    * @param {Function} navigation The navigation function for changing page.
    */
   @Catch
-  async connect(data, navigation, setAudit) {
+  async connect(setSend, data, navigation, setAudit) {
+    setSend(true);
     const user = await this.frontend.get.connect(data, setAudit);
     addUserStore(user);
     await this.frontend.get.status(user._id, updateStatus);
 
-    navigation.navigate("Home");
+    navigation.navigate(PAGES.HOME);
     Alert.alert(`Welcome back, ${user.firstname} !`);
   }
 
@@ -95,5 +98,12 @@ export class Find extends SuperController {
   @Catch
   async userAllApts(id, ...funcs) {
     await this.frontend.get.userAllApts(id, ...funcs);
+  }
+
+  @Catch
+  async homeServices(setRefresh, ...funcs) {
+    setRefresh(true);
+    await this.frontend.get.homeServices(...funcs);
+    setTimeout(() => setRefresh(false), 1000);
   }
 }

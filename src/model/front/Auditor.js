@@ -18,6 +18,7 @@ export class Auditor extends IsFormat {
   fakeAudit(data) {
     var audit = Utils.copy(data);
     Object.keys(audit).forEach((key) => (audit[key] = true));
+    audit["all"] = true;
     return audit;
   }
 
@@ -82,6 +83,7 @@ export class Auditor extends IsFormat {
   audit(data) {
     var report = {};
     Object.keys(data).map((key) => (report[key] = this.auditKey(data, key)));
+    report["all"] = Object.values(report).every((o) => o === true);
     return report;
   }
 }

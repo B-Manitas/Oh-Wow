@@ -4,6 +4,7 @@ import { removeUserStore, defaultStatus } from "store/ActionsCreator";
 import * as ImagePicker from "expo-image-picker";
 import Catch from "exceptions/ErrorsCatcher";
 import Utils from "model/Utils";
+import PAGES from "../constants/PAGES";
 
 export class Update extends SuperController {
   /**
@@ -13,7 +14,7 @@ export class Update extends SuperController {
   logout(navigation) {
     removeUserStore();
     defaultStatus();
-    navigation.navigate("Home");
+    navigation.navigate(PAGES.HOME);
     Alert.alert(`Bye, see you soon !`);
   }
 
@@ -46,6 +47,6 @@ export class Update extends SuperController {
 
   @Catch
   async app(app) {
-    await this.frontend.update.app(app)
+    await this.frontend.update.app(app);
   }
 }

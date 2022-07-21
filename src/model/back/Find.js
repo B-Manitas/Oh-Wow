@@ -150,7 +150,7 @@ export class Find extends Request {
           lastname: "$user.lastname",
           phone: "$user.phone",
           salon: "$salon.name",
-          price: "$service.price"
+          price: "$service.price",
         },
       },
     ]);
@@ -197,7 +197,7 @@ export class Find extends Request {
           salon: "$salon.name",
           service: "$service.name",
           staff: "$staff.firstname",
-          price: "$service.price"
+          price: "$service.price",
         },
       },
     ]);
@@ -243,5 +243,16 @@ export class Find extends Request {
         },
       },
     ]);
+  }
+
+  async homeServices() {
+    return await this.aggregate(SERVICE, [
+      { $match: { is_trend: true, is_hidden: false } },
+    ]);
+  }
+
+  async services(isAdmin) {
+    const filter = !isAdmin ? { is_hidden: false } : {};
+    return await this.find(SERVICE, { filter });
   }
 }

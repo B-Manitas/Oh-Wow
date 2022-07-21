@@ -1,6 +1,8 @@
 import { Approver } from "./Approver";
 import InvalidData from "exceptions/data_error/InvalidData";
 
+import { store } from "store/Store";
+
 export class SuperFrontend extends Approver {
   constructor(backend) {
     super();

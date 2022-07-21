@@ -3,8 +3,13 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import CDate from "model/utils/CDate";
 import Utils from "../../model/Utils";
+import COLORS from "../../constants/COLORS";
 
-const ContactSalon = ({ salon }) => {
+const ContactSalon = (...props) => {
+  // Destructure props
+  const [{ salon }] = props;
+
+  // Define date and time text
   const am_on = CDate.toTimeString(salon.am_on);
   const am_off = CDate.toTimeString(salon.am_off);
   const pm_on = CDate.toTimeString(salon.pm_on);
@@ -16,36 +21,36 @@ const ContactSalon = ({ salon }) => {
       <Text style={styles.h1}>{salon.name}</Text>
 
       <View style={styles.field}>
-        <Text style={styles.h2_key}>Adresse:</Text>
-        <Text style={styles.h2_value} selectable>
+        <Text style={styles.key}>Adresse:</Text>
+        <Text style={styles.value} selectable>
           {salon.address}
         </Text>
       </View>
 
       <View style={styles.field}>
-        <Text style={styles.h2_key}>Téléphone:</Text>
-        <Text style={styles.h2_value} selectable>
+        <Text style={styles.key}>Téléphone:</Text>
+        <Text style={styles.value} selectable>
           {salon.phone}
         </Text>
       </View>
 
       <View style={styles.field}>
-        <Text style={styles.h2_key}>{day.key}</Text>
-        <Text style={styles.h2_value} numberOfLines={2}>
+        <Text style={styles.key}>{day.key}</Text>
+        <Text style={styles.value} numberOfLines={2}>
           {day.value}
         </Text>
       </View>
 
       <View style={styles.field}>
-        <Text style={styles.h2_key}>Le matin de</Text>
-        <Text style={styles.h2_value}>
+        <Text style={styles.key}>Le matin de</Text>
+        <Text style={styles.value}>
           {am_on} à {am_off}
         </Text>
       </View>
 
       <View style={styles.field}>
-        <Text style={styles.h2_key}>L'après-midi de</Text>
-        <Text style={styles.h2_value}>
+        <Text style={styles.key}>L'après-midi de</Text>
+        <Text style={styles.value}>
           {pm_on} à {pm_off}
         </Text>
       </View>
@@ -58,25 +63,26 @@ export default ContactSalon;
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-    padding: 20,
+    padding: 10,
     marginHorizontal: 10,
-    borderBottomWidth: 2,
     borderTopWidth: 2,
+    borderColor: COLORS.main,
   },
 
   h1: {
     fontSize: 25,
     textAlign: "center",
-    paddingBottom: 15,
+    fontWeight: "700",
+    paddingBottom: 10,
   },
 
-  h2_key: {
+  key: {
     fontSize: 18,
     fontWeight: "400",
     textDecorationLine: "underline",
   },
 
-  h2_value: {
+  value: {
     marginLeft: 10,
     fontSize: 18,
     fontWeight: "500",

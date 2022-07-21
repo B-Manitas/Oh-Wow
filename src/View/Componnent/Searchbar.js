@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// React imports
+import React from "react";
 import {
   View,
   TextInput,
@@ -6,20 +7,33 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+
+// Contants imports
 import { ICON } from "constants/IMAGES";
 
-const Searchbar = ({ query, setQuery, plh }) => {
+const Searchbar = (...props) => {
+  const [{ plh, setValue, value }] = props;
+
+  const propsInput = {
+    value: value,
+    onChangeText: setValue,
+    placeholder: plh,
+    returnKeyType: "search",
+    style: styles.input,
+    maxLength: 50,
+  };
+
+  const propsClear = {
+    onPress: () => setValue(""),
+    style: styles.clearButton,
+  };
+
   return (
-    <View style={styles.container_search}>
-      <TextInput
-        style={styles.search}
-        value={query}
-        returnKeyType="search"
-        placeholder={plh}
-        onChangeText={(t) => setQuery(t)}
-      />
-      <TouchableOpacity style={styles.btn_clear} onPress={() => setQuery("")}>
-        <Image source={ICON.close} style={styles.img_clear} />
+    <View style={styles.container}>
+      <TextInput {...propsInput} />
+
+      <TouchableOpacity {...propsClear}>
+        <Image source={ICON.close} style={styles.clearImg} />
       </TouchableOpacity>
     </View>
   );
@@ -28,13 +42,13 @@ const Searchbar = ({ query, setQuery, plh }) => {
 export default Searchbar;
 
 const styles = StyleSheet.create({
-  container_search: {
+  container: {
     justifyContent: "center",
-    marginHorizontal: 30,
+    marginHorizontal: 15,
     marginVertical: 5,
   },
 
-  search: {
+  input: {
     backgroundColor: "#fff",
     borderWidth: 1,
     borderColor: "#a5a5a5",
@@ -49,17 +63,17 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
-    
+
     elevation: 7,
   },
 
-  btn_clear: {
+  clearButton: {
     position: "absolute",
     right: 0,
     padding: 13,
   },
 
-  img_clear: {
+  clearImg: {
     aspectRatio: 1,
     width: 12,
     height: 12,

@@ -2,10 +2,10 @@ import { Animated, Image, StyleSheet, Text, View } from "react-native";
 import Page from "../Container/Page";
 
 import { PHOTO } from "constants/IMAGES";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Loader = () => {
-  const scale = new Animated.Value(0.9);
+  const [scale, _] = useState(new Animated.Value(0.9));
 
   useEffect(() => {
     Animated.loop(
@@ -24,7 +24,7 @@ const Loader = () => {
         }),
       ])
     ).start();
-  });
+  }, [scale]);
 
   return (
     <Page>

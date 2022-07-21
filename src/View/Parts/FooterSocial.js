@@ -1,13 +1,18 @@
+// React imports
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import Social from "../Buttons/Social";
+// Componnents imports
+import Social from "button/Social";
+
+// Constants imports
+import { ICON } from "constants/IMAGES";
 
 const FooterSocial = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Retrouvez-nous sur</Text>
-      <Social />
+      <Social url="https://www.instagram.com/oh.wow.rades/" icon={ICON.insta} />
     </View>
   );
 };
@@ -15,7 +20,7 @@ const FooterSocial = () => {
 export default FooterSocial;
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
     flexDirection: "row",
     position: "absolute",
     bottom: 15,

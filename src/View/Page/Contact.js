@@ -1,65 +1,60 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+// React imports
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, FlatList } from "react-native";
 
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import MapView, { Marker } from "react-native-maps";
-import Page from "../Container/Page";
+// Componnent imports
+import Page from "container/Page";
 import FooterSocial from "../Parts/FooterSocial";
-
-import { controller } from "model/Main";
-import Absolute from "../Buttons/Absolute";
-import ContactSalon from "../Container/ContactSalon";
-import { ICON } from "../../constants/IMAGES";
+import Button from "button/Button";
+import ContactSalon from "container/ContactSalon";
 import Loader from "./Loader";
+import Markers from "../Generator/Markers";
 
-const Contact = ({ navigation }) => {
+// Libraries imports
+import { controller as ctrl } from "model/Main";
+import MapView from "react-native-maps";
+
+// Constants imports
+import { ICON } from "constants/IMAGES";
+import COLORS from "constants/COLORS";
+
+const Contact = (...props) => {
+  // Destructure props
+  const [{ navigation: nav }] = props;
+
+  // Define componnent state
   const [salons, setSalons] = useState(undefined);
 
+  // On load componnent
   useEffect(() => {
-    controller.get.allSalons(setSalons);
+    ctrl.get.allSalons(setSalons);
   }, []);
+
+  // Defin default map region
+  const region = {
+    latitude: 36.8065,
+    longitude: 10.1815,
+    latitudeDelta: 0.7,
+    longitudeDelta: 0.7,
+  };
 
   if (!salons) return <Loader />;
   else
     return (
       <Page>
-        <View style={styles.container}>
-          <MapView
-            style={styles.map}
-            region={{
-              latitude: 36.8065,
-              longitude: 10.1815,
-              latitudeDelta: 0.7,
-              longitudeDelta: 0.7,
-            }}
-          >
-            {salons.map((item, i) => (
-              <Marker
-                key={i}
-                coordinate={{
-                  longitude: item.longitude,
-                  latitude: item.latitude,
-                }}
-              >
-                <View style={styles.marker}>
-                  <Text style={styles.txt_marker}>{item.name}</Text>
-                </View>
-              </Marker>
-            ))}
+        <View style={styles.mapContainer}>
+          <MapView style={styles.map} region={region}>
+            <Markers salons={salons} />
           </MapView>
-          <Absolute
-            img={ICON.close}
-            left={10}
-            top={10}
-            ctn_style={styles.btn_back}
-            txt_style={styles.txt_style}
-            func={() => navigation.navigate("Home")}
+
+          <Button
+            image={ICON.back_wh}
+            style={styles.backButton}
+            onPress={() => ctrl.goTo.home(nav)}
           />
         </View>
 
         <FlatList
-          style={styles.container_salons}
           data={salons}
           keyExtractor={(item) => item._id}
           renderItem={(item) => <ContactSalon salon={item.item} />}
@@ -73,30 +68,7 @@ const Contact = ({ navigation }) => {
 export default Contact;
 
 const styles = StyleSheet.create({
-  parts: {
-    marginVertical: 10,
-    marginHorizontal: 30,
-  },
-
-  btn_back: {
-    borderWidth: 0,
-    backgroundColor: "#f5f5f5",
-  },
-
-  txt_style: {
-    color: "#383838",
-    fontSize: 16,
-    fontWeight: "500",
-  },
-
-  h1: {
-    fontWeight: "400",
-    fontSize: 22,
-    paddingBottom: 15,
-    textDecorationLine: "underline",
-  },
-
-  container: {
+  mapContainer: {
     justifyContent: "center",
     height: "60%",
     marginHorizontal: 10,
@@ -111,7 +83,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: "#f5f5f5",
+    borderColor: COLORS.main,
+    marginBottom: 10,
   },
 
   map: {
@@ -120,19 +93,13 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
 
-  marker: {
-    paddingVertical: 5,
-    paddingHorizontal: 12,
-    backgroundColor: "#8F64C9",
-    borderRadius: 25,
-    opacity: 0.9,
-  },
-
-  txt_marker: {
-    color: "#fff",
-  },
-
-  container_salons: {
-    marginTop: 10,
+  backButton: {
+    position: "absolute",
+    backgroundColor: COLORS.main,
+    top: 0,
+    margin: 10,
+    padding: 5,
+    width: 40,
+    height: 40,
   },
 });

@@ -58,9 +58,9 @@ const Plannings = ({ navigation }) => {
   return (
     <Page>
       <Header
-        title={"Planning des réservations"}
+        text={"Planning des réservations"}
         type={"close"}
-        navigation={navigation}
+        nav={navigation}
       />
       <PickerCalendar
         data={schedule}

@@ -29,9 +29,9 @@ const ConfirmAppt = ({ navigation, route }) => {
   return (
     <Page>
       <Header
-        title={"Valider votre réservation"}
+        text={"Valider votre réservation"}
         type={"back"}
-        navigation={navigation}
+        nav={navigation}
       />
 
       <View style={styles.container}>

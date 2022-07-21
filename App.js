@@ -19,8 +19,8 @@ import ValidationMail from "./src/View/Page/Authcode";
 import ModifyPass from "./src/View/Page/ModifyPass";
 import Booking from "./src/View/Page/Booking/Booking";
 import ConfirmAppt from "./src/View/Page/ConfirmAppt";
-import ConsultAllServices from "./src/View/Page/ConsultAllServices";
-import ConsultService from "./src/View/Page/ConsultService/ConsultService";
+import Catalogues from "./src/View/Page/Catalogues";
+import Service from "./src/View/Page/Service/Service";
 import Forgotten from "./src/View/Page/Forgotten";
 import Appointments from "./src/View/Page/Appointments";
 import Search from "./src/View/Page/Search";
@@ -29,6 +29,7 @@ import Contact from "./src/View/Page/Contact";
 import Client from "./src/View/Page/Client/Client";
 import Plannings from "./src/View/Page/Plannings/Plannings";
 import Salons from "./src/View/Page/Salons";
+import PAGES from "./src/constants/PAGES";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,26 +42,30 @@ export default function App() {
             initialRouteName="Home"
             screenOptions={{ headerShown: false }}
           >
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Navigation" component={Navigation} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="Salons" component={Salons} />
-            <Stack.Screen name="Contact" component={Contact} />
-            <Stack.Screen name="Settings" component={Settings} />
-            <Stack.Screen name="AllServices" component={ConsultAllServices} />
-            <Stack.Screen name="Service" component={ConsultService} />
-            <Stack.Screen name="Forgotten" component={Forgotten} />
-            <Stack.Screen name="Appointments" component={Appointments} />
-            <Stack.Screen name="Search" component={Search} />
-            <Stack.Screen name="Client" component={Client} />
-            <Stack.Screen name="Connection" component={Connection} />
-            <Stack.Screen name="Booking" component={Booking} />
-            <Stack.Screen name="ConfirmAppt" component={ConfirmAppt} />
-            <Stack.Screen name="Authcode" component={Authcode} />
-            <Stack.Screen name="ModifyPass" component={ModifyPass} />
-            <Stack.Screen name="ValidationMail" component={ValidationMail} />
-            <Stack.Screen name="Plannings" component={Plannings} />
+            <Stack.Screen
+              name={PAGES.HOME}
+              component={Home}
+              options={{ animation: "none", gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name={PAGES.CATALOGUE}
+              component={Catalogues}
+              options={{ animation: "none", gestureEnabled: false }}
+            />
+            <Stack.Screen name={PAGES.NAV} component={Navigation} />
+            <Stack.Screen name={PAGES.LOGIN} component={Login} />
+            <Stack.Screen name={PAGES.SIGNUP} component={SignUp} />
+            <Stack.Screen name={PAGES.SALONS} component={Salons} />
+            <Stack.Screen name={PAGES.CONTACT} component={Contact} />
+            <Stack.Screen name={PAGES.SETTINGS} component={Settings} />
+            <Stack.Screen name={PAGES.SERVICE} component={Service} />
+            <Stack.Screen name={PAGES.APTS} component={Appointments} />
+            <Stack.Screen name={PAGES.SEARCH} component={Search} />
+            <Stack.Screen name={PAGES.CLIENT} component={Client} />
+            <Stack.Screen name={PAGES.CONNECTION} component={Connection} />
+            <Stack.Screen name={PAGES.BOOKING} component={Booking} />
+            <Stack.Screen name={PAGES.CONFIRM_APT} component={ConfirmAppt} />
+            <Stack.Screen name={PAGES.PLANNING} component={Plannings} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

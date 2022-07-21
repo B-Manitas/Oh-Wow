@@ -1,57 +1,40 @@
+// React imports
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Absolute from "../Buttons/Absolute";
-import Round from "../Buttons/Round";
 
-const Footer = ({ navigation, current }) => {
+// Constants imports
+import TEXTS from "constants/TEXTS";
+
+import { controller as ctrl } from "model/Main";
+
+const Footer = (props) => {
+  const { isHome, nav } = props;
+
   const props_text = { numberOfLines: 1, adjustsFontSizeToFit: true };
-  const nav = (page) => navigation.navigate(page);
+  const propsButtonHome = {
+    style: styles.button,
+    onPress: () => ctrl.goTo.home(nav),
+    disabled: isHome,
+  };
+  const propsButtonServices = {
+    style: [styles.button, styles.buttonRight],
+    onPress: () => ctrl.goTo.services(nav),
+    disabled: !isHome,
+  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => nav("Home")}
-        disabled={current == "Home"}
-      >
-        <Text
-          {...props_text}
-          style={[styles.text, current == "Home" && styles.current_text]}
-        >
-          Oh WoW
+      <TouchableOpacity {...propsButtonHome}>
+        <Text {...props_text} style={[styles.text, isHome && styles.textOn]}>
+          {TEXTS.title_h2}
         </Text>
       </TouchableOpacity>
 
-      {/* <Round text={"Consulter toutes les prestations"} style={{top: -75}} /> */}
-
-      <TouchableOpacity
-        style={[styles.button, styles.button_center]}
-        onPress={() => nav("AllServices")}
-        disabled={current == "AllServices"}
-      >
-        <Text
-          {...props_text}
-          style={[styles.text, current == "AllServices" && styles.current_text]}
-        >
-          Prendre rendez-vous
+      <TouchableOpacity {...propsButtonServices}>
+        <Text {...props_text} style={[styles.text, !isHome && styles.textOn]}>
+          {TEXTS.booking}
         </Text>
       </TouchableOpacity>
-
-      {/* <TouchableOpacity
-        style={styles.button}
-        onPress={() => nav("Appointments")}
-        disabled={current == "Appointments"}
-      >
-        <Text
-          {...props_text}
-          style={[
-            styles.text,
-            current == "Appointments" && styles.current_text,
-          ]}
-        >
-          Mes rendez-vous
-        </Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
@@ -61,12 +44,15 @@ export default Footer;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    alignSelf: "center",
     position: "absolute",
     bottom: 45,
-    left: 15,
-    right: 15,
+
+    marginHorizontal: 15,
+
     borderRadius: 5,
     backgroundColor: "#faa4af",
+
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -74,34 +60,27 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
-    
+
     elevation: 10,
-    borderWidth: 2,
-    borderColor: "transparent",
   },
 
   button: {
-    marginHorizontal: 5,
     flex: 1,
     paddingVertical: 15,
     paddingHorizontal: 10,
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "transparent",
   },
+
+  buttonRight: { borderLeftColor: "#fff" },
 
   text: {
     fontSize: 20,
     textAlign: "center",
     color: "#fff",
-    fontWeight: "600",
+    fontWeight: "700",
   },
 
-  button_center: {
-    borderLeftWidth: 2,
-    borderColor: "#f5f5f5",
-  },
-
-  current_text: {
-    // fontWeight: "700",
-    color: "#fff",
-    textDecorationLine: "underline",
-  },
+  textOn: { textDecorationLine: "underline" },
 });

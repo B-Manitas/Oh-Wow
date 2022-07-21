@@ -1,38 +1,47 @@
+// React imports
 import React, { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-import Absolute from "../../Buttons/Absolute";
+// Componnents imports
+import Button from "button/Button";
+
+// Constants imports
+import TEXTS from "constants/TEXTS";
 
 import { controller as ctrl } from "model/Main";
-import { useIsFocused } from "@react-navigation/native";
 
-const HomeHeader = ({ refreshing, app, setApp }) => {
-  const [is_admin, setIsAdmin] = useState(ctrl.this_is_admin());
+const HomeHeader = (props) => {
+  const { app, setApp, refreshing } = props;
+  const isFocused = useIsFocused();
 
-  const is_focused = useIsFocused();
+  const [isAdmin, setAdmin] = useState(ctrl.this_is_admin());
 
+  // On focus homepage
   useEffect(() => {
-    setIsAdmin(ctrl.this_is_admin());
-  }, [is_focused]);
+    setAdmin(ctrl.this_is_admin());
+  }, [isFocused]);
+
+  // Define props of the button image
+  const propsButtonImage = {
+    visible: isAdmin,
+    text: TEXTS.newImage,
+    style: styles.buttonImage,
+    onPress: () => ctrl.update.image(setApp),
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.refresh}>
-        <Text style={styles.refresh_text}>
-          {refreshing ? "Chargement..." : "Tirer pour rafraichir"}
+        <Text style={styles.refreshText}>
+          {refreshing ? TEXTS.loading : TEXTS.pullToRefresh}
         </Text>
       </View>
+
       <Image source={{ uri: app?.img }} style={styles.image} />
-      {is_admin && (
-        <Absolute
-          text={"Modifier"}
-          top={60}
-          right={20}
-          ctn_style={styles.btn_edit}
-          func={() => ctrl.update.image(setApp)}
-        />
-      )}
-      <Text style={styles.h1}>Oh WoW...</Text>
+
+      <Button {...propsButtonImage} />
+      <Text style={styles.h1}>{TEXTS.title_h1}</Text>
     </View>
   );
 };
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
 
-  refresh_text: {
+  refreshText: {
     fontSize: 25,
     textAlign: "center",
   },
@@ -71,33 +80,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
-    // backgroundColor: "#faa4af"
   },
 
-  btn_edit: {
-    backgroundColor: "#fff",
+  buttonImage: {
+    position: "absolute",
+    top: 62,
+    right: 20,
     paddingHorizontal: 10,
     paddingVertical: 7,
-    margin: 1,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
-    borderWidth: 0,
-    borderColor: "#383838",
   },
 
   h1: {
     fontSize: 45,
-    // textDecorationLine: "underline",
     fontWeight: "500",
     textAlign: "center",
-    color: "#F87788",
+    color: "#faa4af",
   },
 });

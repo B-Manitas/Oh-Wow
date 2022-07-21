@@ -28,9 +28,9 @@ const Appointments = ({ navigation }) => {
   return (
     <Page>
       <Header
-        title={"Mes rendez-vous"}
+        text={"Mes rendez-vous"}
         type={"close"}
-        navigation={navigation}
+        nav={navigation}
       />
       <View style={styles.ctn_radio}>
         <RadioBox
@@ -42,7 +42,7 @@ const Appointments = ({ navigation }) => {
           style_txt={styles.txt_ratio}
           style_txt_active={styles.txt_ratio_on}
           style_active={styles.ctn_radio_on}
-          />
+        />
         <RadioBox
           text={"Historique"}
           id={1}
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   txt_ratio: {
     fontSize: 20,
     color: "#fff",
-    fontWeight: "500"
+    fontWeight: "500",
   },
 
   ctn_radio_on: {
