@@ -18,9 +18,9 @@ import MapView from "react-native-maps";
 import { ICON } from "constants/IMAGES";
 import COLORS from "constants/COLORS";
 
-const Contact = (...props) => {
+const Contact = (props) => {
   // Destructure props
-  const [{ navigation: nav }] = props;
+  const { navigation: nav } = props;
 
   // Define componnent state
   const [salons, setSalons] = useState(undefined);

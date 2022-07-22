@@ -4,9 +4,9 @@ import CDate from "model/utils/CDate";
 
 import { controller as ctrl } from "model/Main";
 
-const ItemServiceLarge = (...props) => {
+const ItemServiceLarge = (props) => {
   // Destructure props
-  const [{ nav, service }] = props;
+  const { nav, service } = props;
 
   // Define props
   const propsContainer = {

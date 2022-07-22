@@ -30,8 +30,12 @@ export default class ErrorHandler {
    * fields in the user data are missing.
    */
   manageInvalidData() {
-    if (this.error.setAudit != undefined)
-      this.error.setAudit((prev) => ({ ...prev, ...this.error.data }));
+    if (!this.error.setAudit) return;
+
+    this.error.setAudit((prev) => ({
+      ...prev,
+      valid: { ...prev?.valid, ...this.error.data },
+    }));
   }
 
   /** Catching the ExistingUser. */
@@ -52,10 +56,12 @@ export default class ErrorHandler {
 
   /** Catching the FailedLogin. */
   manageFailedLogin() {
-    Alert.alert(
-      "The username or password is incorrect",
-      "Please ensure that you have entered the correct information.."
-    );
+    if (!this.error.setAudit) return;
+
+    this.error.setAudit((prev) => ({
+      ...prev,
+      error: { failedLogin: true },
+    }));
   }
 
   /** Catching the NetworkError. */

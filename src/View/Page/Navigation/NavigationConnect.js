@@ -3,7 +3,7 @@ import React from "react";
 import { View } from "react-native";
 
 // Componnents imports
-import Link from "button/Link";
+import Button from "button/Button";
 import NavigationAdmin from "./NavigationAdmin";
 import NavigationStaff from "./NavigationStaff";
 
@@ -12,32 +12,30 @@ import { controller as ctrl } from "model/Main";
 
 // Constants imports
 import { STYLES_NAV } from "constants/STYLES";
+import { NAVIGATION } from "constants/PROPS";
 
-const NavigationConnect = (...props) => {
-  const [{ nav }] = props;
+const NavigationConnect = (props) => {
+  const { nav } = props;
   const isConnected = ctrl.this_is_connected;
 
   if (!isConnected) return null;
   return (
     <View>
       <View style={STYLES_NAV.section}>
-        <Link
+        <Button
           text={"Accueil"}
-          style_container={STYLES_NAV.navButton}
-          style_text={STYLES_NAV.navText}
-          func={() => ctrl.goTo.home()}
+          onPress={() => ctrl.goTo.home()}
+          {...NAVIGATION}
         />
-        <Link
+        <Button
           text={"Nos prestations"}
-          style_container={styles.navButton}
-          style_text={styles.navText}
-          func={() => ctrl.goTo.services()}
+          onPress={() => ctrl.goTo.services()}
+          {...NAVIGATION}
         />
-        <Link
+        <Button
           text={"Mes rendez-vous"}
-          style_container={styles.navButton}
-          style_text={styles.navText}
-          func={() => ctrl.goTo.appointments()}
+          onPress={() => ctrl.goTo.appointments()}
+          {...NAVIGATION}
         />
       </View>
 
@@ -45,17 +43,15 @@ const NavigationConnect = (...props) => {
       <NavigationAdmin nav={nav} />
 
       <View style={STYLES_NAV.section}>
-        <Link
+        <Button
           text={"Mes paramètres"}
-          style_container={styles.navButton}
-          style_text={styles.navText}
-          func={() => ctrl.goTo.settings(nav)}
+          onPress={() => ctrl.goTo.settings(nav)}
+          {...NAVIGATION}
         />
-        <Link
+        <Button
           text={"Nous contacter"}
-          style_container={styles.navButton}
-          style_text={styles.navText}
-          func={() => ctrl.goTo.contact(nav)}
+          onPress={() => ctrl.goTo.contact(nav)}
+          {...NAVIGATION}
         />
       </View>
     </View>

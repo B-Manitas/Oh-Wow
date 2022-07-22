@@ -1,144 +1,120 @@
-import React, { useState } from "react";
+// React imports
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
-  Text,
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
 
+// Componnent imports
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import FooterSocial from "../Parts/FooterSocial";
-
-import Primary from "../Buttons/Primary";
-import Link from "../Buttons/Link";
+import Primary from "button/Primary";
+import Button from "button/Button";
 import InputPrimary from "../Input/InputPrimary";
 import CheckBoxText from "../Componnent/CheckBoxText";
 
+// Librarie imports
 import { controller as ctrl } from "model/Main";
-import PAGES from "../../constants/PAGES";
+import { useIsFocused } from "@react-navigation/native";
 
-const SignUp = ({ navigation }) => {
+// Constants imports
+import { ERROR_TEXT } from "constants/TEXTS";
+import {
+  INPUT_FIRSTNAME,
+  INPUT_LASTNAME,
+  INPUT_PASSWORD,
+  INPUT_PHONE,
+  KEYBOARD_AVOIDING_VIEW,
+} from "constants/PROPS";
+import { STYLES_LINK } from "../../constants/STYLES";
+
+const SignUp = (props) => {
+  // Destructure props
+  const { navigation: nav } = props;
+  const isFocused = useIsFocused();
+
+  // Define componnent state
   const schema_user = ctrl.frontend.schemaUser();
-  const [is_CGU_accepted, setIsCGUAccepted] = useState(false);
+  const [canSignup, setCanSignup] = useState(false);
+  const [send, setSend] = useState(false);
   const [data, setData] = useState(schema_user);
   const [audit, setAudit] = useState(ctrl.fakeAudit(schema_user));
 
+  // Define componnent function
   const setPhone = (t) => setData((p) => ({ ...p, phone: t }));
+
+  // Reset state page on focus
+  useEffect(() => {
+    setAudit(ctrl.fakeAudit(schema_user));
+    setData(schema_user);
+  }, [isFocused]);
+
+  // On press to sign up
+  useEffect(() => {
+    setSend(false);
+  }, [audit]);
 
   return (
     <Page>
-      <Header type="close" nav={navigation} />
+      <Header type="close" nav={nav} />
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : null}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
-        style={styles.container}
-      >
+      <KeyboardAvoidingView {...KEYBOARD_AVOIDING_VIEW} style={styles.ctn}>
         <ScrollView
-          style={styles.container}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollview}
         >
           <InputPrimary
-            info={"Prénom *"}
-            plh={"John"}
-            typeAndroid={"name-given"}
-            typeIOS={"givenName"}
-            returnKeyType={"next"}
-            maxLength={12}
-            keyboardType={"default"}
-            secureTextEntry={false}
-            onChangeText={(t) => setData({ ...data, firstname: t })}
+            {...INPUT_FIRSTNAME}
             value={data.firstname}
-            isValidFormat={audit.firstname}
+            setValue={(t) => setData({ ...data, firstname: t })}
+            valid={audit.firstname}
+            format={ERROR_TEXT.name}
           />
           <InputPrimary
-            info={"Nom *"}
-            plh={"Doe"}
-            typeAndroid={"name-family"}
-            typeIOS={"familyName"}
-            returnKeyType={"next"}
-            maxLength={12}
-            keyboardType={"default"}
-            secureTextEntry={false}
-            onChangeText={(t) => setData({ ...data, lastname: t })}
+            {...INPUT_LASTNAME}
+            setValue={(t) => setData({ ...data, lastname: t })}
             value={data.lastname}
-            isValidFormat={audit.lastname}
+            valid={audit.lastname}
+            format={ERROR_TEXT.name}
           />
           <InputPrimary
-            info={"Télephone*"}
-            plh={"00 00 00 00 00"}
-            typeAndroid={"tel"}
-            typeIOS={"telephoneNumber"}
-            returnKeyType={"next"}
-            maxLength={14}
-            keyboardType={"phone-pad"}
-            secureTextEntry={false}
-            onChangeText={(t) => ctrl.onFormat.phone(data.phone, t, setPhone)}
+            {...INPUT_PHONE}
             value={data.phone}
-            isValidFormat={audit.phone}
+            setValue={(t) => ctrl.onFormat.phone(data.phone, t, setPhone)}
+            valid={audit.phone}
           />
           <InputPrimary
-            info={"Mail *"}
-            plh={"john@doe.com"}
-            typeAndroid={"email"}
-            typeIOS={"emailAddress"}
-            returnKeyType={"next"}
-            maxLength={50}
-            keyboardType={"email-address"}
-            secureTextEntry={false}
-            onChangeText={(t) => setData({ ...data, mail: t })}
-            value={data.mail}
-            isValidFormat={audit.mail}
-          />
-          <InputPrimary
-            info={"Mot de passe *"}
-            plh={"mY%Pa9ss."}
-            typeAndroid={"password-new"}
-            typeIOS={"newPassword"}
-            returnKeyType={"done"}
-            maxLength={20}
-            keyboardType={"default"}
-            secureTextEntry={true}
-            onChangeText={(t) => setData({ ...data, password: t })}
+            {...INPUT_PASSWORD}
             value={data.password}
-            isValidFormat={audit.password}
+            setValue={(t) => setData({ ...data, password: t })}
+            valid={audit.password}
           />
 
-          <View style={styles.content_tou}>
-            <CheckBoxText
-              func={(b) => setIsCGUAccepted(!b)}
-              state={is_CGU_accepted}
-              size={30}
-              color_bg_active={"#383838"}
-            />
-            <Text style={styles.text_tou}>
-              En poursuivant j'accepte les{" "}
-              <Link
-                text={"conditions d'utilisations"}
-                style_text={styles.text_link}
-              />
-            </Text>
-          </View>
-
-          <View style={styles.content_valid_btn}>
-            <Primary
-              text={"Créer un compte"}
-              width={"60%"}
-              height={10}
-              font_size={20}
-              func={() => ctrl.add.user(data, navigation, setAudit)}
-              is_active={is_CGU_accepted}
-            />
-
-            <Link
-              text={"Déja Client ?"}
-              pad_top={7}
-              style_text={{ textDecorationLine: "underline" }}
-              func={() => navigation.navigate(PAGES.LOGIN)}
+          <View style={styles.parts}>
+            <CheckBoxText onPress={setCanSignup} state={canSignup} />
+            <Button
+              text={"Accepter les conditions générales d'utilisations"}
+              nbLines={2}
+              styleText={styles.link}
+              shadow={false}
             />
           </View>
+
+          <Primary
+            text={send ? "Enregistrement..." : "Créer un compte"}
+            onPress={() => ctrl.add.user(data, nav, setSend, setAudit)}
+            disabled={!canSignup || send}
+          />
+
+          <Button
+            text={"Déja Client ?"}
+            styleText={STYLES_LINK.text}
+            shadow={false}
+            onPress={() => ctrl.goTo.login(nav)}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
 
@@ -150,74 +126,21 @@ const SignUp = ({ navigation }) => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 10,
-  },
+  ctn: { height: "70%" },
 
-  content_field: {
-    marginVertical: 20,
-    marginHorizontal: 30,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+  scrollview: { flexGrow: 1, justifyContent: "center" },
 
-    elevation: 2,
-  },
-
-  content_info: {
-    top: -20,
-    left: 10,
-    borderRadius: 5,
-    borderWidth: 2,
-    position: "absolute",
-    paddingHorizontal: 8,
-    backgroundColor: "#fff",
-    paddingVertical: 5,
-  },
-
-  text_info: {
-    fontSize: 13,
-    textAlign: "center",
-    fontStyle: "italic",
-    fontWeight: "600",
-  },
-
-  txt_input: {
-    backgroundColor: "#fff",
-    paddingLeft: 30,
-    paddingBottom: 10,
-    paddingTop: 15,
-    paddingRight: 10,
-    fontSize: 20,
-    borderWidth: 2,
-    borderRadius: 5,
-    fontWeight: "200",
-  },
-
-  content_tou: {
+  parts: {
     flexDirection: "row",
+    marginVertical: 20,
     marginHorizontal: 40,
-    alignItems: "center",
-  },
-
-  text_tou: {
-    marginHorizontal: 10,
-    fontSize: 14,
-  },
-
-  content_valid_btn: {
     justifyContent: "center",
-    alignItems: "center",
-    marginTop: 25,
   },
 
-  text_link: {
-    color: "#364fc7",
+  link: {
     textDecorationLine: "underline",
-    marginBottom: 4,
+    marginHorizontal: 10,
+    fontSize: 15,
+    fontWeight: "500",
   },
 });

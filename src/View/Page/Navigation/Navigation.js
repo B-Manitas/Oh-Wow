@@ -1,13 +1,15 @@
+// React imports
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
+// Componnents imports
 import Page from "container/Page";
 import Header from "../../Parts/Header";
 import NavigationConnect from "./NavigationConnect";
 import NavigationDisconnect from "./NavigationDisconnect";
 
-const Navigation = (...props) => {
-  const [{ navigation: nav }] = props;
+const Navigation = (props) => {
+  const { navigation: nav } = props;
 
   return (
     <Page is_safe_input={false}>

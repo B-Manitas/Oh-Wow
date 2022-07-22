@@ -6,10 +6,10 @@ import { Dimensions, StyleSheet, Text, View } from "react-native";
 import InputError from "./InputError";
 
 const InputLong = (props) => {
-  const valid = props.valid === false ? false : true;
+  const error = props.error === true ? true : false;
 
   return (
-    <View style={[styles.container, !valid && styles.containerError]}>
+    <View style={[styles.container, error && styles.containerError]}>
       <Text style={styles.text}>{props.text}</Text>
       <InputError {...props} style={styles.containerInput} />
     </View>

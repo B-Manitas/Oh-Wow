@@ -13,7 +13,8 @@ export class Add extends SuperController {
    * @param {Function} navigation The navigation function for changing page.
    */
   @Catch
-  async user(data, navigation, setAudit) {
+  async user(data, navigation, setAudit, setSend) {
+    setSend(true);
     const user = await this.frontend.add.user(data, setAudit);
     addUserStore(user);
 

@@ -1,7 +1,7 @@
 import PAGES from "../constants/PAGES";
 import { SuperController } from "./SuperController";
 
-export class Navigation extends SuperController {
+export class GoTo extends SuperController {
   searchToUser(navigation, user) {
     navigation.navigate(PAGES.CLIENT, { data: user });
   }
@@ -38,6 +38,14 @@ export class Navigation extends SuperController {
     nav.navigate(PAGES.APTS);
   }
 
+  login(nav) {
+    nav.navigate(PAGES.LOGIN);
+  }
+
+  signup(nav) {
+    nav.navigate(PAGES.SIGNUP);
+  }
+
   booking(nav, service) {
     if (this.this_is_connected) nav.navigate(PAGES.BOOKING, { data: service });
     else nav.navigate(PAGES.CONNECTION);
@@ -45,5 +53,13 @@ export class Navigation extends SuperController {
 
   service(nav, service) {
     nav.navigate(PAGES.SERVICE, { service, isNew: false });
+  }
+
+  salons(nav) {
+    nav.navigate(PAGES.SALONS);
+  }
+
+  search(nav) {
+    nav.navigate(PAGES.SEARCH);
   }
 }

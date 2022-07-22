@@ -6,10 +6,11 @@ import { Image, StyleSheet, Text, View } from "react-native";
 // Componnents imports
 import Button from "button/Button";
 
+// Model import
+import { controller as ctrl } from "model/Main";
+
 // Constants imports
 import TEXTS from "constants/TEXTS";
-
-import { controller as ctrl } from "model/Main";
 
 const HomeHeader = (props) => {
   const { app, setApp, refreshing } = props;

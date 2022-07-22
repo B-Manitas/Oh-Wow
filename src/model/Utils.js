@@ -1,4 +1,7 @@
+// Libraries imports
 import _ from "lodash";
+
+// Constants imports
 import { FR_DAYS } from "../constants/DAYS";
 import { ICON } from "../constants/IMAGES";
 import PAGES from "../constants/PAGES";
@@ -12,20 +15,8 @@ export default {
     else return { img: ICON.menu_bl, onPress: () => nav.navigate(PAGES.NAV) };
   },
 
-  isNull(value) {
-    return value === null || value === undefined;
-  },
-
-  randomBool() {
-    return Math.random() < 0.5;
-  },
-
   randomInt(max) {
     return Math.floor(Math.random() * max);
-  },
-
-  dictState(value, setValue) {
-    return { val: value, func: setValue };
   },
 
   removeKey(object, ...keys) {
@@ -40,10 +31,6 @@ export default {
 
   copy(object) {
     return JSON.parse(JSON.stringify(object));
-  },
-
-  setValue(func, key, value) {
-    func((p) => ({ ...p, [key]: value }));
   },
 
   openDaysText(days) {

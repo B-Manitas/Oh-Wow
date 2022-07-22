@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 
 // Componnents imports
-// import Absolute from "buttons/Absolute";
 import Button from "button/Button";
 import Footer from "../Parts/Footer";
 import Header from "../Parts/Header";
@@ -19,8 +18,8 @@ import { PLH } from "../../constants/TEXTS";
 import { useIsFocused } from "@react-navigation/native";
 import Utils from "../../model/Utils";
 
-const Catalogues = (...props) => {
-  const [{ navigation: nav }] = props;
+const Catalogues = (props) => {
+  const { navigation: nav } = props;
   const isFocused = useIsFocused();
 
   // Define componnent state

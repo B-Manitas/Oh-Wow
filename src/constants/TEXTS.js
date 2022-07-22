@@ -24,4 +24,18 @@ export const PLH = {
   serviceName: "Manucure",
   password: "mY%Pa9ss.",
   mail: "name@address.com",
+  firstname: "John",
+  lastname: "Doe",
+  phone: "00 00 00 00",
+};
+
+export const ERROR_TEXT = {
+  name: "Minimum deux lettres requises",
+  password:
+    "Doit contenir minimum 8 lettres, un chiffre, une lettre minuscule et une majuscule",
+  mail: "Addresse mail invalide",
+  phone: "Numéro de téléphone invalide",
+  prix: "Un nombre positif requis",
+  duration: "Formats '10', '1h' ou '1h10'",
+  failedLogin: "Identifiant ou mot de passe invalide.",
 };

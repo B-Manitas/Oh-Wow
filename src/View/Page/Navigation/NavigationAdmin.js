@@ -1,31 +1,33 @@
+// React imports
 import React from "react";
 import { View } from "react-native";
-import Link from "button/Link";
 
-import { controller } from "model/Main";
+// Componnents imports
+import Button from "button/Button";
+
+// Model import
+import { controller as ctrl } from "model/Main";
 
 // Constants imports
+import { NAVIGATION } from "constants/PROPS";
 import { STYLES_NAV } from "constants/STYLES";
-import PAGES from "constants/PAGES";
 
-const NavigationAdmin = (...props) => {
-  const [{ nav }] = props;
-  const isAdmin = controller.this_is_admin;
+const NavigationAdmin = (props) => {
+  const { nav } = props;
+  const isAdmin = ctrl.this_is_admin;
 
   if (!isAdmin) return null;
   return (
-    <View style={styles.nav}>
-      <Link
-        text={"Gérer les salons"}
-        style_container={STYLES_NAV.navButton}
-        style_text={STYLES_NAV.navText}
-        func={() => nav.navigate(PAGES.SALONS)}
+    <View style={STYLES_NAV.section}>
+      <Button
+        text="Gérer les salons"
+        onPress={() => ctrl.goTo.salons(nav)}
+        {...NAVIGATION}
       />
-      <Link
-        text={"Rechercher un utilisateur"}
-        style_container={STYLES_NAV.navButton}
-        style_text={STYLES_NAV.navText}
-        func={() => nav.navigate(PAGES.SEARCH)}
+      <Button
+        text="Rechercher un utilisateur"
+        onPress={() => ctrl.goTo.search(nav)}
+        {...NAVIGATION}
       />
     </View>
   );

@@ -11,9 +11,9 @@ import Utils from "model/Utils";
 // Constants imports
 import { PHOTO } from "constants/IMAGES";
 
-const Header = (...props) => {
+const Header = (props) => {
   // Destructure props
-  const [{ text, type, nav, onPress, addLogo }] = props;
+  const { text, type, nav, onPress, addLogo } = props;
   const [headerType, setHeaderType] = useState();
 
   // On load componnent

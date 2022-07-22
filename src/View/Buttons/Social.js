@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, Linking } from "react-native";
+import { StyleSheet } from "react-native";
 import Button from "./Button";
 
 import { controller as ctrl } from "model/Main";
 
-const Social = (...props) => {
-  const [{ url, icon }] = props;
+const Social = (props) => {
+  const { url, icon } = props;
 
   return (
     <Button

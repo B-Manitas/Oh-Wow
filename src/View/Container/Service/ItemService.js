@@ -10,9 +10,9 @@ import Button from "button/Button";
 import { controller as ctrl } from "model/Main";
 import CDate from "model/utils/CDate";
 
-const ItemService = (...props) => {
+const ItemService = (props) => {
   // Destructure props
-  const [{ nav, service }] = props;
+  const { nav, service } = props;
 
   // Define props
   const propsCtn = { style: [styles.ctn, service.is_hidden && styles.hidden] };

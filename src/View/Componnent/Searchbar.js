@@ -11,8 +11,8 @@ import {
 // Contants imports
 import { ICON } from "constants/IMAGES";
 
-const Searchbar = (...props) => {
-  const [{ plh, setValue, value }] = props;
+const Searchbar = (props) => {
+  const { plh, setValue, value } = props;
 
   const propsInput = {
     value: value,

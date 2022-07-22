@@ -30,6 +30,7 @@ import TEXTS, { PLH, TITLE } from "constants/TEXTS";
 import COLORS from "constants/COLORS";
 import Primary from "../../Buttons/Primary";
 import InputError from "../../Input/InputError";
+import { ERROR_TEXT } from "../../../constants/TEXTS";
 
 const ServiceSettings = (props) => {
   // Destructure props
@@ -84,7 +85,7 @@ const ServiceSettings = (props) => {
             valid={audit.name || saving}
             value={data.name}
             setValue={(t) => setData((p) => ({ ...p, name: t }))}
-            formatError="Minimum deux lettres requises"
+            errorText={ERROR_TEXT.name}
           />
           <InputLong
             text={"Prix en dinar tunisien"}
@@ -93,7 +94,7 @@ const ServiceSettings = (props) => {
             valid={audit.price || saving}
             value={data.price.toString()}
             setValue={(t) => ctrl.onFormat.price(t, setPrice)}
-            formatError="Un nombre positif requis"
+            errorText={ERROR_TEXT.price}
           />
           <InputLong
             text={"Durée"}
@@ -101,7 +102,7 @@ const ServiceSettings = (props) => {
             valid={audit.duration || saving}
             value={duration(data.duration)}
             setValue={(t) => ctrl.onFormat.time(t, setDur)}
-            formatError="Formats '10', '1h' ou '1h10'"
+            errorText={ERROR_TEXT.duration}
           />
         </View>
 
@@ -111,9 +112,9 @@ const ServiceSettings = (props) => {
             value={data.description}
             setValue={(t) => setData((p) => ({ ...p, description: t }))}
             placeholder={PLH.description}
-            valid={audit.description || saving}
+            valid={audit.description && !saving}
             multiline
-            formatError="Minimum deux lettres requises"
+            errorText={ERROR_TEXT.name}
           />
         </View>
 

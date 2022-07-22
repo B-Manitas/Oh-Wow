@@ -1,57 +1,84 @@
+// React imports
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet, Text } from "react-native";
 
-import Page from "../Container/Page";
-import Header from "../Parts/Header";
+// Componnents imports
 import FooterSocial from "../Parts/FooterSocial";
-
+import Header from "../Parts/Header";
 import InputPrimary from "../Input/InputPrimary";
-import Primary from "../Buttons/Primary";
-import Link from "../Buttons/Link";
+import Button from "button/Button";
+import Page from "container/Page";
+import Primary from "button/Primary";
 
-import { controller } from "model/Main";
-import PAGES from "../../constants/PAGES";
-import { PLH } from "constants/TEXTS";
-import { INPUT_MAIL, INPUT_PASSWORD } from "../../constants/PROPS";
+// Librarie imports
+import { controller as ctrl } from "model/Main";
+import { useIsFocused } from "@react-navigation/native";
 
-const Login = ({ navigation }) => {
-  const schema = controller.frontend.schemaLogin();
-  const [data, setData] = useState(schema);
-  const [audit, setAudit] = useState(controller.fakeAudit(schema));
+// Constants imports
+import { INPUT_MAIL, INPUT_PASSWORD } from "constants/PROPS";
+import { STYLES_LINK } from "constants/STYLES";
+import COLORS from "constants/COLORS";
+import { ERROR_TEXT } from "../../constants/TEXTS";
+
+const Login = (props) => {
+  // Destructure props
+  const { navigation: nav } = props;
+
+  // Define componnent state
+  const schemaUser = ctrl.frontend.schemaLogin();
+  const isFocused = useIsFocused();
   const [send, setSend] = useState(false);
+  // const [networkError, setNetworkError] = useState(false);
+  const [data, setData] = useState(schemaUser);
+  const [audit, setAudit] = useState();
 
+  // Reset state page on focus
+  useEffect(() => {
+    setAudit();
+    setData(schemaUser);
+  }, [isFocused]);
+
+  // On send
   useEffect(() => {
     setSend(false);
   }, [audit]);
 
+  // Define componnent function
+  const login = () => ctrl.get.connect(data, nav, setAudit, setSend);
+
   return (
     <Page>
-      <Header nav={navigation} type="close" />
+      <Header nav={nav} type="close" />
       <ScrollView contentContainerStyle={styles.container}>
+        {audit?.error?.failedLogin && (
+          <Text style={styles.errorLogin}>{ERROR_TEXT.failedLogin}</Text>
+        )}
+
         <InputPrimary
           {...INPUT_MAIL}
-          // value={data.mail}
-          // onChangeText={(mail) => setData((props) => ({ ...props, mail }))}
-          // isValidFormat={audit.mail}
+          value={data.mail}
+          setValue={(mail) => setData((props) => ({ ...props, mail }))}
+          valid={audit?.valid?.mail}
         />
         <InputPrimary
           {...INPUT_PASSWORD}
-          // value={data.password}
-          // onChangeText={(t) => setData((props) => ({ ...props, password: t }))}
-          // isValidFormat={audit.password}
+          value={data.password}
+          setValue={(t) => setData((props) => ({ ...props, password: t }))}
+          valid={audit?.valid?.password}
         />
 
         <View style={styles.content_valid_btn}>
           <Primary
-            text={"Se connecter"}
-            onPress={() => controller.get.connect(data, navigation, setAudit)}
+            text={send ? "Connexion..." : "Se connecter"}
+            onPress={login}
             disabled={send}
           />
 
-          <Link
+          <Button
             text={"Pas encore client ?"}
-            style_text={styles.link}
-            func={() => navigation.navigate(PAGES.SIGNUP)}
+            styleText={STYLES_LINK.text}
+            shadow={false}
+            onPress={() => ctrl.goTo.signup(nav)}
           />
         </View>
       </ScrollView>
@@ -75,9 +102,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
 
-  link: {
-    textDecorationLine: "underline",
-    marginBottom: 4,
-    marginTop: 10,
+  errorLogin: {
+    color: COLORS.error,
+    fontWeight: "600",
+    fontSize: 16,
+    margin: 10,
+    textAlign: "center",
   },
 });

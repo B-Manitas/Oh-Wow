@@ -65,8 +65,9 @@ export class Find extends SuperController {
    * @param {Function} navigation The navigation function for changing page.
    */
   @Catch
-  async connect(setSend, data, navigation, setAudit) {
+  async connect(data, navigation, setAudit, setSend) {
     setSend(true);
+
     const user = await this.frontend.get.connect(data, setAudit);
     addUserStore(user);
     await this.frontend.get.status(user._id, updateStatus);

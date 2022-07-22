@@ -1,32 +1,20 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import InputError from "./InputError";
 
-// info,
-// plh,
-// typeAndroid,
-// typeIOS,
-// returnKeyType,
-// keyboardType,
-// maxLength,
-// secureTextEntry,
-// value,
-// onChangeText,
-// isValidFormat,
-
-const InputPrimary = (...props) => {
+const InputPrimary = (props) => {
   const passwordRules =
     "minlength: 8; required: lower; required: upper; required: digit;";
 
   const propsInput = {
     ...props,
-    style: [styles.input, props.error && { borderColor: "red" }],
+    style: [styles.input],
     passwordRules,
   };
 
   return (
     <View style={styles.container}>
-      <InputError {...propsInput} placeholder={"Prénom"} />
+      <InputError {...propsInput} />
     </View>
   );
 };

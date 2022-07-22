@@ -49,7 +49,7 @@ export class Find extends SuperFrontend {
       setAudit
     );
 
-    if (data == null) throw new FailedLogin();
+    if (data == null) throw new FailedLogin(setAudit);
     else return data;
   }
 

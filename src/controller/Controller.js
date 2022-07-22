@@ -1,7 +1,7 @@
 import { Find } from "./Find";
 import { Add } from "./Add";
 import { OnClose } from "./OnClose";
-import { Navigation } from "./Navigation";
+import { GoTo } from "./GoTo";
 import { SuperController } from "./SuperController";
 import { Update } from "./Update";
 import { Delete } from "./Delete";
@@ -28,7 +28,7 @@ export class Controller extends SuperController {
     this.onClose = new OnClose(backend, frontend);
     this.onPress = new OnPress(backend, frontend);
     this.onChange = new OnChange(backend, frontend);
-    this.goTo = new Navigation(backend, frontend);
+    this.goTo = new GoTo(backend, frontend);
     this.onFormat = new OnFormat(backend, frontend);
     this.onSearch = new OnSearch(backend, frontend);
   }

@@ -2,8 +2,8 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-const Marker = (...props) => {
-  const [{ marker }] = props;
+const Marker = (props) => {
+  const { marker } = props;
 
   return (
     <View style={styles.container}>

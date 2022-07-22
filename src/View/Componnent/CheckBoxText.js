@@ -1,65 +1,55 @@
+// React imports
 import React from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 
-const CheckBoxText = ({
-  state,
-  size,
-  text,
-  color_txt_active,
-  color_bg_active,
-  color_bd_active,
-  flex,
-  func,
-}) => {
-  return (
-    <Pressable
-      onPress={() => func(state)}
-      style={[
-        styles.button,
-        { width: size, height: size, flex: flex },
-        state && {
-          backgroundColor: color_bg_active,
-          borderColor: color_bd_active,
-        },
-      ]}
-    >
-      <Text
-        style={[styles.text, state && { color: color_txt_active }]}
-        adjustsFontSizeToFit={true}
-        numberOfLines={1}
-      >
-        {text}
-      </Text>
-    </Pressable>
-  );
+// Componnent imports
+import Button from "button/Button";
+
+// Constant imports
+import COLORS from "constants/COLORS";
+import { STYLES_SHADOW } from "constants/STYLES";
+
+const CheckBoxText = (props) => {
+  // Define componnent state
+  const state = props.state;
+  const isFlex = props.isFlex;
+
+  // Define button props
+  const buttonProps = {
+    ...props,
+    onPress: () => props.onPress(!state),
+    style: [styles.button, isFlex && styles.flex, state && styles.buttonOn],
+    styleText: styles.text,
+  };
+
+  return <Button {...buttonProps} />;
 };
 
 export default CheckBoxText;
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 3,
     borderWidth: 2,
-    borderColor: "#D0D0D0",
-    backgroundColor: "#fff",
-    width: 30,
-    height: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 2,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
+    borderRadius: 10,
+    borderColor: COLORS.darkGray,
+    backgroundColor: COLORS.default,
+    width: 40,
+    height: 40,
 
-    elevation: 1,
+    ...STYLES_SHADOW.low,
+  },
+
+  flex: {
+    flex: 1,
+  },
+
+  buttonOn: {
+    backgroundColor: COLORS.main,
+    borderColor: COLORS.main,
   },
 
   text: {
-    color: "#474747",
+    color: COLORS.black,
     fontWeight: "600",
   },
 });

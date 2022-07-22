@@ -6,18 +6,28 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import COLORS from "constants/COLORS";
 
 const InputError = (props) => {
-  const valid = props.valid === false ? false : true;
+  const error = props.valid === false ? true : false;
+  const info = props.info;
 
+  // Define props input
   const propsInput = {
     ...props,
+    autoComplete: props.typeAndroid,
+    textContentType: props.typeIOS,
     onChangeText: props.setValue,
-    style: [styles.input, props.style, !valid && styles.error],
+    style: [
+      styles.input,
+      props.style,
+      error && styles.error,
+      info && styles.info,
+    ],
   };
 
   return (
     <View style={{ ...styles.container, ...props.style }}>
+      {info && <Text style={styles.infoText}>{props.info.toUpperCase()}</Text>}
       <TextInput {...propsInput} />
-      {!valid && <Text style={styles.errorText}>{props.formatError}</Text>}
+      {error && <Text style={styles.errorText}>{props.errorText}</Text>}
     </View>
   );
 };
@@ -32,6 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     borderWidth: 2,
     borderColor: "transparent",
+    color: "#383838",
+    fontWeight: "300",
 
     shadowColor: "#000",
     shadowOffset: {
@@ -40,12 +52,25 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.18,
     shadowRadius: 1.0,
-
     elevation: 1,
+  },
+
+  info: { paddingBottom: 0, height: 60 },
+
+  infoText: {
+    position: "absolute",
+    left: 16,
+    top: 8,
+    zIndex: 2,
+    fontSize: 11,
+    color: "#383838",
+    fontWeight: "700",
   },
 
   error: {
     borderBottomColor: COLORS.error,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
   },
 
   errorText: {

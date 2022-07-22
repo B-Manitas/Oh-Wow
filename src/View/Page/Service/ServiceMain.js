@@ -5,9 +5,9 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 // Libraries import
 import CDate from "model/utils/CDate";
 
-const ServiceMain = (...props) => {
+const ServiceMain = (props) => {
   // Destructure props
-  const [{ service, visible }] = props;
+  const { service, visible } = props;
 
   // Define text
   const durationText = CDate.toTimeString(service.duration);

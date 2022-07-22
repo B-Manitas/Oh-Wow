@@ -19,9 +19,9 @@ import { controller as ctrl } from "model/Main";
 import { ICON } from "constants/IMAGES";
 import TEXTS from "constants/TEXTS";
 
-const Home = (...props) => {
+const Home = (props) => {
   // Destructur props
-  const [{ navigation: nav }] = props;
+  const { navigation: nav } = props;
   const refApp = useRef();
 
   // Define componnent states

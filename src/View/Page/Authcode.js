@@ -7,7 +7,7 @@ import FooterSocial from "../Parts/FooterSocial";
 
 import InputPrimary from "../Input/InputPrimary";
 import Primary from "../Buttons/Primary";
-import Link from "../Buttons/Link";
+import Button from "../Buttons/Button";
 import PAGES from "../../constants/PAGES";
 
 const Authcode = ({ navigation }) => {
@@ -42,11 +42,7 @@ const Authcode = ({ navigation }) => {
             height={10}
             font_size={20}
           />
-          <Link
-            pad_top={7}
-            text={"Envoyer un autre code"}
-            style_text={styles.link}
-          />
+          <Button text={"Envoyer un autre code"} styleText={styles.link} />
         </View>
       </View>
 

@@ -1,13 +1,17 @@
+// React imports
 import React from "react";
-
 import { View, Text, StyleSheet } from "react-native";
+
+// Librarie imports
 import CDate from "model/utils/CDate";
 import Utils from "../../model/Utils";
+
+// Constants imports
 import COLORS from "../../constants/COLORS";
 
-const ContactSalon = (...props) => {
+const ContactSalon = (props) => {
   // Destructure props
-  const [{ salon }] = props;
+  const { salon } = props;
 
   // Define date and time text
   const am_on = CDate.toTimeString(salon.am_on);
