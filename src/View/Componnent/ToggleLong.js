@@ -1,10 +1,15 @@
 import { StyleSheet, Switch, Text, View } from "react-native";
+import { STYLE_GENERAL } from "../../constants/STYLES";
 
 const ToggleLong = ({ text, value, func }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{text}</Text>
-      <Switch value={value} style={styles.switch} onChange={() => func(!value)} />
+      <Text style={STYLE_GENERAL.sectionH2}>{text}</Text>
+      <Switch
+        value={value}
+        style={styles.switch}
+        onChange={() => func(!value)}
+      />
     </View>
   );
 };

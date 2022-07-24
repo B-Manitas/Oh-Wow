@@ -1,34 +1,40 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import InputError from "./InputError";
 
-const InputHours = ({
-  text,
-  plh_1,
-  plh_2,
-  value_1,
-  value_2,
-  func_1,
-  func_2,
-  is_valid_1,
-  is_valid_2,
-}) => {
+const InputHours = (props) => {
+  const { plhRight, valueRight, setValueRight, validRight, textRight } = props;
+  const { plhLeft, valueLeft, setValueLeft, validLeft, textLeft } = props;
+
+  const inputLeft = {
+    ...props,
+    text: textLeft,
+    placeholder: plhLeft,
+    value: valueLeft,
+    setValue: setValueLeft,
+    valid: validLeft,
+    style: styles.input,
+    styleInput: styles.txtInput,
+    multilineErrorText: false,
+  };
+
+  const inputRight = {
+    ...props,
+    text: textRight,
+    placeholder: plhRight,
+    value: valueRight,
+    setValue: setValueRight,
+    valid: validRight,
+    style: styles.input,
+    styleInput: styles.txtInput,
+    multilineErrorText: false,
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{text}</Text>
-      <View style={styles.ctn_input}>
-        <TextInput
-          style={[styles.input, !is_valid_1 && styles.bad_format]}
-          placeholder={plh_1}
-          maxLength={20}
-          value={value_1}
-          onChangeText={func_1}
-        />
-        <TextInput
-          style={[styles.input, !is_valid_2 && styles.bad_format]}
-          placeholder={plh_2}
-          maxLength={20}
-          value={value_2}
-          onChangeText={func_2}
-        />
+      <Text style={styles.text}>{props.text}</Text>
+      <View style={styles.inputCtn}>
+        <InputError {...inputLeft} />
+        <InputError {...inputRight} />
       </View>
     </View>
   );
@@ -39,33 +45,26 @@ export default InputHours;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    marginVertical: 12,
+    marginVertical: 30,
     alignItems: "center",
+  },
+
+  txtInput: {
+    textAlign: "center",
   },
 
   text: {
     fontSize: 20,
   },
 
-  ctn_input: {
+  inputCtn: {
     flexDirection: "row",
     position: "absolute",
     right: 0,
   },
 
   input: {
-    fontSize: 16,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    minWidth: "20%",
-    backgroundColor: "#f5f5f5",
-    borderRadius: 5,
-    marginLeft: 10,
-    borderWidth: 2,
-    borderColor: "transparent",
-  },
-
-  bad_format: {
-    borderColor: "#DA573D",
+    marginHorizontal: 5,
+    width: 100,
   },
 });

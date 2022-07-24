@@ -25,7 +25,7 @@ export const INPUT_MAIL = {
 };
 
 export const INPUT_PASSWORD = {
-  info: "Mot de passe",
+  text: "Mot de passe",
   placeholder: PLH.password,
   secureTextEntry: true,
   typeAndroid: "password",
@@ -37,7 +37,7 @@ export const INPUT_PASSWORD = {
 };
 
 export const INPUT_FIRSTNAME = {
-  info: "Prenom",
+  text: "Prenom",
   placeholder: PLH.firstname,
   typeAndroid: "name-given",
   typeIOS: "givenName",
@@ -49,7 +49,7 @@ export const INPUT_FIRSTNAME = {
 };
 
 export const INPUT_LASTNAME = {
-  info: "Nom",
+  text: "Nom",
   placeholder: PLH.lastname,
   typeAndroid: "name-given",
   typeIOS: "givenName",
@@ -61,7 +61,7 @@ export const INPUT_LASTNAME = {
 };
 
 export const INPUT_PHONE = {
-  info: "Telephone",
+  text: "Telephone",
   placeholder: PLH.phone,
   typeAndroid: "tel",
   typeIOS: "telephoneNumber",
@@ -69,5 +69,31 @@ export const INPUT_PHONE = {
   maxLength: 14,
   keyboardType: "number-pad",
   secureTextEntry: false,
+  errorText: ERROR_TEXT.phone,
+};
+
+export const INPUT_SALONS = {
+  text: "Nom du salon",
+  returnKeyType: "next",
+  maxLength: 15,
+  placeholder: PLH.salon,
+  secureTextEntry: false,
   errorText: ERROR_TEXT.name,
+};
+
+export const INPUT_ADDRESS = {
+  text: "Adresse",
+  returnKeyType: "next",
+  maxLength: 50,
+  placeholder: PLH.adress,
+  secureTextEntry: false,
+  errorText: ERROR_TEXT.name,
+};
+
+export const INPUT_COORD = {
+  returnKeyType: "next",
+  maxLength: 10,
+  placeholder: PLH.coord,
+  keyboardType: "numeric",
+  errorText: ERROR_TEXT.number,
 };

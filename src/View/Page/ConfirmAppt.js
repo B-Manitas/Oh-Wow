@@ -64,7 +64,7 @@ const ConfirmAppt = ({ navigation, route }) => {
           typeIOS={"givenName"}
           returnKeyType={"next"}
           maxLength={20}
-          isValidFormat={audit.offer?.firstname}
+          isValidFormat={audit?.valid?.offer?.firstname}
           value={radio ? apt.offer?.firstname : user.firstname}
           setValue={(t) => updateOffer("firstname", t)}
           disabled={!radio}
@@ -75,7 +75,7 @@ const ConfirmAppt = ({ navigation, route }) => {
           typeIOS={"familyName"}
           returnKeyType={"next"}
           maxLength={20}
-          isValidFormat={audit.offer?.lastname}
+          isValidFormat={audit?.valid?.offer?.lastname}
           value={radio ? apt.offer?.lastname : user.lastname}
           setValue={(t) => updateOffer("lastname", t)}
           disabled={!radio}
@@ -87,7 +87,7 @@ const ConfirmAppt = ({ navigation, route }) => {
           returnKeyType={"done"}
           maxLength={14}
           keyboardType={"phone-pad"}
-          isValidFormat={audit.offer?.phone}
+          isValidFormat={audit?.valid?.offer?.phone}
           value={radio ? apt.offer?.phone : user.phone}
           setValue={(t) =>
             updateOffer("phone", ctrl.onFormat.phone(apt.offer?.phone, t))

@@ -1,84 +1,71 @@
+// React imports
 import React, { useState } from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 
-import { controller } from "model/Main";
+// Model imports
+import { controller as ctrl } from "model/Main";
 
+// Componnent imports
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import InputSecondary from "../Input/InputSecondary";
-import Chevron from "../Buttons/Chevron";
+import ButtonThird from "../Buttons/ButtonThird";
+
+// Constants imports
+import { INPUT_FIRSTNAME } from "constants/PROPS";
+import { INPUT_LASTNAME, INPUT_PHONE } from "constants/PROPS";
+import { TITLE } from "constants/TEXTS";
+import _ from "lodash";
+import { STYLE_GENERAL } from "../../constants/STYLES";
 
 const Settings = ({ navigation }) => {
-  const [data, setData] = useState(controller.get.this_user_data);
-  const [audit, setAudit] = useState(controller.fakeAudit(data));
+  // Define componnent state
+  const [data, setData] = useState(ctrl.get.this_user_data);
+  const [audit, setAudit] = useState();
 
   return (
     <Page>
-      <Header
-        nav={navigation}
-        type={"close"}
-        text={"Paramètres"}
-        onPress={() => controller.onClose.settings(data, navigation, setAudit)}
-      />
+      <Header nav={navigation} type={"close"} text={"Paramètres"} />
 
       <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.h1}>Vos informations personnelles :</Text>
+        <View style={STYLE_GENERAL.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>{TITLE.globalInfo}</Text>
           <InputSecondary
-            plh={"Prénom"}
-            typeAndroid={"name-given"}
-            typeIOS={"givenName"}
-            returnKeyType={"next"}
-            maxLength={12}
-            keyboardType={"default"}
             value={data.firstname}
             setValue={(t) => setData((p) => ({ ...p, firstname: t }))}
-            isValidFormat={audit.firstname}
+            valid={audit?.valid?.firstname}
+            {...INPUT_FIRSTNAME}
           />
           <InputSecondary
-            plh={"Nom"}
-            typeAndroid={"name-family"}
-            typeIOS={"familyName"}
-            returnKeyType={"next"}
-            maxLength={12}
-            keyboardType={"default"}
             value={data.lastname}
             setValue={(t) => setData((p) => ({ ...p, lastname: t }))}
-            isValidFormat={audit.lastname}
+            valid={audit?.valid?.lastname}
+            {...INPUT_LASTNAME}
           />
           <InputSecondary
-            plh={"Mail"}
-            typeAndroid={"email"}
-            typeIOS={"emailAddress"}
-            returnKeyType={"next"}
-            maxLength={50}
-            keyboardType={"email-address"}
-            value={data.mail}
-            setValue={(t) => setData((p) => ({ ...p, mail: t }))}
-            isValidFormat={audit.mail}
-          />
-          <InputSecondary
-            plh={"0600000000"}
-            typeAndroid={"tel"}
-            typeIOS={"telephoneNumber"}
-            returnKeyType={"done"}
-            maxLength={10}
-            keyboardType={"phone-pad"}
             value={data.phone}
             setValue={(t) => setData((p) => ({ ...p, phone: t }))}
-            isValidFormat={audit.phone}
+            valid={audit?.valid?.phone}
+            {...INPUT_PHONE}
+          />
+
+          <ButtonThird
+            text={"Sauvegarder"}
+            disabled={_.isEqual(data, ctrl.get.this_user_data)}
+            onPress={() => ctrl.onClose.settings(data, navigation, setAudit)}
           />
         </View>
 
-        <View style={styles.container}>
-          <Text style={styles.h1}>Actions :</Text>
-          <Chevron
+        <View style={STYLE_GENERAL.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
+          <ButtonThird
             text={"Se déconnecter"}
-            func={() => controller.update.logout(navigation)}
+            onPress={() => controller.update.logout(navigation)}
           />
-          <Chevron
+          <ButtonThird
             text={"Supprimer votre compte"}
-            func={() => controller.delete.user(navigation)}
+            important
+            onPress={() => controller.delete.user(navigation)}
           />
         </View>
       </ScrollView>
@@ -87,18 +74,3 @@ const Settings = ({ navigation }) => {
 };
 
 export default Settings;
-
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 35,
-    paddingVertical: 20,
-  },
-
-  h1: {
-    marginHorizontal: -10,
-    fontWeight: "400",
-    fontSize: 22,
-    paddingBottom: 15,
-    textDecorationLine: "underline",
-  },
-});

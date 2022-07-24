@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import Chevron from "../../Buttons/Chevron";
+import ButtonThird from "../../Buttons/ButtonThird";
 import ToggleLong from "../../Componnent/ToggleLong";
 import InputLong from "../../Input/InputLong";
 
@@ -38,7 +38,7 @@ const ClientInfo = ({ data_client, setInit }) => {
             text={"Prénom"}
             value={client.firstname}
             setValue={(t) => update("firstname", t)}
-            is_valid={audit.firstname}
+            is_valid={audit?.valid?.firstname}
             placeholder={"Jonn"}
             length={12}
           />
@@ -46,7 +46,7 @@ const ClientInfo = ({ data_client, setInit }) => {
             text={"Nom"}
             value={client.lastname}
             setValue={(t) => update("lastname", t)}
-            is_valid={audit.lastname}
+            is_valid={audit?.valid?.lastname}
             placeholder={"Doe"}
             length={12}
           />
@@ -56,7 +56,7 @@ const ClientInfo = ({ data_client, setInit }) => {
             setValue={(t) =>
               update("phone", ctrl.onFormat.phone(client.phone, t))
             }
-            is_valid={audit.phone}
+            is_valid={audit?.valid?.phone}
             placeholder={"00 00 00 00 00"}
             key_type={"numeric"}
             length={14}
@@ -65,7 +65,7 @@ const ClientInfo = ({ data_client, setInit }) => {
             text={"E-Mail"}
             value={client.mail}
             setValue={(t) => update("mail", t)}
-            is_valid={audit.mail}
+            is_valid={audit?.valid?.mail}
             placeholder={"exemple@adresse.com"}
             length={50}
           />
@@ -87,7 +87,7 @@ const ClientInfo = ({ data_client, setInit }) => {
 
         <View style={styles.section}>
           <Text style={styles.section_h1}>Autres</Text>
-          <Chevron
+          <ButtonThird
             text={"Supprimer définitivement le compte"}
             func={() => controller.delete.user(navigation, user)}
             fontWeight={"500"}

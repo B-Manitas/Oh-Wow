@@ -19,7 +19,7 @@ const CheckBoxText = (props) => {
     ...props,
     onPress: () => props.onPress(!state),
     style: [styles.button, isFlex && styles.flex, state && styles.buttonOn],
-    styleText: styles.text,
+    styleText: [styles.text, state && styles.textOn],
   };
 
   return <Button {...buttonProps} />;
@@ -29,8 +29,9 @@ export default CheckBoxText;
 
 const styles = StyleSheet.create({
   button: {
-    borderWidth: 2,
-    borderRadius: 10,
+    margin: 2,
+    borderWidth: 1,
+    borderRadius: 3,
     borderColor: COLORS.darkGray,
     backgroundColor: COLORS.default,
     width: 40,
@@ -50,6 +51,11 @@ const styles = StyleSheet.create({
 
   text: {
     color: COLORS.black,
-    fontWeight: "600",
+    fontWeight: "400",
   },
+  
+  textOn: {
+    fontWeight: "700",
+    color: "#fff"
+  }
 });

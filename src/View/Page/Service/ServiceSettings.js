@@ -6,15 +6,13 @@ import {
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
-  TextInput,
 } from "react-native";
 
 // Componnents imports
 import ToggleLong from "../../Componnent/ToggleLong";
 import Button from "button/Button";
 import InputLong from "../../Input/InputLong";
-import Chevron from "button/Chevron";
-import Secondary from "button/Secondary";
+import ButtonThird from "button/ButtonThird";
 
 // Model imports
 import { controller as ctrl } from "model/Main";
@@ -26,11 +24,13 @@ import _ from "lodash";
 // Constants imports
 import { ICON } from "constants/IMAGES";
 import { KEYBOARD_AVOIDING_VIEW } from "constants/PROPS";
-import TEXTS, { PLH, TITLE } from "constants/TEXTS";
+import { PLH, TITLE } from "constants/TEXTS";
 import COLORS from "constants/COLORS";
 import Primary from "../../Buttons/Primary";
 import InputError from "../../Input/InputError";
 import { ERROR_TEXT } from "../../../constants/TEXTS";
+import { STYLE_GENERAL } from "../../../constants/STYLES";
+import HeaderSave from "../../Parts/HeaderSave";
 
 const ServiceSettings = (props) => {
   // Destructure props
@@ -47,42 +47,30 @@ const ServiceSettings = (props) => {
   const onSave = () =>
     ctrl.onPress.service(setSaving, data, init, setInit, setAudit);
 
+  console.log(audit?.valid?.name && !saving);
+
   // On save service
   useEffect(() => {
-    if (!audit.all && saving) setSaving(false);
+    if (!audit?.valid?.all && saving) setSaving(false);
   }, [audit]);
 
   if (!visible) return null;
   return (
     <KeyboardAvoidingView {...KEYBOARD_AVOIDING_VIEW} style={styles.ctn}>
-      <View style={styles.header}>
-        <Button
-          visible={!saving}
-          image={ICON.close}
-          style={styles.close}
-          shadow={false}
-          onPress={close}
-        />
-        {saving && (
-          <Text style={styles.savingText}>Sauvegarde en cours....</Text>
-        )}
-
-        <Primary
-          text={"Sauvegarder"}
-          style={styles.save}
-          styleText={styles.saveText}
-          disabled={_.isEqual(data, init) || saving}
-          onPress={onSave}
-        />
-      </View>
+      <HeaderSave
+        saving={saving}
+        canSave={_.isEqual(data, init)}
+        onSave={onSave}
+        onClose={close}
+      />
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.section}>
-          <Text style={styles.sectionH1}>{TITLE.globalInfo}</Text>
+        <View style={STYLE_GENERAL.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>{TITLE.globalInfo}</Text>
           <InputLong
             text={"Nom"}
             placeholder={PLH.serviceName}
-            valid={audit.name || saving}
+            valid={audit?.valid?.name && !saving}
             value={data.name}
             setValue={(t) => setData((p) => ({ ...p, name: t }))}
             errorText={ERROR_TEXT.name}
@@ -91,35 +79,35 @@ const ServiceSettings = (props) => {
             text={"Prix en dinar tunisien"}
             key_type={"numeric"}
             placeholder={PLH.price}
-            valid={audit.price || saving}
+            valid={audit?.valid?.price && !saving}
             value={data.price.toString()}
             setValue={(t) => ctrl.onFormat.price(t, setPrice)}
-            errorText={ERROR_TEXT.price}
+            errorText={ERROR_TEXT.number}
           />
           <InputLong
             text={"Durée"}
             placeholder={PLH.duration}
-            valid={audit.duration || saving}
+            valid={audit?.valid?.duration && !saving}
             value={duration(data.duration)}
             setValue={(t) => ctrl.onFormat.time(t, setDur)}
             errorText={ERROR_TEXT.duration}
           />
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionH1}>{TITLE.description}</Text>
+        <View style={STYLE_GENERAL.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>{TITLE.description}</Text>
           <InputError
             value={data.description}
             setValue={(t) => setData((p) => ({ ...p, description: t }))}
             placeholder={PLH.description}
-            valid={audit.description && !saving}
+            valid={audit?.valid?.description && !saving}
             multiline
             errorText={ERROR_TEXT.name}
           />
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionH1}>{TITLE.visibility}</Text>
+        <View style={STYLE_GENERAL.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>{TITLE.visibility}</Text>
           <ToggleLong
             text={"Afficher"}
             value={!data.is_hidden}
@@ -132,9 +120,9 @@ const ServiceSettings = (props) => {
           />
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionH1}>{TITLE.others}</Text>
-          <Chevron
+        <View style={styles.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
+          <ButtonThird
             text={"Supprimer la prestation"}
             fontWeight={"500"}
             color={COLORS.error}
@@ -208,19 +196,5 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-  },
-
-  section: {
-    marginVertical: 15,
-    marginHorizontal: 30,
-  },
-
-  sectionH1: {
-    fontSize: 25,
-    fontWeight: "500",
-    width: "100%",
-    borderBottomWidth: 2,
-    textDecorationLine: "underline",
-    marginBottom: 10,
   },
 });

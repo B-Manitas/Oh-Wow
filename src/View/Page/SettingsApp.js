@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ScrollView, View, Text, StyleSheet, TextInput } from "react-native";
-import Chevron from "../Buttons/Chevron";
+import ButtonThird from "../Buttons/ButtonThird";
 import ToggleLong from "../Componnent/ToggleLong";
 
 import Page from "../Container/Page";
@@ -56,7 +56,7 @@ const SettingsApp = ({ navigation }) => {
         <View style={styles.parts}>
           <Text style={styles.h1}>Date de fermeture</Text>
           <TextInput
-            style={[styles.input, !audit.date_off && { borderColor: "red" }]}
+            style={[styles.input, !audit?.valid?.date_off && { borderColor: "red" }]}
             placeholder={"14/07;25/12"}
             value={data.date_off}
             onChangeText={(t) => setData((p) => ({ ...p, date_off: t }))}
@@ -72,8 +72,8 @@ const SettingsApp = ({ navigation }) => {
             value_2={formatDur(data.am_off)}
             func_1={(t) => ctrl.onFormat.time(t, setAMOn)}
             func_2={(t) => ctrl.onFormat.time(t, setAMOff)}
-            isValidFormat_1={audit.am_on}
-            isValidFormat_2={audit.am_off}
+            isValidFormat_1={audit?.valid?.am_on}
+            isValidFormat_2={audit?.valid?.am_off}
           />
           <InputHours
             text={"Horaire de l'après-midi"}
@@ -83,16 +83,16 @@ const SettingsApp = ({ navigation }) => {
             value_2={formatDur(data.pm_off)}
             func_1={(t) => ctrl.onFormat.time(t, data.am_on, setPMOn)}
             func_2={(t) => ctrl.onFormat.time(t, data.am_on, setPMOff)}
-            isValidFormat_1={audit.pm_on}
-            isValidFormat_2={audit.pm_off}
+            isValidFormat_1={audit?.valid?.pm_on}
+            isValidFormat_2={audit?.valid?.pm_off}
           />
           <ToggleLong
             text={"Prise de nouveau RDV"}
             value={data.is_opened}
             func={(b) => setData((p) => ({ ...p, is_opened: b }))}
           />
-          <Chevron text={"Réinitialiser la base de donnée"} />
-          <Chevron text={"Réinitialiser l'état de l'application"} />
+          <ButtonThird text={"Réinitialiser la base de donnée"} />
+          <ButtonThird text={"Réinitialiser l'état de l'application"} />
         </View>
       </ScrollView>
     </Page>

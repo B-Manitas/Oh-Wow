@@ -62,4 +62,8 @@ export class GoTo extends SuperController {
   search(nav) {
     nav.navigate(PAGES.SEARCH);
   }
+
+  back(nav) {
+    nav.goBack();
+  }
 }

@@ -20,13 +20,13 @@ const NavigationAdmin = (props) => {
   return (
     <View style={STYLES_NAV.section}>
       <Button
-        text="Gérer les salons"
-        onPress={() => ctrl.goTo.salons(nav)}
+        text="Rechercher un utilisateur"
+        onPress={() => ctrl.goTo.search(nav)}
         {...NAVIGATION}
       />
       <Button
-        text="Rechercher un utilisateur"
-        onPress={() => ctrl.goTo.search(nav)}
+        text="Gérer mon application"
+        onPress={() => ctrl.goTo.salons(nav)}
         {...NAVIGATION}
       />
     </View>

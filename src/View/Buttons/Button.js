@@ -1,16 +1,26 @@
 // React imports
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { ICON } from "../../constants/IMAGES";
+
+// Constants imports
+import { ICON } from "constants/IMAGES";
+import { STYLES_SHADOW } from "constants/STYLES";
 
 const Button = (props) => {
+  // Define componnent state
   const shadow = props.shadow === false ? false : true;
   const visible = props.visible === false ? false : true;
+  const disabled = props.disabled;
 
   // Define button props
   const propsButton = {
-    style: [styles.button, shadow && styles.shadow, props.style],
-    disabled: props.disabled,
+    style: [
+      styles.button,
+      shadow && !disabled && STYLES_SHADOW.medium,
+      disabled && styles.disabled,
+      props.style,
+    ],
+    disabled,
     onPress: props.onPress,
   };
 
@@ -59,6 +69,11 @@ const styles = StyleSheet.create({
 
     elevation: 5,
     zIndex: 5,
+  },
+
+  disabled: {
+    opacity: 0.5,
+    ...STYLES_SHADOW.low,
   },
 
   image: {

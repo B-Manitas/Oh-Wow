@@ -4,12 +4,13 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 // Constants imports
 import COLORS from "constants/COLORS";
+import { STYLES_SHADOW } from "constants/STYLES";
 
 const InputError = (props) => {
   const error = props.valid === false ? true : false;
-  const info = props.info;
+  const text = props.text;
 
-  // Define props input
+  // Define input props
   const propsInput = {
     ...props,
     autoComplete: props.typeAndroid,
@@ -17,17 +18,24 @@ const InputError = (props) => {
     onChangeText: props.setValue,
     style: [
       styles.input,
-      props.style,
+      props.styleInput,
       error && styles.error,
-      info && styles.info,
+      text && styles.ctnText,
     ],
+  };
+
+  // Define error text props
+  const propsErrorText = {
+    style: styles.errorText,
+    numberOfLines: props.multilineErrorText ? 10 : 1,
+    adjustsFontSizeToFit: !props.multilineErrorText,
   };
 
   return (
     <View style={{ ...styles.container, ...props.style }}>
-      {info && <Text style={styles.infoText}>{props.info.toUpperCase()}</Text>}
+      {text && <Text style={styles.text}>{text.toUpperCase()}</Text>}
       <TextInput {...propsInput} />
-      {error && <Text style={styles.errorText}>{props.errorText}</Text>}
+      {error && <Text {...propsErrorText}>{props.errorText}</Text>}
     </View>
   );
 };
@@ -42,22 +50,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     borderWidth: 2,
     borderColor: "transparent",
-    color: "#383838",
+    color: COLORS.black,
     fontWeight: "300",
 
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
-    elevation: 1,
+    ...STYLES_SHADOW.low,
   },
 
-  info: { paddingBottom: 0, height: 60 },
+  ctnText: { paddingBottom: 0, height: 60 },
 
-  infoText: {
+  text: {
     position: "absolute",
     left: 16,
     top: 8,

@@ -27,6 +27,13 @@ export const PLH = {
   firstname: "John",
   lastname: "Doe",
   phone: "00 00 00 00",
+  salon: "Salon",
+  adress: "1 rue du salon.",
+  coord: "10.000",
+  amOn: "8h30",
+  amOff: "12h",
+  pmOn: "13h30",
+  pmOff: "17h30",
 };
 
 export const ERROR_TEXT = {
@@ -35,7 +42,8 @@ export const ERROR_TEXT = {
     "Doit contenir minimum 8 lettres, un chiffre, une lettre minuscule et une majuscule",
   mail: "Addresse mail invalide",
   phone: "Numéro de téléphone invalide",
-  prix: "Un nombre positif requis",
+  number: "Un nombre positif requis",
   duration: "Formats '10', '1h' ou '1h10'",
   failedLogin: "Identifiant ou mot de passe invalide.",
+  hours: "Horaire invalide",
 };

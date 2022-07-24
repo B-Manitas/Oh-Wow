@@ -28,7 +28,6 @@ const Login = (props) => {
   const schemaUser = ctrl.frontend.schemaLogin();
   const isFocused = useIsFocused();
   const [send, setSend] = useState(false);
-  // const [networkError, setNetworkError] = useState(false);
   const [data, setData] = useState(schemaUser);
   const [audit, setAudit] = useState();
 

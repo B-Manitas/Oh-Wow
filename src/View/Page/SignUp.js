@@ -70,27 +70,27 @@ const SignUp = (props) => {
             {...INPUT_FIRSTNAME}
             value={data.firstname}
             setValue={(t) => setData({ ...data, firstname: t })}
-            valid={audit.firstname}
+            valid={audit?.valid?.firstname}
             format={ERROR_TEXT.name}
           />
           <InputPrimary
             {...INPUT_LASTNAME}
             setValue={(t) => setData({ ...data, lastname: t })}
             value={data.lastname}
-            valid={audit.lastname}
+            valid={audit?.valid?.lastname}
             format={ERROR_TEXT.name}
           />
           <InputPrimary
             {...INPUT_PHONE}
             value={data.phone}
             setValue={(t) => ctrl.onFormat.phone(data.phone, t, setPhone)}
-            valid={audit.phone}
+            valid={audit?.valid?.phone}
           />
           <InputPrimary
             {...INPUT_PASSWORD}
             value={data.password}
             setValue={(t) => setData({ ...data, password: t })}
-            valid={audit.password}
+            valid={audit?.valid?.password}
           />
 
           <View style={styles.parts}>

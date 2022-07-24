@@ -39,7 +39,7 @@ export default function App() {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName={PAGES.HOME}
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen
