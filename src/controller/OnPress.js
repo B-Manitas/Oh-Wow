@@ -5,7 +5,6 @@ import Catch from "exceptions/ErrorsCatcher";
 import _ from "lodash";
 import { Alert, Linking } from "react-native";
 import Utils from "model/Utils";
-import CDate from "../model/utils/CDate"
 
 export class OnPress extends SuperController {
   aptDay(setApt, setDate, date) {
@@ -41,8 +40,9 @@ export class OnPress extends SuperController {
   }
 
   @Catch
-  async client(data, data_init, setInit, setAudit) {
-    if (!_.isEqual(data, data_init) && this.this_is_admin) {
+  async client(dataInit, data, setInit, setAudit, setSaving) {
+    setSaving(true);
+    if (!_.isEqual(data, dataInit) && this.this_is_admin) {
       const user = Utils.removeKey(data, "is_admin", "id_salon");
       await this.frontend.update.user(user, setAudit);
 
@@ -55,12 +55,13 @@ export class OnPress extends SuperController {
         );
 
       setInit(data);
-      Alert.alert("Modification sauvegardées");
+      setAudit();
+      setSaving(false);
     }
   }
 
   @Catch
-  async link(url){
+  async link(url) {
     await Linking.canOpenURL(url);
     Linking.openURL(url);
   }

@@ -59,4 +59,10 @@ export default {
   cleanUp(...funcs) {
     funcs.map((func) => func(undefined));
   },
+
+  strStatus(isAdmin, isStaff) {
+    if (isAdmin) return "ADMIN";
+    else if (isStaff) return "EMPLOYE";
+    else return "";
+  },
 };

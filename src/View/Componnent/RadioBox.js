@@ -1,51 +1,29 @@
+// React imports
 import React from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 
-const RadioBox = ({
-  id,
-  id_selected,
-  onPress,
-  text,
-  style,
-  style_active,
-  style_txt,
-  style_txt_active,
-}) => {
-  if (!style_active) style_active = styles.container_active;
+import CheckBoxText from "../Componnent/CheckBoxText";
 
-  return (
-    <Pressable
-      onPress={() => onPress(id)}
-      style={[
-        styles.container,
-        style && style,
-        id == id_selected && style_active,
-      ]}
-    >
-      <Text
-        adjustsFontSizeToFit
-        numberOfLines={1}
-        style={[style_txt, id == id_selected && style_txt_active]}
-      >
-        {text}
-      </Text>
-    </Pressable>
-  );
+const RadioBox = (props) => {
+  // Destructure props
+  const { id, idSelected } = props;
+
+  // Define button props
+  const propsButton = {
+    ...props,
+    styleText: styles.text,
+    state: id == idSelected,
+    noResize: true,
+    onPress: () => props.onPress(id),
+  };
+
+  return <CheckBoxText {...propsButton} />;
 };
 
 export default RadioBox;
 
 const styles = StyleSheet.create({
-  container: {
-    borderRadius: 5,
-    borderWidth: 2,
-    backgroundColor: "#fafafa",
-    width: 30,
-    height: 30,
-    margin: 2,
-  },
-
-  container_active: {
-    backgroundColor: "#383838",
+  text: {
+    fontSize: 18,
   },
 });

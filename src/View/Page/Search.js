@@ -2,12 +2,14 @@ import { View, Text, StyleSheet, FlatList } from "react-native";
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Searchbar from "../Componnent/Searchbar";
-import User from "../Container/User";
+import CtnUser from "../Container/CtnUser";
 import { useEffect, useState } from "react";
 import { controller } from "model/Main";
 import { PLH } from "../../constants/TEXTS";
 
-const Search = ({ navigation }) => {
+const Search = (props) => {
+  const { navigation: nav } = props;
+
   const [fetch, setFetch] = useState([]);
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
@@ -43,18 +45,14 @@ const Search = ({ navigation }) => {
 
   return (
     <Page>
-      <Header
-        navigation={navigation}
-        type={"close"}
-        title={"Rechercher un utilisateur"}
-      />
-      <Searchbar value={query} setValue={search} plh={PLH.searchUser} />
+      <Header nav={nav} type={"close"} text={"Les utilisateurs"} />
 
+      <Searchbar value={query} setValue={search} plh={PLH.searchUser} />
       <FlatList
         style={styles.container}
         data={users}
         keyExtractor={(item, _) => item._id}
-        renderItem={(item) => <User navigation={navigation} data={item.item} />}
+        renderItem={(item) => <CtnUser nav={nav} user={item.item} />}
       />
     </Page>
   );
@@ -64,6 +62,7 @@ export default Search;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 15,
   },
 });

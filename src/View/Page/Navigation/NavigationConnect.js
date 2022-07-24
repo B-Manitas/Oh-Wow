@@ -24,17 +24,17 @@ const NavigationConnect = (props) => {
       <View style={STYLES_NAV.section}>
         <Button
           text={"Accueil"}
-          onPress={() => ctrl.goTo.home()}
+          onPress={() => ctrl.goTo.home(nav)}
           {...NAVIGATION}
         />
         <Button
           text={"Nos prestations"}
-          onPress={() => ctrl.goTo.services()}
+          onPress={() => ctrl.goTo.services(nav)}
           {...NAVIGATION}
         />
         <Button
           text={"Mes rendez-vous"}
-          onPress={() => ctrl.goTo.appointments()}
+          onPress={() => ctrl.goTo.appointments(nav)}
           {...NAVIGATION}
         />
       </View>

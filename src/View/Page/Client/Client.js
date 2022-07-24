@@ -1,54 +1,85 @@
 import { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
+
 import Page from "../../Container/Page";
 import Header from "../../Parts/Header";
-import { controller } from "model/Main";
+import HeaderSave from "../../Parts/HeaderSave";
 import RadioBox from "../../Componnent/RadioBox";
 import ClientInfo from "./ClientInfo";
 import ClientApt from "./ClientApt";
 
-const Client = ({ navigation, route }) => {
+import { controller as ctrl } from "model/Main";
+
+import { STYLES_SHADOW } from "constants/STYLES";
+import _ from "lodash";
+import CheckBoxText from "../../Componnent/CheckBoxText";
+
+const Client = (props) => {
+  // Destructure componnent props
+  const { navigation: nav, route } = props;
+
+  // Define componnent states
+  const [initClient, setInitClient] = useState(route.params.data);
   const [client, setClient] = useState(route.params.data);
   const [page, setPage] = useState(0);
   const [apts, setApts] = useState(undefined);
+  const [audit, setAudit] = useState();
+  const [saving, setSaving] = useState(false);
+  const [salon, setSalon] = useState();
 
+  // Define componnent functions
+  const close = () => ctrl.goTo.back(nav);
+  const save = () =>
+    ctrl.onPress.client(initClient, client, setInitClient, setAudit, setSaving);
+
+  // On load componnent
   useEffect(() => {
-    controller.get.userAllApts(client._id, setApts);
+    ctrl.get.userAllApts(client._id, setApts);
+    ctrl.get.salon(setSalon);
   }, []);
+
+  // After saving
+  useEffect(() => {
+    setSaving(false);
+  }, [audit]);
 
   return (
     <Page>
-      <Header
-        type={"back"}
-        text={`${client.firstname} ${client.lastname}`}
-        nav={navigation}
+      <HeaderSave
+        canSave={page === 0 && !_.isEqual(initClient, client)}
+        onClose={close}
+        onSave={save}
+        saving={saving}
+        isBack
       />
-      <View style={styles.ctn_nav_button}>
+
+      <View style={styles.navigationCtn}>
         <RadioBox
+          text={`${client.firstname} ${client.lastname}`}
           id={0}
-          id_selected={page}
+          idSelected={page}
           onPress={setPage}
-          text={"Paramètres"}
-          style={styles.radio}
-          style_txt={styles.txt_radio}
-          style_active={styles.radio_on}
+          disabled={saving}
+          isFlex
         />
         <RadioBox
-          id={1}
-          id_selected={page}
-          onPress={setPage}
           text={"Réservations"}
-          style={styles.radio}
-          style_txt={styles.txt_radio}
-          style_active={styles.radio_on}
+          id={1}
+          idSelected={page}
+          onPress={setPage}
+          disabled={saving}
+          isFlex
         />
       </View>
 
-      {page ? (
-        <ClientApt appointments={apts} />
-      ) : (
-        <ClientInfo data_client={client} setInit={setClient} />
-      )}
+      <ClientInfo
+        visible={page == 0}
+        client={client}
+        setClient={setClient}
+        salon={salon}
+        audit={audit}
+      />
+      <ClientApt visible={page == 1} appointments={apts} />
     </Page>
   );
 };
@@ -56,10 +87,13 @@ const Client = ({ navigation, route }) => {
 export default Client;
 
 const styles = StyleSheet.create({
-  ctn_nav_button: {
+  navigationCtn: {
     flexDirection: "row",
-    marginHorizontal: 30,
-    marginBottom: 10
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    top: 60,
+    backgroundColor: "#fff",
+    width: "100%",
   },
 
   parts: {
@@ -94,6 +128,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     margin: 2,
     borderColor: "#f5f5f5",
+    marginHorizontal: 5,
   },
 
   txt_radio: {
@@ -103,6 +138,6 @@ const styles = StyleSheet.create({
 
   radio_on: {
     backgroundColor: "#f5f5f5",
-    flex: 2,
+    // flex: 2,
   },
 });

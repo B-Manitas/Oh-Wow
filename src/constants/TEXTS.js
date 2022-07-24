@@ -30,10 +30,11 @@ export const PLH = {
   salon: "Salon",
   adress: "1 rue du salon.",
   coord: "10.000",
-  amOn: "8h30",
-  amOff: "12h",
-  pmOn: "13h30",
+  amOn: "10h",
+  amOff: "12h30",
+  pmOn: "13h",
   pmOff: "17h30",
+  dateOff: "14/07;15/08",
 };
 
 export const ERROR_TEXT = {

@@ -13,7 +13,7 @@ export const NAVIGATION = {
 };
 
 export const INPUT_MAIL = {
-  info: "Mail",
+  text: "Mail",
   placeholder: PLH.mail,
   typeAndroid: "email",
   typeIOS: "emailAddress",

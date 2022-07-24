@@ -60,12 +60,12 @@ const Settings = ({ navigation }) => {
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
           <ButtonThird
             text={"Se déconnecter"}
-            onPress={() => controller.update.logout(navigation)}
+            onPress={() => ctrl.update.logout(navigation)}
           />
           <ButtonThird
             text={"Supprimer votre compte"}
             important
-            onPress={() => controller.delete.user(navigation)}
+            onPress={() => ctrl.delete.user(navigation)}
           />
         </View>
       </ScrollView>

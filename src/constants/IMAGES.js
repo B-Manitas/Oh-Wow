@@ -7,6 +7,7 @@ export const ICON = {
   close: require("icon/close.png"),
   insta: require("icon/instagram.png"),
   trash: require("icon/trash.png"),
+  closeGray: require("icon/closeGray.png"),
   chevron: require("icon/chevron.png"),
 };
 

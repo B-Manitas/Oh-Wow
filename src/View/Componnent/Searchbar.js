@@ -8,8 +8,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import Button from "button/Button";
+
 // Contants imports
 import { ICON } from "constants/IMAGES";
+import { STYLES_SHADOW } from "constants/STYLES";
+import COLORS from "constants/COLORS";
 
 const Searchbar = (props) => {
   const { plh, setValue, value } = props;
@@ -29,12 +33,14 @@ const Searchbar = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, props.style]}>
       <TextInput {...propsInput} />
 
-      <TouchableOpacity {...propsClear}>
-        <Image source={ICON.close} style={styles.clearImg} />
-      </TouchableOpacity>
+      <Button
+        style={styles.clearButton}
+        shadow={false}
+        image={ICON.closeGray}
+      />
     </View>
   );
 };
@@ -51,26 +57,21 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "#fff",
     borderWidth: 1,
-    borderColor: "#a5a5a5",
-    borderRadius: 7,
+    borderColor: COLORS.darkGray,
+    borderRadius: 3,
     paddingLeft: 15,
     paddingRight: 40,
     paddingVertical: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
 
-    elevation: 7,
+    ...STYLES_SHADOW.medium,
   },
 
   clearButton: {
     position: "absolute",
-    right: 0,
-    padding: 13,
+    right: 10,
+    padding: 5,
+    width: 25,
+    height: 25,
   },
 
   clearImg: {

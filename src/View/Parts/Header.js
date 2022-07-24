@@ -10,6 +10,7 @@ import Utils from "model/Utils";
 
 // Constants imports
 import { PHOTO } from "constants/IMAGES";
+import COLORS from "constants/COLORS";
 
 const Header = (props) => {
   // Destructure props
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 32,
     alignSelf: "center",
+    color: COLORS.black,
   },
 
   button: {

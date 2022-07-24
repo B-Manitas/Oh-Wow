@@ -2,8 +2,8 @@ import PAGES from "../constants/PAGES";
 import { SuperController } from "./SuperController";
 
 export class GoTo extends SuperController {
-  searchToUser(navigation, user) {
-    navigation.navigate(PAGES.CLIENT, { data: user });
+  searchToUser(nav, user) {
+    nav.navigate(PAGES.CLIENT, { data: user });
   }
 
   nav(nav) {

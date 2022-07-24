@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   ScrollView,
@@ -6,103 +6,79 @@ import {
   Text,
   View,
 } from "react-native";
-import ButtonThird from "../../Buttons/ButtonThird";
+
+import ButtonThird from "button/ButtonThird";
+import Primary from "button/Primary";
 import ToggleLong from "../../Componnent/ToggleLong";
 import InputLong from "../../Input/InputLong";
 
 import { controller as ctrl } from "model/Main";
-import Primary from "../../Buttons/Primary";
-import _ from "lodash";
+import _, { lowerFirst } from "lodash";
 
-const ClientInfo = ({ data_client, setInit }) => {
-  const [salon, setSalon] = useState(null);
-  const [client, setClient] = useState(data_client);
-  const [audit, setAudit] = useState(ctrl.fakeAudit(data_client));
+import {
+  KEYBOARD_AVOIDING_VIEW,
+  INPUT_FIRSTNAME,
+  INPUT_LASTNAME,
+  INPUT_PHONE,
+} from "constants/PROPS";
+import { TITLE } from "constants/TEXTS";
+import { STYLE_GENERAL } from "constants/STYLES";
 
+const ClientInfo = (props) => {
+  // Destructure props
+  const { client, setClient, audit, salon, visible } = props;
+
+  // Define componnent function
   const update = (key, v) => setClient((p) => ({ ...p, [key]: v }));
 
-  useEffect(() => {
-    ctrl.get.salon(setSalon);
-  }, []);
-
+  if (!visible) return null;
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : null}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
-      style={styles.container}
-    >
+    <KeyboardAvoidingView {...KEYBOARD_AVOIDING_VIEW} style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.section}>
-          <Text style={styles.section_h1}>Information Générale</Text>
+        <View style={STYLE_GENERAL.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>{TITLE.globalInfo}</Text>
           <InputLong
-            text={"Prénom"}
+            {...INPUT_FIRSTNAME}
             value={client.firstname}
             setValue={(t) => update("firstname", t)}
-            is_valid={audit?.valid?.firstname}
-            placeholder={"Jonn"}
-            length={12}
+            valid={audit?.valid?.firstname}
           />
           <InputLong
-            text={"Nom"}
+            {...INPUT_LASTNAME}
             value={client.lastname}
             setValue={(t) => update("lastname", t)}
-            is_valid={audit?.valid?.lastname}
-            placeholder={"Doe"}
-            length={12}
+            valid={audit?.valid?.lastname}
           />
           <InputLong
-            text={"Téléphone"}
+            {...INPUT_PHONE}
             value={client.phone}
             setValue={(t) =>
               update("phone", ctrl.onFormat.phone(client.phone, t))
             }
-            is_valid={audit?.valid?.phone}
-            placeholder={"00 00 00 00 00"}
-            key_type={"numeric"}
-            length={14}
-          />
-          <InputLong
-            text={"E-Mail"}
-            value={client.mail}
-            setValue={(t) => update("mail", t)}
-            is_valid={audit?.valid?.mail}
-            placeholder={"exemple@adresse.com"}
-            length={50}
+            valid={audit?.valid?.phone}
           />
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.section_h1}>Gestion des droits</Text>
+        <View style={STYLE_GENERAL.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>Gestion des droits :</Text>
           <ToggleLong
             text={"Employé"}
             value={client.is_admin || client.id_salon != null}
-            func={(b) => update("id_salon", b ? salon._id : null)}
+            setValue={(b) => update("id_salon", b ? salon._id : null)}
           />
           <ToggleLong
             text={"Administrateur"}
             value={client.is_admin}
-            func={(b) => update("is_admin", b)}
+            setValue={(b) => update("is_admin", b)}
           />
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.section_h1}>Autres</Text>
+        <View style={STYLE_GENERAL.sectionCtn}>
+          <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
           <ButtonThird
             text={"Supprimer définitivement le compte"}
-            func={() => controller.delete.user(navigation, user)}
-            fontWeight={"500"}
-            color={"#DA573D"}
-          />
-        </View>
-        <View style={styles.section}>
-          <Primary
-            text={"Sauvegarder"}
-            height={10}
-            font_size={20}
-            is_active={!_.isEqual(data_client, client)}
-            func={() =>
-              ctrl.onPress.client(client, data_client, setInit, setAudit)
-            }
+            onPres={() => controller.delete.user(navigation, user)}
+            important
           />
         </View>
       </ScrollView>
@@ -114,8 +90,8 @@ export default ClientInfo;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
-    marginBottom: 150,
+    top: 50,
+    height: "90%",
   },
 
   section: {

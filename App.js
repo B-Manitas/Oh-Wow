@@ -40,7 +40,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName={PAGES.HOME}
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: false, gestureEnabled: false }}
           >
             <Stack.Screen
               name={PAGES.HOME}
@@ -52,7 +52,11 @@ export default function App() {
               component={Catalogues}
               options={{ animation: "none", gestureEnabled: false }}
             />
-            <Stack.Screen name={PAGES.NAV} component={Navigation} />
+            <Stack.Screen
+              name={PAGES.NAV}
+              component={Navigation}
+              options={{ gestureEnabled: true }}
+            />
             <Stack.Screen name={PAGES.LOGIN} component={Login} />
             <Stack.Screen name={PAGES.SIGNUP} component={SignUp} />
             <Stack.Screen name={PAGES.SALONS} component={Salons} />

@@ -104,6 +104,8 @@ const styles = StyleSheet.create({
     borderColor: "#faa4af",
     paddingVertical: 5,
     width: "15%",
+    zIndex: 6,
+    elevation: 6,
   },
 
   addText: {

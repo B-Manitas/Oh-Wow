@@ -10,27 +10,25 @@ import {
 
 // Componnents imports
 import ToggleLong from "../../Componnent/ToggleLong";
-import Button from "button/Button";
 import InputLong from "../../Input/InputLong";
 import ButtonThird from "button/ButtonThird";
+import HeaderSave from "../../Parts/HeaderSave";
+import InputError from "../../Input/InputError";
 
 // Model imports
 import { controller as ctrl } from "model/Main";
 
 // Libraries imports
-import CDate from "../../../model/utils/CDate";
+import CDate from "model/utils/CDate";
 import _ from "lodash";
 
 // Constants imports
-import { ICON } from "constants/IMAGES";
 import { KEYBOARD_AVOIDING_VIEW } from "constants/PROPS";
 import { PLH, TITLE } from "constants/TEXTS";
 import COLORS from "constants/COLORS";
-import Primary from "../../Buttons/Primary";
-import InputError from "../../Input/InputError";
-import { ERROR_TEXT } from "../../../constants/TEXTS";
-import { STYLE_GENERAL } from "../../../constants/STYLES";
-import HeaderSave from "../../Parts/HeaderSave";
+import { ERROR_TEXT } from "constants/TEXTS";
+import { STYLE_GENERAL } from "constants/STYLES";
+import Utils from "../../../model/Utils";
 
 const ServiceSettings = (props) => {
   // Destructure props
@@ -47,9 +45,7 @@ const ServiceSettings = (props) => {
   const onSave = () =>
     ctrl.onPress.service(setSaving, data, init, setInit, setAudit);
 
-  console.log(audit?.valid?.name && !saving);
-
-  // On save service
+  // After saving service
   useEffect(() => {
     if (!audit?.valid?.all && saving) setSaving(false);
   }, [audit]);
@@ -59,7 +55,7 @@ const ServiceSettings = (props) => {
     <KeyboardAvoidingView {...KEYBOARD_AVOIDING_VIEW} style={styles.ctn}>
       <HeaderSave
         saving={saving}
-        canSave={_.isEqual(data, init)}
+        canSave={!_.isEqual(data, init)}
         onSave={onSave}
         onClose={close}
       />
@@ -120,7 +116,7 @@ const ServiceSettings = (props) => {
           />
         </View>
 
-        <View style={styles.sectionCtn}>
+        <View style={STYLE_GENERAL.sectionCtn}>
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
           <ButtonThird
             text={"Supprimer la prestation"}
@@ -137,59 +133,9 @@ const ServiceSettings = (props) => {
 export default ServiceSettings;
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    position: "absolute",
-    height: 110,
-    elevation: 5,
-    zIndex: 5,
-    top: 0,
-    right: 0,
-    left: 0,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
-  },
-
-  close: {
-    height: 35,
-    width: 35,
-    position: "absolute",
-    padding: 5,
-    top: 60,
-    left: 30,
-  },
-
-  savingText: {
-    position: "absolute",
-    top: 70,
-    left: 30,
-  },
-
-  save: {
-    paddingVertical: 7,
-    width: 120,
-    paddingHorizontal: 10,
-    position: "absolute",
-    top: 60,
-    right: 20,
-  },
-
   ctn: {
     paddingTop: 110,
-    paddingBottom: 0,
-    marginBottom: 50,
+    marginBottom: 20,
     position: "absolute",
     backgroundColor: "#fff",
     bottom: 0,

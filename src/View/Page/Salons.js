@@ -34,7 +34,7 @@ import {
 } from "constants/PROPS";
 import { TITLE } from "constants/TEXTS";
 import { STYLE_GENERAL } from "constants/STYLES";
-import { ERROR_TEXT } from "../../constants/TEXTS";
+import { ERROR_TEXT, PLH } from "../../constants/TEXTS";
 import HeaderSave from "../Parts/HeaderSave";
 
 const Salons = (...props) => {
@@ -60,6 +60,7 @@ const Salons = (...props) => {
     ctrl.get.salon(setInitSalon, setSalon);
   }, []);
 
+  // After saving
   useEffect(() => {
     setSaving(false);
   }, [audit]);
@@ -127,8 +128,8 @@ const Salons = (...props) => {
               errorText={ERROR_TEXT.hours}
               textLeft="Ouverture"
               textRight="Fermeture"
-              plhLeft={"10h00"}
-              plhRight={"12h"}
+              plhLeft={PLH.amOn}
+              plhRight={PLH.amOff}
               valueLeft={formatHours(salon.am_on)}
               valueRight={formatHours(salon.am_off)}
               setValueLeft={(v) => setSalon({ ...salon, am_on: strTime(v) })}
@@ -142,8 +143,8 @@ const Salons = (...props) => {
               errorText={ERROR_TEXT.hours}
               textLeft="Ouverture"
               textRight="Fermeture"
-              plhLeft={"13h30"}
-              plhRight={"18h"}
+              plhLeft={PLH.pmOn}
+              plhRight={PLH.pmOff}
               valueLeft={formatHours(salon.pm_on)}
               valueRight={formatHours(salon.pm_off)}
               setValueLeft={(v) => setSalon({ ...salon, pm_on: strTime(v) })}
@@ -175,7 +176,7 @@ const Salons = (...props) => {
             <InputError
               value={salon.date_off}
               setValue={(v) => setSalon({ ...salon, date_off: v })}
-              placeholder="14/07;15/08"
+              placeholder={PLH.dateOff}
               multiline
             />
           </View>

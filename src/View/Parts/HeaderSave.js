@@ -4,22 +4,23 @@ import { View, Text, StyleSheet } from "react-native";
 
 // Componnents imports
 import Button from "button/Button";
+import Primary from "button/Primary";
 
 // Libraries imports
 import _ from "lodash";
 
 // Constants imports
 import { ICON } from "constants/IMAGES";
-import Primary from "button/Primary";
+import { STYLES_SHADOW } from "constants/STYLES";
 
 const HeaderSave = (props) => {
-  const { saving, onSave, onClose, canSave } = props;
+  const { saving, onSave, onClose, canSave, isBack } = props;
 
   return (
     <View style={styles.header}>
       <Button
         visible={!saving}
-        image={ICON.close}
+        image={isBack ? ICON.back : ICON.close}
         style={styles.close}
         shadow={false}
         onPress={onClose}
@@ -30,7 +31,7 @@ const HeaderSave = (props) => {
         text={"Sauvegarder"}
         style={styles.save}
         styleText={styles.saveText}
-        disabled={canSave || saving}
+        disabled={!canSave || saving}
         onPress={onSave}
       />
     </View>
@@ -52,15 +53,8 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
 
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    ...STYLES_SHADOW.medium,
 
-    elevation: 2,
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
   },

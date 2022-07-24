@@ -36,7 +36,7 @@ const Button = (props) => {
     style: props.styleText,
     numberOfLines: props.nbLines ? props.nbLines : 1,
     allowFontScalling: true,
-    adjustsFontSizeToFit: true,
+    adjustsFontSizeToFit: props.noResize === true ? false : true,
   };
 
   if (!visible) return null;
