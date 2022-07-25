@@ -57,7 +57,7 @@ export default {
   },
 
   cleanUp(...funcs) {
-    funcs.map((func) => func(undefined));
+    return funcs.map((func) => func(undefined));
   },
 
   strStatus(isAdmin, isStaff) {

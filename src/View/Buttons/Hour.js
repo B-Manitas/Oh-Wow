@@ -1,33 +1,56 @@
+// React import
 import React from "react";
 import { StyleSheet } from "react-native";
 
-import Round from "./Round";
+// Componnent import
+import Button from "./Button";
 
-const Hour = ({ hour, is_available, func, is_selected }) => {
-  const colors = is_available ? "#383838" : "#faa4af";
+// Constant import
+import COLORS from "constants/COLORS";
 
-  return (
-    <Round
-      size={40}
-      text={hour}
-      colors={colors}
-      enabled={is_available}
-      func={func}
-      style_ctn_enabled={is_selected && styles.ctn_enabled}
-      style_txt_enabled={is_selected && styles.txt_enabled}
-    />
-  );
+const Hour = (props) => {
+  // Destructure props
+  const { hour, visible, onPress, isOn } = props;
+
+  // Define button props
+  const propsButton = {
+    text: hour,
+    style: [styles.container, isOn && styles.ctnEnabled],
+    styleText: [styles.text, isOn && styles.textEnabled],
+    visible,
+    onPress,
+  };
+
+  return <Button {...propsButton} />;
 };
 
 export default Hour;
 
 const styles = StyleSheet.create({
-  ctn_enabled: {
+  container: {
+    flex: 1,
+
+    borderColor: COLORS.main,
+    borderRadius: 3,
+    borderWidth: 2,
+
+    marginHorizontal: 5,
+    marginVertical: 7,
+
+    paddingVertical: 12,
+  },
+
+  text: {
+    color: COLORS.main,
+    fontWeight: "700",
+  },
+
+  ctnEnabled: {
     backgroundColor: "#faa4af",
     borderColor: "#faa4af",
   },
 
-  txt_enabled: {
+  textEnabled: {
     color: "#fff",
   },
 });

@@ -1,98 +1,80 @@
-import React, { useState } from "react";
+// React import
+import React, { useRef, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
+
+// Componnent import
+import Header from "../Parts/Header";
+import Page from "../Container/Page";
+import InputSecondary from "../Input/InputSecondary";
 import Primary from "../Buttons/Primary";
 import RadioBox from "../Componnent/RadioBox";
 
-import Page from "../Container/Page";
-import InputSecondary from "../Input/InputSecondary";
-import Header from "../Parts/Header";
-
+// Libraries import
 import { controller as ctrl } from "model/Main";
-import CDate from "../../model/utils/CDate";
+import CDate from "model/utils/CDate";
 
-const ConfirmAppt = ({ navigation, route }) => {
+// Constants import
+import { INPUT_FIRSTNAME, INPUT_LASTNAME, INPUT_PHONE } from "constants/PROPS";
+
+const ConfirmAppt = (props) => {
+  // Destructure props
+  const { navigation: nav, route } = props;
+
+  // Define componnent state
+  const apt = useRef(route.params.apt);
   const service = route.params.service;
   const salon = route.params.salon;
-  const apt_init = route.params.apt;
   const user = ctrl.this_user_data;
+  const aptDate = new CDate(apt.current.date);
 
-  const [apt, setApt] = useState(apt_init);
-  const [audit, setAudit] = useState(ctrl.fakeAudit(apt_init));
-  const [radio, setRadio] = useState(0);
+  const [audit, setAudit] = useState();
+  const [isOffer, setIsOffer] = useState(0);
 
-  const apt_date = new CDate(apt.date);
+  const updtOffer = (k, t) =>
+    (apt.current = { ...apt.current, offer: { ...apt.current.offer, [k]: t } });
 
-  const radioOffer = (id) => ctrl.onPress.radioOffer(setApt, setRadio, id);
-  const updateOffer = (k, t) =>
-    setApt((p) => ({ ...p, offer: { ...p.offer, [k]: t } }));
+  // Define radio box props
+  const propsRadioBox = {
+    onPress: (id) => ctrl.onPress.radioOffer(setApt, setIsOffer, id),
+    isFlex: true,
+    isSelected: isOffer,
+  };
 
   return (
     <Page>
-      <Header
-        text={"Valider votre réservation"}
-        type={"back"}
-        nav={navigation}
-      />
+      <Header text={"Valider votre réservation"} type={"back"} nav={nav} />
 
       <View style={styles.container}>
-        <RadioBox
-          style={styles.radio}
-          style_txt={styles.txt_radio}
-          style_active={styles.radio_on}
-          text={"Pour moi"}
-          id={0}
-          id_selected={radio}
-          style_txt_active={styles.txt_radio_on}
-          onPress={radioOffer}
-          />
-        <RadioBox
-          style={styles.radio}
-          style_txt_active={styles.txt_radio_on}
-          style_txt={styles.txt_radio}
-          style_active={styles.radio_on}
-          text={"Pour un proche"}
-          id={1}
-          id_selected={radio}
-          onPress={radioOffer}
-        />
+        <RadioBox {...propsRadioBox} text={"Pour moi"} id={0} />
+        <RadioBox {...propsRadioBox} text={"Pour un proche"} id={1} />
       </View>
 
       <View style={styles.ctn_inputs}>
         <InputSecondary
-          plh={"Prénom"}
-          typeAndroid={"name-given"}
-          typeIOS={"givenName"}
-          returnKeyType={"next"}
-          maxLength={20}
-          isValidFormat={audit?.valid?.offer?.firstname}
-          value={radio ? apt.offer?.firstname : user.firstname}
-          setValue={(t) => updateOffer("firstname", t)}
-          disabled={!radio}
+          {...INPUT_FIRSTNAME}
+          valid={audit?.valid?.offer?.firstname}
+          value={isOffer ? apt.current.offer?.firstname : user.firstname}
+          setValue={(t) => updtOffer("firstname", t)}
+          disabled={!isOffer}
+          editable={isOffer === 1}
         />
         <InputSecondary
-          plh={"Nom"}
-          typeAndroid={"name-family"}
-          typeIOS={"familyName"}
-          returnKeyType={"next"}
-          maxLength={20}
-          isValidFormat={audit?.valid?.offer?.lastname}
-          value={radio ? apt.offer?.lastname : user.lastname}
-          setValue={(t) => updateOffer("lastname", t)}
-          disabled={!radio}
+          {...INPUT_LASTNAME}
+          valid={audit?.valid?.offer?.lastname}
+          value={isOffer ? apt.current.offer?.lastname : user.lastname}
+          setValue={(t) => updtOffer("lastname", t)}
+          disabled={!isOffer}
+          editable={isOffer === 1}
         />
         <InputSecondary
-          plh={"Téléphone"}
-          typeAndroid={"tel"}
-          typeIOS={"telephoneNumber"}
-          returnKeyType={"done"}
-          maxLength={14}
-          keyboardType={"phone-pad"}
-          isValidFormat={audit?.valid?.offer?.phone}
-          value={radio ? apt.offer?.phone : user.phone}
+          {...INPUT_PHONE}
+          valid={audit?.valid?.offer?.phone}
+          value={isOffer ? apt.current.offer?.phone : user.phone}
           setValue={(t) =>
-            updateOffer("phone", ctrl.onFormat.phone(apt.offer?.phone, t))
+            updtOffer("phone", ctrl.onFormat.phone(apt.current.offer?.phone, t))
           }
-          disabled={!radio}
+          disabled={!isOffer}
+          editable={isOffer === 1}
         />
       </View>
 
@@ -107,12 +89,12 @@ const ConfirmAppt = ({ navigation, route }) => {
 
         <View style={styles.field}>
           <Text style={styles.h2_key}>Date :</Text>
-          <Text style={styles.h2_val}>{apt_date.toDateString()}</Text>
+          <Text style={styles.h2_val}>{aptDate.toLocaleDateString()}</Text>
         </View>
 
         <View style={styles.field}>
           <Text style={styles.h2_key}>Heure :</Text>
-          <Text style={styles.h2_val}>{apt_date.toTimeString()}</Text>
+          <Text style={styles.h2_val}>{aptDate.toTimeString()}</Text>
         </View>
 
         <View style={styles.field}>
@@ -134,12 +116,8 @@ const ConfirmAppt = ({ navigation, route }) => {
       </View>
 
       <Primary
-        text={`Confirmer la réservation`}
-        height={10}
-        font_size={18}
-        style={styles.button_appt}
-        func={() => ctrl.add.appointment(navigation, apt, setAudit)}
-        is_active={true}
+        text={"Confirmer la réservation"}
+        onPress={() => ctrl.add.appointment(navigation, apt, setAudit)}
       />
     </Page>
   );
@@ -178,13 +156,13 @@ const styles = StyleSheet.create({
   txt_radio: {
     fontSize: 20,
     fontWeight: "500",
-    color: "#fff"
+    color: "#fff",
   },
-  
+
   txt_radio_on: {
     color: "#faa4af",
   },
-  
+
   radio_on: {
     backgroundColor: "#fff",
     flex: 2,

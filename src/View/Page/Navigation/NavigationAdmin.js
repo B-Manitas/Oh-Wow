@@ -13,8 +13,11 @@ import { NAVIGATION } from "constants/PROPS";
 import { STYLES_NAV } from "constants/STYLES";
 
 const NavigationAdmin = (props) => {
+  // Destructure props
   const { nav } = props;
-  const isAdmin = ctrl.this_is_admin;
+
+  // Define componnent state
+  const isAdmin = ctrl.this_is_admin();
 
   if (!isAdmin) return null;
   return (

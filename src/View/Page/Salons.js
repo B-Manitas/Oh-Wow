@@ -10,7 +10,6 @@ import {
 
 // Componnents imports
 import Page from "container/Page";
-import Header from "../Parts/Header";
 import InputLong from "../Input/InputLong";
 import InputHours from "../Input/InputHours";
 import DaysCheckBoxList from "../Generator/DaysCheckBoxList";
@@ -18,6 +17,7 @@ import ToggleLong from "../Componnent/ToggleLong";
 import Primary from "button/Primary";
 import Loader from "./Loader";
 import InputError from "../Input/InputError";
+import HeaderSave from "../Parts/HeaderSave";
 
 // Libraries imports
 import _ from "lodash";
@@ -34,8 +34,7 @@ import {
 } from "constants/PROPS";
 import { TITLE } from "constants/TEXTS";
 import { STYLE_GENERAL } from "constants/STYLES";
-import { ERROR_TEXT, PLH } from "../../constants/TEXTS";
-import HeaderSave from "../Parts/HeaderSave";
+import { ERROR_TEXT, PLH } from "constants/TEXTS";
 
 const Salons = (...props) => {
   // Destructure props
@@ -69,7 +68,7 @@ const Salons = (...props) => {
   return (
     <Page>
       <HeaderSave
-        canSave={_.isEqual(initSalon, salon)}
+        canSave={!_.isEqual(initSalon, salon)}
         saving={saving}
         onSave={onSave}
         onClose={() => ctrl.goTo.back(nav)}
@@ -186,7 +185,7 @@ const Salons = (...props) => {
             <ToggleLong
               text={"Prise de nouveau RDV"}
               value={salon.is_opened}
-              onPress={(b) => setSalon({ ...salon, date_off: b })}
+              setValue={(b) => setSalon({ ...salon, date_off: b })}
             />
           </View>
         </ScrollView>

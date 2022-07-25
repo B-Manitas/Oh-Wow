@@ -1,16 +1,22 @@
+// React imports
 import { FlatList, StyleSheet } from "react-native";
-import Appointment from "../../Container/Appointment";
+
+// Componnent imports
+import CtnAppointment from "container/CtnAppointment";
 
 const ClientApt = (props) => {
-  const { visible, appointments } = props;
+  const { visible, appointments, setApts, client } = props;
 
-  if (visible) return null;
+  if (!visible) return null;
   return (
     <FlatList
       data={appointments}
       style={styles.container}
       keyExtractor={(item) => item._id}
-      renderItem={(item) => <Appointment data={item.item} />}
+      renderItem={(item) => (
+        <CtnAppointment data={{ ...item.item, ...client }} setApts={setApts} />
+      )}
+      showsVerticalScrollIndicator={false}
     />
   );
 };
@@ -18,5 +24,5 @@ const ClientApt = (props) => {
 export default ClientApt;
 
 const styles = StyleSheet.create({
-  container: { top: 60 },
+  container: { top: 60, paddingHorizontal: 25, marginBottom: 50 },
 });

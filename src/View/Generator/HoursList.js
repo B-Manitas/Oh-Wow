@@ -1,39 +1,49 @@
+// React import
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import CDate from "../../model/utils/CDate";
 
+// Componnent import
 import Hour from "../Buttons/Hour";
 
-const HoursList = ({ date, onPress, calendar, selected }) => {
-  const am_hour = calendar.find((day) =>
+// Libraries import
+import CDate from "model/utils/CDate";
+
+const HoursList = (props) => {
+  // Destructure props
+  const { date, onPress, calendar, selected } = props;
+
+  // Define am hours list
+  const hoursAM = calendar.find((day) =>
     day === 0 ? 0 : date.isSameDate(day.date)
   )?.am_hours;
 
-  const pm_hours = calendar.find((day) =>
+  // Define pm hours list
+  const hoursPM = calendar.find((day) =>
     day === 0 ? 0 : date.isSameDate(day.date)
   )?.pm_hours;
 
   return (
-    <View>
-      <View style={styles.container}>
-        {am_hour?.map((h_info, id) => (
+    <View style={styles.container}>
+      <View style={styles.hoursCtn}>
+        {hoursAM?.map((hour, id) => (
           <Hour
             key={id}
-            hour={CDate.toTimeString(h_info.time)}
-            func={() => onPress(h_info.time)}
-            is_available={h_info.is_on}
-            is_selected={selected.getTime() === h_info.time}
+            hour={CDate.toTimeString(hour.time)}
+            onPress={() => onPress(hour.time)}
+            visible={hour.is_on}
+            isOn={selected.getTime() === hour.time}
           />
         ))}
       </View>
-      <View style={styles.container}>
-        {pm_hours?.map((h_info, id) => (
+
+      <View style={styles.hoursCtn}>
+        {hoursPM?.map((hour, id) => (
           <Hour
             key={id}
-            hour={CDate.toTimeString(h_info.time)}
-            func={() => onPress(h_info.time)}
-            is_available={h_info.is_on}
-            is_selected={selected.getTime() === h_info.time}
+            hour={CDate.toTimeString(hour.time)}
+            onPress={() => onPress(hour.time)}
+            visible={hour.is_on}
+            isOn={selected.getTime() === hour.time}
           />
         ))}
       </View>
@@ -44,7 +54,7 @@ const HoursList = ({ date, onPress, calendar, selected }) => {
 export default HoursList;
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-  },
+  container: { marginBottom: 20 },
+
+  hoursCtn: { flexDirection: "row" },
 });

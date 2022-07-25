@@ -1,86 +1,89 @@
-import { useEffect, useState } from "react";
-import CDate from "../../../model/utils/CDate";
-import PickerCalendar from "../../Componnent/PickerCalendar";
-import Page from "../../Container/Page";
-import Header from "../../Parts/Header";
-import BookingHeader from "../Booking/BookingHeader";
-
-import Calendar from "model/utils/Calendar";
-import { controller as ctrl } from "model/Main";
-import { StyleSheet, Text, View } from "react-native";
+// React imports
+import React, { useEffect, useMemo, useState } from "react";
+import { Dimensions, StyleSheet, Text } from "react-native";
 import { SwipeablePanel } from "rn-swipeable-panel";
-import _ from "lodash";
+
+// Componnent imports
+import PickerCalendar from "../../Componnent/PickerCalendar";
+import Page from "container/Page";
+import Header from "../../Parts/Header";
 import PlanningsHeader from "./PlanningsHeader";
 import Loader from "../Loader";
-import ItemAptPlannings from "../../Container/ItemAptPlannings";
+import CtnAppointment from "container/CtnAppointment";
+
+// Libraries imports
+import _ from "lodash";
+import { controller as ctrl } from "model/Main";
+import CDate from "model/utils/CDate";
+import Calendar from "model/utils/Calendar";
+
+// Constants imports
+import COLORS from "constants/COLORS";
 
 const Plannings = ({ navigation }) => {
+  // Define componnent state
   const [date, setDate] = useState(CDate.today());
-  const [calendar, setCalendar] = useState();
-  const [schedule, setSchedule] = useState(undefined);
-  const [plannings, setPlannings] = useState([]);
-  const [selected_plannings, setSelectedPlanning] = useState([]);
+  const [plannings, setPlannings] = useState();
   const [staff, setStaff] = useState(ctrl.this_user_data._id);
-  const [is_active, setIsActive] = useState(false);
+  const [showingPanel, setShowingPanel] = useState(false);
+  const strH1 = date.isToday()
+    ? "d'aujourd'hui"
+    : `du ${date.toLocaleDateString()}`;
 
+  // Define componnent memo state
+  const calendar = useMemo(() => new Calendar(), []);
+
+  const days = useMemo(
+    () => calendar.getPlanning(date, plannings),
+    [date, plannings]
+  );
+
+  const selectedPlanning = useMemo(
+    () => plannings?.filter((apt) => date.isSameDate(apt.date)),
+    [date, plannings]
+  );
+
+  // Fetch plannings on change staff
   useEffect(() => {
-    setCalendar(new Calendar());
-  }, []);
+    const beginDate = date.getFirstDate().getTimestamp();
+    const endDate = date.getLastDate().getTimestamp();
+    ctrl.get.plannings(staff, beginDate, endDate, setPlannings);
 
-  useEffect(() => {
-    const date_str = date.getFirstDate().getTimestamp();
-    const date_end = date.getLastDate().getTimestamp();
-
-    if (ctrl.this_is_staff) setStaff(ctrl.this_user_data._id);
-    ctrl.get.plannings(staff, date_str, date_end, setPlannings);
+    return () => setPlannings([]);
   }, [staff]);
 
-  useEffect(() => {
-    setSchedule(calendar?.getPlanning(date, plannings));
-  }, [calendar, date, plannings]);
-
-  var props_cal_header = { date, setDate, staff, setStaff, all_staff: true };
-
-  const pressDay = (day) => {
-    setDate(day);
-    const date_plannings = plannings.filter((apt) => day.isSameDate(apt.date));
-    setSelectedPlanning(date_plannings);
-    setIsActive(true);
+  // Define the planning header props of the calendar picker componnent
+  const propsPlanningsHeader = {
+    date,
+    setDate,
+    staff,
+    setStaff,
+    allOption: true,
   };
 
-  const deleteApt = (id) => {
-    ctrl.delete.appointment(id);
-    setPlannings((p) => p.filter((item) => item._id != id));
-    setSelectedPlanning((p) => p.filter((item) => item._id != id));
-  };
-
-  if (!plannings) return <Loader />;
+  if (plannings === undefined) return <Loader />;
   return (
     <Page>
-      <Header
-        text={"Planning des réservations"}
-        type={"close"}
-        nav={navigation}
-      />
+      <Header text={"Les réservations"} type={"close"} nav={navigation} />
       <PickerCalendar
-        data={schedule}
+        data={days}
         date={date}
-        header={<PlanningsHeader {...props_cal_header} />}
-        onPressDay={pressDay}
+        header={<PlanningsHeader {...propsPlanningsHeader} />}
+        onPress={(day) =>
+          ctrl.onPress.calendarDay(day, setDate, setShowingPanel)
+        }
       />
       <SwipeablePanel
         showCloseButton={false}
-        isActive={is_active}
-        onClose={() => setIsActive(false)}
-        allowTouchOutside={true}
+        isActive={showingPanel}
+        onClose={() => setShowingPanel(false)}
+        allowTouchOutside
         style={styles.panel}
       >
-        <Text style={styles.panel_h1}>
-          Le planning du {date.toDateString()}
-        </Text>
+        <Text style={styles.h1Panel}>Le planning {strH1}</Text>
 
-        {selected_plannings.map((apt) => (
-          <ItemAptPlannings key={apt._id} apt={apt} deleteApt={deleteApt} />
+        {selectedPlanning.map((apt) => (
+          <CtnAppointment key={apt._id} data={apt} setApts={setPlannings} />
         ))}
       </SwipeablePanel>
     </Page>
@@ -91,40 +94,18 @@ export default Plannings;
 
 const styles = StyleSheet.create({
   panel: {
-    backgroundColor: "#f5f5f5",
-    borderWidth: 1,
-    borderColor: "#c3c3c3",
-    paddingHorizontal: 5,
-    paddingVertical: 10,
+    height: Dimensions.get("screen").height - 150,
+    width: Dimensions.get("screen").width - 20,
+    borderWidth: 3,
+    borderColor: COLORS.gray,
+    paddingHorizontal: 10,
   },
 
-  panel_h1: {
+  h1Panel: {
     fontSize: 22,
-    fontWeight: "300",
+    fontWeight: "600",
     textAlign: "center",
     marginTop: 15,
     marginBottom: 20,
-  },
-
-  ctn_apt: {
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    borderColor: "#c3c3c3",
-    borderWidth: 1,
-    marginHorizontal: 15,
-    marginBottom: 10,
-  },
-
-  apt_h1: {
-    fontSize: 18,
-    fontWeight: "500",
-  },
-
-  apt_h2: {
-    fontSize: 15,
-    fontWeight: "300",
-    paddingTop: 5,
   },
 });

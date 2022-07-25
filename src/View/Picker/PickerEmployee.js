@@ -1,10 +1,16 @@
+// React imports
 import React from "react";
 import { StyleSheet } from "react-native";
+
+// React imports
 import { Picker } from "@react-native-picker/picker";
-import _ from "lodash";
 import { ItemsStaff } from "../Generator/ItemsStaff";
 
-const PickerEmployee = ({ onChange, value, all }) => {
+const PickerEmployee = (props) => {
+  // Define componnent props
+  const { onChange, value, allOption, visible } = props;
+
+  if (!visible) return null;
   return (
     <Picker
       style={styles.picker}
@@ -13,7 +19,7 @@ const PickerEmployee = ({ onChange, value, all }) => {
       selectedValue={value}
       onValueChange={(v) => onChange(v)}
     >
-      {ItemsStaff({onChange, all})}
+      {ItemsStaff({ onChange, allOption })}
     </Picker>
   );
 };

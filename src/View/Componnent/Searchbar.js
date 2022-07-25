@@ -1,13 +1,8 @@
 // React imports
 import React from "react";
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 
+// Componnent imports
 import Button from "button/Button";
 
 // Contants imports
@@ -16,8 +11,10 @@ import { STYLES_SHADOW } from "constants/STYLES";
 import COLORS from "constants/COLORS";
 
 const Searchbar = (props) => {
+  // Destructure componnent props
   const { plh, setValue, value } = props;
 
+  // Define input props
   const propsInput = {
     value: value,
     onChangeText: setValue,
@@ -27,19 +24,15 @@ const Searchbar = (props) => {
     maxLength: 50,
   };
 
-  const propsClear = {
-    onPress: () => setValue(""),
-    style: styles.clearButton,
-  };
-
   return (
     <View style={[styles.container, props.style]}>
       <TextInput {...propsInput} />
 
       <Button
         style={styles.clearButton}
-        shadow={false}
+        noShadow
         image={ICON.closeGray}
+        onPress={() => setValue("")}
       />
     </View>
   );

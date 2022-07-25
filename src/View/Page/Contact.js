@@ -23,7 +23,7 @@ const Contact = (props) => {
   const { navigation: nav } = props;
 
   // Define componnent state
-  const [salons, setSalons] = useState(undefined);
+  const [salons, setSalons] = useState();
 
   // On load componnent
   useEffect(() => {

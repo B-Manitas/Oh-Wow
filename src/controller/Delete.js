@@ -41,8 +41,9 @@ export class Delete extends SuperController {
   }
 
   @Catch
-  async appointment(id) {
+  async appointment(id, setAptFilter) {
+    console.log("w");
+    if (setAptFilter) setAptFilter((p) => p.filter((item) => item._id != id));
     await this.frontend.delete.appointment(id);
-    Alert.alert(`Your appointment has been succesfully removed.`);
   }
 }

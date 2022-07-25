@@ -13,8 +13,11 @@ import { STYLES_NAV } from "constants/STYLES";
 import { NAVIGATION } from "constants/PROPS";
 
 const NavigationStaff = (props) => {
+  // Destructure props
   const { nav } = props;
-  const isStaff = ctrl.this_is_staff;
+
+  // Define componnent state
+  const isStaff = ctrl.this_is_staff || ctrl.this_is_admin();
 
   if (!isStaff) return null;
   return (

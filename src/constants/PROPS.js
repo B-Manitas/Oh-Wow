@@ -9,7 +9,7 @@ export const KEYBOARD_AVOIDING_VIEW = {
 export const NAVIGATION = {
   style: STYLES_NAV.navButton,
   styleText: STYLES_NAV.navText,
-  shadow: false,
+  noShadow: true,
 };
 
 export const INPUT_MAIL = {

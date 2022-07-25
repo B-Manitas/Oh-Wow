@@ -10,7 +10,7 @@ import PAGES from "../constants/PAGES";
 export class OnClose extends SuperController {
   @Catch
   async service(data, data_init, navigation) {
-    if (data.img != data_init.img && this.this_is_admin) {
+    if (data.img != data_init.img && this.this_is_admin()) {
       await this.frontend.update.service({ _id: data._id, img: data.img });
 
       updateService({ ...data_init, img: data.img });
@@ -21,7 +21,7 @@ export class OnClose extends SuperController {
 
   @Catch
   async settingsApp(data, data_init, navigation, setAudit) {
-    if (!Utils.isEquals(data, data_init) && this.this_is_admin)
+    if (!Utils.isEquals(data, data_init) && this.this_is_admin())
       await this.frontend.update.salon(data, setAudit);
 
     navigation.navigate(PAGES.HOME);

@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Day from "../Buttons/Day";
 
-const PickerCalendar = ({ data, header, footer, onPressDay, date }) => {
+const PickerCalendar = ({ data, header, footer, onPress, date }) => {
   return (
     <FlatList
       data={data}
@@ -10,7 +10,7 @@ const PickerCalendar = ({ data, header, footer, onPressDay, date }) => {
       ListHeaderComponent={header}
       ListFooterComponent={footer}
       renderItem={(day) => (
-        <Day day={day.item} onPressDay={onPressDay} date={date} />
+        <Day day={day.item} onPressDay={onPress} date={date} />
       )}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}

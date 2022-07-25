@@ -4,10 +4,10 @@ import { View, Text, StyleSheet } from "react-native";
 
 // Librarie imports
 import CDate from "model/utils/CDate";
-import Utils from "../../model/Utils";
+import Utils from "model/Utils";
 
 // Constants imports
-import COLORS from "../../constants/COLORS";
+import COLORS from "constants/COLORS";
 
 const ContactSalon = (props) => {
   // Destructure props

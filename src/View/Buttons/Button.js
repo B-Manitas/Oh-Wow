@@ -8,15 +8,15 @@ import { STYLES_SHADOW } from "constants/STYLES";
 
 const Button = (props) => {
   // Define componnent state
-  const shadow = props.shadow === false ? false : true;
   const visible = props.visible === false ? false : true;
+  const noShadow = props.noShadow;
   const disabled = props.disabled;
 
   // Define button props
   const propsButton = {
     style: [
       styles.button,
-      shadow && !disabled && STYLES_SHADOW.medium,
+      !noShadow && !disabled && STYLES_SHADOW.medium,
       disabled && styles.disabled,
       props.style,
     ],

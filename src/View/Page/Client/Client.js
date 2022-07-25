@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 
 import Page from "../../Container/Page";
-import Header from "../../Parts/Header";
 import HeaderSave from "../../Parts/HeaderSave";
 import RadioBox from "../../Componnent/RadioBox";
 import ClientInfo from "./ClientInfo";
@@ -10,9 +9,7 @@ import ClientApt from "./ClientApt";
 
 import { controller as ctrl } from "model/Main";
 
-import { STYLES_SHADOW } from "constants/STYLES";
 import _ from "lodash";
-import CheckBoxText from "../../Componnent/CheckBoxText";
 
 const Client = (props) => {
   // Destructure componnent props
@@ -22,7 +19,7 @@ const Client = (props) => {
   const [initClient, setInitClient] = useState(route.params.data);
   const [client, setClient] = useState(route.params.data);
   const [page, setPage] = useState(0);
-  const [apts, setApts] = useState(undefined);
+  const [apts, setApts] = useState();
   const [audit, setAudit] = useState();
   const [saving, setSaving] = useState(false);
   const [salon, setSalon] = useState();
@@ -79,7 +76,7 @@ const Client = (props) => {
         salon={salon}
         audit={audit}
       />
-      <ClientApt visible={page == 1} appointments={apts} />
+      <ClientApt visible={page == 1} appointments={apts} client={initClient} />
     </Page>
   );
 };
@@ -94,50 +91,5 @@ const styles = StyleSheet.create({
     top: 60,
     backgroundColor: "#fff",
     width: "100%",
-  },
-
-  parts: {
-    marginHorizontal: 30,
-    marginVertical: 20,
-  },
-
-  container_name: {
-    flexDirection: "row",
-  },
-
-  h1: {
-    fontSize: 26,
-    marginLeft: 10,
-  },
-
-  radio: {
-    flex: 1,
-    borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 40,
-    backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
-    margin: 2,
-    borderColor: "#f5f5f5",
-    marginHorizontal: 5,
-  },
-
-  txt_radio: {
-    fontSize: 20,
-    fontWeight: "300",
-  },
-
-  radio_on: {
-    backgroundColor: "#f5f5f5",
-    // flex: 2,
   },
 });

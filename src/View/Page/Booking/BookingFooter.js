@@ -1,43 +1,38 @@
+// React import
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import PAGES from "../../../constants/PAGES";
-import CDate from "../../../model/utils/CDate";
 
-import Primary from "../../Buttons/Primary";
+// Componnent import
+import Primary from "button/Primary";
 import HoursList from "../../Generator/HoursList";
 
-const BookingFooter = ({ date, calendar, navigation, onPress, data }) => {
-  const date_appointment = new CDate(data.apt.date);
+// Libraries import
+import CDate from "model/utils/CDate";
+import { controller as ctrl } from "model/Main";
+
+const BookingFooter = (props) => {
+  // Destructure props
+  const { date, calendar, nav, onPress, data } = props;
+
+  // Define componnent state
+  const aptDate = new CDate(data.apt.date);
 
   return (
-    <View style={styles.container}>
+    <View>
       <HoursList
         date={date}
         onPress={onPress}
         calendar={calendar}
-        selected={date_appointment}
+        selected={aptDate}
       />
 
       <Primary
-        text={"Prendre RDV"}
-        height={10}
-        font_size={18}
-        
-        style={styles.button_appt}
-        is_active={!date_appointment.isZeroTime()}
-        func={() => navigation.navigate(PAGES.CONFIRM_APT, data)}
+        text={"Prendre rendez-vous"}
+        disabled={aptDate.isZeroTime()}
+        onPress={() => ctrl.goTo.confirmApt(nav, data)}
       />
     </View>
   );
 };
 
 export default BookingFooter;
-
-const styles = StyleSheet.create({
-  button_appt: {
-    borderWidth: 0,
-    marginTop: 15,
-    marginBottom: 30,
-    backgroundColor: "#faa4af"
-  },
-});

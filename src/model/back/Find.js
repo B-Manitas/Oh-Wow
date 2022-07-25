@@ -153,6 +153,9 @@ export class Find extends Request {
           price: "$service.price",
         },
       },
+      {
+        $sort: { date: -1 },
+      },
     ]);
   }
 
@@ -200,6 +203,9 @@ export class Find extends Request {
           price: "$service.price",
         },
       },
+      {
+        $sort: { date: -1 },
+      },
     ]);
   }
 
@@ -241,6 +247,9 @@ export class Find extends Request {
           service: "$service.name",
           staff: "$staff.firstname",
         },
+      },
+      {
+        $sort: { date: -1 },
       },
     ]);
   }

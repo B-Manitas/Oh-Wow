@@ -1,68 +1,61 @@
-import { useCallback, useEffect, useState } from "react";
+// React imports
+import React, { useEffect, useMemo, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
+
+// Componnent imports
 import RadioBox from "../Componnent/RadioBox";
-import Appointment from "../Container/Appointment";
+import CtnAppointment from "../Container/CtnAppointment";
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
+
+// Libraries imports
 import { controller as ctrl } from "model/Main";
+import Utils from "model/Utils";
 
-const Appointments = ({ navigation }) => {
-  const [is_historic, setIsHistoric] = useState(0);
+const Appointments = (props) => {
+  // Destrucuture componnent props
+  const { navigation: nav } = props;
 
+  // Define componnent state
+  const [page, setPage] = useState(0);
   const [upcoming, setUpcoming] = useState([]);
   const [historic, setHistoric] = useState([]);
 
-  const deleteApt = (id) => {
-    ctrl.delete.appointment(id);
+  // Define memo state
+  const selectedApts = useMemo(() => (!page ? upcoming : historic), [page]);
+  const onDelete = useMemo(() => (!page ? setUpcoming : setHistoric), [page]);
 
-    if (!is_historic) setUpcoming((p) => p.filter((item) => item._id != id));
-    else setHistoric((p) => p.filter((item) => item._id != id));
-  };
-
+  // On load componnent
   useEffect(() => {
-    const user_id = ctrl.this_user_data._id;
-    ctrl.get.userApt(user_id, false, setUpcoming);
-    ctrl.get.userApt(user_id, true, setHistoric);
+    const userID = ctrl.this_user_data._id;
+    ctrl.get.userApt(userID, false, setUpcoming);
+    ctrl.get.userApt(userID, true, setHistoric);
+
+    return () => Utils.cleanUp(setHistoric, setUpcoming);
   }, []);
+
+  // Define radio box props
+  const propsRadioBox = { idSelected: page, onPress: setPage, isFlex: true };
 
   return (
     <Page>
-      <Header
-        text={"Mes rendez-vous"}
-        type={"close"}
-        nav={navigation}
-      />
-      <View style={styles.ctn_radio}>
-        <RadioBox
-          text={"À venir"}
-          id={0}
-          id_selected={is_historic}
-          onPress={setIsHistoric}
-          style={styles.radio}
-          style_txt={styles.txt_ratio}
-          style_txt_active={styles.txt_ratio_on}
-          style_active={styles.ctn_radio_on}
-        />
-        <RadioBox
-          text={"Historique"}
-          id={1}
-          id_selected={is_historic}
-          onPress={setIsHistoric}
-          style={styles.radio}
-          style_txt_active={styles.txt_ratio_on}
-          style_txt={styles.txt_ratio}
-          style_active={styles.ctn_radio_on}
-        />
+      <Header text={"Mes rendez-vous"} type={"close"} nav={nav} />
+      <View style={styles.pageCtn}>
+        <RadioBox {...propsRadioBox} text={"À venir"} id={0} />
+        <RadioBox {...propsRadioBox} text={"Historique"} id={1} />
       </View>
 
       <FlatList
-        style={styles.container}
-        extraData={is_historic === 1 ? historic : upcoming}
-        data={is_historic === 1 ? historic : upcoming}
-        renderItem={(item) => (
-          <Appointment data={item.item} deleteApt={deleteApt} />
+        data={selectedApts}
+        renderItem={(i) => (
+          <CtnAppointment
+            data={{ ...i.item, ...ctrl.this_user_data }}
+            setApts={onDelete}
+          />
         )}
         keyExtractor={(item) => item._id}
+        showsVerticalScrollIndicator={false}
+        style={styles.container}
       />
     </Page>
   );
@@ -73,46 +66,11 @@ export default Appointments;
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-  },
-
-  ctn_radio: {
-    flexDirection: "row",
     marginHorizontal: 10,
   },
 
-  radio: {
-    flex: 1,
-    borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 40,
-    backgroundColor: "#faa4af",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
-    margin: 5,
-    borderColor: "#faa4af",
-  },
-
-  txt_ratio: {
-    fontSize: 20,
-    color: "#fff",
-    fontWeight: "500",
-  },
-
-  ctn_radio_on: {
-    backgroundColor: "#fff",
-    flex: 2,
-    height: 50,
-  },
-
-  txt_ratio_on: {
-    color: "#faa4af",
+  pageCtn: {
+    flexDirection: "row",
+    marginHorizontal: 10,
   },
 });

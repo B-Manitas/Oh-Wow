@@ -6,8 +6,7 @@ import { StyleSheet } from "react-native";
 import Button from "button/Button";
 
 // Constants imports
-import { STYLES_SHADOW } from "../../constants/STYLES";
-import COLORS from "../../constants/COLORS";
+import COLORS from "constants/COLORS";
 
 const ButtonThird = (props) => {
   const important = props.important;

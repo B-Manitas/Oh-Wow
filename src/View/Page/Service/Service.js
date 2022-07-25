@@ -90,7 +90,7 @@ const Service = (props) => {
       <Primary
         visible={!setting && Utils.canBook(init, service, route.params.isNew)}
         text={TEXTS.booking}
-        onPress={() => ctrl.goTo.booking(nav)}
+        onPress={() => ctrl.goTo.booking(nav, init)}
       />
     </Page>
   );

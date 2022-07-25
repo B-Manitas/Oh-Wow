@@ -1,7 +1,7 @@
 // React imports
 import React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
-import { STYLE_GENERAL } from "../../constants/STYLES";
+import { STYLE_GENERAL } from "constants/STYLES";
 
 // Componnents imports
 import InputError from "./InputError";

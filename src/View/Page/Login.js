@@ -18,7 +18,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { INPUT_MAIL, INPUT_PASSWORD } from "constants/PROPS";
 import { STYLES_LINK } from "constants/STYLES";
 import COLORS from "constants/COLORS";
-import { ERROR_TEXT } from "../../constants/TEXTS";
+import { ERROR_TEXT } from "constants/TEXTS";
 
 const Login = (props) => {
   // Destructure props
@@ -74,10 +74,11 @@ const Login = (props) => {
           />
 
           <Button
+            disabled={send}
             text={"Pas encore client ?"}
             styleText={STYLES_LINK.text}
-            shadow={false}
             onPress={() => ctrl.goTo.signup(nav)}
+            noShadow
           />
         </View>
       </ScrollView>

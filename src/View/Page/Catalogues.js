@@ -10,19 +10,20 @@ import Page from "../Container/Page";
 import Searchbar from "../Componnent/Searchbar";
 import ItemService from "../Container/Service/ItemService";
 
-// Model imports
+// Libraries imports
+import { useIsFocused } from "@react-navigation/native";
 import { controller as ctrl } from "model/Main";
+import Utils from "model/Utils";
 
 // Contants imports
-import { PLH } from "../../constants/TEXTS";
-import { useIsFocused } from "@react-navigation/native";
-import Utils from "../../model/Utils";
+import { PLH } from "constants/TEXTS";
 
 const Catalogues = (props) => {
+  // Destructure componnent props
   const { navigation: nav } = props;
-  const isFocused = useIsFocused();
 
   // Define componnent state
+  const isFocused = useIsFocused();
   const [isAdmin, setAdmin] = useState(ctrl.this_is_admin());
   const [services, setService] = useState();
   const [refreshing, setRefresh] = useState(false);

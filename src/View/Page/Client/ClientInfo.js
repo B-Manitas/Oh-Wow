@@ -93,18 +93,4 @@ const styles = StyleSheet.create({
     top: 50,
     height: "90%",
   },
-
-  section: {
-    marginVertical: 15,
-    marginHorizontal: 30,
-  },
-
-  section_h1: {
-    fontSize: 25,
-    fontWeight: "500",
-    width: "100%",
-    borderBottomWidth: 2,
-    textDecorationLine: "underline",
-    marginBottom: 10,
-  },
 });

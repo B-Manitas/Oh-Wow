@@ -22,8 +22,8 @@ const HeaderSave = (props) => {
         visible={!saving}
         image={isBack ? ICON.back : ICON.close}
         style={styles.close}
-        shadow={false}
         onPress={onClose}
+        noShadow
       />
       {saving && <Text style={styles.savingText}>Sauvegarde en cours....</Text>}
 

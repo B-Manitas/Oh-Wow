@@ -14,6 +14,7 @@ import Button from "button/Button";
 // Library imports
 import _ from "lodash";
 import { controller as ctrl } from "model/Main";
+import Utils from "model/Utils";
 
 // Contants imports
 import { ICON } from "constants/IMAGES";
@@ -36,6 +37,8 @@ const Home = (props) => {
   useEffect(() => {
     fetchServices();
     ctrl.get.app(setApp, (e) => (refApp.current = e));
+
+    return () => Utils.cleanUp(setRefresh, setService);
   }, []);
 
   // On change app state.

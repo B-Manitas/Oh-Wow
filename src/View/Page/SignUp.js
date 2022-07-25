@@ -99,7 +99,7 @@ const SignUp = (props) => {
               text={"Accepter les conditions générales d'utilisations"}
               nbLines={2}
               styleText={styles.link}
-              shadow={false}
+              noShadow
             />
           </View>
 
@@ -110,10 +110,11 @@ const SignUp = (props) => {
           />
 
           <Button
+            disabled={send}
             text={"Déja Client ?"}
             styleText={STYLES_LINK.text}
-            shadow={false}
             onPress={() => ctrl.goTo.login(nav)}
+            noShadow
           />
         </ScrollView>
       </KeyboardAvoidingView>

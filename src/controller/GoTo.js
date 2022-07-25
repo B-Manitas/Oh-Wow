@@ -66,4 +66,8 @@ export class GoTo extends SuperController {
   back(nav) {
     nav.goBack();
   }
+
+  confirmApt(nav, data) {
+    nav.navigate(PAGES.CONFIRM_APT, data);
+  }
 }

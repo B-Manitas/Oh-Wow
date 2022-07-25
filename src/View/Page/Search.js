@@ -1,53 +1,52 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+// React imports
+import React, { useEffect, useState } from "react";
+import { StyleSheet, FlatList } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+
+// Componnent imports
 import Page from "../Container/Page";
 import Header from "../Parts/Header";
 import Searchbar from "../Componnent/Searchbar";
 import CtnUser from "../Container/CtnUser";
-import { useEffect, useState } from "react";
-import { controller } from "model/Main";
-import { PLH } from "../../constants/TEXTS";
+
+// Libraries imports
+import { controller as ctrl } from "model/Main";
+import Utils from "model/Utils";
+
+// Constants imports
+import { PLH } from "constants/TEXTS";
 
 const Search = (props) => {
+  // Destructure props
   const { navigation: nav } = props;
 
+  // Define componnent state
+  const isFocused = useIsFocused();
   const [fetch, setFetch] = useState([]);
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
 
+  // On focus page
   useEffect(() => {
-    controller.get.allUsersWithFunction(setFetch);
-  }, []);
+    ctrl.get.allUsersWithFunction(setFetch);
+    return () => Utils.cleanUp(setFetch);
+  }, [isFocused]);
 
+  // On fetching data
   useEffect(() => {
     setUsers(fetch);
   }, [fetch]);
 
-  const contains = (user, query) => {
-    const query_formatted = query.toLowerCase();
-
-    return (
-      user.firstname.toLowerCase().includes(query_formatted) ||
-      user.lastname.toLowerCase().includes(query_formatted) ||
-      user.phone.toLowerCase().includes(query_formatted) ||
-      user.mail.toLowerCase().includes(query_formatted) ||
-      ("administrateur".includes(query_formatted) && user.is_admin) ||
-      ("employé".includes(query_formatted) &&
-        user.id_salon != "" &&
-        !user.is_admin)
-    );
-  };
-
-  const search = (query) => {
-    if (query != "") setUsers(fetch.filter((u) => contains(u, query)));
-    else setUsers(fetch);
-    setQuery(query);
-  };
+  // On search users
+  useEffect(() => {
+    setUsers(ctrl.onSearch.users(fetch, query));
+  }, [query]);
 
   return (
     <Page>
       <Header nav={nav} type={"close"} text={"Les utilisateurs"} />
 
-      <Searchbar value={query} setValue={search} plh={PLH.searchUser} />
+      <Searchbar value={query} setValue={setQuery} plh={PLH.searchUser} />
       <FlatList
         style={styles.container}
         data={users}

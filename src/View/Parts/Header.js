@@ -34,7 +34,7 @@ const Header = (props) => {
     image: headerType?.img,
     onPress: onPress ? onPress : headerType?.onPress,
     style: styles.button,
-    shadow: false,
+    noShadow: true,
     visible: nav,
   };
 

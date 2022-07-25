@@ -1,45 +1,46 @@
+// React import
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
+// Componnent import
 import DaysList from "../../Generator/DaysList";
 import PickerEmployee from "../../Picker/PickerEmployee";
-import PickerSalon from "../../Picker/PickerSalon";
 import Picker from "../../Picker/Picker";
-import { MONTHS, YEARS } from "../../../constants/DAYS";
-
 import GeneratePickItems from "../../Generator/GeneratePickItems";
 
-import { controller } from "model/Main";
+// Constants import
+import { MONTHS, YEARS } from "constants/DAYS";
 
-const PlanningsHeader = ({ date, setDate, staff, setStaff, all_staff }) => {
+// Libraries imports
+import { controller as ctrl } from "model/Main";
+
+const PlanningsHeader = (props) => {
+  // Destructure componnent props
+  const { date, setDate, staff, setStaff, allOption, showStaff } = props;
+
   return (
     <View style={styles.container}>
-      <View>
-        <View style={styles.container_picker}>
-          <Picker
-            generator={() => GeneratePickItems({ data: MONTHS })}
-            value={date.getMonth() - 1}
-            onChange={(m) => controller.onChange.month(setDate, m + 1)}
-          />
-          <Picker
-            generator={() => GeneratePickItems({ data: YEARS })}
-            value={YEARS.findIndex((year) => year == date.getFullYear())}
-            onChange={(y) => controller.onChange.year(setDate, y)}
-          />
+      <View style={styles.pickerCtn}>
+        <Picker
+          generator={() => GeneratePickItems({ data: MONTHS })}
+          value={date.getMonth() - 1}
+          onChange={(m) => ctrl.onChange.month(setDate, m + 1)}
+        />
+        <Picker
+          generator={() => GeneratePickItems({ data: YEARS })}
+          value={YEARS.findIndex((year) => year == date.getFullYear())}
+          onChange={(y) => ctrl.onChange.year(setDate, y)}
+        />
 
-          {controller.this_is_admin && (
-            <PickerEmployee
-              all={all_staff}
-              value={staff}
-              onChange={(v) => setStaff(v)}
-            />
-          )}
-        </View>
+        <PickerEmployee
+          visible={ctrl.this_is_admin() && showStaff}
+          allOption={allOption}
+          value={staff}
+          onChange={(v) => setStaff(v)}
+        />
       </View>
 
-      <View style={styles.container_day}>
-        <DaysList />
-      </View>
+      <DaysList />
     </View>
   );
 };
@@ -51,49 +52,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 
-  container_nextslot: {
+  pickerCtn: {
     flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    marginBottom: 20,
-  },
-
-  text_slot: {
-    fontSize: 20,
-    fontWeight: "300",
-  },
-
-  btn_nextslot: {
-    marginHorizontal: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 5,
-    position: "absolute",
-    right: 0,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-
-    elevation: 3,
-    backgroundColor: "#fff",
-  },
-
-  btn_txt_nextslot: {
-    fontSize: 20,
-    fontWeight: "300",
-  },
-
-  container_picker: {
-    flexDirection: "row",
-  },
-
-  container_day: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 20,
   },
 });

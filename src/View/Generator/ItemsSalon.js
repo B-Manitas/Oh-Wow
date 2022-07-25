@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 
 export const ItemsSalon = ({ onChange }) => {
-  const [salon, setSalon] = useState(undefined);
+  const [salon, setSalon] = useState();
 
   useEffect(() => {
     const default_value = (salon) => onChange(salon[0]._id);

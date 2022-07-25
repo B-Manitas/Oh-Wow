@@ -1,5 +1,9 @@
+// React imports
+import React from "react";
 import { StyleSheet, Switch, Text, View } from "react-native";
-import { STYLE_GENERAL } from "../../constants/STYLES";
+
+// Constants imports
+import { STYLE_GENERAL } from "constants/STYLES";
 
 const ToggleLong = (props) => {
   const { text, value, setValue } = props;

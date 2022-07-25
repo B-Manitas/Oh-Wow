@@ -105,6 +105,6 @@ export class Find extends SuperController {
   async homeServices(setRefresh, ...funcs) {
     setRefresh(true);
     await this.frontend.get.homeServices(...funcs);
-    setTimeout(() => setRefresh(false), 1000);
+    setRefresh(false);
   }
 }

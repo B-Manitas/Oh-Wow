@@ -44,7 +44,7 @@ const ItemService = (props) => {
         style={styles.aptButton}
         styleText={styles.aptText}
         onPress={() => ctrl.goTo.booking(nav, service)}
-        shadow={false}
+        noShadow
       />
     </View>
   );
