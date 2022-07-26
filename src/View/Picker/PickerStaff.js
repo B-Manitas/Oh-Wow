@@ -1,10 +1,16 @@
+// React imports
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import _ from "lodash";
-import { ItemsSalon } from "generators/ItemsSalon";
 
-const PickerSalon = ({ value, onChange }) => {
+// Componnent imports
+import { ItemsStaff } from "generators/ItemsStaff";
+
+const PickerStaff = (props) => {
+  // Define componnent props
+  const { onChange, value, allOption, visible } = props;
+
+  if (!visible) return null;
   return (
     <Picker
       style={styles.picker}
@@ -13,27 +19,23 @@ const PickerSalon = ({ value, onChange }) => {
       selectedValue={value}
       onValueChange={(v) => onChange(v)}
     >
-      {ItemsSalon({ onChange })}
+      {ItemsStaff({ onChange, allOption })}
     </Picker>
   );
 };
 
-export default PickerSalon;
+export default PickerStaff;
 
 const styles = StyleSheet.create({
   picker: {
     flex: 2,
   },
-  
+
   item: {
     height: 130,
     fontSize: 15,
     fontWeight: "400",
     marginHorizontal: -5,
     marginVertical: -8,
-    // backgroundColor: "red",
-    marginLeft: -5,
-    // marginRight: -15,
-    // width: 60
   },
 });

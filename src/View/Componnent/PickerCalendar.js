@@ -1,8 +1,13 @@
+// React imports
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
-import Day from "buttons/Day";
 
-const PickerCalendar = ({ data, header, footer, onPress, date }) => {
+// Componnent imports
+import BtnDay from "buttons/BtnDay";
+
+const PickerCalendar = (props) => {
+  const { data, header, footer, onPress, date } = props;
+
   return (
     <FlatList
       data={data}
@@ -10,7 +15,7 @@ const PickerCalendar = ({ data, header, footer, onPress, date }) => {
       ListHeaderComponent={header}
       ListFooterComponent={footer}
       renderItem={(day) => (
-        <Day day={day.item} onPressDay={onPress} date={date} />
+        <BtnDay data={day.item} calendarDate={date} onPress={onPress} />
       )}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}

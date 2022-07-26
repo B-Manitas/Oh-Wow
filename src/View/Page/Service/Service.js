@@ -6,7 +6,7 @@ import { View, StyleSheet, Image } from "react-native";
 import ServiceMain from "./ServiceMain";
 import ServiceSettings from "./ServiceSettings";
 import Button from "buttons/Button";
-import Primary from "buttons/Primary";
+import BtnPrimary from "buttons/BtnPrimary";
 import Page from "containers/Page";
 
 // Libraries imports
@@ -17,6 +17,7 @@ import _ from "lodash";
 // Contants imports
 import { ICON } from "constants/IMAGES";
 import TEXTS from "constants/TEXTS";
+import COLORS from "constants/COLORS";
 
 const Service = (props) => {
   // Destructure props
@@ -87,7 +88,7 @@ const Service = (props) => {
 
       <ServiceMain visible={setting} service={service} />
 
-      <Primary
+      <BtnPrimary
         visible={!setting && Utils.canBook(init, service, route.params.isNew)}
         text={TEXTS.booking}
         onPress={() => ctrl.goTo.booking(nav, init)}
@@ -117,7 +118,7 @@ const stylesClose = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
     borderWidth: 0,
-    backgroundColor: "#faa4af",
+    backgroundColor: COLORS.main,
     paddingLeft: 38,
     height: 40,
   },

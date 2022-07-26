@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 // Componnents imports
 import Button from "buttons/Button";
-import Primary from "buttons/Primary";
+import BtnPrimary from "buttons/BtnPrimary";
 
 // Libraries imports
 import _ from "lodash";
@@ -27,7 +27,7 @@ const HeaderSave = (props) => {
       />
       {saving && <Text style={styles.savingText}>Sauvegarde en cours....</Text>}
 
-      <Primary
+      <BtnPrimary
         text={"Sauvegarder"}
         style={styles.save}
         styleText={styles.saveText}

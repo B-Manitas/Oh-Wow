@@ -4,7 +4,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 
 // Componnent imports
 import Page from "containers/Page";
-import ContactSalon from "containers/ContactSalon";
+import CtnSalonContact from "containers/CtnSalonContact";
 import FooterSocial from "parts/FooterSocial";
 import Button from "buttons/Button";
 import Markers from "generators/Markers";
@@ -17,6 +17,7 @@ import MapView from "react-native-maps";
 // Constants imports
 import { ICON } from "constants/IMAGES";
 import COLORS from "constants/COLORS";
+import { STYLES_SHADOW } from "constants/STYLES";
 
 const Contact = (props) => {
   // Destructure props
@@ -30,7 +31,7 @@ const Contact = (props) => {
     ctrl.get.allSalons(setSalons);
   }, []);
 
-  // Defin default map region
+  // Define default map region
   const region = {
     latitude: 36.8065,
     longitude: 10.1815,
@@ -57,7 +58,7 @@ const Contact = (props) => {
         <FlatList
           data={salons}
           keyExtractor={(item) => item._id}
-          renderItem={(item) => <ContactSalon salon={item.item} />}
+          renderItem={(item) => <CtnSalonContact salon={item.item} />}
         />
 
         <FooterSocial />
@@ -72,19 +73,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "60%",
     marginHorizontal: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
     borderRadius: 5,
     borderWidth: 2,
     borderColor: COLORS.main,
     marginBottom: 10,
+
+    ...STYLES_SHADOW.high,
   },
 
   map: {

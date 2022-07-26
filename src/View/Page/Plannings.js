@@ -57,6 +57,7 @@ const Plannings = ({ navigation }) => {
     staff,
     setStaff,
     allOption: true,
+    showStaff: true
   };
 
   if (plannings === undefined) return <Loader />;

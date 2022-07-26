@@ -4,10 +4,11 @@ import React, { useEffect, useMemo, useState } from "react";
 // Componnent imports
 import Page from "containers/Page";
 import Header from "parts/Header";
+import BtnPrimary from "buttons/BtnPrimary";
 import PickerCalendar from "componnents/PickerCalendar";
 import HeaderPicker from "parts/HeaderPicker";
-import BookingFooter from "./BookingFooter";
 import Loader from "pages/Loader";
+import HoursList from "generators/HoursList";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
@@ -62,16 +63,11 @@ const Booking = (props) => {
   };
 
   // Define calendar footer props
-  const propsCalendarFooter = {
-    date,
+  const propsHoursList = {
     calendar: days,
-    nav,
+    date,
     onPress: (hours) => ctrl.onPress.aptHours(setApt, hours, date),
-    data: {
-      service,
-      apt: { ...apt, date: apt.date ? apt.date.getTimestamp() : 0 },
-      salon,
-    },
+    selected: apt.date,
   };
 
   if (!salon || !days || !apt) return <Loader />;
@@ -84,7 +80,13 @@ const Booking = (props) => {
           date={date}
           onPress={(newDate) => ctrl.onPress.aptDay(setApt, setDate, newDate)}
           header={<HeaderPicker {...propsCalendarHeader} />}
-          footer={<BookingFooter {...propsCalendarFooter} />}
+          footer={<HoursList {...propsHoursList} />}
+        />
+
+        <BtnPrimary
+          text="Prendre rendez-vous"
+          disabled={apt.date ? apt.date.isZeroTime() : false}
+          onPress={() => ctrl.goTo.confirmApt(nav, service, salon, apt)}
         />
       </Page>
     );

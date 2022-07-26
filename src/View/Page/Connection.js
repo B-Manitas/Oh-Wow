@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import Primary from "buttons/Primary";
+import BtnPrimary from "buttons/BtnPrimary";
 import FooterSocial from "parts/FooterSocial";
 import Header from "parts/Header";
 import Page from "containers/Page";
@@ -19,11 +19,11 @@ const Connection = ({ navigation }) => {
       </View>
 
       <View style={styles.buttonsCtn}>
-        <Primary
+        <BtnPrimary
           text={"Créer un compte"}
           onPress={() => navigation.navigate(PAGES.SIGNUP)}
         />
-        <Primary
+        <BtnPrimary
           text={"Se connecter"}
           onPress={() => navigation.navigate(PAGES.LOGIN)}
         />

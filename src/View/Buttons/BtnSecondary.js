@@ -5,7 +5,10 @@ import { StyleSheet } from "react-native";
 // Componnents imports
 import Button from "buttons/Button";
 
-const Secondary = (props) => {
+// Constants imports
+import COLORS from "constants/COLORS";
+
+const BtnSecondary = (props) => {
   const disabled = props.disabled === true ? true : false;
 
   // Define props
@@ -18,7 +21,7 @@ const Secondary = (props) => {
   return <Button {...propsButton} />;
 };
 
-export default Secondary;
+export default BtnSecondary;
 
 const styles = StyleSheet.create({
   button: {
@@ -27,17 +30,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 15,
     backgroundColor: "#fff",
-    shadowColor: "#000",
-    borderColor: "#faa4af",
+    borderColor: COLORS.main,
     borderWidth: 2,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
 
-    elevation: 5,
     paddingVertical: 15,
   },
 
@@ -45,7 +40,7 @@ const styles = StyleSheet.create({
 
   text: {
     fontWeight: "600",
-    color: "#faa4af",
+    color: COLORS.main,
     fontSize: 18,
   },
 });

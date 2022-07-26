@@ -1,8 +1,9 @@
+// React import
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-const PickerMonths = ({onChange, value}) => {
+const PickerMonths = ({ onChange, value }) => {
   return (
     <Picker
       style={styles.picker}
@@ -11,18 +12,18 @@ const PickerMonths = ({onChange, value}) => {
       selectedValue={value}
       onValueChange={(v) => onChange(v)}
     >
-      <Picker.Item value={0} label="Janvier"/>
-      <Picker.Item value={1} label="Février"/>
-      <Picker.Item value={2} label="Mars"/>
-      <Picker.Item value={3} label="Avril"/>
-      <Picker.Item value={4} label="Mai"/>
-      <Picker.Item value={5} label="Juin"/>
-      <Picker.Item value={6} label="Juillet"/>
-      <Picker.Item value={7} label="Août"/>
-      <Picker.Item value={8} label="Septembre"/>
-      <Picker.Item value={9} label="Octobre"/>
-      <Picker.Item value={10} label="Novembre"/>
-      <Picker.Item value={11} label="Décembre"/>
+      <Picker.Item value={0} label="Janvier" />
+      <Picker.Item value={1} label="Février" />
+      <Picker.Item value={2} label="Mars" />
+      <Picker.Item value={3} label="Avril" />
+      <Picker.Item value={4} label="Mai" />
+      <Picker.Item value={5} label="Juin" />
+      <Picker.Item value={6} label="Juillet" />
+      <Picker.Item value={7} label="Août" />
+      <Picker.Item value={8} label="Septembre" />
+      <Picker.Item value={9} label="Octobre" />
+      <Picker.Item value={10} label="Novembre" />
+      <Picker.Item value={11} label="Décembre" />
     </Picker>
   );
 };
@@ -39,6 +40,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "400",
     marginHorizontal: -5,
-    marginVertical: -8
+    marginVertical: -8,
   },
 });

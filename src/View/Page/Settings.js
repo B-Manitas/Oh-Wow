@@ -9,8 +9,8 @@ import _ from "lodash";
 // Componnent imports
 import Page from "containers/Page";
 import Header from "parts/Header";
-import InputSecondary from "inputs/InputSecondary";
-import ButtonThird from "buttons/ButtonThird";
+import InputError from "inputs/InputError";
+import BtnThird from "buttons/BtnThird";
 
 // Constants imports
 import { INPUT_FIRSTNAME } from "constants/PROPS";
@@ -30,26 +30,26 @@ const Settings = ({ navigation }) => {
       <ScrollView>
         <View style={STYLE_GENERAL.sectionCtn}>
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.globalInfo}</Text>
-          <InputSecondary
+          <InputError
             value={data.firstname}
             setValue={(t) => setData((p) => ({ ...p, firstname: t }))}
             valid={audit?.valid?.firstname}
             {...INPUT_FIRSTNAME}
           />
-          <InputSecondary
+          <InputError
             value={data.lastname}
             setValue={(t) => setData((p) => ({ ...p, lastname: t }))}
             valid={audit?.valid?.lastname}
             {...INPUT_LASTNAME}
           />
-          <InputSecondary
+          <InputError
             value={data.phone}
             setValue={(t) => setData((p) => ({ ...p, phone: t }))}
             valid={audit?.valid?.phone}
             {...INPUT_PHONE}
           />
 
-          <ButtonThird
+          <BtnThird
             text={"Sauvegarder"}
             disabled={_.isEqual(data, ctrl.get.thisUserData)}
             onPress={() => ctrl.onClose.settings(data, navigation, setAudit)}
@@ -58,11 +58,11 @@ const Settings = ({ navigation }) => {
 
         <View style={STYLE_GENERAL.sectionCtn}>
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
-          <ButtonThird
+          <BtnThird
             text={"Se déconnecter"}
             onPress={() => ctrl.update.logout(navigation)}
           />
-          <ButtonThird
+          <BtnThird
             text={"Supprimer votre compte"}
             important
             onPress={() => ctrl.delete.user(navigation)}

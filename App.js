@@ -14,7 +14,7 @@ import Navigation from "./src/View/Page/Navigation/Navigation";
 import Connection from "./src/View/Page/Connection";
 import Login from "./src/View/Page/Login";
 import SignUp from "./src/View/Page/SignUp";
-import Booking from "./src/View/Page/Booking/Booking";
+import Booking from "./src/View/Page/Booking";
 import ConfirmAppt from "./src/View/Page/ConfirmAppt";
 import Catalogues from "./src/View/Page/Catalogues";
 import Service from "./src/View/Page/Service/Service";

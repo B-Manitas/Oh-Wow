@@ -11,7 +11,7 @@ import {
 // Componnents imports
 import ToggleLong from "componnents/ToggleLong";
 import InputLong from "inputs/InputLong";
-import ButtonThird from "buttons/ButtonThird";
+import BtnThird from "buttons/BtnThird";
 import HeaderSave from "parts/HeaderSave";
 import InputError from "inputs/InputError";
 
@@ -111,7 +111,7 @@ const ServiceSettings = (props) => {
 
         <View style={STYLE_GENERAL.sectionCtn}>
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
-          <ButtonThird
+          <BtnThird
             text={"Supprimer la prestation"}
             fontWeight={"500"}
             color={COLORS.error}

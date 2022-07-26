@@ -67,7 +67,13 @@ export class GoTo extends SuperController {
     nav.goBack();
   }
 
-  confirmApt(nav, data) {
+  confirmApt(nav, service, salon, apt) {
+    const data = {
+      service,
+      apt: { ...apt, date: apt.date ? apt.date.getTimestamp() : 0 },
+      salon,
+    };
+
     nav.navigate(PAGES.CONFIRM_APT, data);
   }
 }

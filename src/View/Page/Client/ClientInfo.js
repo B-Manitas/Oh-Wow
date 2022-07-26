@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 // Componnent imports
-import ButtonThird from "buttons/ButtonThird";
+import BtnThird from "buttons/BtnThird";
 import ToggleLong from "componnents/ToggleLong";
 import InputLong from "inputs/InputLong";
 
@@ -78,7 +78,7 @@ const ClientInfo = (props) => {
 
         <View style={STYLE_GENERAL.sectionCtn}>
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
-          <ButtonThird
+          <BtnThird
             text={"Supprimer définitivement le compte"}
             onPres={() => controller.delete.user(navigation, user)}
             important

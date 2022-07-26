@@ -1,10 +1,15 @@
+// React import
 import React from "react";
 import { StyleSheet } from "react-native";
+
+// Componnent import
 import Button from "./Button";
 
+// Libraries import
 import { controller as ctrl } from "model/Main";
 
-const Social = (props) => {
+const BtnSocial = (props) => {
+  // Destructure
   const { url, icon } = props;
 
   return (
@@ -16,7 +21,7 @@ const Social = (props) => {
   );
 };
 
-export default Social;
+export default BtnSocial;
 
 const styles = StyleSheet.create({
   icon: {

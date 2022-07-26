@@ -8,7 +8,7 @@ import Footer from "parts/Footer";
 import Header from "parts/Header";
 import Page from "containers/Page";
 import Searchbar from "componnents/Searchbar";
-import ItemService from "containers/Service/ItemService";
+import CtnService from "containers/Service/CtnService";
 
 // Libraries imports
 import { useIsFocused } from "@react-navigation/native";
@@ -17,6 +17,8 @@ import Utils from "model/Utils";
 
 // Contants imports
 import { PLH } from "constants/TEXTS";
+import COLORS from "constants/COLORS";
+
 
 const Catalogues = (props) => {
   // Destructure componnent props
@@ -55,7 +57,7 @@ const Catalogues = (props) => {
 
       <FlatList
         data={services}
-        renderItem={(o) => <ItemService nav={nav} service={o.item} />}
+        renderItem={(o) => <CtnService nav={nav} service={o.item} />}
         refreshing={refreshing}
         onRefresh={() => ctrl.get.allServices(setRefresh, setFetch)}
         numColumns={2}
@@ -80,10 +82,10 @@ const styles = StyleSheet.create({
   menuBtn: {
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
-    borderColor: "#faa4af",
+    borderColor: COLORS.main,
     padding: 7,
     paddingLeft: 35,
-    backgroundColor: "#faa4af",
+    backgroundColor: COLORS.main,
     borderWidth: 1,
     borderLeftWidth: 0,
     width: 80,
@@ -103,7 +105,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     bottom: 90,
     borderWidth: 2,
-    borderColor: "#faa4af",
+    borderColor: COLORS.main,
     paddingVertical: 5,
     width: "15%",
     zIndex: 6,
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
   addText: {
     fontWeight: "700",
     fontSize: 22,
-    color: "#faa4af",
+    color: COLORS.main,
     top: -1,
   },
 });

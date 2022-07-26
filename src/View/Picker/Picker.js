@@ -1,8 +1,11 @@
+// React import
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Picker as ReactPicker } from "@react-native-picker/picker";
 
-const Picker = ({ generator, value, onChange }) => {
+const Picker = (props) => {
+  // Destructure props
+  const { generator, value, onChange } = props;
   return (
     <ReactPicker
       style={styles.picker}

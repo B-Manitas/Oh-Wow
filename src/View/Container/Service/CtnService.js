@@ -10,7 +10,11 @@ import Button from "buttons/Button";
 import { controller as ctrl } from "model/Main";
 import CDate from "model/utils/CDate";
 
-const ItemService = (props) => {
+// Constants imports
+import COLORS from "constants/COLORS";
+import { STYLES_SHADOW } from "constants/STYLES";
+
+const CtnService = (props) => {
   // Destructure props
   const { nav, service } = props;
 
@@ -50,32 +54,23 @@ const ItemService = (props) => {
   );
 };
 
-export default ItemService;
+export default CtnService;
 
 const styles = StyleSheet.create({
   ctn: {
     marginHorizontal: 2,
     marginVertical: 10,
     flex: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-    zIndex: 5,
     borderWidth: 2,
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
-    borderColor: "#faa4af",
+    borderColor: COLORS.main,
+    ...STYLES_SHADOW.high,
   },
 
   hidden: {
     opacity: 0.7,
-    borderColor: "#f5f5f5",
+    borderColor: COLORS.default,
   },
 
   info: {
@@ -103,7 +98,7 @@ const styles = StyleSheet.create({
 
   aptButton: {
     backgroundColor: "#fff",
-    borderColor: "#faa4af",
+    borderColor: COLORS.main,
     paddingVertical: 8,
     borderTopWidth: 1,
     borderBottomLeftRadius: 14,
@@ -113,6 +108,6 @@ const styles = StyleSheet.create({
   aptText: {
     textAlign: "center",
     fontWeight: "800",
-    color: "#faa4af",
+    color: COLORS.main,
   },
 });

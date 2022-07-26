@@ -8,7 +8,8 @@ import Button from "buttons/Button";
 // Constants imports
 import COLORS from "constants/COLORS";
 
-const ButtonThird = (props) => {
+const BtnThird = (props) => {
+  // Destructure props
   const important = props.important;
 
   return (
@@ -20,7 +21,7 @@ const ButtonThird = (props) => {
   );
 };
 
-export default ButtonThird;
+export default BtnThird;
 
 const styles = StyleSheet.create({
   button: {

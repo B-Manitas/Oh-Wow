@@ -2,7 +2,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-const Marker = (props) => {
+const CtnMarker = (props) => {
   const { marker } = props;
 
   return (
@@ -12,7 +12,7 @@ const Marker = (props) => {
   );
 };
 
-export default Marker;
+export default CtnMarker;
 
 const styles = StyleSheet.create({
   container: {

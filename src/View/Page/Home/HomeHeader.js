@@ -11,6 +11,8 @@ import { controller as ctrl } from "model/Main";
 
 // Constants imports
 import TEXTS from "constants/TEXTS";
+import COLORS from "constants/COLORS";
+import { STYLES_SHADOW } from "constants/STYLES";
 
 const HomeHeader = (props) => {
   const { app, setApp, refreshing } = props;
@@ -51,14 +53,7 @@ export default HomeHeader;
 
 const styles = StyleSheet.create({
   container: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    ...STYLES_SHADOW.high,
     marginBottom: 50,
   },
 
@@ -95,6 +90,6 @@ const styles = StyleSheet.create({
     fontSize: 45,
     fontWeight: "500",
     textAlign: "center",
-    color: "#faa4af",
+    color: COLORS.main,
   },
 });

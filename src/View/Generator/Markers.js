@@ -1,5 +1,5 @@
 // Componnents imports
-import ItemMarker from "containers/Marker";
+import CtnMarker from "containers/CtnMarker";
 
 // Liraries imports
 import { Marker } from "react-native-maps";
@@ -16,7 +16,7 @@ const Markers = (props) => {
         latitude: item.latitude,
       }}
     >
-      <ItemMarker marker={item} />
+      <CtnMarker marker={item} />
     </Marker>
   ));
 };

@@ -3,7 +3,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 // Componnent import
-import PickerEmployee from "pickers/PickerEmployee";
+import PickerStaff from "pickers/PickerStaff";
 import Picker from "pickers/Picker";
 import GeneratePickItems from "generators/GeneratePickItems";
 import DaysList from "generators/DaysList";
@@ -32,7 +32,7 @@ const HeaderPicker = (props) => {
           onChange={(y) => ctrl.onChange.year(setDate, y)}
         />
 
-        <PickerEmployee
+        <PickerStaff
           visible={ctrl.thisIsAdmin() && showStaff}
           allOption={allOption}
           value={staff}

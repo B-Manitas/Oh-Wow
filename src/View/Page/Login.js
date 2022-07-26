@@ -5,10 +5,9 @@ import { ScrollView, View, StyleSheet, Text } from "react-native";
 // Componnents imports
 import FooterSocial from "parts/FooterSocial";
 import Header from "parts/Header";
-import InputPrimary from "inputs/InputPrimary";
 import Button from "buttons/Button";
 import Page from "containers/Page";
-import Primary from "buttons/Primary";
+import BtnPrimary from "buttons/BtnPrimary";
 
 // Librarie imports
 import { controller as ctrl } from "model/Main";
@@ -19,6 +18,7 @@ import { INPUT_MAIL, INPUT_PASSWORD } from "constants/PROPS";
 import { STYLES_LINK } from "constants/STYLES";
 import COLORS from "constants/COLORS";
 import { ERROR_TEXT } from "constants/TEXTS";
+import InputError from "../Input/InputError";
 
 const Login = (props) => {
   // Destructure props
@@ -48,18 +48,19 @@ const Login = (props) => {
   return (
     <Page>
       <Header nav={nav} type="close" />
+
       <ScrollView contentContainerStyle={styles.container}>
         {audit?.error?.failedLogin && (
           <Text style={styles.errorLogin}>{ERROR_TEXT.failedLogin}</Text>
         )}
 
-        <InputPrimary
+        <InputError
           {...INPUT_MAIL}
           value={data.mail}
           setValue={(mail) => setData((props) => ({ ...props, mail }))}
           valid={audit?.valid?.mail}
         />
-        <InputPrimary
+        <InputError
           {...INPUT_PASSWORD}
           value={data.password}
           setValue={(t) => setData((props) => ({ ...props, password: t }))}
@@ -67,7 +68,7 @@ const Login = (props) => {
         />
 
         <View style={styles.buttonsCtn}>
-          <Primary
+          <BtnPrimary
             text={send ? "Connexion..." : "Se connecter"}
             onPress={login}
             disabled={send}
@@ -93,13 +94,16 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     height: "70%",
+    width: "80%",
     justifyContent: "center",
+    alignSelf: "center",
   },
 
   buttonsCtn: {
+    marginHorizontal: -35,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 15,
+    marginTop: 30,
   },
 
   errorLogin: {

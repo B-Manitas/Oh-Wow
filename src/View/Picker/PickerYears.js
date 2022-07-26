@@ -1,10 +1,15 @@
+// React import
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-import ItemsYears from "generators/ItemsYearsPicker";
+// Constant import
+import { YEARS } from "constants/DAYS";
 
-const PickerYears = ({ onChange, value }) => {
+const PickerYears = (props) => {
+  // Destructure props
+  const { onChange, value } = props;
+
   return (
     <Picker
       style={styles.picker}
@@ -13,8 +18,8 @@ const PickerYears = ({ onChange, value }) => {
       selectedValue={value}
       onValueChange={(v) => onChange(v)}
     >
-      <Picker.Item value="2022" label="2022" />
-      <Picker.Item value="2023" label="2023" />
+      <Picker.Item value={YEARS[0]} label={YEARS[0]} />
+      <Picker.Item value={YEARS[1]} label={YEARS[1]} />
     </Picker>
   );
 };

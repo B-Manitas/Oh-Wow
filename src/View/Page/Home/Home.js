@@ -5,10 +5,10 @@ import { Dimensions, FlatList, RefreshControl, StyleSheet } from "react-native";
 // Componnent imports
 import HomeHeader from "./HomeHeader";
 import Page from "containers/Page";
-import ItemServiceLarge from "containers/Service/ItemServiceLarge";
+import CtnServiceLarge from "containers/Service/CtnServiceLarge";
 import Loader from "pages/Loader";
 import Footer from "parts/Footer";
-import Secondary from "buttons/Secondary";
+import BtnSecondary from "buttons/BtnSecondary";
 import Button from "buttons/Button";
 
 // Library imports
@@ -19,6 +19,7 @@ import Utils from "model/Utils";
 // Contants imports
 import { ICON } from "constants/IMAGES";
 import TEXTS from "constants/TEXTS";
+import COLORS from "constants/COLORS";
 
 const Home = (props) => {
   // Destructur props
@@ -52,7 +53,7 @@ const Home = (props) => {
   // Define flatlist props.
   const propsList = {
     data: services,
-    renderItem: (o) => <ItemServiceLarge nav={nav} service={o.item} />,
+    renderItem: (o) => <CtnServiceLarge nav={nav} service={o.item} />,
     keyExtractor: (item) => item._id,
     showsVerticalScrollIndicator: false,
     refreshing,
@@ -63,7 +64,7 @@ const Home = (props) => {
     ),
     ListHeaderComponent: <HomeHeader {...{ setApp, app, refreshing }} />,
     ListFooterComponent: (
-      <Secondary
+      <BtnSecondary
         text={TEXTS.showAllServices}
         onPress={() => ctrl.goTo.services(nav)}
       />
@@ -99,10 +100,10 @@ const styles = StyleSheet.create({
   menuBtn: {
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
-    borderColor: "#faa4af",
+    borderColor: COLORS.main,
     padding: 7,
     paddingLeft: 35,
-    backgroundColor: "#faa4af",
+    backgroundColor: COLORS.main,
     borderWidth: 1,
     borderLeftWidth: 0,
     width: 80,

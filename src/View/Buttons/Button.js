@@ -17,7 +17,7 @@ const Button = (props) => {
     style: [
       styles.button,
       !noShadow && !disabled && STYLES_SHADOW.medium,
-      disabled && { ...styles.disabled, ...props.styleDisabled },
+      disabled && !noShadow && { ...styles.disabled, ...props.styleDisabled },
       props.style,
     ],
     disabled,
@@ -56,19 +56,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     borderRadius: 3,
-  },
-
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-    zIndex: 5,
   },
 
   disabled: {

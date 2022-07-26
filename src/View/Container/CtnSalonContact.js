@@ -9,7 +9,7 @@ import Utils from "model/Utils";
 // Constants imports
 import COLORS from "constants/COLORS";
 
-const ContactSalon = (props) => {
+const CtnSalonContact = (props) => {
   // Destructure props
   const { salon } = props;
 
@@ -62,7 +62,7 @@ const ContactSalon = (props) => {
   );
 };
 
-export default ContactSalon;
+export default CtnSalonContact;
 
 const styles = StyleSheet.create({
   container: {

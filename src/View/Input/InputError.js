@@ -7,6 +7,7 @@ import COLORS from "constants/COLORS";
 import { STYLES_SHADOW } from "constants/STYLES";
 
 const InputError = (props) => {
+  // Define componnent state
   const error = props.valid === false ? true : false;
   const text = props.text;
 
@@ -43,11 +44,13 @@ const InputError = (props) => {
 export default InputError;
 
 const styles = StyleSheet.create({
+  container: { margin: 5 },
+
   input: {
     fontSize: 16,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: COLORS.default,
     borderWidth: 2,
     borderColor: "transparent",
     color: COLORS.black,

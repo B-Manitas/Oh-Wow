@@ -11,9 +11,8 @@ import {
 import Header from "parts/Header";
 import FooterSocial from "parts/FooterSocial";
 import Page from "containers/Page";
-import Primary from "buttons/Primary";
+import BtnPrimary from "buttons/BtnPrimary";
 import Button from "buttons/Button";
-import InputPrimary from "inputs/InputPrimary";
 import CheckBoxText from "componnents/CheckBoxText";
 
 // Librarie imports
@@ -30,11 +29,12 @@ import {
   KEYBOARD_AVOIDING_VIEW,
 } from "constants/PROPS";
 import { STYLES_LINK } from "constants/STYLES";
+import InputError from "../Input/InputError";
 
 const SignUp = (props) => {
   // Destructure props
   const { navigation: nav } = props;
-  
+
   // Define componnent state
   const isFocused = useIsFocused();
   const userSchema = ctrl.frontend.schemaUser();
@@ -66,27 +66,27 @@ const SignUp = (props) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollview}
         >
-          <InputPrimary
+          <InputError
             {...INPUT_FIRSTNAME}
             value={data.firstname}
             setValue={(t) => setData({ ...data, firstname: t })}
             valid={audit?.valid?.firstname}
             format={ERROR_TEXT.name}
           />
-          <InputPrimary
+          <InputError
             {...INPUT_LASTNAME}
             setValue={(t) => setData({ ...data, lastname: t })}
             value={data.lastname}
             valid={audit?.valid?.lastname}
             format={ERROR_TEXT.name}
           />
-          <InputPrimary
+          <InputError
             {...INPUT_PHONE}
             value={data.phone}
             setValue={(t) => ctrl.onFormat.phone(data.phone, t, setPhone)}
             valid={audit?.valid?.phone}
           />
-          <InputPrimary
+          <InputError
             {...INPUT_PASSWORD}
             value={data.password}
             setValue={(t) => setData({ ...data, password: t })}
@@ -103,19 +103,21 @@ const SignUp = (props) => {
             />
           </View>
 
-          <Primary
-            text={send ? "Enregistrement..." : "Créer un compte"}
-            onPress={() => ctrl.add.user(data, nav, setSend, setAudit)}
-            disabled={!canSignup || send}
-          />
+          <View style={styles.buttonCtn}>
+            <BtnPrimary
+              text={send ? "Enregistrement..." : "Créer un compte"}
+              onPress={() => ctrl.add.user(data, nav, setSend, setAudit)}
+              disabled={!canSignup || send}
+            />
 
-          <Button
-            disabled={send}
-            text={"Déja Client ?"}
-            styleText={STYLES_LINK.text}
-            onPress={() => ctrl.goTo.login(nav)}
-            noShadow
-          />
+            <Button
+              disabled={send}
+              text={"Déja Client ?"}
+              styleText={STYLES_LINK.text}
+              onPress={() => ctrl.goTo.login(nav)}
+              noShadow
+            />
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
 
@@ -129,13 +131,22 @@ export default SignUp;
 const styles = StyleSheet.create({
   ctn: { height: "70%" },
 
-  scrollview: { flexGrow: 1, justifyContent: "center" },
+  scrollview: {
+    flexGrow: 1,
+    justifyContent: "center",
+    width: "80%",
+    alignContent: "center",
+    alignSelf: "center",
+  },
 
   parts: {
     flexDirection: "row",
     marginVertical: 20,
-    marginHorizontal: 40,
     justifyContent: "center",
+  },
+
+  buttonCtn: {
+    marginHorizontal: -30,
   },
 
   link: {

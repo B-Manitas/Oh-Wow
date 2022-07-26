@@ -1,10 +1,16 @@
+// React import
 import React from "react";
 import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
-import CDate from "model/utils/CDate";
 
+// Libraries import
+import CDate from "model/utils/CDate";
 import { controller as ctrl } from "model/Main";
 
-const ItemServiceLarge = (props) => {
+// Constants imports
+import COLORS from "constants/COLORS";
+import { STYLES_SHADOW } from "constants/STYLES";
+
+const CtnServiceLarge = (props) => {
   // Destructure props
   const { nav, service } = props;
 
@@ -34,7 +40,7 @@ const ItemServiceLarge = (props) => {
   );
 };
 
-export default ItemServiceLarge;
+export default CtnServiceLarge;
 
 const styles = StyleSheet.create({
   container: {
@@ -43,7 +49,7 @@ const styles = StyleSheet.create({
 
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: "#faa4af",
+    borderColor: COLORS.main,
 
     alignItems: "center",
     backgroundColor: "#fff",
@@ -52,16 +58,7 @@ const styles = StyleSheet.create({
     marginVertical: 3,
     paddingRight: 10,
 
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-    zIndex: 5,
+    ...STYLES_SHADOW.high,
   },
 
   ctnText: {

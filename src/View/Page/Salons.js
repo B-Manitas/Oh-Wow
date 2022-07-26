@@ -14,7 +14,7 @@ import InputLong from "inputs/InputLong";
 import InputHours from "inputs/InputHours";
 import DaysCheckBoxList from "generators/DaysCheckBoxList";
 import ToggleLong from "componnents/ToggleLong";
-import Primary from "buttons/Primary";
+import BtnPrimary from "buttons/BtnPrimary";
 import Loader from "./Loader";
 import InputError from "inputs/InputError";
 import HeaderSave from "parts/HeaderSave";

@@ -3,7 +3,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 // Componnent import
-import Hour from "buttons/Hour";
+import BtnHour from "buttons/BtnHour";
 
 // Libraries import
 import CDate from "model/utils/CDate";
@@ -26,7 +26,7 @@ const HoursList = (props) => {
     <View style={styles.container}>
       <View style={styles.hoursCtn}>
         {hoursAM?.map((hour, id) => (
-          <Hour
+          <BtnHour
             key={id}
             hour={CDate.toTimeString(hour.time)}
             onPress={() => onPress(hour.time)}
@@ -38,7 +38,7 @@ const HoursList = (props) => {
 
       <View style={styles.hoursCtn}>
         {hoursPM?.map((hour, id) => (
-          <Hour
+          <BtnHour
             key={id}
             hour={CDate.toTimeString(hour.time)}
             onPress={() => onPress(hour.time)}

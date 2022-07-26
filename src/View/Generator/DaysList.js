@@ -9,12 +9,7 @@ const DaysList = () => {
   return (
     <View style={styles.container}>
       {SHORT_DAYS.map((day, id) => (
-        <Text
-          key={id}
-          style={styles.day}
-          numberOfLines={1}
-          allowFontScaling={true}
-        >
+        <Text key={id} style={styles.day} numberOfLines={1} allowFontScaling>
           {day}
         </Text>
       ))}

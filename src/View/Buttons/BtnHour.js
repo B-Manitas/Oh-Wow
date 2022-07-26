@@ -8,7 +8,7 @@ import Button from "./Button";
 // Constant import
 import COLORS from "constants/COLORS";
 
-const Hour = (props) => {
+const BtnHour = (props) => {
   // Destructure props
   const { hour, visible, onPress, isOn } = props;
 
@@ -24,15 +24,15 @@ const Hour = (props) => {
   return <Button {...propsButton} />;
 };
 
-export default Hour;
+export default BtnHour;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
 
-    borderColor: COLORS.main,
+    borderColor: COLORS.darkGray,
     borderRadius: 3,
-    borderWidth: 2,
+    borderWidth: 1,
 
     marginHorizontal: 5,
     marginVertical: 7,
@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: COLORS.main,
+    color: COLORS.black,
     fontWeight: "700",
   },
 
   ctnEnabled: {
-    backgroundColor: "#faa4af",
-    borderColor: "#faa4af",
+    backgroundColor: COLORS.main,
+    borderColor: COLORS.main,
   },
 
   textEnabled: {

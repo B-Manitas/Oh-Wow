@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 // Componnents imports
-import Social from "buttons/Social";
+import BtnSocial from "buttons/BtnSocial";
 
 // Constants imports
 import { ICON } from "constants/IMAGES";
@@ -12,7 +12,7 @@ const FooterSocial = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Retrouvez-nous sur</Text>
-      <Social url="https://www.instagram.com/oh.wow.rades/" icon={ICON.insta} />
+      <BtnSocial url="https://www.instagram.com/oh.wow.rades/" icon={ICON.insta} />
     </View>
   );
 };

@@ -5,7 +5,11 @@ import { StyleSheet } from "react-native";
 // Componnents imports
 import Button from "buttons/Button";
 
-const Primary = (props) => {
+// Constants imports
+import COLORS from "constants/COLORS";
+
+
+const BtnPrimary = (props) => {
   const disabled = props.disabled === true ? true : false;
 
   // Define props
@@ -18,13 +22,13 @@ const Primary = (props) => {
   return <Button {...propsButton} />;
 };
 
-export default Primary;
+export default BtnPrimary;
 
 const styles = StyleSheet.create({
   button: {
     marginHorizontal: 15,
     marginVertical: 5,
-    backgroundColor: "#faa4af",
+    backgroundColor: COLORS.main,
     paddingVertical: 18,
     width: "80%",
     alignSelf: "center",

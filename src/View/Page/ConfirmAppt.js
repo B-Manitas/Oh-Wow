@@ -5,8 +5,8 @@ import { View, Text, StyleSheet } from "react-native";
 // Componnent import
 import Header from "parts/Header";
 import Page from "containers/Page";
-import InputSecondary from "inputs/InputSecondary";
-import Primary from "buttons/Primary";
+import InputError from "inputs/InputError";
+import BtnPrimary from "buttons/BtnPrimary";
 import RadioBox from "componnents/RadioBox";
 
 // Libraries import
@@ -56,7 +56,7 @@ const ConfirmAppt = (props) => {
       </View>
 
       <View style={styles.inputCtn}>
-        <InputSecondary
+        <InputError
           {...INPUT_FIRSTNAME}
           valid={audit?.valid?.offer?.firstname}
           value={isOffer ? apt.current.offer?.firstname : user.firstname}
@@ -64,7 +64,7 @@ const ConfirmAppt = (props) => {
           disabled={!isOffer}
           editable={isOffer === 1}
         />
-        <InputSecondary
+        <InputError
           {...INPUT_LASTNAME}
           valid={audit?.valid?.offer?.lastname}
           value={isOffer ? apt.current.offer?.lastname : user.lastname}
@@ -73,7 +73,7 @@ const ConfirmAppt = (props) => {
           editable={isOffer === 1}
           isSelected={isOffer}
         />
-        <InputSecondary
+        <InputError
           {...INPUT_PHONE}
           valid={audit?.valid?.offer?.phone}
           value={isOffer ? apt.current.offer?.phone : user.phone}
@@ -119,7 +119,7 @@ const ConfirmAppt = (props) => {
         </View>
       </View>
 
-      <Primary
+      <BtnPrimary
         disabled={sending}
         text={sending ? "Envoie..." : "Confirmer la réservation"}
         onPress={() => ctrl.add.appointment(navigation, apt, setAudit)}
