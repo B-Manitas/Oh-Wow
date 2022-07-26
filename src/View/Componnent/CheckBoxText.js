@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 // Componnent imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 // Constant imports
 import COLORS from "constants/COLORS";

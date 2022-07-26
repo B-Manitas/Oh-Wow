@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 // Componnents imports
-import Social from "button/Social";
+import Social from "buttons/Social";
 
 // Constants imports
 import { ICON } from "constants/IMAGES";

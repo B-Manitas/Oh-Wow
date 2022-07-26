@@ -3,10 +3,10 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 // Componnent import
-import DaysList from "../../Generator/DaysList";
-import PickerEmployee from "../../Picker/PickerEmployee";
-import Picker from "../../Picker/Picker";
-import GeneratePickItems from "../../Generator/GeneratePickItems";
+import PickerEmployee from "pickers/PickerEmployee";
+import Picker from "pickers/Picker";
+import GeneratePickItems from "generators/GeneratePickItems";
+import DaysList from "generators/DaysList";
 
 // Constants import
 import { MONTHS, YEARS } from "constants/DAYS";
@@ -14,7 +14,10 @@ import { MONTHS, YEARS } from "constants/DAYS";
 // Libraries imports
 import { controller as ctrl } from "model/Main";
 
-const BookingHeader = ({ date, setDate, staff, setStaff }) => {
+const HeaderPicker = (props) => {
+  // Destructure componnent props
+  const { date, setDate, staff, setStaff, allOption, showStaff } = props;
+
   return (
     <View style={styles.container}>
       <View style={styles.pickerCtn}>
@@ -28,7 +31,13 @@ const BookingHeader = ({ date, setDate, staff, setStaff }) => {
           value={YEARS.findIndex((year) => year == date.getFullYear())}
           onChange={(y) => ctrl.onChange.year(setDate, y)}
         />
-        <PickerEmployee value={staff} onChange={(v) => setStaff(v)} />
+
+        <PickerEmployee
+          visible={ctrl.thisIsAdmin() && showStaff}
+          allOption={allOption}
+          value={staff}
+          onChange={(v) => setStaff(v)}
+        />
       </View>
 
       <DaysList />
@@ -36,7 +45,7 @@ const BookingHeader = ({ date, setDate, staff, setStaff }) => {
   );
 };
 
-export default BookingHeader;
+export default HeaderPicker;
 
 const styles = StyleSheet.create({
   container: {

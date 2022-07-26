@@ -4,7 +4,7 @@ import { removeUserStore, defaultStatus } from "store/ActionsCreator";
 import * as ImagePicker from "expo-image-picker";
 import Catch from "exceptions/ErrorsCatcher";
 import Utils from "model/Utils";
-import PAGES from "../constants/PAGES";
+import PAGES from "constants/PAGES";
 import _ from "lodash";
 
 export class Update extends SuperController {

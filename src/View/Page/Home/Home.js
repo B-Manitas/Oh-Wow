@@ -4,12 +4,12 @@ import { Dimensions, FlatList, RefreshControl, StyleSheet } from "react-native";
 
 // Componnent imports
 import HomeHeader from "./HomeHeader";
-import Page from "container/Page";
-import ItemServiceLarge from "container/Service/ItemServiceLarge";
-import Loader from "../Loader";
+import Page from "containers/Page";
+import ItemServiceLarge from "containers/Service/ItemServiceLarge";
+import Loader from "pages/Loader";
 import Footer from "parts/Footer";
-import Secondary from "button/Secondary";
-import Button from "button/Button";
+import Secondary from "buttons/Secondary";
+import Button from "buttons/Button";
 
 // Library imports
 import _ from "lodash";

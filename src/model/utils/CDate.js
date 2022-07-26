@@ -1,3 +1,5 @@
+import { MONTHS } from "constants/DAYS";
+
 export default class CDate extends Date {
   #DAY_MS = 60000;
 
@@ -113,12 +115,15 @@ export default class CDate extends Date {
   }
 
   toDateString(shorted = false) {
-    if (!shorted) return super.toDateString();
-    else {
-      const day = this.getDate().toString().padStart(2, "0");
-      const month = this.getMonth().toString().padStart(2, "0");
+    const strDay = this.getDate().toString().padStart(2, "0");
 
-      return `${day}/${month}`;
+    if (shorted) {
+      const strMonth = this.getMonth().toString().padStart(2, "0");
+      return `${strDay}/${strMonth}`;
+    } else {
+      const strMonth = MONTHS[this.getMonth()];
+      const strYear = this.getFullYear().toString();
+      return `${strDay} ${strMonth} ${strYear}`;
     }
   }
 

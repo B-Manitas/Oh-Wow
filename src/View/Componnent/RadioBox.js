@@ -2,7 +2,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 
-import CheckBoxText from "../Componnent/CheckBoxText";
+import CheckBoxText from "componnents/CheckBoxText";
 
 const RadioBox = (props) => {
   // Destructure props

@@ -3,7 +3,7 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 // Componnent imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 // Libraries imports
 import CDate from "model/utils/CDate";
@@ -19,7 +19,7 @@ const CtnAppointment = (props) => {
 
   // Define componnent state
   const date = new CDate(data.date);
-  const strDate = `Le ${date.toLocaleDateString()} à ${date.toTimeString()}`;
+  const strDate = `Le ${date.toDateString()} à ${date.toTimeString()}`;
   const strBookBy = `${data.firstname} ${data.lastname}`;
   const strClient = data.offer
     ? `${data.offer.firstname} ${data.offer.lastname}`
@@ -31,7 +31,7 @@ const CtnAppointment = (props) => {
   return (
     <View style={[styles.container, date.isPast() && styles.containerPast]}>
       <Button
-        visible={ctrl.this_is_admin()}
+        visible={ctrl.thisIsAdmin()}
         image={ICON.trash}
         style={styles.trashBtn}
         onPress={() => ctrl.delete.appointment(data._id, setApts)}

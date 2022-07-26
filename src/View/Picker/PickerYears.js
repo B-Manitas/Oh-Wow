@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-import ItemsYears from "../Generator/ItemsYearsPicker";
+import ItemsYears from "generators/ItemsYearsPicker";
 
 const PickerYears = ({ onChange, value }) => {
   return (

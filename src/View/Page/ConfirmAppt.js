@@ -1,13 +1,13 @@
 // React import
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 // Componnent import
-import Header from "../Parts/Header";
-import Page from "../Container/Page";
-import InputSecondary from "../Input/InputSecondary";
-import Primary from "../Buttons/Primary";
-import RadioBox from "../Componnent/RadioBox";
+import Header from "parts/Header";
+import Page from "containers/Page";
+import InputSecondary from "inputs/InputSecondary";
+import Primary from "buttons/Primary";
+import RadioBox from "componnents/RadioBox";
 
 // Libraries import
 import { controller as ctrl } from "model/Main";
@@ -15,6 +15,7 @@ import CDate from "model/utils/CDate";
 
 // Constants import
 import { INPUT_FIRSTNAME, INPUT_LASTNAME, INPUT_PHONE } from "constants/PROPS";
+import { STYLE_GENERAL } from "constants/STYLES";
 
 const ConfirmAppt = (props) => {
   // Destructure props
@@ -24,20 +25,25 @@ const ConfirmAppt = (props) => {
   const apt = useRef(route.params.apt);
   const service = route.params.service;
   const salon = route.params.salon;
-  const user = ctrl.this_user_data;
+  const user = ctrl.thisUserData;
   const aptDate = new CDate(apt.current.date);
 
   const [audit, setAudit] = useState();
   const [isOffer, setIsOffer] = useState(0);
+  const [sending, setSending] = useState();
 
-  const updtOffer = (k, t) =>
+  const setOffer = (k, t) =>
     (apt.current = { ...apt.current, offer: { ...apt.current.offer, [k]: t } });
+
+  useEffect(() => {
+    setSending(false);
+  }, [audit]);
 
   // Define radio box props
   const propsRadioBox = {
-    onPress: (id) => ctrl.onPress.radioOffer(setApt, setIsOffer, id),
+    onPress: (id) => ctrl.onPress.radioOffer(apt.current, setIsOffer, id),
+    idSelected: isOffer,
     isFlex: true,
-    isSelected: isOffer,
   };
 
   return (
@@ -49,12 +55,12 @@ const ConfirmAppt = (props) => {
         <RadioBox {...propsRadioBox} text={"Pour un proche"} id={1} />
       </View>
 
-      <View style={styles.ctn_inputs}>
+      <View style={styles.inputCtn}>
         <InputSecondary
           {...INPUT_FIRSTNAME}
           valid={audit?.valid?.offer?.firstname}
           value={isOffer ? apt.current.offer?.firstname : user.firstname}
-          setValue={(t) => updtOffer("firstname", t)}
+          setValue={(t) => setOffer("firstname", t)}
           disabled={!isOffer}
           editable={isOffer === 1}
         />
@@ -62,61 +68,60 @@ const ConfirmAppt = (props) => {
           {...INPUT_LASTNAME}
           valid={audit?.valid?.offer?.lastname}
           value={isOffer ? apt.current.offer?.lastname : user.lastname}
-          setValue={(t) => updtOffer("lastname", t)}
+          setValue={(t) => setOffer("lastname", t)}
           disabled={!isOffer}
           editable={isOffer === 1}
+          isSelected={isOffer}
         />
         <InputSecondary
           {...INPUT_PHONE}
           valid={audit?.valid?.offer?.phone}
           value={isOffer ? apt.current.offer?.phone : user.phone}
           setValue={(t) =>
-            updtOffer("phone", ctrl.onFormat.phone(apt.current.offer?.phone, t))
+            setOffer("phone", ctrl.onFormat.phone(apt.current.offer?.phone, t))
           }
           disabled={!isOffer}
           editable={isOffer === 1}
         />
       </View>
 
-      <View style={styles.ctn_resume}>
-        <Text style={styles.h1}>Récapitulatif :</Text>
+      <View style={styles.resumeCtn}>
+        <Text style={STYLE_GENERAL.sectionH1}>Récapitulatif :</Text>
         <View style={styles.field}>
-          <Text style={styles.h2_key}>Prestation :</Text>
-          <Text style={styles.h2_val} numberOfLines={2}>
+          <Text style={styles.heKey}>Prestation :</Text>
+          <Text style={styles.h2Val} numberOfLines={2}>
             {service.name}
           </Text>
         </View>
 
         <View style={styles.field}>
-          <Text style={styles.h2_key}>Date :</Text>
-          <Text style={styles.h2_val}>{aptDate.toLocaleDateString()}</Text>
+          <Text style={styles.heKey}>Date :</Text>
+          <Text style={styles.h2Val}>
+            Le {aptDate.toDateString()} à {aptDate.toTimeString()}
+          </Text>
         </View>
 
         <View style={styles.field}>
-          <Text style={styles.h2_key}>Heure :</Text>
-          <Text style={styles.h2_val}>{aptDate.toTimeString()}</Text>
-        </View>
-
-        <View style={styles.field}>
-          <Text style={styles.h2_key}>Durée :</Text>
-          <Text style={styles.h2_val}>
+          <Text style={styles.heKey}>Durée :</Text>
+          <Text style={styles.h2Val}>
             {CDate.toTimeString(service.duration)}
           </Text>
         </View>
 
         <View style={styles.field}>
-          <Text style={styles.h2_key}>Salon :</Text>
-          <Text style={styles.h2_val}>{salon.address}</Text>
+          <Text style={styles.heKey}>Salon :</Text>
+          <Text style={styles.h2Val}>{salon.address}</Text>
         </View>
 
         <View style={styles.field}>
-          <Text style={styles.h2_key}>Tarif :</Text>
-          <Text style={styles.h2_val}>{service.price}DT</Text>
+          <Text style={styles.heKey}>Tarif :</Text>
+          <Text style={styles.h2Val}>{service.price}DT</Text>
         </View>
       </View>
 
       <Primary
-        text={"Confirmer la réservation"}
+        disabled={sending}
+        text={sending ? "Envoie..." : "Confirmer la réservation"}
         onPress={() => ctrl.add.appointment(navigation, apt, setAudit)}
       />
     </Page>
@@ -132,47 +137,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  radio: {
-    flex: 1,
-    borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 40,
-    backgroundColor: "#faa4af",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
-    margin: 5,
-    borderColor: "#faa4af",
-    minWidth: 90,
-  },
-
-  txt_radio: {
-    fontSize: 20,
-    fontWeight: "500",
-    color: "#fff",
-  },
-
-  txt_radio_on: {
-    color: "#faa4af",
-  },
-
-  radio_on: {
-    backgroundColor: "#fff",
-    flex: 2,
-  },
-
-  ctn_inputs: {
+  inputCtn: {
     marginHorizontal: 40,
   },
 
-  ctn_resume: {
+  resumeCtn: {
     marginHorizontal: 30,
     marginVertical: 40,
   },
@@ -193,24 +162,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
 
-  h2_key: {
+  heKey: {
     fontSize: 18,
     fontWeight: "400",
   },
 
-  h2_val: {
+  h2Val: {
     marginLeft: 10,
     fontSize: 18,
     fontWeight: "500",
     flex: 1,
     flexWrap: "wrap",
-  },
-
-  button_appt: {
-    borderWidth: 2,
-    backgroundColor: "#faa4af",
-    borderColor: "#faa4af",
-    marginVertical: 30,
-    marginHorizontal: 30,
   },
 });

@@ -1,6 +1,6 @@
 export default TEXTS = {
-  title_h1: "Oh WoW...",
-  title_h2: "Oh WoW",
+  titleH1: "Oh WoW...",
+  titleH2: "Oh WoW",
   showAllServices: "Consulter toutes les prestations",
   booking: "Prendre rendez-vous",
   pullToRefresh: "Tirer pour rafraichir",

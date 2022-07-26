@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 
 // React imports
 import { Picker } from "@react-native-picker/picker";
-import { ItemsStaff } from "../Generator/ItemsStaff";
+import { ItemsStaff } from "generators/ItemsStaff";
 
 const PickerEmployee = (props) => {
   // Define componnent props

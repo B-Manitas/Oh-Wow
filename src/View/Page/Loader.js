@@ -1,22 +1,29 @@
+// React imports
+import React, { useEffect, useRef } from "react";
 import { Animated, Image, StyleSheet, Text, View } from "react-native";
-import Page from "../Container/Page";
 
+// Componnents imports
+import Page from "containers/Page";
+
+// Constants imports
 import { PHOTO } from "constants/IMAGES";
-import { useEffect, useState } from "react";
+import { STYLES_SHADOW } from "constants/STYLES";
 
 const Loader = () => {
-  const [scale, _] = useState(new Animated.Value(0.9));
+  // Define componnent state
+  const scale = useRef(new Animated.Value(0.9));
 
+  // Animation
   useEffect(() => {
     Animated.loop(
       Animated.sequence([
-        Animated.timing(scale, {
+        Animated.timing(scale.current, {
           toValue: 1.1,
           duration: 700,
           delay: 0,
           useNativeDriver: true,
         }),
-        Animated.timing(scale, {
+        Animated.timing(scale.current, {
           toValue: 0.9,
           duration: 700,
           delay: 0,
@@ -28,7 +35,9 @@ const Loader = () => {
 
   return (
     <Page>
-      <Animated.View style={[styles.ctn_img, { transform: [{ scale }] }]}>
+      <Animated.View
+        style={[styles.imgCtn, { transform: [{ scale: scale.current }] }]}
+      >
         <Image style={styles.img} source={PHOTO.logo} />
       </Animated.View>
 
@@ -42,19 +51,11 @@ const Loader = () => {
 export default Loader;
 
 const styles = StyleSheet.create({
-  ctn_img: {
+  imgCtn: {
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
+    ...STYLES_SHADOW.high,
   },
 
   img: {

@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 
 // Componnents imports
-import Button from "button/Button";
-import Footer from "../Parts/Footer";
-import Header from "../Parts/Header";
-import Page from "../Container/Page";
-import Searchbar from "../Componnent/Searchbar";
-import ItemService from "../Container/Service/ItemService";
+import Button from "buttons/Button";
+import Footer from "parts/Footer";
+import Header from "parts/Header";
+import Page from "containers/Page";
+import Searchbar from "componnents/Searchbar";
+import ItemService from "containers/Service/ItemService";
 
 // Libraries imports
 import { useIsFocused } from "@react-navigation/native";
@@ -24,7 +24,7 @@ const Catalogues = (props) => {
 
   // Define componnent state
   const isFocused = useIsFocused();
-  const [isAdmin, setAdmin] = useState(ctrl.this_is_admin());
+  const [isAdmin, setAdmin] = useState(ctrl.thisIsAdmin());
   const [services, setService] = useState();
   const [refreshing, setRefresh] = useState(false);
   const [query, setQuery] = useState("");
@@ -33,7 +33,7 @@ const Catalogues = (props) => {
   // On focus page
   useEffect(() => {
     ctrl.get.allServices(setRefresh, setFetch, setService);
-    setAdmin(ctrl.this_is_admin());
+    setAdmin(ctrl.thisIsAdmin());
 
     return () => Utils.cleanUp(setService, setRefresh);
   }, [isFocused]);
@@ -59,7 +59,7 @@ const Catalogues = (props) => {
         refreshing={refreshing}
         onRefresh={() => ctrl.get.allServices(setRefresh, setFetch)}
         numColumns={2}
-        style={styles.container_item}
+        style={styles.flatlist}
       />
 
       <Button
@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 60,
   },
-  container_item: {
+
+  flatlist: {
     marginHorizontal: 10,
     paddingHorizontal: 5,
     marginTop: 15,

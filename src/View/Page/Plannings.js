@@ -4,12 +4,12 @@ import { Dimensions, StyleSheet, Text } from "react-native";
 import { SwipeablePanel } from "rn-swipeable-panel";
 
 // Componnent imports
-import PickerCalendar from "../../Componnent/PickerCalendar";
-import Page from "container/Page";
-import Header from "../../Parts/Header";
-import PlanningsHeader from "./PlanningsHeader";
-import Loader from "../Loader";
-import CtnAppointment from "container/CtnAppointment";
+import Page from "containers/Page";
+import CtnAppointment from "containers/CtnAppointment";
+import Header from "parts/Header";
+import HeaderPicker from "parts/HeaderPicker";
+import PickerCalendar from "componnents/PickerCalendar";
+import Loader from "./Loader";
 
 // Libraries imports
 import _ from "lodash";
@@ -24,11 +24,9 @@ const Plannings = ({ navigation }) => {
   // Define componnent state
   const [date, setDate] = useState(CDate.today());
   const [plannings, setPlannings] = useState();
-  const [staff, setStaff] = useState(ctrl.this_user_data._id);
+  const [staff, setStaff] = useState(ctrl.thisUserData._id);
   const [showingPanel, setShowingPanel] = useState(false);
-  const strH1 = date.isToday()
-    ? "d'aujourd'hui"
-    : `du ${date.toLocaleDateString()}`;
+  const strH1 = date.isToday() ? "d'aujourd'hui" : `du ${date.toDateString()}`;
 
   // Define componnent memo state
   const calendar = useMemo(() => new Calendar(), []);
@@ -68,7 +66,7 @@ const Plannings = ({ navigation }) => {
       <PickerCalendar
         data={days}
         date={date}
-        header={<PlanningsHeader {...propsPlanningsHeader} />}
+        header={<HeaderPicker {...propsPlanningsHeader} />}
         onPress={(day) =>
           ctrl.onPress.calendarDay(day, setDate, setShowingPanel)
         }

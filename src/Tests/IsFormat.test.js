@@ -1,5 +1,5 @@
-import { IsFormat } from "../model/front/IsFormat";
-import CDate from "../model/utils/CDate";
+import { IsFormat } from "model/front/IsFormat";
+import CDate from "model/utils/CDate";
 
 const is_format = new IsFormat();
 

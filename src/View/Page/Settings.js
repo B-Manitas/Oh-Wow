@@ -2,25 +2,25 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 
-// Model imports
+// Libraries imports
 import { controller as ctrl } from "model/Main";
+import _ from "lodash";
 
 // Componnent imports
-import Page from "../Container/Page";
-import Header from "../Parts/Header";
-import InputSecondary from "../Input/InputSecondary";
-import ButtonThird from "../Buttons/ButtonThird";
+import Page from "containers/Page";
+import Header from "parts/Header";
+import InputSecondary from "inputs/InputSecondary";
+import ButtonThird from "buttons/ButtonThird";
 
 // Constants imports
 import { INPUT_FIRSTNAME } from "constants/PROPS";
 import { INPUT_LASTNAME, INPUT_PHONE } from "constants/PROPS";
 import { TITLE } from "constants/TEXTS";
-import _ from "lodash";
-import { STYLE_GENERAL } from "../../constants/STYLES";
+import { STYLE_GENERAL } from "constants/STYLES";
 
 const Settings = ({ navigation }) => {
   // Define componnent state
-  const [data, setData] = useState(ctrl.get.this_user_data);
+  const [data, setData] = useState(ctrl.get.thisUserData);
   const [audit, setAudit] = useState();
 
   return (
@@ -51,7 +51,7 @@ const Settings = ({ navigation }) => {
 
           <ButtonThird
             text={"Sauvegarder"}
-            disabled={_.isEqual(data, ctrl.get.this_user_data)}
+            disabled={_.isEqual(data, ctrl.get.thisUserData)}
             onPress={() => ctrl.onClose.settings(data, navigation, setAudit)}
           />
         </View>

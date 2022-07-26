@@ -3,10 +3,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 // Componnent imports
-import RadioBox from "../Componnent/RadioBox";
-import CtnAppointment from "../Container/CtnAppointment";
-import Page from "../Container/Page";
-import Header from "../Parts/Header";
+import RadioBox from "componnents/RadioBox";
+import CtnAppointment from "containers/CtnAppointment";
+import Page from "containers/Page";
+import Header from "parts/Header";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
@@ -27,7 +27,7 @@ const Appointments = (props) => {
 
   // On load componnent
   useEffect(() => {
-    const userID = ctrl.this_user_data._id;
+    const userID = ctrl.thisUserData._id;
     ctrl.get.userApt(userID, false, setUpcoming);
     ctrl.get.userApt(userID, true, setHistoric);
 
@@ -49,7 +49,7 @@ const Appointments = (props) => {
         data={selectedApts}
         renderItem={(i) => (
           <CtnAppointment
-            data={{ ...i.item, ...ctrl.this_user_data }}
+            data={{ ...i.item, ...ctrl.thisUserData }}
             setApts={onDelete}
           />
         )}

@@ -3,7 +3,7 @@ import React from "react";
 import { View } from "react-native";
 
 // Componnents imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 // Model import
 import { controller as ctrl } from "model/Main";
@@ -17,7 +17,7 @@ const NavigationAdmin = (props) => {
   const { nav } = props;
 
   // Define componnent state
-  const isAdmin = ctrl.this_is_admin();
+  const isAdmin = ctrl.thisIsAdmin();
 
   if (!isAdmin) return null;
   return (

@@ -1,5 +1,5 @@
 // Componnents imports
-import ItemMarker from "container/Marker";
+import ItemMarker from "containers/Marker";
 
 // Liraries imports
 import { Marker } from "react-native-maps";

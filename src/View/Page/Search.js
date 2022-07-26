@@ -4,10 +4,10 @@ import { StyleSheet, FlatList } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 
 // Componnent imports
-import Page from "../Container/Page";
-import Header from "../Parts/Header";
-import Searchbar from "../Componnent/Searchbar";
-import CtnUser from "../Container/CtnUser";
+import Page from "containers/Page";
+import Header from "parts/Header";
+import Searchbar from "componnents/Searchbar";
+import CtnUser from "containers/CtnUser";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";

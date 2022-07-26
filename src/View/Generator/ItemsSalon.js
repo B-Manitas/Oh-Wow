@@ -7,8 +7,8 @@ export const ItemsSalon = ({ onChange }) => {
   const [salon, setSalon] = useState();
 
   useEffect(() => {
-    const default_value = (salon) => onChange(salon[0]._id);
-    controller.get.allSalons(setSalon, default_value);
+    const defaultValue = (salon) => onChange(salon[0]._id);
+    controller.get.allSalons(setSalon, defaultValue);
   }, []);
 
   if (salon == undefined)

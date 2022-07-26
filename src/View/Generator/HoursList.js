@@ -3,7 +3,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 // Componnent import
-import Hour from "../Buttons/Hour";
+import Hour from "buttons/Hour";
 
 // Libraries import
 import CDate from "model/utils/CDate";

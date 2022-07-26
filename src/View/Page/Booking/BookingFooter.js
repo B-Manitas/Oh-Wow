@@ -3,8 +3,8 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 // Componnent import
-import Primary from "button/Primary";
-import HoursList from "../../Generator/HoursList";
+import Primary from "buttons/Primary";
+import HoursList from "generators/HoursList";
 
 // Libraries import
 import CDate from "model/utils/CDate";

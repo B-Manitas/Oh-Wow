@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, View, StyleSheet, Text } from "react-native";
 
 // Componnents imports
-import FooterSocial from "../Parts/FooterSocial";
-import Header from "../Parts/Header";
-import InputPrimary from "../Input/InputPrimary";
-import Button from "button/Button";
-import Page from "container/Page";
-import Primary from "button/Primary";
+import FooterSocial from "parts/FooterSocial";
+import Header from "parts/Header";
+import InputPrimary from "inputs/InputPrimary";
+import Button from "buttons/Button";
+import Page from "containers/Page";
+import Primary from "buttons/Primary";
 
 // Librarie imports
 import { controller as ctrl } from "model/Main";
@@ -66,7 +66,7 @@ const Login = (props) => {
           valid={audit?.valid?.password}
         />
 
-        <View style={styles.content_valid_btn}>
+        <View style={styles.buttonsCtn}>
           <Primary
             text={send ? "Connexion..." : "Se connecter"}
             onPress={login}
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  content_valid_btn: {
+  buttonsCtn: {
     justifyContent: "center",
     alignItems: "center",
     marginTop: 15,

@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 // Componnents imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 const Primary = (props) => {
   const disabled = props.disabled === true ? true : false;

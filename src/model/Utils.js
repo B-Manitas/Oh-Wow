@@ -2,9 +2,9 @@
 import _ from "lodash";
 
 // Constants imports
-import { FR_DAYS } from "../constants/DAYS";
-import { ICON } from "../constants/IMAGES";
-import PAGES from "../constants/PAGES";
+import { FR_DAYS } from "constants/DAYS";
+import { ICON } from "constants/IMAGES";
+import PAGES from "constants/PAGES";
 
 export default {
   headerType(type, nav) {

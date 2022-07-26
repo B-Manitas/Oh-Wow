@@ -8,7 +8,7 @@ import UnknowUser from "exceptions/user_error/UnknowUser";
 import ExistingUser from "exceptions/user_error/ExistingUser";
 import NetworkError from "exceptions/network_error/NetworkError";
 import BadStatus from "exceptions/network_error/BadStatus";
-import PAGES from "../constants/PAGES";
+import PAGES from "constants/PAGES";
 
 /**
  * Capture errors before the user interface.

@@ -8,13 +8,13 @@ import {
 } from "react-native";
 
 // Componnent imports
-import Page from "../Container/Page";
-import Header from "../Parts/Header";
-import FooterSocial from "../Parts/FooterSocial";
-import Primary from "button/Primary";
-import Button from "button/Button";
-import InputPrimary from "../Input/InputPrimary";
-import CheckBoxText from "../Componnent/CheckBoxText";
+import Header from "parts/Header";
+import FooterSocial from "parts/FooterSocial";
+import Page from "containers/Page";
+import Primary from "buttons/Primary";
+import Button from "buttons/Button";
+import InputPrimary from "inputs/InputPrimary";
+import CheckBoxText from "componnents/CheckBoxText";
 
 // Librarie imports
 import { controller as ctrl } from "model/Main";
@@ -29,27 +29,27 @@ import {
   INPUT_PHONE,
   KEYBOARD_AVOIDING_VIEW,
 } from "constants/PROPS";
-import { STYLES_LINK } from "../../constants/STYLES";
+import { STYLES_LINK } from "constants/STYLES";
 
 const SignUp = (props) => {
   // Destructure props
   const { navigation: nav } = props;
-  const isFocused = useIsFocused();
-
+  
   // Define componnent state
-  const schema_user = ctrl.frontend.schemaUser();
+  const isFocused = useIsFocused();
+  const userSchema = ctrl.frontend.schemaUser();
   const [canSignup, setCanSignup] = useState(false);
   const [send, setSend] = useState(false);
-  const [data, setData] = useState(schema_user);
-  const [audit, setAudit] = useState(ctrl.fakeAudit(schema_user));
+  const [data, setData] = useState(userSchema);
+  const [audit, setAudit] = useState();
 
   // Define componnent function
   const setPhone = (t) => setData((p) => ({ ...p, phone: t }));
 
   // Reset state page on focus
   useEffect(() => {
-    setAudit(ctrl.fakeAudit(schema_user));
-    setData(schema_user);
+    setAudit();
+    setData(userSchema);
   }, [isFocused]);
 
   // On press to sign up

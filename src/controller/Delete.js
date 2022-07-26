@@ -2,17 +2,17 @@ import { SuperController } from "./SuperController";
 import { removeUserStore, defaultStatus } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
-import { deleteService } from "../redux/ActionsCreator";
-import PAGES from "../constants/PAGES";
+import { deleteService } from "store/ActionsCreator";
+import PAGES from "constants/PAGES";
 
 export class Delete extends SuperController {
   async thisUser() {
-    await this.user(this.this_user_data._id);
+    await this.user(this.thisUserData._id);
   }
 
   @Catch
   async user(navigation) {
-    await this.frontend.delete.user(this.this_user_data._id);
+    await this.frontend.delete.user(this.thisUserData._id);
     removeUserStore();
     defaultStatus();
     navigation.navigate(PAGES.HOME);

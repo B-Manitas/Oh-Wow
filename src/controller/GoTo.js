@@ -1,4 +1,4 @@
-import PAGES from "../constants/PAGES";
+import PAGES from "constants/PAGES";
 import { SuperController } from "./SuperController";
 
 export class GoTo extends SuperController {
@@ -47,7 +47,7 @@ export class GoTo extends SuperController {
   }
 
   booking(nav, service) {
-    if (this.this_is_connected) nav.navigate(PAGES.BOOKING, { data: service });
+    if (this.thisIsConnected) nav.navigate(PAGES.BOOKING, { data: service });
     else nav.navigate(PAGES.CONNECTION);
   }
 

@@ -9,15 +9,15 @@ import {
 } from "react-native";
 
 // Componnents imports
-import Page from "container/Page";
-import InputLong from "../Input/InputLong";
-import InputHours from "../Input/InputHours";
-import DaysCheckBoxList from "../Generator/DaysCheckBoxList";
-import ToggleLong from "../Componnent/ToggleLong";
-import Primary from "button/Primary";
+import Page from "containers/Page";
+import InputLong from "inputs/InputLong";
+import InputHours from "inputs/InputHours";
+import DaysCheckBoxList from "generators/DaysCheckBoxList";
+import ToggleLong from "componnents/ToggleLong";
+import Primary from "buttons/Primary";
 import Loader from "./Loader";
-import InputError from "../Input/InputError";
-import HeaderSave from "../Parts/HeaderSave";
+import InputError from "inputs/InputError";
+import HeaderSave from "parts/HeaderSave";
 
 // Libraries imports
 import _ from "lodash";

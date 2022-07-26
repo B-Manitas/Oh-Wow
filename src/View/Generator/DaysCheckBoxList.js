@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 
 // Componnent imports
-import CheckBoxText from "../Componnent/CheckBoxText";
+import CheckBoxText from "componnents/CheckBoxText";
 
 // Constants imports
 import { SHORT_DAYS } from "constants/DAYS";

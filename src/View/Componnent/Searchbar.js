@@ -3,7 +3,7 @@ import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 
 // Componnent imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 // Contants imports
 import { ICON } from "constants/IMAGES";

@@ -97,3 +97,27 @@ export const INPUT_COORD = {
   keyboardType: "numeric",
   errorText: ERROR_TEXT.number,
 };
+
+export const INPUT_PRICE = {
+  text: "Prix en dinar tunisien",
+  maxLength: 5,
+  keyboardType: "numeric",
+  placeholder: PLH.price,
+  errorText: ERROR_TEXT.number,
+};
+
+export const INPUT_SERVICE = {
+  text: "Nom",
+  placeholder: PLH.serviceName,
+  returnKeyType: "next",
+  maxLength: 15,
+  errorText: ERROR_TEXT.name,
+};
+
+export const INPUT_DURATION = {
+  text: "Durée",
+  placeholder: PLH.duration,
+  returnKeyType: "next",
+  maxLength: 5,
+  errorText: ERROR_TEXT.duration,
+};

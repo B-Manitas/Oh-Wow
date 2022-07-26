@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
-import Day from "../Buttons/Day";
+import Day from "buttons/Day";
 
 const PickerCalendar = ({ data, header, footer, onPress, date }) => {
   return (

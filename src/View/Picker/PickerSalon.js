@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import _ from "lodash";
-import { ItemsSalon } from "../Generator/ItemsSalon";
+import { ItemsSalon } from "generators/ItemsSalon";
 
 const PickerSalon = ({ value, onChange }) => {
   return (

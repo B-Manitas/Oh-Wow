@@ -2,12 +2,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 // Componnent imports
-import Page from "../../Container/Page";
-import Header from "../../Parts/Header";
-import PickerCalendar from "../../Componnent/PickerCalendar";
-import PlanningsHeader from "../Plannings/PlanningsHeader";
+import Page from "containers/Page";
+import Header from "parts/Header";
+import PickerCalendar from "componnents/PickerCalendar";
+import HeaderPicker from "parts/HeaderPicker";
 import BookingFooter from "./BookingFooter";
-import Loader from "../Loader";
+import Loader from "pages/Loader";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
@@ -21,7 +21,7 @@ const Booking = (props) => {
   const service = route.params.data;
 
   // Define componnent state
-  const userID = ctrl.this_user_data._id;
+  const userID = ctrl.thisUserData._id;
 
   const [date, setDate] = useState(CDate.today());
   const [planning, setPlanning] = useState();
@@ -83,7 +83,7 @@ const Booking = (props) => {
           data={days}
           date={date}
           onPress={(newDate) => ctrl.onPress.aptDay(setApt, setDate, newDate)}
-          header={<PlanningsHeader {...propsCalendarHeader} />}
+          header={<HeaderPicker {...propsCalendarHeader} />}
           footer={<BookingFooter {...propsCalendarFooter} />}
         />
       </Page>

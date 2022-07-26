@@ -1,5 +1,5 @@
-import { YEARS } from "../constants/DAYS";
-import CDate from "../model/utils/CDate";
+import { YEARS } from "constants/DAYS";
+import CDate from "model/utils/CDate";
 import { SuperController } from "./SuperController";
 
 export class OnChange extends SuperController {

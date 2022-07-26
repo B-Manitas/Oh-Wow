@@ -3,7 +3,7 @@ import React from "react";
 import { View } from "react-native";
 
 // Componnents imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 import NavigationAdmin from "./NavigationAdmin";
 import NavigationStaff from "./NavigationStaff";
 
@@ -16,7 +16,7 @@ import { NAVIGATION } from "constants/PROPS";
 
 const NavigationConnect = (props) => {
   const { nav } = props;
-  const isConnected = ctrl.this_is_connected;
+  const isConnected = ctrl.thisIsConnected;
 
   if (!isConnected) return null;
   return (

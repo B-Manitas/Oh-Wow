@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 
 // Componnent imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 // Libraries imports
 import Utils from "model/Utils";
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     alignSelf: "center",
     color: COLORS.black,
+    marginHorizontal: 35,
   },
 
   button: {

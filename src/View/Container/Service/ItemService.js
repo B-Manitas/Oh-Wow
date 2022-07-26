@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 
 // Componnents imports
 import TEXTS from "constants/TEXTS";
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";

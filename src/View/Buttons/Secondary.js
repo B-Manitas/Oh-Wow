@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 // Componnents imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 const Secondary = (props) => {
   const disabled = props.disabled === true ? true : false;
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 
-  button_off: { opacity: 0.4 },
+  btnOff: { opacity: 0.4 },
 
   text: {
     fontWeight: "600",

@@ -3,8 +3,8 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 // Componnents imports
-import Button from "button/Button";
-import Primary from "button/Primary";
+import Button from "buttons/Button";
+import Primary from "buttons/Primary";
 
 // Libraries imports
 import _ from "lodash";

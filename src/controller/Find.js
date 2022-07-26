@@ -1,17 +1,17 @@
-import { store } from "../redux/Store";
+import { store } from "store/Store";
 import { SuperController } from "./SuperController";
 import { addUserStore, updateStatus } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
 import _ from "lodash";
-import PAGES from "../constants/PAGES";
+import PAGES from "constants/PAGES";
 
 export class Find extends SuperController {
   @Catch
   allServices(setRefresh, ...funcs) {
     setRefresh(true);
 
-    const isAdmin = this.this_is_admin();
+    const isAdmin = this.thisIsAdmin();
     const data_store = store.getState().services;
 
     if (_.isEmpty(data_store)) this.frontend.get.allServices(isAdmin, ...funcs);

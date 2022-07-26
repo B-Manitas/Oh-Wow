@@ -17,7 +17,7 @@ const Button = (props) => {
     style: [
       styles.button,
       !noShadow && !disabled && STYLES_SHADOW.medium,
-      disabled && styles.disabled,
+      disabled && { ...styles.disabled, ...props.styleDisabled },
       props.style,
     ],
     disabled,

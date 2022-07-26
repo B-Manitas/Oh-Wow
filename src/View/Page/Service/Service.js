@@ -3,20 +3,20 @@ import React, { useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
 
 // Componnents  imports
-import Button from "button/Button";
-import Page from "../../Container/Page";
-import ServiceSettings from "./ServiceSettings";
 import ServiceMain from "./ServiceMain";
+import ServiceSettings from "./ServiceSettings";
+import Button from "buttons/Button";
+import Primary from "buttons/Primary";
+import Page from "containers/Page";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
+import Utils from "model/Utils";
 import _ from "lodash";
 
 // Contants imports
 import { ICON } from "constants/IMAGES";
 import TEXTS from "constants/TEXTS";
-import Primary from "../../Buttons/Primary";
-import Utils from "../../../model/Utils";
 
 const Service = (props) => {
   // Destructure props
@@ -57,20 +57,20 @@ const Service = (props) => {
             text={isEdit ? "Fermer" : "Modifier"}
             style={styleDrop.button}
             styleText={styleDrop.h1}
-            visible={ctrl.this_is_admin()}
+            visible={ctrl.thisIsAdmin()}
             onPress={() => setEdit((b) => !b)}
           />
           <Button
             text="Paramètres"
             style={styleDrop.button}
-            visible={ctrl.this_is_admin() && isEdit}
+            visible={ctrl.thisIsAdmin() && isEdit}
             onPress={openSettings}
           />
           <Button
             text="Modifier la photo"
             style={styleDrop.button}
             onPress={openImage}
-            visible={ctrl.this_is_admin() && isEdit}
+            visible={ctrl.thisIsAdmin() && isEdit}
           />
         </View>
       </View>

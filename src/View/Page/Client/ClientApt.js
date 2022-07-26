@@ -2,7 +2,7 @@
 import { FlatList, StyleSheet } from "react-native";
 
 // Componnent imports
-import CtnAppointment from "container/CtnAppointment";
+import CtnAppointment from "containers/CtnAppointment";
 
 const ClientApt = (props) => {
   const { visible, appointments, setApts, client } = props;

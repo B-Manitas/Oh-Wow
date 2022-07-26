@@ -14,10 +14,10 @@ const ContactSalon = (props) => {
   const { salon } = props;
 
   // Define date and time text
-  const am_on = CDate.toTimeString(salon.am_on);
-  const am_off = CDate.toTimeString(salon.am_off);
-  const pm_on = CDate.toTimeString(salon.pm_on);
-  const pm_off = CDate.toTimeString(salon.pm_off);
+  const amOn = CDate.toTimeString(salon.am_on);
+  const amOff = CDate.toTimeString(salon.am_off);
+  const pmOn = CDate.toTimeString(salon.pm_on);
+  const pmOff = CDate.toTimeString(salon.pm_off);
   const day = Utils.openDaysText(salon.day_off);
 
   return (
@@ -48,14 +48,14 @@ const ContactSalon = (props) => {
       <View style={styles.field}>
         <Text style={styles.key}>Le matin de</Text>
         <Text style={styles.value}>
-          {am_on} à {am_off}
+          {amOn} à {amOff}
         </Text>
       </View>
 
       <View style={styles.field}>
         <Text style={styles.key}>L'après-midi de</Text>
         <Text style={styles.value}>
-          {pm_on} à {pm_off}
+          {pmOn} à {pmOff}
         </Text>
       </View>
     </View>

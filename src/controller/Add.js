@@ -2,7 +2,7 @@ import { SuperController } from "./SuperController";
 import { addUserStore } from "store/ActionsCreator";
 import { Alert } from "react-native";
 import Catch from "exceptions/ErrorsCatcher";
-import PAGES from "../constants/PAGES";
+import PAGES from "constants/PAGES";
 
 export class Add extends SuperController {
   /**

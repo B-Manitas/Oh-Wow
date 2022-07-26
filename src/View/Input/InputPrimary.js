@@ -8,7 +8,7 @@ const InputPrimary = (props) => {
 
   const propsInput = {
     ...props,
-    style: [styles.input],
+    style: styles.input,
     passwordRules,
   };
 
@@ -25,24 +25,6 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 5,
     marginHorizontal: 40,
-  },
-
-  content_info: {
-    top: -20,
-    left: 10,
-    borderRadius: 5,
-    borderWidth: 2,
-    position: "absolute",
-    paddingHorizontal: 8,
-    backgroundColor: "#fff",
-    paddingVertical: 5,
-  },
-
-  text_info: {
-    fontSize: 13,
-    textAlign: "center",
-    fontStyle: "italic",
-    fontWeight: "600",
   },
 
   input: {

@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
 // Componnent imports
-import Page from "container/Page";
-import FooterSocial from "../Parts/FooterSocial";
-import Button from "button/Button";
-import ContactSalon from "container/ContactSalon";
+import Page from "containers/Page";
+import ContactSalon from "containers/ContactSalon";
+import FooterSocial from "parts/FooterSocial";
+import Button from "buttons/Button";
+import Markers from "generators/Markers";
 import Loader from "./Loader";
-import Markers from "../Generator/Markers";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";

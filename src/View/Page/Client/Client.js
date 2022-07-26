@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 
-import Page from "../../Container/Page";
-import HeaderSave from "../../Parts/HeaderSave";
-import RadioBox from "../../Componnent/RadioBox";
+import Page from "containers/Page";
+import HeaderSave from "parts/HeaderSave";
+import RadioBox from "componnents/RadioBox";
 import ClientInfo from "./ClientInfo";
 import ClientApt from "./ClientApt";
 

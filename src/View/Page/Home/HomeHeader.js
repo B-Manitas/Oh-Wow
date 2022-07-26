@@ -4,7 +4,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 // Componnents imports
-import Button from "button/Button";
+import Button from "buttons/Button";
 
 // Model import
 import { controller as ctrl } from "model/Main";
@@ -16,11 +16,11 @@ const HomeHeader = (props) => {
   const { app, setApp, refreshing } = props;
   const isFocused = useIsFocused();
 
-  const [isAdmin, setAdmin] = useState(ctrl.this_is_admin());
+  const [isAdmin, setAdmin] = useState(ctrl.thisIsAdmin());
 
   // On focus homepage
   useEffect(() => {
-    setAdmin(ctrl.this_is_admin());
+    setAdmin(ctrl.thisIsAdmin());
   }, [isFocused]);
 
   // Define props of the button image
@@ -42,7 +42,7 @@ const HomeHeader = (props) => {
       <Image source={{ uri: app?.img }} style={styles.image} />
 
       <Button {...propsButtonImage} />
-      <Text style={styles.h1}>{TEXTS.title_h1}</Text>
+      <Text style={styles.h1}>{TEXTS.titleH1}</Text>
     </View>
   );
 };

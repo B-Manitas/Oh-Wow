@@ -1,40 +1,47 @@
 // React imports
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+
+// Componnent imports
+import Button from "buttons/Button";
+
+// Libraries imports
+import { controller as ctrl } from "model/Main";
 
 // Constants imports
 import TEXTS from "constants/TEXTS";
-
-import { controller as ctrl } from "model/Main";
+import COLORS from "constants/COLORS";
+import { STYLES_SHADOW } from "constants/STYLES";
 
 const Footer = (props) => {
+  // Destructure props
   const { isHome, nav } = props;
 
-  const props_text = { numberOfLines: 1, adjustsFontSizeToFit: true };
+  // Define text props
+  const propsText = { numberOfLines: 1, adjustsFontSizeToFit: true };
   const propsButtonHome = {
-    style: styles.button,
+    text: TEXTS.titleH2,
     onPress: () => ctrl.goTo.home(nav),
     disabled: isHome,
+    style: [styles.button, styles.buttonLeft],
+    styleText: [styles.text, isHome && styles.textOn],
+    styleDisabled: styles.disabled,
+    noShadow: true,
   };
   const propsButtonServices = {
-    style: [styles.button, styles.buttonRight],
+    text: TEXTS.booking,
     onPress: () => ctrl.goTo.services(nav),
     disabled: !isHome,
+    style: [styles.button, styles.buttonRight],
+    styleText: [styles.text, !isHome && styles.textOn],
+    styleDisabled: styles.disabled,
+    noShadow: true,
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity {...propsButtonHome}>
-        <Text {...props_text} style={[styles.text, isHome && styles.textOn]}>
-          {TEXTS.title_h2}
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity {...propsButtonServices}>
-        <Text {...props_text} style={[styles.text, !isHome && styles.textOn]}>
-          {TEXTS.booking}
-        </Text>
-      </TouchableOpacity>
+      <Button {...propsButtonHome} />
+      <Button {...propsButtonServices} />
     </View>
   );
 };
@@ -51,36 +58,44 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
 
     borderRadius: 5,
-    backgroundColor: "#faa4af",
+    padding: 3,
+    backgroundColor: COLORS.main,
 
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-
-    elevation: 10,
+    ...STYLES_SHADOW.high,
   },
 
   button: {
     flex: 1,
+    backgroundColor: COLORS.main,
     paddingVertical: 15,
     paddingHorizontal: 10,
-    justifyContent: "center",
     borderWidth: 1,
     borderColor: "transparent",
   },
 
-  buttonRight: { borderLeftColor: "#fff" },
+  buttonRight: {
+    borderLeftColor: "#fff",
+    borderBottomLeftRadius: 0,
+    borderTopLeftRadius: 0,
+  },
+
+  buttonLeft: {
+    borderRightColor: "#fff",
+    borderBottomRightRadius: 0,
+    borderTopRightRadius: 0,
+  },
+
+  disabled: {
+    opacity: 1,
+    ...STYLES_SHADOW.noShadow,
+  },
 
   text: {
     fontSize: 20,
     textAlign: "center",
     color: "#fff",
-    fontWeight: "700",
+    fontWeight: "600",
   },
 
-  textOn: { textDecorationLine: "underline" },
+  textOn: { textDecorationLine: "underline", fontWeight: "700" },
 });

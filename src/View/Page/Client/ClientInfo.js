@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// React imports
+import React from "react";
 import {
   KeyboardAvoidingView,
   ScrollView,
@@ -7,22 +8,24 @@ import {
   View,
 } from "react-native";
 
-import ButtonThird from "button/ButtonThird";
-import Primary from "button/Primary";
-import ToggleLong from "../../Componnent/ToggleLong";
-import InputLong from "../../Input/InputLong";
+// Componnent imports
+import ButtonThird from "buttons/ButtonThird";
+import ToggleLong from "componnents/ToggleLong";
+import InputLong from "inputs/InputLong";
 
+// Librairies imports
 import { controller as ctrl } from "model/Main";
-import _, { lowerFirst } from "lodash";
+import _ from "lodash";
 
+// Constants imports
+import { TITLE } from "constants/TEXTS";
+import { STYLE_GENERAL } from "constants/STYLES";
 import {
   KEYBOARD_AVOIDING_VIEW,
   INPUT_FIRSTNAME,
   INPUT_LASTNAME,
   INPUT_PHONE,
 } from "constants/PROPS";
-import { TITLE } from "constants/TEXTS";
-import { STYLE_GENERAL } from "constants/STYLES";
 
 const ClientInfo = (props) => {
   // Destructure props

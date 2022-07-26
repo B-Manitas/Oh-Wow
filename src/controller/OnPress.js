@@ -20,17 +20,18 @@ export class OnPress extends SuperController {
     setApt((p) => ({ ...p, date: date.setTime(hours) }));
   }
 
-  radioOffer(setApt, setRadio, id) {
+  radioOffer(apt, setRadio, id) {
     const offer = id == 1 ? this.frontend.schemaAnonymous() : null;
 
-    setApt((p) => ({ ...p, offer }));
+    apt = { ...apt, offer };
+    // setApt((p) => ({ ...p, offer }));
     setRadio(id);
   }
 
   @Catch
   async service(setSaving, data, data_init, setServiceInit, setAudit) {
     setSaving(true);
-    if (!_.isEqual(data, data_init) && this.this_is_admin()) {
+    if (!_.isEqual(data, data_init) && this.thisIsAdmin()) {
       await this.frontend.update.service(data, setAudit);
       updateService(data);
       setServiceInit(data);
@@ -42,7 +43,7 @@ export class OnPress extends SuperController {
   @Catch
   async client(dataInit, data, setInit, setAudit, setSaving) {
     setSaving(true);
-    if (!_.isEqual(data, dataInit) && this.this_is_admin()) {
+    if (!_.isEqual(data, dataInit) && this.thisIsAdmin()) {
       const user = Utils.removeKey(data, "is_admin", "id_salon");
       await this.frontend.update.user(user, setAudit);
 

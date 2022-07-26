@@ -9,11 +9,11 @@ import {
 } from "react-native";
 
 // Componnents imports
-import ToggleLong from "../../Componnent/ToggleLong";
-import InputLong from "../../Input/InputLong";
-import ButtonThird from "button/ButtonThird";
-import HeaderSave from "../../Parts/HeaderSave";
-import InputError from "../../Input/InputError";
+import ToggleLong from "componnents/ToggleLong";
+import InputLong from "inputs/InputLong";
+import ButtonThird from "buttons/ButtonThird";
+import HeaderSave from "parts/HeaderSave";
+import InputError from "inputs/InputError";
 
 // Model imports
 import { controller as ctrl } from "model/Main";
@@ -28,7 +28,7 @@ import { PLH, TITLE } from "constants/TEXTS";
 import COLORS from "constants/COLORS";
 import { ERROR_TEXT } from "constants/TEXTS";
 import { STYLE_GENERAL } from "constants/STYLES";
-import Utils from "../../../model/Utils";
+import { INPUT_DURATION, INPUT_PRICE, INPUT_SERVICE } from "constants/PROPS";
 
 const ServiceSettings = (props) => {
   // Destructure props
@@ -64,29 +64,22 @@ const ServiceSettings = (props) => {
         <View style={STYLE_GENERAL.sectionCtn}>
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.globalInfo}</Text>
           <InputLong
-            text={"Nom"}
-            placeholder={PLH.serviceName}
+            {...INPUT_SERVICE}
             valid={audit?.valid?.name && !saving}
             value={data.name}
             setValue={(t) => setData((p) => ({ ...p, name: t }))}
-            errorText={ERROR_TEXT.name}
           />
           <InputLong
-            text={"Prix en dinar tunisien"}
-            key_type={"numeric"}
-            placeholder={PLH.price}
+            {...INPUT_PRICE}
             valid={audit?.valid?.price && !saving}
             value={data.price.toString()}
             setValue={(t) => ctrl.onFormat.price(t, setPrice)}
-            errorText={ERROR_TEXT.number}
           />
           <InputLong
-            text={"Durée"}
-            placeholder={PLH.duration}
+            {...INPUT_DURATION}
             valid={audit?.valid?.duration && !saving}
             value={duration(data.duration)}
             setValue={(t) => ctrl.onFormat.time(t, setDur)}
-            errorText={ERROR_TEXT.duration}
           />
         </View>
 
