@@ -90,7 +90,7 @@ const ClientInfo = (props) => {
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
           <BtnThird
             text={"Supprimer définitivement le compte"}
-            onPres={() => controller.delete.user(nav, user)}
+            onPress={() => ctrl.delete.user(nav, client)}
             important
           />
         </View>

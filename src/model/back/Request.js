@@ -72,26 +72,6 @@ export class Request {
   }
 
   /**
-   * Send a DELETE REQUEST
-   * @param {String} endpoint The url endpoint of the request
-   * @param {Object} options The body of the request.
-   * @returns The response of the request.
-   */
-  async delete(endpoint, options = {}) {
-    return await this._fetch(endpoint, { ...options, method: "DELETE" });
-  }
-
-  /**
-   * Send a PUT REQUEST
-   * @param {String} endpoint The url endpoint of the request
-   * @param {Object} options The body of the request.
-   * @returns The response of the request.
-   */
-  async put(endpoint, options = {}) {
-    return await this._fetch(endpoint, { ...options, method: "PUT" });
-  }
-
-  /**
    * Insert single object in database.
    * @param {String} collection The collection name in the database.
    * @param {Object} data The data to insert.
@@ -172,6 +152,15 @@ export class Request {
    */
   async deleteOne(collection, filter) {
     await this.post("/deleteOne", { ...this.#body, collection, filter });
+  }
+
+  /**
+   * Delete multiple object in the database.
+   * @param {String} collection The collection name in the database.
+   * @param {Object} filter The conditions filtering to apply before finding object.
+   */
+  async deleteMany(collection, filter) {
+    await this.post("/deleteMany", { ...this.#body, collection, filter });
   }
 
   /**

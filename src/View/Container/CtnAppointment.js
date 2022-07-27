@@ -44,15 +44,19 @@ const CtnAppointment = (props) => {
         {data.service}
       </Text>
 
-      <View style={styles.fieldCtn}>
-        <View style={styles.field}>
-          <Text style={styles.h2Key}>Esthéticienne:</Text>
-          <Text {...propsTxtValue}>{data.staff}</Text>
-        </View>
+      <View style={styles.field}>
+        <Text style={styles.h2Key}>Esthéticienne:</Text>
+        <Text {...propsTxtValue}>{data.staff}</Text>
+      </View>
 
+      <View style={styles.fieldCtn}>
         <View style={styles.field}>
           <Text style={styles.h2Key}>Prix:</Text>
           <Text {...propsTxtValue}>{data.price}DT</Text>
+        </View>
+        <View style={styles.field}>
+          <Text style={styles.h2Key}>Durée:</Text>
+          <Text {...propsTxtValue}>{CDate.toTimeString(data.duration)}</Text>
         </View>
       </View>
 

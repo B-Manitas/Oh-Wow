@@ -14,7 +14,6 @@ import InputLong from "inputs/InputLong";
 import InputHours from "inputs/InputHours";
 import DaysCheckBoxList from "generators/DaysCheckBoxList";
 import ToggleLong from "componnents/ToggleLong";
-import BtnPrimary from "buttons/BtnPrimary";
 import Loader from "./Loader";
 import InputError from "inputs/InputError";
 import HeaderSave from "parts/HeaderSave";
@@ -85,19 +84,19 @@ const Salons = (...props) => {
               {...INPUT_SALONS}
               value={salon.name}
               setValue={(v) => setSalon({ ...salon, name: v })}
-              valid={audit?.valid?.name && !saving}
+              valid={audit?.valid?.name}
             />
             <InputLong
               {...INPUT_ADDRESS}
               value={salon.address}
               setValue={(v) => setSalon({ ...salon, address: v })}
-              valid={audit?.valid?.address && !saving}
+              valid={audit?.valid?.address}
             />
             <InputLong
               {...INPUT_PHONE}
               value={salon.phone}
               setValue={(v) => setSalon({ ...salon, phone: strPhone(v) })}
-              valid={audit?.valid?.phone && !saving}
+              valid={audit?.valid?.phone}
             />
           </View>
 
@@ -108,14 +107,14 @@ const Salons = (...props) => {
               text={"Longitude"}
               setValue={(v) => setSalon({ ...salon, longitude: strFloat(v) })}
               value={salon.longitude.toString()}
-              valid={audit?.valid?.longitude && !saving}
+              valid={audit?.valid?.longitude}
             />
             <InputLong
               {...INPUT_COORD}
               text={"Latitude"}
               value={salon.latitude.toString()}
               setValue={(v) => setSalon({ ...salon, latitude: strFloat(v) })}
-              valid={audit?.valid?.latitude && !saving}
+              valid={audit?.valid?.latitude}
             />
           </View>
 

@@ -11,7 +11,13 @@ const InputLong = (props) => {
 
   return (
     <View style={[styles.container, error && styles.containerError]}>
-      <Text style={STYLE_GENERAL.sectionH2}>{props.text}</Text>
+      <Text
+        style={{ ...STYLE_GENERAL.sectionH2, ...styles.textInfo }}
+        adjustsFontSizeToFit
+        numberOfLines={1}
+      >
+        {props.text}
+      </Text>
       <InputError {...props} text={undefined} style={styles.containerInput} />
     </View>
   );
@@ -31,5 +37,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 0,
     maxWidth: Dimensions.get("screen").width / 2,
+  },
+
+  textInfo: {
+    width: Dimensions.get("screen").width / 3 + 10,
+    bottom: -7
   },
 });

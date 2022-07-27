@@ -1,8 +1,7 @@
 import CDate from "./CDate";
 
 export default class Calendar {
-  #DAYS_MN = 1400;
-  #is_first_date_on = true;
+  #isFirstDateOn = true;
   #day_off;
   #date_off;
   #date;
@@ -24,9 +23,9 @@ export default class Calendar {
   }
 
   setFirstDateOn(func, date) {
-    if (!this.#is_first_date_on) return;
+    if (!this.#isFirstDateOn) return;
 
-    this.#is_first_date_on = false;
+    this.#isFirstDateOn = false;
     func(date);
   }
 
@@ -45,19 +44,25 @@ export default class Calendar {
   isHoursOn(date, time, dur) {
     if (date.copy().setTime(time).isPast()) return false;
 
-    date = date.getTimestamp();
-    const booking = this.#bookings.find(
-      (b) => Math.abs(date - b.date) <= this.#DAYS_MN
-    );
+    // Only get bookings that are the same date as the time date.
+    const bookings = this.#bookings.filter((b) => date.isSameDate(b.date));
 
-    if (!booking) return true;
-    else {
-      const min_apt = Math.abs(booking.date - date);
-      return (
-        (time < min_apt && time + dur < min_apt + booking.duration) ||
-        (time > min_apt && time + dur > min_apt + booking.duration)
-      );
-    }
+    date = date.getTimestamp();
+
+    // True if there is no other reservation for the same date.
+    if (!bookings) return true;
+    // Else check if each reservation starts and ends BEFORE the time date plus duration.
+    // Or starts and ends AFTER the time date plus duration.
+    else
+      return bookings.every((b) => {
+        // Get the time of the booking date. (note: date is a zero time date)
+        const bookTime = Math.abs(b.date - date);
+
+        return (
+          (time < bookTime && time + dur < bookTime + b.duration) ||
+          (time > bookTime && time + dur > bookTime + b.duration)
+        );
+      });
   }
 
   getHours(date, dur, time_on, time_off, is_date_on) {
@@ -97,7 +102,7 @@ export default class Calendar {
   getCalendars(date, setDate, plannings, salon, dur) {
     if (!salon) return [];
 
-    this.#is_first_date_on = true;
+    this.#isFirstDateOn = true;
     this.#bookings = plannings;
     this.#salon = salon;
 
@@ -108,17 +113,17 @@ export default class Calendar {
 
     for (var day = 0; day < date.getMonthLength(); day++) {
       const date = new CDate(this.#date.year, this.#date.month, day + 1);
-      const is_date_on = this.isDateOn(date) && salon.is_opened;
+      const isDateOn = this.isDateOn(date) && salon.is_opened;
 
-      if (is_date_on) this.setFirstDateOn(setDate, date);
+      if (isDateOn) this.setFirstDateOn(setDate, date);
 
-      const am = this.getAMHours(date, dur, is_date_on);
-      const pm = this.getPMHours(date, dur, is_date_on);
+      const am = isDateOn ? this.getAMHours(date, dur, isDateOn) : [];
+      const pm = isDateOn ? this.getPMHours(date, dur, isDateOn) : [];
       const shift = CDate.getFirstDay(date.year, date.month);
 
       this.#days_list[shift + day] = {
         date,
-        is_on: is_date_on && (am.is_on || pm.is_on),
+        is_on: isDateOn && (am.is_on || pm.is_on),
         am_hours: am.hours,
         pm_hours: pm.hours,
       };

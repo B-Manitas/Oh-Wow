@@ -117,10 +117,10 @@ export class IsFormat extends Normalizer {
     return status === "valid" || status === "pending";
   }
 
-  isDayOff(day_off) {
+  isDayOff(dayOff) {
     return (
-      this.isSchema(day_off, this.salon.day_off) &&
-      Object.values(day_off).every((val) => {
+      this.isSchema(dayOff, super.salon.day_off) &&
+      Object.values(dayOff).every((val) => {
         return this.isBool(val);
       })
     );

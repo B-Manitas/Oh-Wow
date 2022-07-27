@@ -41,4 +41,12 @@ export class Delete extends Request {
   async appointment(ID) {
     await this.deleteOne(APPT, { _id: ID });
   }
+
+  async allUserApts(ID) {
+    await this.deleteMany(APPT, { $or: [{ id_user: ID }, { id_staff: ID }] });
+  }
+
+  async allServiceApts(ID) {
+    await this.deleteMany(APPT, { id_service: ID });
+  }
 }

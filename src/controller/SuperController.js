@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { Alert } from "react-native";
 import { ADMIN, EMPLOYEE } from "src/UserStatus";
 
 // Store import
@@ -45,5 +46,22 @@ export class SuperController {
    */
   thisIsAdmin() {
     return this.thisIsConnected() && this.thisUserAccess.status == ADMIN;
+  }
+
+  async alertDelete(message) {
+    return new Promise((resolve) => {
+      Alert.alert(
+        "Supprimer définitivement",
+        `Êtes-vous sûr de vouloir supprimer ${message} ?`,
+        [
+          { text: "Annuler", style: "cancel", onPress: () => resolve(false) },
+          {
+            text: "Supprimer",
+            style: "destructive",
+            onPress: () => resolve(true),
+          },
+        ]
+      );
+    });
   }
 }

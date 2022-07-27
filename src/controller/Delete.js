@@ -1,20 +1,29 @@
 import { SuperController } from "./SuperController";
-import { removeUserStore, defaultStatus } from "store/ActionsCreator";
+
+import {
+  deleteService,
+  removeUserStore,
+  defaultStatus,
+} from "store/ActionsCreator";
+
 import { Alert } from "react-native";
+
 import Catch from "exceptions/ErrorsCatcher";
-import { deleteService } from "store/ActionsCreator";
+
 import PAGES from "constants/PAGES";
 
 export class Delete extends SuperController {
   /** Delete the connected user. */
-  async thisUser(navigation) {
-    await this.frontend.delete.user(userID)(this.thisUserData._id);
+  async thisUser(navigation, askConfirmation = true) {
+    if (askConfirmation && !(await this.alertDelete("le compte"))) return;
+
+    await this.frontend.delete.user(this.thisUserData._id);
 
     removeUserStore();
     defaultStatus();
 
     navigation.navigate(PAGES.HOME);
-    Alert.alert(`Your account has been successfully removed.`);
+    Alert.alert("Votre compte a correctement été supprimé.");
   }
 
   /**
@@ -24,9 +33,11 @@ export class Delete extends SuperController {
    */
   @Catch
   async user(navigation, userID) {
-    if (userID === this.thisUserData._id) this.thisUser(navigation);
+    if (!(await this.alertDelete("le compte"))) return;
+
+    if (userID === this.thisUserData._id) this.thisUser(navigation, false);
     else {
-      await this.frontend.delete.user(userID);
+      await this.frontend.delete.user(this.thisUserData._id);
       navigation.goBack();
     }
   }
@@ -38,10 +49,12 @@ export class Delete extends SuperController {
    */
   @Catch
   async service(id, navigation) {
+    if (!(await this.alertDelete("le compte"))) return;
+
     await this.frontend.delete.service(id);
     deleteService(id);
     navigation.navigate(PAGES.HOME);
-    Alert.alert(`The service has been successfully removed.`);
+    Alert.alert("La prestation a correctement été supprimé.");
   }
 
   /**
@@ -51,6 +64,8 @@ export class Delete extends SuperController {
    */
   @Catch
   async appointment(id, setAptFilter) {
+    if (!(await this.alertDelete("le rendez-vous"))) return;
+
     if (setAptFilter) setAptFilter((p) => p.filter((item) => item._id != id));
     await this.frontend.delete.appointment(id);
   }

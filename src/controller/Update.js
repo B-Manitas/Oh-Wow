@@ -26,10 +26,11 @@ export class Update extends SuperController {
    * @param {Function} navigation The navigation function for changing page.
    */
   logout(navigation) {
+    const firstname = this.thisUserData.firstname;
     removeUserStore();
     defaultStatus();
     navigation.navigate(PAGES.HOME);
-    Alert.alert(`Bye, see you soon !`);
+    Alert.alert(`A bientôt ${firstname}...`);
   }
 
   /**
@@ -128,8 +129,6 @@ export class Update extends SuperController {
     if (!_.isEqual(data, init)) {
       const user = Utils.removeKey(data, "is_admin", "id_salon");
       await this.frontend.update.user(user._id, setAudit);
-
-      // console.log(data);
 
       if (data.id_salon == null) await this.frontend.delete.staff(data._id);
       else if (data.id_salon != null || data.is_admin)

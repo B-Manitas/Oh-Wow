@@ -26,7 +26,7 @@ Service
 ✔ BUGS lorsqu'on modifie le service à cause de addUserStore @done(22-07-11 13:59) @lasted(35s)
 
 Booking
-☐ [IMPORTANT] BUGS RDV OVERLAP
+✔ [IMPORTANT] BUGS RDV OVERLAP @done(22-07-27 20:42)
 ✔ Fix size pour petite durée @done(22-07-26 17:24)
 
 Staff
@@ -37,8 +37,8 @@ Client
 ☐ Gestion is_staff et salon
 
 Settings
-☐ Faire en sorte qu'un employer ne puisse pas changer son mdp et supprimer son compte ?
-☐ Un admin puisse deconnecter un employer de force
+✔ Faire en sorte qu'un employer ne puisse pas changer son mdp et supprimer son compte ? @done(22-07-27 20:42)
+✔ Un admin puisse deconnecter un employer de force @done(22-07-27 20:42)
 
 Gestion Salons
 ☐ PM après AM, vérifier overlap 

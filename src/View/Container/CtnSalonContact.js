@@ -2,9 +2,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import Button from "buttons/Button";
+
 // Librarie imports
 import CDate from "model/utils/CDate";
 import Utils from "model/utils/Utils";
+import { controller as ctrl } from "model/Main";
 
 // Constants imports
 import COLORS from "constants/COLORS";
@@ -33,9 +36,12 @@ const CtnSalonContact = (props) => {
 
       <View style={styles.field}>
         <Text style={styles.key}>Téléphone:</Text>
-        <Text style={styles.value} selectable>
-          {salon.phone}
-        </Text>
+        <Button
+          text={salon.phone}
+          onPress={() => ctrl.onPress.link(`tel:${salon.phone}`)}
+          styleText={styles.value}
+          noShadow
+        />
       </View>
 
       <View style={styles.field}>
