@@ -9,6 +9,7 @@ import FooterSocial from "parts/FooterSocial";
 import Button from "buttons/Button";
 import Markers from "generators/Markers";
 import Loader from "./Loader";
+import Empty from "componnents/Empty";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
@@ -49,7 +50,7 @@ const Contact = (props) => {
           </MapView>
 
           <Button
-            image={ICON.back_wh}
+            image={ICON.backWhite}
             style={styles.backButton}
             onPress={() => ctrl.goTo.home(nav)}
           />
@@ -59,6 +60,7 @@ const Contact = (props) => {
           data={salons}
           keyExtractor={(item) => item._id}
           renderItem={(item) => <CtnSalonContact salon={item.item} />}
+          ListEmptyComponent={<Empty />}
         />
 
         <FooterSocial />

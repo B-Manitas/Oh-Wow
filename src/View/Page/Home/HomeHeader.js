@@ -30,7 +30,7 @@ const HomeHeader = (props) => {
     visible: isAdmin,
     text: TEXTS.newImage,
     style: styles.buttonImage,
-    onPress: () => ctrl.update.image(setApp),
+    onPress: () => ctrl.onPress.image(setApp),
   };
 
   return (

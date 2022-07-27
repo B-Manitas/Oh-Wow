@@ -1,74 +1,93 @@
+// Super-class import
 import { SuperController } from "./SuperController";
 
-import { updateService } from "store/ActionsCreator";
+// Exception import
 import Catch from "exceptions/ErrorsCatcher";
+
+// Librairies import
 import _ from "lodash";
+import * as ImagePicker from "expo-image-picker";
+
+// React import
 import { Alert, Linking } from "react-native";
-import Utils from "model/Utils";
+import Utils from "../model/utils/Utils";
 
 export class OnPress extends SuperController {
+  /**
+   * On press day button in booking page.
+   * @param {Function} setApt Function to set the appointment.
+   * @param {Function} setDate Function to set the date.
+   * @param {CDate} date The date pressed.
+   */
   aptDay(setApt, setDate, date) {
     setDate(date);
     setApt((p) => ({ ...p, date: date }));
   }
 
-  aptStaff(setApt, id) {
-    setApt((p) => ({ ...p, id_staff: id }));
-  }
-
+  /**
+   * On press hours button in booking page.
+   * @param {Function} setApt Function to set the appointment.
+   * @param {Number} hours The hours pressed.
+   * @param {CDate} date The date of the appointment.
+   */
   aptHours(setApt, hours, date) {
     setApt((p) => ({ ...p, date: date.setTime(hours) }));
   }
 
-  radioOffer(apt, setRadio, id) {
-    const offer = id == 1 ? this.frontend.schemaAnonymous() : null;
+  /**
+   * On press offer radio box in the comfirmApt page.
+   * @param {Object} apt The appointment data
+   * @param {Function} setSelectedView Function to set the selected offer view.
+   * @param {Number} selectedView 1 if is offer, else 0.
+   */
+  offer(apt, setSelectedView, selectedView) {
+    const offer = selectedView == 1 ? this.schema.anonymous : null;
 
     apt = { ...apt, offer };
-    // setApt((p) => ({ ...p, offer }));
-    setRadio(id);
+    setSelectedView(selectedView);
   }
 
-  @Catch
-  async service(setSaving, data, data_init, setServiceInit, setAudit) {
-    setSaving(true);
-    if (!_.isEqual(data, data_init) && this.thisIsAdmin()) {
-      await this.frontend.update.service(data, setAudit);
-      updateService(data);
-      setServiceInit(data);
-      setAudit(this.frontend.fakeAudit(data));
-    }
-    setSaving(false);
-  }
-
-  @Catch
-  async client(dataInit, data, setInit, setAudit, setSaving) {
-    setSaving(true);
-    if (!_.isEqual(data, dataInit) && this.thisIsAdmin()) {
-      const user = Utils.removeKey(data, "is_admin", "id_salon");
-      await this.frontend.update.user(user, setAudit);
-
-      if (data.id_salon == null) await this.frontend.delete.staff(data._id);
-      else if (data.id_salon != null || data.is_admin)
-        await this.frontend.update.staff(
-          data._id,
-          data.id_salon,
-          data.is_admin
-        );
-
-      setInit(data);
-      setAudit();
-      setSaving(false);
-    }
-  }
-
+  /**
+   * Open website.
+   * @param {String} url The url of the link
+   */
   @Catch
   async link(url) {
     await Linking.canOpenURL(url);
     Linking.openURL(url);
   }
 
-  calendarDay(newDate, setDate, setShowingPanel) {
+  /**
+   * On press day button in the planning page.
+   * @param {CDate} newDate The date pressed.
+   * @param {Function} setDate The function to set new date.
+   * @param {Function} setShowingPanel The function to show swipeable pannel.
+   */
+  planningDay(newDate, setDate, setShowingPanel) {
     setDate(newDate);
     setShowingPanel(true);
+  }
+
+  /**
+   * Open dialog to choose new images.
+   * @param {Function} func The function to called to set image.
+   */
+  async image(func) {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      base64: true,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (result.cancelled) return;
+    
+    if (!Utils.lessThan1MB(result.base64))
+      Alert.alert("Erreur: L'image doit faire moins 1MB.");
+    else {
+      const base64 = "data:image/jpeg;base64,";
+      func((p) => ({ ...p, img: base64 + result.base64 }));
+    }
   }
 }

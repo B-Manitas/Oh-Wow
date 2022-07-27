@@ -1,6 +1,3 @@
-// Super-class import
-import { Request } from "./Request";
-
 // Mixins-class imports
 import { Add } from "./Add";
 import { Delete } from "./Delete";
@@ -12,8 +9,10 @@ import { Update } from "./Update";
  * @methods {@link signup}, {@link login}, {@link update}
  */
 export class Backend {
+  #options;
+
   constructor() {
-    this._options = {
+    this.#options = {
       url: "https://data.mongodb-api.com/app/data-qqvij/endpoint/data/v1/action",
       body: { dataSource: "DB", database: "DB" },
       headers: {
@@ -23,9 +22,9 @@ export class Backend {
       },
     };
 
-    this.add = new Add(this._options);
-    this.delete = new Delete(this._options);
-    this.get = new Find(this._options);
-    this.update = new Update(this._options);
+    this.add = new Add(this.#options);
+    this.delete = new Delete(this.#options);
+    this.get = new Find(this.#options);
+    this.update = new Update(this.#options);
   }
 }

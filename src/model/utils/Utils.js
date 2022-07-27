@@ -9,24 +9,16 @@ import PAGES from "constants/PAGES";
 export default {
   headerType(type, nav) {
     if (type == "close")
-      return { img: ICON.close, onPress: () => nav.popToTop() };
+      return { img: ICON.closeBlack, onPress: () => nav.popToTop() };
     else if (type == "back")
-      return { img: ICON.back, onPress: () => nav.goBack() };
-    else return { img: ICON.menu_bl, onPress: () => nav.navigate(PAGES.NAV) };
-  },
-
-  randomInt(max) {
-    return Math.floor(Math.random() * max);
+      return { img: ICON.backBlack, onPress: () => nav.goBack() };
+    else return { img: ICON.menuBlack, onPress: () => nav.navigate(PAGES.NAV) };
   },
 
   removeKey(object, ...keys) {
     object = this.copy(object);
     keys.map((key) => delete object[key]);
     return object;
-  },
-
-  isEquals(o1, o2) {
-    return _.isEqual(o1, o2);
   },
 
   copy(object) {
@@ -64,5 +56,16 @@ export default {
     if (isAdmin) return "ADMIN";
     else if (isStaff) return "EMPLOYE";
     else return "";
+  },
+
+  base64FileSize(base64) {
+    const length = base64.length;
+    const nbEqual = (base64.match(/=/g) || []).length;
+    const bytes = Math.ceil(length / 4) * 3 - nbEqual;
+    return bytes / 1000000;
+  },
+
+  lessThan1MB(base64) {
+    return this.base64FileSize(base64) < 1;
   },
 };

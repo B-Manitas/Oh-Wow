@@ -34,25 +34,29 @@ const Settings = ({ navigation }) => {
             value={data.firstname}
             setValue={(t) => setData((p) => ({ ...p, firstname: t }))}
             valid={audit?.valid?.firstname}
+            editable={!ctrl.thisIsStaff}
             {...INPUT_FIRSTNAME}
           />
           <InputError
             value={data.lastname}
             setValue={(t) => setData((p) => ({ ...p, lastname: t }))}
             valid={audit?.valid?.lastname}
+            editable={!ctrl.thisIsStaff}
             {...INPUT_LASTNAME}
           />
           <InputError
             value={data.phone}
             setValue={(t) => setData((p) => ({ ...p, phone: t }))}
             valid={audit?.valid?.phone}
+            editable={!ctrl.thisIsStaff}
             {...INPUT_PHONE}
           />
 
           <BtnThird
             text={"Sauvegarder"}
             disabled={_.isEqual(data, ctrl.get.thisUserData)}
-            onPress={() => ctrl.onClose.settings(data, navigation, setAudit)}
+            onPress={() => ctrl.update.settings(data, setAudit)}
+            visible={!ctrl.thisIsStaff}
           />
         </View>
 
@@ -66,6 +70,7 @@ const Settings = ({ navigation }) => {
             text={"Supprimer votre compte"}
             important
             onPress={() => ctrl.delete.user(navigation)}
+            visible={!ctrl.thisIsStaff}
           />
         </View>
       </ScrollView>

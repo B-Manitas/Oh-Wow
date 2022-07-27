@@ -11,7 +11,7 @@ import Page from "containers/Page";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
-import Utils from "model/Utils";
+import Utils from "model/utils/Utils";
 import _ from "lodash";
 
 // Contants imports
@@ -31,7 +31,7 @@ const Service = (props) => {
 
   // On press settings button
   const openImage = () => {
-    ctrl.update.image(setService);
+    ctrl.onPress.image(setService);
     setEdit(false);
   };
 
@@ -47,7 +47,7 @@ const Service = (props) => {
         <Image source={{ uri: service.img }} style={stylesImage.image} />
 
         <Button
-          image={ICON.back_wh}
+          image={ICON.backWhite}
           style={stylesClose.button}
           onPress={() => ctrl.onClose.service(service, init, nav)}
           styleImg={stylesClose.image}

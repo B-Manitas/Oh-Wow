@@ -1,39 +1,30 @@
 // Super-class import
 import { SuperController } from "./SuperController";
 
+// Libraries import
 import _ from "lodash";
-import Utils from "model/Utils";
+
+// Exception import
 import Catch from "exceptions/ErrorsCatcher";
-import { updateService, addUserStore } from "store/ActionsCreator";
-import PAGES from "constants/PAGES";
+
+// Store import
+import { updateService } from "store/ActionsCreator";
 
 export class OnClose extends SuperController {
+  /**
+   * Update image on close service. Then go to previous page.
+   * @param {Object} data The data service updated.
+   * @param {Object} init The data service not updated.
+   * @param {Object} nav The navigation object for changing page.
+   */
   @Catch
-  async service(data, data_init, navigation) {
-    if (data.img != data_init.img && this.thisIsAdmin()) {
+  async service(data, init, navigation) {
+    if (data.img != init.img && this.thisIsAdmin()) {
       await this.frontend.update.service({ _id: data._id, img: data.img });
 
-      updateService({ ...data_init, img: data.img });
+      updateService({ ...init, img: data.img });
     }
 
     navigation.goBack();
-  }
-
-  @Catch
-  async settingsApp(data, data_init, navigation, setAudit) {
-    if (!Utils.isEquals(data, data_init) && this.thisIsAdmin())
-      await this.frontend.update.salon(data, setAudit);
-
-    navigation.navigate(PAGES.HOME);
-  }
-
-  @Catch
-  async settings(data, navigation, setAudit) {
-    if (!Utils.isEquals(data, this.thisUserData)) {
-      await this.frontend.update.user(data, setAudit);
-      addUserStore(data);
-    }
-
-    navigation.navigate(PAGES.HOME);
   }
 }

@@ -7,20 +7,24 @@ import BadStatus from "exceptions/network_error/BadStatus";
  * {@link put}.
  */
 export class Request {
+  #url;
+  #headers;
+  #body;
+
   constructor(options = {}) {
-    this._url = options.url || "";
-    this._headers = options.headers || {};
-    this._body = options.body || {};
+    this.#url = options.url || "";
+    this.#headers = options.headers || {};
+    this.#body = options.body || {};
   }
 
   /**
    * Set field of the header.
    * @param {String} key The key to add in the header.
-   * @param {String} value The value of key.
+   * @param {String} value The value of the key.
    * @returns this.
    */
   setHeaders(key, value) {
-    this._headers[key] = value;
+    this.#headers[key] = value;
     return this;
   }
 
@@ -33,9 +37,9 @@ export class Request {
    * @throws {NetworkStatuError} If the response is not successful.
    */
   async _fetch(endpoint, options = {}) {
-    const response = await fetch(this._url + endpoint, {
+    const response = await fetch(this.#url + endpoint, {
       ...options,
-      headers: this._headers,
+      headers: this.#headers,
     });
 
     if (!response.ok) throw new BadStatus(response);
@@ -57,23 +61,47 @@ export class Request {
     });
   }
 
+  /**
+   * Send a GET REQUEST
+   * @param {String} endpoint The url endpoint of the request
+   * @param {Object} options The body of the request.
+   * @returns The response of the request.
+   */
   async get(endpoint, options = {}) {
     return await this._fetch(endpoint, { ...options, method: "GET" });
   }
 
+  /**
+   * Send a DELETE REQUEST
+   * @param {String} endpoint The url endpoint of the request
+   * @param {Object} options The body of the request.
+   * @returns The response of the request.
+   */
   async delete(endpoint, options = {}) {
     return await this._fetch(endpoint, { ...options, method: "DELETE" });
   }
 
+  /**
+   * Send a PUT REQUEST
+   * @param {String} endpoint The url endpoint of the request
+   * @param {Object} options The body of the request.
+   * @returns The response of the request.
+   */
   async put(endpoint, options = {}) {
     return await this._fetch(endpoint, { ...options, method: "PUT" });
   }
 
+  /**
+   * Insert single object in database.
+   * @param {String} collection The collection name in the database.
+   * @param {Object} data The data to insert.
+   * @returns The ID of the element inserted.
+   */
   async insertOne(collection, data = {}) {
     const document = { _id: Date.now().toString(), ...data };
 
     const resp = await this.post("/insertOne", {
-      ...this._body,
+      ...this.#body,
       collection,
       document,
     });
@@ -81,9 +109,16 @@ export class Request {
     return resp.insertedId;
   }
 
+  /**
+   * Find single object in database.
+   * @param {String} collection The collection name in the database.
+   * @param {Object} filter The conditions filtering to apply before finding object.
+   * @param {Object} projection The projection of the response.
+   * @returns The response of the request.
+   */
   async findOne(collection, filter = {}, projection = {}) {
     const resp = await this.post("/findOne", {
-      ...this._body,
+      ...this.#body,
       collection,
       filter,
       projection,
@@ -92,9 +127,17 @@ export class Request {
     return resp.document;
   }
 
+  /**
+   * Update single object in database
+   * @param {String} collection The collection name in the database.
+   * @param {Object} filter The conditions filtering to apply before finding object.
+   * @param {*} update The new data to update.
+   * @param {*} upsert If true, add odject if no object was found. (default false)
+   * @returns The ID inserted if upsert is true
+   */
   async updateOne(collection, filter, update, upsert = false) {
     const resp = await this.post("/updateOne", {
-      ...this._body,
+      ...this.#body,
       collection,
       filter,
       update,
@@ -104,9 +147,16 @@ export class Request {
     if (upsert) return resp.insertedId;
   }
 
+  /**
+   * Find multiple object in the database.
+   * @param {String} collection The collection name in the database.
+   * @param {Object} options Add filter field to filtering to apply before finding object.
+   * Add projection field to set the projection of the response.
+   * @returns The response of the request.
+   */
   async find(collection, options = {}) {
     const resp = await this.post("/find", {
-      ...this._body,
+      ...this.#body,
       collection,
       filter: options.filter || {},
       projection: options.projection || {},
@@ -115,13 +165,24 @@ export class Request {
     return resp.documents;
   }
 
+  /**
+   * Delete single object in the database.
+   * @param {String} collection The collection name in the database.
+   * @param {Object} filter The conditions filtering to apply before finding object.
+   */
   async deleteOne(collection, filter) {
-    await this.post("/deleteOne", { ...this._body, collection, filter });
+    await this.post("/deleteOne", { ...this.#body, collection, filter });
   }
 
+  /**
+   * Send aggregate request in the database.
+   * @param {String} collection The collection name in the database.
+   * @param {*} pipeline
+   * @returns
+   */
   async aggregate(collection, pipeline) {
     const resp = await this.post("/aggregate", {
-      ...this._body,
+      ...this.#body,
       collection,
       pipeline,
     });

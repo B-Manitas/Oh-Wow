@@ -33,7 +33,7 @@ const HeaderPicker = (props) => {
         />
 
         <PickerStaff
-          visible={ctrl.thisIsAdmin() && showStaff}
+          visible={showStaff}
           allOption={allOption}
           value={staff}
           onChange={(v) => setStaff(v)}

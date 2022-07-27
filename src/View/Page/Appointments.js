@@ -7,10 +7,11 @@ import RadioBox from "componnents/RadioBox";
 import CtnAppointment from "containers/CtnAppointment";
 import Page from "containers/Page";
 import Header from "parts/Header";
+import Empty from "componnents/Empty";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
-import Utils from "model/Utils";
+import Utils from "model/utils/Utils";
 
 const Appointments = (props) => {
   // Destrucuture componnent props
@@ -22,8 +23,11 @@ const Appointments = (props) => {
   const [historic, setHistoric] = useState([]);
 
   // Define memo state
-  const selectedApts = useMemo(() => (!page ? upcoming : historic), [page]);
   const onDelete = useMemo(() => (!page ? setUpcoming : setHistoric), [page]);
+  const selectedApts = useMemo(
+    () => (!page ? upcoming : historic),
+    [page, upcoming, historic]
+  );
 
   // On load componnent
   useEffect(() => {
@@ -49,13 +53,15 @@ const Appointments = (props) => {
         data={selectedApts}
         renderItem={(i) => (
           <CtnAppointment
-            data={{ ...i.item, ...ctrl.thisUserData }}
+            data={{ ...ctrl.thisUserData, ...i.item }}
             setApts={onDelete}
+            canDelete
           />
         )}
         keyExtractor={(item) => item._id}
         showsVerticalScrollIndicator={false}
         style={styles.container}
+        ListEmptyComponent={<Empty />}
       />
     </Page>
   );

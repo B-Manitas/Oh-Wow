@@ -48,10 +48,6 @@ export class SuperFrontend extends Approver {
     return resp != null;
   }
 
-  async isExistingSalon(id) {
-    return (await this.backend.get.salon(id)) != null;
-  }
-
   async isExistingService(id) {
     return (await this.backend.get.service(id)) != null;
   }

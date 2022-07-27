@@ -1,3 +1,4 @@
+/** Define collections name in the database */
 export const USER = "user";
 export const APP = "app";
 export const STAFF = "staff";

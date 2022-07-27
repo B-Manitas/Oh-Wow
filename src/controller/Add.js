@@ -1,16 +1,26 @@
-import { SuperController } from "./SuperController";
-import { addUserStore } from "store/ActionsCreator";
+// React import
 import { Alert } from "react-native";
+
+// Super-class import
+import { SuperController } from "./SuperController";
+
+// Store import
+import { addUserStore } from "store/ActionsCreator";
+
+// Exception import
 import Catch from "exceptions/ErrorsCatcher";
+
+// Constant import
 import PAGES from "constants/PAGES";
 
 export class Add extends SuperController {
   /**
    * Function to be called when the user has pressed the registration button.
    * @param {Object} data The user's data to be stored in the database.
+   * @param {Function} navigation The navigation function for changing page.
    * @param {Function} hookFuncAudit The hook function to be called when required
    * fields in the user data are missing.
-   * @param {Function} navigation The navigation function for changing page.
+   * @param {Function} setSend The hook function to set sending to true
    */
   @Catch
   async user(data, navigation, setAudit, setSend) {
@@ -22,13 +32,25 @@ export class Add extends SuperController {
     Alert.alert(`Welcome, ${user.firstname} !`);
   }
 
+  /**
+   * Function to be called when the admin has pressed new service button.
+   * @param {Function} navigation the navigation function for changing page.
+   */
   service(navigation) {
-    const data = this.frontend.schemaService();
+    const data = this.schema.service;
     navigation.navigate(PAGES.SERVICE, { data, isNew: true });
   }
 
+  /**
+   * Function to be called when the user has booked new appointment.
+   * @param {Function} navigation the navigation function for changing page.
+   * @param {Object} appointment The appointment data to be stroed in the database.
+   * @param {Function} hookFuncAudit The hook function to be called when required
+   * fields in the user data are missing.
+   */
   @Catch
-  async appointment(navigation, appointment, setAudit) {
+  async appointment(navigation, appointment, setAudit, setSending) {
+    setSending(true);
     await this.frontend.add.appointment(appointment, setAudit);
     Alert.alert(`Your appointment has been validated.`);
     navigation.navigate(PAGES.HOME);

@@ -35,7 +35,7 @@ const ServiceSettings = (props) => {
   const { data, setData, init, setInit, nav, visible, close } = props;
 
   // Define componnent state
-  const [audit, setAudit] = useState(ctrl.fakeAudit(init));
+  const [audit, setAudit] = useState();
   const [saving, setSaving] = useState(false);
 
   // Define componnent function
@@ -43,7 +43,7 @@ const ServiceSettings = (props) => {
   const setDur = (t) => setData((p) => ({ ...p, duration: t }));
   const setPrice = (t) => setData((p) => ({ ...p, price: t }));
   const onSave = () =>
-    ctrl.onPress.service(setSaving, data, init, setInit, setAudit);
+    ctrl.update.service(setSaving, data, init, setInit, setAudit);
 
   // After saving service
   useEffect(() => {
@@ -73,7 +73,7 @@ const ServiceSettings = (props) => {
             {...INPUT_PRICE}
             valid={audit?.valid?.price && !saving}
             value={data.price.toString()}
-            setValue={(t) => ctrl.onFormat.price(t, setPrice)}
+            setValue={(t) => ctrl.onFormat.integer(t, setPrice)}
           />
           <InputLong
             {...INPUT_DURATION}
@@ -115,7 +115,7 @@ const ServiceSettings = (props) => {
             text={"Supprimer la prestation"}
             fontWeight={"500"}
             color={COLORS.error}
-            func={() => ctrl.delete.data(data._id, nav)}
+            func={() => ctrl.delete.service(data._id, nav)}
           />
         </View>
       </ScrollView>

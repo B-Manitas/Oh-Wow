@@ -1,8 +1,11 @@
+// Super-class import
+import { SuperController } from "./SuperController";
+
+// Mixins import
 import { Find } from "./Find";
 import { Add } from "./Add";
 import { OnClose } from "./OnClose";
 import { GoTo } from "./GoTo";
-import { SuperController } from "./SuperController";
 import { Update } from "./Update";
 import { Delete } from "./Delete";
 import { OnPress } from "./OnPress";
@@ -20,6 +23,7 @@ export class Controller extends SuperController {
     super(backend, frontend);
     this.backend = backend;
     this.frontend = frontend;
+    this.schema = frontend;
 
     this.get = new Find(backend, frontend);
     this.add = new Add(backend, frontend);
@@ -31,9 +35,5 @@ export class Controller extends SuperController {
     this.goTo = new GoTo(backend, frontend);
     this.onFormat = new OnFormat(backend, frontend);
     this.onSearch = new OnSearch(backend, frontend);
-  }
-
-  fakeAudit(data) {
-    return this.frontend.fakeAudit(data);
   }
 }

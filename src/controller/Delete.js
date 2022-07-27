@@ -6,19 +6,36 @@ import { deleteService } from "store/ActionsCreator";
 import PAGES from "constants/PAGES";
 
 export class Delete extends SuperController {
-  async thisUser() {
-    await this.user(this.thisUserData._id);
-  }
+  /** Delete the connected user. */
+  async thisUser(navigation) {
+    await this.frontend.delete.user(userID)(this.thisUserData._id);
 
-  @Catch
-  async user(navigation) {
-    await this.frontend.delete.user(this.thisUserData._id);
     removeUserStore();
     defaultStatus();
+
     navigation.navigate(PAGES.HOME);
     Alert.alert(`Your account has been successfully removed.`);
   }
 
+  /**
+   * Delete user.
+   * @param {Object} navigation The navigation object for changing page.
+   * @param {String} userID The ID user to be deleted.
+   */
+  @Catch
+  async user(navigation, userID) {
+    if (userID === this.thisUserData._id) this.thisUser(navigation);
+    else {
+      await this.frontend.delete.user(userID);
+      navigation.goBack();
+    }
+  }
+
+  /**
+   * Delete service.
+   * @param {String} id The ID of the service to be deleted.
+   * @param {Object} navigation The navigation object for changing page.
+   */
   @Catch
   async service(id, navigation) {
     await this.frontend.delete.service(id);
@@ -27,22 +44,13 @@ export class Delete extends SuperController {
     Alert.alert(`The service has been successfully removed.`);
   }
 
-  @Catch
-  salon(salon, salons_init, setSalons, setSalonsInit, setSelect) {
-    const id = salons_init.findIndex((item) => item._id === salon._id);
-
-    if (id === -1) setSalons((p) => p.filter((s) => s._id !== salon._id));
-    else {
-      this.frontend.delete.salon(salon._id);
-      setSalonsInit(salons_init.filter((s) => s._id !== salon._id));
-    }
-
-    setSelect(id > 0 ? id - 1 : 0);
-  }
-
+  /**
+   * Delete appoinment.
+   * @param {String} id The ID of the appointment to be deleted.
+   * @param {Function} setAptFilter The function to remove locally the appointment.
+   */
   @Catch
   async appointment(id, setAptFilter) {
-    console.log("w");
     if (setAptFilter) setAptFilter((p) => p.filter((item) => item._id != id));
     await this.frontend.delete.appointment(id);
   }

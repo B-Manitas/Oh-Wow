@@ -18,6 +18,7 @@ export class Frontend extends SuperFrontend {
   constructor(backend) {
     super(backend);
     this.backend = backend;
+    
     this.add = new Add(backend);
     this.delete = new Delete(backend);
     this.get = new Find(backend);

@@ -8,10 +8,11 @@ import Page from "containers/Page";
 import Header from "parts/Header";
 import Searchbar from "componnents/Searchbar";
 import CtnUser from "containers/CtnUser";
+import Empty from "componnents/Empty";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
-import Utils from "model/Utils";
+import Utils from "model/utils/Utils";
 
 // Constants imports
 import { PLH } from "constants/TEXTS";
@@ -52,6 +53,7 @@ const Search = (props) => {
         data={users}
         keyExtractor={(item, _) => item._id}
         renderItem={(item) => <CtnUser nav={nav} user={item.item} />}
+        ListEmptyComponent={<Empty />}
       />
     </Page>
   );

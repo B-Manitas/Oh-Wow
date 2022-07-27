@@ -1,14 +1,13 @@
 export const ICON = {
   default: require("icon/default.png"),
-  menu_bl: require("icon/menu.png"),
-  menu: require("icon/menu_.png"),
-  back: require("icon/back.png"),
-  back_wh: require("icon/back_wh.png"),
-  close: require("icon/close.png"),
-  insta: require("icon/instagram.png"),
-  trash: require("icon/trash.png"),
+  menuBlack: require("icon/menuBlack.png"),
+  menuWhite: require("icon/menuWhite.png"),
+  backBack: require("icon/backBlack.png"),
+  backWhite: require("icon/backWhite.png"),
+  closeBlack: require("icon/closeBlack.png"),
   closeGray: require("icon/closeGray.png"),
-  chevron: require("icon/chevron.png"),
+  trash: require("icon/trash.png"),
+  insta: require("icon/instagram.png"),
 };
 
 export const PHOTO = {

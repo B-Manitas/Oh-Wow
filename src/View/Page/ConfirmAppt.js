@@ -41,7 +41,7 @@ const ConfirmAppt = (props) => {
 
   // Define radio box props
   const propsRadioBox = {
-    onPress: (id) => ctrl.onPress.radioOffer(apt.current, setIsOffer, id),
+    onPress: (id) => ctrl.onPress.offer(apt.current, setIsOffer, id),
     idSelected: isOffer,
     isFlex: true,
   };
@@ -122,7 +122,9 @@ const ConfirmAppt = (props) => {
       <BtnPrimary
         disabled={sending}
         text={sending ? "Envoie..." : "Confirmer la réservation"}
-        onPress={() => ctrl.add.appointment(navigation, apt, setAudit)}
+        onPress={() =>
+          ctrl.add.appointment(nav, apt.current, setAudit, setSending)
+        }
       />
     </Page>
   );

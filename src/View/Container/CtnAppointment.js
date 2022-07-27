@@ -16,6 +16,7 @@ import { ICON } from "constants/IMAGES";
 const CtnAppointment = (props) => {
   // Destructure componnent props
   const { data, setApts } = props;
+  const canDelete = props.canDelete === true ? true : false;
 
   // Define componnent state
   const date = new CDate(data.date);
@@ -31,7 +32,7 @@ const CtnAppointment = (props) => {
   return (
     <View style={[styles.container, date.isPast() && styles.containerPast]}>
       <Button
-        visible={ctrl.thisIsAdmin()}
+        visible={canDelete}
         image={ICON.trash}
         style={styles.trashBtn}
         onPress={() => ctrl.delete.appointment(data._id, setApts)}
@@ -109,6 +110,8 @@ const styles = StyleSheet.create({
     padding: 5,
     width: 35,
     height: 35,
+    elevation: 5,
+    zIndex: 5,
   },
 
   textDate: {

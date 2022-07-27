@@ -50,6 +50,10 @@ const Plannings = ({ navigation }) => {
     return () => setPlannings([]);
   }, [staff]);
 
+  useEffect(() => {
+    if (!showingPanel) setDate(CDate.today());
+  }, [showingPanel]);
+
   // Define the planning header props of the calendar picker componnent
   const propsPlanningsHeader = {
     date,
@@ -57,7 +61,7 @@ const Plannings = ({ navigation }) => {
     staff,
     setStaff,
     allOption: true,
-    showStaff: true
+    showStaff: ctrl.thisIsAdmin(),
   };
 
   if (plannings === undefined) return <Loader />;
@@ -69,9 +73,14 @@ const Plannings = ({ navigation }) => {
         date={date}
         header={<HeaderPicker {...propsPlanningsHeader} />}
         onPress={(day) =>
-          ctrl.onPress.calendarDay(day, setDate, setShowingPanel)
+          ctrl.onPress.planningDay(day, setDate, setShowingPanel)
         }
       />
+      
+      <Text style={styles.infoText}>
+        Appuyer sur un jour pour afficher les réservations.
+      </Text>
+      
       <SwipeablePanel
         showCloseButton={false}
         isActive={showingPanel}
@@ -106,5 +115,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 15,
     marginBottom: 20,
+  },
+
+  infoText: {
+    textAlign: "center",
+    fontSize: 18,
+    marginHorizontal: 20,
+    color: COLORS.darkGray,
+    marginBottom: 30,
+    fontWeight: "300",
   },
 });

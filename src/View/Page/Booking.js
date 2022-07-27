@@ -14,7 +14,7 @@ import HoursList from "generators/HoursList";
 import { controller as ctrl } from "model/Main";
 import Calendar from "model/utils/Calendar";
 import CDate from "model/utils/CDate";
-import Utils from "model/Utils";
+import Utils from "model/utils/Utils";
 
 const Booking = (props) => {
   // Destructure props
@@ -27,7 +27,7 @@ const Booking = (props) => {
   const [date, setDate] = useState(CDate.today());
   const [planning, setPlanning] = useState();
   const [salon, setSalon] = useState();
-  const [apt, setApt] = useState(ctrl.frontend.schemaAppointment(userID));
+  const [apt, setApt] = useState(ctrl.schema.appointment(userID));
 
   // Define componnent memo
   const calendar = useMemo(() => new Calendar(), []);
@@ -50,7 +50,7 @@ const Booking = (props) => {
 
   // Fetch planning on change date and apt data
   useEffect(() => {
-    ctrl.get.appointment(apt.id_salon, apt.id_staff, setPlanning);
+    ctrl.get.planningStaff(apt.id_staff, setPlanning);
   }, [date.month, date.year, apt.id_staff, apt.id_staff]);
 
   // Define calendar header props
@@ -59,7 +59,7 @@ const Booking = (props) => {
     date,
     setDate,
     staff: apt.id_staff,
-    setStaff: (s) => ctrl.onPress.aptStaff(setApt, s),
+    setStaff: (s) => ctrl.onChange.staff(setApt, s),
   };
 
   // Define calendar footer props

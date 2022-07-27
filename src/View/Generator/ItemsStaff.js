@@ -15,10 +15,10 @@ export const ItemsStaff = (props) => {
 
   // On loading componnent
   useEffect(() => {
-    if (allOption) ctrl.get.allEmployed(setStaff);
+    if (allOption) ctrl.get.allUserStaff(setStaff);
     else {
       const setDefaultValue = (staff) => onChange(staff[0]._id);
-      ctrl.get.allEmployed(setStaff, setDefaultValue);
+      ctrl.get.allUserStaff(setStaff, setDefaultValue);
     }
   }, []);
 

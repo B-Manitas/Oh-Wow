@@ -4,7 +4,7 @@ import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
 // Libraries imports
 import { controller as ctrl } from "model/Main";
-import Utils from "model/Utils";
+import Utils from "model/utils/Utils";
 
 // Constants imports
 import { STYLES_SHADOW } from "constants/STYLES";
@@ -21,7 +21,7 @@ const CtnUser = (props) => {
   // Define button props
   const propsButton = {
     style: styles.ctn,
-    onPress: () => ctrl.goTo.searchToUser(nav, user),
+    onPress: () => ctrl.goTo.client(nav, user),
   };
 
   // Define h2 text props

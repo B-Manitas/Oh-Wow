@@ -34,10 +34,12 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 1,
 
-    marginHorizontal: 5,
-    marginVertical: 7,
+    marginHorizontal: 3,
+    marginVertical: 3,
 
-    paddingVertical: 12,
+    minWidth: 43,
+    paddingHorizontal: 5,
+    height: 43,
   },
 
   text: {

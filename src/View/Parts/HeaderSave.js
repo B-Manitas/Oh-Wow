@@ -20,7 +20,7 @@ const HeaderSave = (props) => {
     <View style={styles.header}>
       <Button
         visible={!saving}
-        image={isBack ? ICON.back : ICON.close}
+        image={isBack ? ICON.backBlack : ICON.closeBlack}
         style={styles.close}
         onPress={onClose}
         noShadow

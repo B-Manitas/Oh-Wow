@@ -56,5 +56,5 @@ export default HoursList;
 const styles = StyleSheet.create({
   container: { marginBottom: 20 },
 
-  hoursCtn: { flexDirection: "row" },
+  hoursCtn: { flexDirection: "row", flexWrap: "wrap" },
 });

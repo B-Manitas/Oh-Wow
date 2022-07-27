@@ -1,4 +1,5 @@
-import Utils from "model/Utils";
+// Libraries import
+import _ from "lodash";
 
 /** The Schema class contains all the tables in the database. */
 export class Schema {
@@ -10,26 +11,16 @@ export class Schema {
    * Otherwise, return false.
    */
   isSchema(object, schema) {
-    return Utils.isEquals(Object.keys(object), Object.keys(schema));
+    return _.isEqual(Object.keys(object), Object.keys(schema));
   }
 
-  /**
-   * Tests whether the object is a user schema.
-   * @param {Object} data The test object
-   * @returns true if the keys of the object are equal to the keys of the user schema.
-   * Otherwise, return false.
-   */
-  isSchemaUser(data) {
-    return this.isSchema(data, this.schemaUser());
-  }
-
-  /** Get the login schema. */
-  schemaLogin() {
+  /** Get the database login schema. */
+  get login() {
     return { mail: "", password: "" };
   }
 
-  /** Get the user schema. */
-  schemaUser() {
+  /** Get the database user schema */
+  get user() {
     return {
       firstname: "",
       lastname: "",
@@ -39,11 +30,8 @@ export class Schema {
     };
   }
 
-  schemaStaff(_id = "", id_salon = null, is_admin = false) {
-    return { _id, id_salon, is_admin };
-  }
-
-  schemaSalon() {
+  /** Get the database salon schema. */
+  get salon() {
     return {
       _id: Date.now().toString(),
       name: "",
@@ -69,7 +57,8 @@ export class Schema {
     };
   }
 
-  schemaService() {
+  /** Get the database service schema. */
+  get service() {
     return {
       _id: Date.now().toString(),
       name: "",
@@ -82,7 +71,8 @@ export class Schema {
     };
   }
 
-  schemaAnonymous() {
+  /** Get the database anonymous user schema. */
+  get anonymous() {
     return {
       firstname: "",
       lastname: "",
@@ -90,7 +80,25 @@ export class Schema {
     };
   }
 
-  schemaAppointment(id_user = "", id_salon = "", id_service = "") {
+  /**
+   * Get the database staff schema.
+   * @param {String} _id The ID of the user to be staff.
+   * @param {String} id_salon The ID of the salon where the user work.
+   * @param {Boolean} is_admin True if user is admin. Otherwiser, false.
+   * @returns The database staff schema.
+   */
+  staff(_id = "", id_salon = null, is_admin = false) {
+    return { _id, id_salon, is_admin };
+  }
+
+  /**
+   * The database appointment schema.
+   * @param {String} id_user The ID of the user who booked new appointment.
+   * @param {String} id_salon The ID of the salon where the user booked the appointment.
+   * @param {String} id_service The ID of the service booked by the user.
+   * @returns The database appointment schema.
+   */
+  appointment(id_user = "", id_salon = "", id_service = "") {
     return {
       _id: Date.now().toString(),
       id_user,
@@ -102,14 +110,13 @@ export class Schema {
     };
   }
 
-  schemaAccess(_id = "", password = "") {
+  /**
+   * Get the database access schema.
+   * @param {String} _id The ID of the user.
+   * @param {String} password The password of the user.
+   * @returns The database access schema.
+   */
+  access(_id = "", password = "") {
     return { _id, password };
-  }
-
-  schemaApp() {
-    return {
-      _id: Date.now().toString(),
-      img: "data:image/jpg;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
-    };
   }
 }

@@ -33,7 +33,7 @@ export class Update extends SuperFrontend {
     const is_existing_user = await this.isExistingUser({ _id: id_user });
 
     if (is_existing_user) {
-      const staff_schema = this.schemaStaff(id_user, id_salon, is_admin);
+      const staff_schema = this.staff(id_user, id_salon, is_admin);
       await this.backend.update.staff(staff_schema);
     } else throw new UnknowUser();
   }

@@ -119,7 +119,7 @@ export class IsFormat extends Normalizer {
 
   isDayOff(day_off) {
     return (
-      this.isSchema(day_off, this.schemaSalon().day_off) &&
+      this.isSchema(day_off, this.salon.day_off) &&
       Object.values(day_off).every((val) => {
         return this.isBool(val);
       })
@@ -167,7 +167,7 @@ export class IsFormat extends Normalizer {
 
   isOffer(offer) {
     if (offer == null) return true;
-    else if (!this.isSchema(offer, this.schemaAnonymous())) return false;
+    else if (!this.isSchema(offer, this.anonymous)) return false;
     else {
       const firstname = this.isName(offer.firstname);
       const lastname = this.isName(offer.lastname);

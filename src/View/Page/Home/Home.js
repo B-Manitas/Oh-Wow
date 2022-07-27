@@ -10,11 +10,12 @@ import Loader from "pages/Loader";
 import Footer from "parts/Footer";
 import BtnSecondary from "buttons/BtnSecondary";
 import Button from "buttons/Button";
+import Empty from "componnents/Empty";
 
 // Library imports
 import _ from "lodash";
 import { controller as ctrl } from "model/Main";
-import Utils from "model/Utils";
+import Utils from "model/utils/Utils";
 
 // Contants imports
 import { ICON } from "constants/IMAGES";
@@ -75,11 +76,12 @@ const Home = (props) => {
       refreshing && styleList.onRefresh,
     ],
     ListFooterComponentStyle: styleList.footer,
+    ListEmptyComponent: <Empty />,
   };
 
   // Define button menu props.
   const propsMenuBtn = {
-    image: ICON.menu,
+    image: ICON.menuWhite,
     style: styles.menuBtn,
     onPress: () => ctrl.goTo.nav(nav),
   };

@@ -29,7 +29,7 @@ import {
 
 const ClientInfo = (props) => {
   // Destructure props
-  const { client, setClient, audit, salon, visible } = props;
+  const { client, setClient, audit, salon, visible, nav } = props;
 
   // Define componnent function
   const update = (key, v) => setClient((p) => ({ ...p, [key]: v }));
@@ -80,7 +80,7 @@ const ClientInfo = (props) => {
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
           <BtnThird
             text={"Supprimer définitivement le compte"}
-            onPres={() => controller.delete.user(navigation, user)}
+            onPres={() => controller.delete.user(nav, user)}
             important
           />
         </View>

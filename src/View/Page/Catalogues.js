@@ -9,16 +9,16 @@ import Header from "parts/Header";
 import Page from "containers/Page";
 import Searchbar from "componnents/Searchbar";
 import CtnService from "containers/Service/CtnService";
+import Empty from "componnents/Empty";
 
 // Libraries imports
 import { useIsFocused } from "@react-navigation/native";
 import { controller as ctrl } from "model/Main";
-import Utils from "model/Utils";
+import Utils from "model/utils/Utils";
 
 // Contants imports
 import { PLH } from "constants/TEXTS";
 import COLORS from "constants/COLORS";
-
 
 const Catalogues = (props) => {
   // Destructure componnent props
@@ -62,6 +62,7 @@ const Catalogues = (props) => {
         onRefresh={() => ctrl.get.allServices(setRefresh, setFetch)}
         numColumns={2}
         style={styles.flatlist}
+        ListEmptyComponent={<Empty />}
       />
 
       <Button

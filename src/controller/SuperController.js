@@ -1,5 +1,4 @@
 import _ from "lodash";
-import Utils from "model/Utils";
 import { STATE_USER } from "store/State";
 import { store } from "store/Store";
 import { ADMIN, EMPLOYEE } from "src/UserStatus";
@@ -23,8 +22,7 @@ export class SuperController {
 
   get thisIsConnected() {
     return (
-      this.thisUserData != null &&
-      !Utils.isEquals(this.thisUserData, STATE_USER)
+      this.thisUserData != null && !_.isEqual(this.thisUserData, STATE_USER)
     );
   }
 

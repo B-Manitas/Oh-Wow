@@ -4,8 +4,10 @@ import { FlatList, StyleSheet } from "react-native";
 
 // Componnent imports
 import BtnDay from "buttons/BtnDay";
+import Empty from "./Empty";
 
 const PickerCalendar = (props) => {
+  // Destructure props
   const { data, header, footer, onPress, date } = props;
 
   return (
@@ -20,6 +22,7 @@ const PickerCalendar = (props) => {
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
       numColumns={7}
+      ListEmptyComponent={<Empty />}
     />
   );
 };

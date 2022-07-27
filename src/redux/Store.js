@@ -1,9 +1,11 @@
-import { statusReducer, serviceReducer, userReducer } from "./Reducer";
-
+// Libraries import
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistStore, persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+
+// Reducer import
+import { statusReducer, serviceReducer, userReducer } from "./Reducer";
 
 // Define the reducers of the store.
 const reducers = combineReducers({

@@ -3,6 +3,7 @@ import { FlatList, StyleSheet } from "react-native";
 
 // Componnent imports
 import CtnAppointment from "containers/CtnAppointment";
+import Empty from "componnents/Empty";
 
 const ClientApt = (props) => {
   const { visible, appointments, setApts, client } = props;
@@ -17,6 +18,7 @@ const ClientApt = (props) => {
         <CtnAppointment data={{ ...item.item, ...client }} setApts={setApts} />
       )}
       showsVerticalScrollIndicator={false}
+      ListEmptyComponent={<Empty />}
     />
   );
 };

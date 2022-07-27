@@ -52,7 +52,7 @@ const Salons = (...props) => {
   const strFloat = (v) => ctrl.onFormat.float(v);
   const strTime = (v) => ctrl.onFormat.time(v);
   const onSave = () =>
-    ctrl.update.salon(salon, initSalon, setInitSalon, setAudit, setSaving);
+    ctrl.update.salon(setSaving, salon, initSalon, setInitSalon, setAudit);
 
   // On load componnent
   useEffect(() => {

@@ -37,7 +37,7 @@ const SignUp = (props) => {
 
   // Define componnent state
   const isFocused = useIsFocused();
-  const userSchema = ctrl.frontend.schemaUser();
+  const userSchema = ctrl.schema.user;
   const [canSignup, setCanSignup] = useState(false);
   const [send, setSend] = useState(false);
   const [data, setData] = useState(userSchema);

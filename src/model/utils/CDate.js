@@ -135,8 +135,4 @@ export default class CDate extends Date {
   copy() {
     return new CDate(this.getTimestamp());
   }
-
-  log() {
-    console.log(this.toString());
-  }
 }

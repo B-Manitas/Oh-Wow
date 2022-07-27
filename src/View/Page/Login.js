@@ -25,7 +25,7 @@ const Login = (props) => {
   const { navigation: nav } = props;
 
   // Define componnent state
-  const schemaUser = ctrl.frontend.schemaLogin();
+  const schemaUser = ctrl.schema.login;
   const isFocused = useIsFocused();
   const [send, setSend] = useState(false);
   const [data, setData] = useState(schemaUser);

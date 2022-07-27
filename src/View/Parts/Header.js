@@ -6,7 +6,7 @@ import { View, StyleSheet, Text, Image } from "react-native";
 import Button from "buttons/Button";
 
 // Libraries imports
-import Utils from "model/Utils";
+import Utils from "model/utils/Utils";
 
 // Constants imports
 import { PHOTO } from "constants/IMAGES";

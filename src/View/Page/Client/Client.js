@@ -25,9 +25,9 @@ const Client = (props) => {
   const [salon, setSalon] = useState();
 
   // Define componnent functions
-  const close = () => ctrl.goTo.back(nav);
-  const save = () =>
-    ctrl.onPress.client(initClient, client, setInitClient, setAudit, setSaving);
+  const onClose = () => ctrl.goTo.back(nav);
+  const onSave = () =>
+    ctrl.update.client(setSaving, client, initClient, setInitClient, setAudit);
 
   // On load componnent
   useEffect(() => {
@@ -44,8 +44,8 @@ const Client = (props) => {
     <Page>
       <HeaderSave
         canSave={page === 0 && !_.isEqual(initClient, client)}
-        onClose={close}
-        onSave={save}
+        onClose={onClose}
+        onSave={onSave}
         saving={saving}
         isBack
       />
@@ -75,6 +75,7 @@ const Client = (props) => {
         setClient={setClient}
         salon={salon}
         audit={audit}
+        nav={nav}
       />
       <ClientApt visible={page == 1} appointments={apts} client={initClient} />
     </Page>
