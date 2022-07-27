@@ -38,13 +38,9 @@ export class SuperFrontend extends Approver {
    * @param {Object} user The user data.
    * @returns true if the user exist. Otherwise, return false.
    */
-  async isExistingUser(user, setAudit) {
-    const get_back = this.backend.get;
-    const resp = await this._actions(
-      user,
-      get_back.user.bind(get_back),
-      setAudit
-    );
+  async isExistingUser(ID, setAudit) {
+    const getBack = this.backend.get;
+    const resp = await this._actions(ID, getBack.user.bind(getBack), setAudit);
     return resp != null;
   }
 

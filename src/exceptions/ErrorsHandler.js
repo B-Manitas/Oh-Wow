@@ -42,12 +42,19 @@ export default class ErrorHandler {
   manageExistingUser() {
     Alert.alert(
       "User already exist",
-      "A user with this e-mail address has already been registered."
+      "A user with this phone already been registered."
     );
   }
 
   /** Catching the UnknowUser. */
   manageUnknowError() {
+    if (!this.error.setAudit) return;
+
+    this.error.setAudit((prev) => ({
+      ...prev,
+      error: { unknowError: true },
+    }));
+
     Alert.alert(
       "Inexisting User",
       "The user is not yet registered in the database."
@@ -74,7 +81,6 @@ export default class ErrorHandler {
 
   /** Catching the NetworkStatuError. */
   manageBadStatus() {
-    console.log(this.error);
     Alert.alert(
       "Network Status Error",
       `Please contact the developer for the error status code ${this.error.status}`

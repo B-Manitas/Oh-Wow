@@ -1,4 +1,4 @@
-import { STAFF, SALON, SERVICE, USER, APP } from "./Collection";
+import { STAFF, SALON, SERVICE, USER, APP, ACCESS } from "./Collection";
 import { Request } from "./Request";
 
 export class Update extends Request {
@@ -37,6 +37,18 @@ export class Update extends Request {
    */
   async app(data) {
     await this.updateOne(APP, { _id: data._id }, { $set: { ...data } }, true);
+  }
+
+  /**
+   * Send a request to update an access's data of user.
+   * @param {Object} data The access's data to update.
+   */
+  async access(data) {
+    await this.updateOne(
+      ACCESS,
+      { _id: data._id },
+      { $set: { password: data.password } }
+    );
   }
 
   /**

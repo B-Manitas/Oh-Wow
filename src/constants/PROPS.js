@@ -20,7 +20,6 @@ export const INPUT_MAIL = {
   returnKeyType: "next",
   maxLength: 50,
   keyboardType: "email-address",
-  secureTextEntry: false,
   errorText: ERROR_TEXT.mail,
 };
 
@@ -28,6 +27,7 @@ export const INPUT_PASSWORD = {
   text: "Mot de passe",
   placeholder: PLH.password,
   secureTextEntry: true,
+  autoCorrect: false,
   typeAndroid: "password",
   typeIOS: "password",
   returnKeyType: "done",
@@ -44,7 +44,6 @@ export const INPUT_FIRSTNAME = {
   returnKeyType: "next",
   maxLength: 12,
   keyboardType: "default",
-  secureTextEntry: false,
   errorText: ERROR_TEXT.name,
 };
 
@@ -56,19 +55,17 @@ export const INPUT_LASTNAME = {
   returnKeyType: "next",
   maxLength: 12,
   keyboardType: "default",
-  secureTextEntry: false,
   errorText: ERROR_TEXT.name,
 };
 
 export const INPUT_PHONE = {
-  text: "Telephone",
+  text: "Telephone (+216)",
   placeholder: PLH.phone,
   typeAndroid: "tel",
   typeIOS: "telephoneNumber",
   returnKeyType: "next",
-  maxLength: 14,
+  maxLength: 11,
   keyboardType: "number-pad",
-  secureTextEntry: false,
   errorText: ERROR_TEXT.phone,
 };
 

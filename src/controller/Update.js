@@ -9,10 +9,12 @@ import {
   addUserStore,
   removeUserStore,
   defaultStatus,
+  updateStatus,
 } from "store/ActionsCreator";
 
 // Libraries import
 import Catch from "exceptions/ErrorsCatcher";
+import Utils from "model/utils/Utils";
 import _ from "lodash";
 
 // Constants import
@@ -108,23 +110,69 @@ export class Update extends SuperController {
    * fields in the data are missing or have bad format.
    */
   @Catch
-  async client(setSaving, data, init, setInit, setAudit) {
+  async client(setSaving, data, init, setData, setInit, setAudit) {
+    if (!this.thisIsAdmin()) return;
+
     setSaving(true);
-    if (!_.isEqual(data, init) && this.thisIsAdmin()) {
+
+    // Check if the password must be updated.
+    if (data.password != undefined) {
+      const access = { _id: data._id, password: data.password };
+      await this.frontend.update.access(access, setAudit);
+    }
+
+    // Remove password key
+    data = Utils.removeKey(data, "password");
+
+    // Check if user data must be updated.
+    if (!_.isEqual(data, init)) {
       const user = Utils.removeKey(data, "is_admin", "id_salon");
-      await this.frontend.update.user(user, setAudit);
+      await this.frontend.update.user(user._id, setAudit);
+
+      // console.log(data);
 
       if (data.id_salon == null) await this.frontend.delete.staff(data._id);
       else if (data.id_salon != null || data.is_admin)
         await this.frontend.update.staff(
           data._id,
           data.id_salon,
-          data.is_admin
+          data.is_admin,
+          setAudit
         );
-
-      setInit(data);
-      setAudit();
-      setSaving(false);
     }
+
+    setData(data);
+    setInit(data);
+    setAudit();
+    setSaving(false);
+  }
+
+  /**
+   * Logout the user if local access is different from that of the database.
+   * Update the user data and access if connected.
+   */
+  async localUserData(setWaiting) {
+    if (!this.thisIsConnected()) return;
+
+    setWaiting(true);
+
+    const userID = this.thisUserData._id;
+    const userAccess = this.thisUserData.access;
+    const DBAccess = await this.frontend.get.access(userID, userAccess);
+
+    // Disconnect the user if password have changed.
+    if (DBAccess == null) {
+      removeUserStore();
+      defaultStatus();
+    } else {
+      // Update user access.
+      await this.frontend.get.status(userID, updateStatus);
+
+      // Update user data.
+      const userData = await this.frontend.get.user(userID);
+      addUserStore({ ...userData, access: userAccess });
+    }
+
+    setWaiting(false);
   }
 }

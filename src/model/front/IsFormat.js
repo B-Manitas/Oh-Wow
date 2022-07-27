@@ -17,7 +17,7 @@ export class IsFormat extends Normalizer {
 
     this._FORMAT_AUTHCODE = /^[0-9]{6}$/;
     this._FORMAT_MAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
-    this._FORMAT_PHONE = /^([0-9]){2}( \d{2}){4}$/;
+    this._FORMAT_PHONE = /^([0-9]){2}( \d{2}){3}$/;
     this._FORMAT_DATE = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/;
     this._FORMAT_PASSWORD = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
     this._FORMAT_HOURS = /^(?:([01]?[0-9]|2[0-3])h)?(?:[0-5][0-9](?:min)?)?$/;

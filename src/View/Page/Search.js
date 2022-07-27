@@ -50,7 +50,7 @@ const Search = (props) => {
       <Searchbar value={query} setValue={setQuery} plh={PLH.searchUser} />
       <FlatList
         style={styles.container}
-        data={users}
+        data={users?.filter((u) => u._id != ctrl.thisUserData._id)}
         keyExtractor={(item, _) => item._id}
         renderItem={(item) => <CtnUser nav={nav} user={item.item} />}
         ListEmptyComponent={<Empty />}

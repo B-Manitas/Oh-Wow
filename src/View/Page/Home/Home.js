@@ -31,12 +31,14 @@ const Home = (props) => {
   const [app, setApp] = useState();
   const [services, setService] = useState();
   const [refreshing, setRefresh] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
   // Define componnent functions
   const fetchServices = () => ctrl.get.homeServices(setRefresh, setService);
 
   // On load componnent.
   useEffect(() => {
+    ctrl.update.localUserData(setWaiting);
     fetchServices();
     ctrl.get.app(setApp, (e) => (refApp.current = e));
 
@@ -86,7 +88,7 @@ const Home = (props) => {
     onPress: () => ctrl.goTo.nav(nav),
   };
 
-  if (!services || !app) return <Loader />;
+  if (!services || !app || waiting) return <Loader />;
   return (
     <Page>
       <FlatList {...propsList} />

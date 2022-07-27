@@ -8,17 +8,17 @@ import Header from "parts/Header";
 import Button from "buttons/Button";
 import Page from "containers/Page";
 import BtnPrimary from "buttons/BtnPrimary";
+import InputError from "inputs/InputError";
 
 // Librarie imports
 import { controller as ctrl } from "model/Main";
 import { useIsFocused } from "@react-navigation/native";
 
 // Constants imports
-import { INPUT_MAIL, INPUT_PASSWORD } from "constants/PROPS";
+import { INPUT_PHONE, INPUT_PASSWORD } from "constants/PROPS";
 import { STYLES_LINK } from "constants/STYLES";
 import COLORS from "constants/COLORS";
 import { ERROR_TEXT } from "constants/TEXTS";
-import InputError from "../Input/InputError";
 
 const Login = (props) => {
   // Destructure props
@@ -43,6 +43,7 @@ const Login = (props) => {
   }, [audit]);
 
   // Define componnent function
+  const strPhone = (phone) => ctrl.onFormat.phone(data.phone, phone);
   const login = () => ctrl.get.connect(data, nav, setAudit, setSend);
 
   return (
@@ -55,16 +56,17 @@ const Login = (props) => {
         )}
 
         <InputError
-          {...INPUT_MAIL}
-          value={data.mail}
-          setValue={(mail) => setData((props) => ({ ...props, mail }))}
-          valid={audit?.valid?.mail}
+          {...INPUT_PHONE}
+          value={data.phone}
+          setValue={(t) => setData((p) => ({ ...p, phone: strPhone(t) }))}
+          valid={audit?.valid?.phone}
         />
         <InputError
           {...INPUT_PASSWORD}
           value={data.password}
           setValue={(t) => setData((props) => ({ ...props, password: t }))}
           valid={audit?.valid?.password}
+          multilineErrorText
         />
 
         <View style={styles.buttonsCtn}>

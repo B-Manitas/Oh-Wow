@@ -28,8 +28,8 @@ const InputError = (props) => {
   // Define error text props
   const propsErrorText = {
     style: styles.errorText,
-    numberOfLines: props.multilineErrorText ? 10 : 1,
-    adjustsFontSizeToFit: !props.multilineErrorText,
+    numberOfLines: props.multilineErrorText ? props.multilineErrorText : 1,
+    adjustsFontSizeToFit: true,
   };
 
   return (

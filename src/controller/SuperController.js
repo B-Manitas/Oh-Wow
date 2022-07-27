@@ -1,11 +1,12 @@
 import _ from "lodash";
-import { STATE_USER } from "store/State";
-import { store } from "store/Store";
 import { ADMIN, EMPLOYEE } from "src/UserStatus";
 
+// Store import
+import { store } from "store/Store";
+import { STATE_USER } from "store/State";
+
 export class SuperController {
-  constructor(backend, frontend) {
-    this.backend = backend;
+  constructor(frontend) {
     this.frontend = frontend;
   }
 
@@ -15,22 +16,34 @@ export class SuperController {
   }
 
   /** Get the user status in the redux state. */
-  get this_user_access() {
-    if (this.thisIsConnected) return store.getState().status;
+  get thisUserAccess() {
+    if (this.thisIsConnected()) return store.getState().status;
     else return undefined;
   }
 
-  get thisIsConnected() {
+  /**
+   * Check if current user is connected.
+   * @returns true if current user is connected. Otherwise, return false.
+   */
+  thisIsConnected() {
     return (
       this.thisUserData != null && !_.isEqual(this.thisUserData, STATE_USER)
     );
   }
 
-  thisIsAdmin() {
-    return this.thisIsConnected && this.this_user_access.status == ADMIN;
+  /**
+   * Check if current user is an employee.
+   * @returns true if current user is an employee. Otherwise, return false.
+   */
+  thisIsStaff() {
+    return this.thisIsConnected() && this.thisUserAccess.status == EMPLOYEE;
   }
 
-  get thisIsStaff() {
-    return this.thisIsConnected && this.this_user_access.status == EMPLOYEE;
+  /**
+   * Check if current user is an admin.
+   * @returns true if current user is an admin. Otherwise, return false.
+   */
+  thisIsAdmin() {
+    return this.thisIsConnected() && this.thisUserAccess.status == ADMIN;
   }
 }

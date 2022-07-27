@@ -27,7 +27,14 @@ const Client = (props) => {
   // Define componnent functions
   const onClose = () => ctrl.goTo.back(nav);
   const onSave = () =>
-    ctrl.update.client(setSaving, client, initClient, setInitClient, setAudit);
+    ctrl.update.client(
+      setSaving,
+      client,
+      initClient,
+      setClient,
+      setInitClient,
+      setAudit
+    );
 
   // On load componnent
   useEffect(() => {

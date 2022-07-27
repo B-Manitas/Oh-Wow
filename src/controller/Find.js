@@ -125,7 +125,7 @@ export class Find extends SuperController {
     setSend(true);
 
     const user = await this.frontend.get.connect(data, setAudit);
-    addUserStore(user);
+    addUserStore({ ...user, access: data.password });
     await this.frontend.get.status(user._id, updateStatus);
 
     navigation.navigate(PAGES.HOME);
@@ -141,7 +141,7 @@ export class Find extends SuperController {
    */
   @Catch
   async plannings(staffID, beginDate, endDate, ...funcs) {
-    await this.frontend.get.plannings(staffID, beginDate, endDate, ...funcs);
+    await this.frontend.get.planningStaffBetweenDates(staffID, beginDate, endDate, ...funcs);
   }
 
   /**

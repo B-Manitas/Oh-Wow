@@ -4,4 +4,4 @@ import { Frontend } from "./front/Frontend";
 
 const backend = new Backend();
 const frontend = new Frontend(backend);
-export const controller = new Controller(backend, frontend);
+export const controller = new Controller(frontend);

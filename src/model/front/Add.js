@@ -14,16 +14,16 @@ export class Add extends SuperFrontend {
   async user(data, setAudit) {
     this._approveData(data, setAudit);
 
-    const is_existing_user = await this.isExistingUser({ mail: data.mail });
-    if (is_existing_user) throw new ExistingUser(data);
+    const isExistingUser = await this.isExistingUser({ phone: data.phone });
+    if (isExistingUser) throw new ExistingUser(data);
 
-    const add_back = this.backend.add;
+    const addBack = this.backend.add;
     const user = Utils.removeKey(data, "password", "status");
-    const id = await this._actions(user, add_back.user.bind(add_back));
+    const id = await this._actions(user, addBack.user.bind(addBack));
 
     await this._actions(
       this.access(id, data.password),
-      add_back.access.bind(add_back)
+      addBack.access.bind(addBack)
     );
 
     return { ...id, ...user };
@@ -34,8 +34,8 @@ export class Add extends SuperFrontend {
    * @param {Object} salon The object data to be added to the database.
    */
   async salon(salon) {
-    const add_back = this.backend.add;
-    await this._actions(salon, add_back.salon.bind(add_back));
+    const addBack = this.backend.add;
+    await this._actions(salon, addBack.salon.bind(addBack));
   }
 
   /**
@@ -45,10 +45,10 @@ export class Add extends SuperFrontend {
    * fields in the data are missing or have bad format.
    */
   async appointment(appointment, setAudit) {
-    const add_back = this.backend.add;
+    const addBack = this.backend.add;
     await this._actions(
       appointment,
-      add_back.appointment.bind(add_back),
+      addBack.appointment.bind(addBack),
       setAudit
     );
   }

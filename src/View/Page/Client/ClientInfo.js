@@ -25,6 +25,7 @@ import {
   INPUT_FIRSTNAME,
   INPUT_LASTNAME,
   INPUT_PHONE,
+  INPUT_PASSWORD,
 } from "constants/PROPS";
 
 const ClientInfo = (props) => {
@@ -59,6 +60,15 @@ const ClientInfo = (props) => {
               update("phone", ctrl.onFormat.phone(client.phone, t))
             }
             valid={audit?.valid?.phone}
+          />
+          <InputLong
+            {...INPUT_PASSWORD}
+            value={client.password}
+            setValue={(t) => update("password", t)}
+            valid={audit?.valid?.password}
+            contextMenuHidden
+            secureTextEntry={false}
+            multilineErrorText={2}
           />
         </View>
 

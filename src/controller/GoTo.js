@@ -116,7 +116,7 @@ export class GoTo extends SuperController {
    * @param {Object} service The service data.
    */
   booking(nav, service) {
-    if (this.thisIsConnected) nav.navigate(PAGES.BOOKING, { data: service });
+    if (this.thisIsConnected()) nav.navigate(PAGES.BOOKING, { data: service });
     else nav.navigate(PAGES.CONNECTION);
   }
 

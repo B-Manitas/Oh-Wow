@@ -7,34 +7,39 @@ export class Update extends SuperFrontend {
    * @param {Object} user The data entered by the user.
    */
   async user(user, setAudit) {
-    const update_back = this.backend.update;
-    await this._actions(user, update_back.user.bind(update_back), setAudit);
+    const updateBack = this.backend.update;
+    await this._actions(user, updateBack.user.bind(updateBack), setAudit);
   }
 
   async app(app) {
     await this.backend.update.app(app);
   }
 
+  async access(data, setAudit) {
+    const updateBack = this.backend.update;
+    await this._actions(data, updateBack.access.bind(updateBack), setAudit);
+  }
+
   async salon(salon, setAudit) {
-    const update_back = this.backend.update;
-    await this._actions(salon, update_back.salon.bind(update_back), setAudit);
+    const updateBack = this.backend.update;
+    await this._actions(salon, updateBack.salon.bind(updateBack), setAudit);
   }
 
   async service(service, setAudit) {
-    const update_back = this.backend.update;
+    const updateBack = this.backend.update;
     return await this._actions(
       service,
-      update_back.service.bind(update_back),
+      updateBack.service.bind(updateBack),
       setAudit
     );
   }
 
-  async staff(id_user, id_salon, is_admin) {
-    const is_existing_user = await this.isExistingUser({ _id: id_user });
-
-    if (is_existing_user) {
-      const staff_schema = this.staff(id_user, id_salon, is_admin);
-      await this.backend.update.staff(staff_schema);
-    } else throw new UnknowUser();
+  async staff(id_user, id_salon, is_admin, setAudit) {
+    const isExistingUser = await this.isExistingUser(id_user);
+    
+    if (isExistingUser) {
+      const staff = super.staff(id_user, id_salon, is_admin);
+      await this.backend.update.staff(staff);
+    } else throw new UnknowUser(setAudit);
   }
 }

@@ -27,11 +27,6 @@ const styles = StyleSheet.create({
 
   containerError: { marginVertical: 25 },
 
-  text: {
-    fontSize: 20,
-    paddingVertical: 7,
-  },
-
   containerInput: {
     position: "absolute",
     right: 0,

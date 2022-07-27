@@ -42,7 +42,7 @@ export class Request {
       headers: this.#headers,
     });
 
-    if (!response.ok) throw new BadStatus(response);
+    if (!response.ok) throw new BadStatus(response.status);
     return response.json();
   }
 

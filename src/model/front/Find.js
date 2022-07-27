@@ -15,8 +15,8 @@ export class Find extends SuperFrontend {
    * @returns a list of users.
    */
   async allUsers(...funcs) {
-    const get_back = this.backend.get;
-    return await this._get(get_back.allUsers.bind(get_back), ...funcs);
+    const getBack = this.backend.get;
+    return await this._get(getBack.allUsers.bind(getBack), ...funcs);
   }
 
   /**
@@ -25,8 +25,8 @@ export class Find extends SuperFrontend {
    * @returns a list of staff.
    */
   async allStaff(...funcs) {
-    const get_back = this.backend.get;
-    return await this._get(get_back.allStaff.bind(get_back), ...funcs);
+    const getBack = this.backend.get;
+    return await this._get(getBack.allStaff.bind(getBack), ...funcs);
   }
 
   /**
@@ -35,8 +35,8 @@ export class Find extends SuperFrontend {
    * @returns a list of staff with their data.
    */
   async allUserStaff(...funcs) {
-    const get_back = this.backend.get;
-    return await this._get(get_back.allUserStaff.bind(get_back), ...funcs);
+    const getBack = this.backend.get;
+    return await this._get(getBack.allUserStaff.bind(getBack), ...funcs);
   }
 
   /**
@@ -55,8 +55,8 @@ export class Find extends SuperFrontend {
    * @returns a list of services.
    */
   async homeServices(...funcs) {
-    const get_back = this.backend.get;
-    return await this._get(get_back.homeServices.bind(get_back), ...funcs);
+    const getBack = this.backend.get;
+    return await this._get(getBack.homeServices.bind(getBack), ...funcs);
   }
 
   /**
@@ -65,8 +65,16 @@ export class Find extends SuperFrontend {
    * @returns a list of salons.
    */
   async allSalons(...funcs) {
-    const get_back = this.backend.get;
-    return await this._get(get_back.allSalons.bind(get_back), ...funcs);
+    const getBack = this.backend.get;
+    return await this._get(getBack.allSalons.bind(getBack), ...funcs);
+  }
+
+  /**
+   * Get user data stored in the database.
+   * @returns user data.
+   */
+  async user(id) {
+    return await this.backend.get.user(id);
   }
 
   /**
@@ -77,10 +85,10 @@ export class Find extends SuperFrontend {
    * @throws {FailedLogin} If the user has not yet been registered.
    */
   async connect(user, setAudit) {
-    const get_back = this.backend.get;
+    const getBack = this.backend.get;
     const data = await this._actions(
       user,
-      get_back.connect.bind(get_back),
+      getBack.connect.bind(getBack),
       setAudit
     );
 
@@ -161,5 +169,14 @@ export class Find extends SuperFrontend {
   async app(...funcs) {
     const resp = await this.backend.get.app();
     funcs.map((func) => func(resp));
+  }
+
+  /**
+   * Get access of a user in the database.
+   * @param {String} iduncs The user ID.
+   * @param {...Function} funcs The functions to set access data.
+   */
+  async access(id, access) {
+    return await this.backend.get.access(id, access);
   }
 }

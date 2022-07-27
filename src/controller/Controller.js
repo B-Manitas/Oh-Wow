@@ -15,25 +15,23 @@ import { OnSearch } from "./OnSearch";
 
 export class Controller extends SuperController {
   /**
-   * Manage the link between the application and the user.
-   * @param {Backend} backend The backend of the application.
+   * Manage the link between the frontend model and the user.
    * @param {Frontend} frontend The frontend of the application.
    */
-  constructor(backend, frontend) {
-    super(backend, frontend);
-    this.backend = backend;
+  constructor(frontend) {
+    super(frontend);
     this.frontend = frontend;
     this.schema = frontend;
 
-    this.get = new Find(backend, frontend);
-    this.add = new Add(backend, frontend);
-    this.update = new Update(backend, frontend);
-    this.delete = new Delete(backend, frontend);
-    this.onClose = new OnClose(backend, frontend);
-    this.onPress = new OnPress(backend, frontend);
-    this.onChange = new OnChange(backend, frontend);
-    this.goTo = new GoTo(backend, frontend);
-    this.onFormat = new OnFormat(backend, frontend);
-    this.onSearch = new OnSearch(backend, frontend);
+    this.get = new Find(frontend);
+    this.add = new Add(frontend);
+    this.update = new Update(frontend);
+    this.delete = new Delete(frontend);
+    this.onClose = new OnClose(frontend);
+    this.onPress = new OnPress(frontend);
+    this.onChange = new OnChange(frontend);
+    this.goTo = new GoTo(frontend);
+    this.onFormat = new OnFormat(frontend);
+    this.onSearch = new OnSearch(frontend);
   }
 }

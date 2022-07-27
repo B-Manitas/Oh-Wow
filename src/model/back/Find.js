@@ -148,11 +148,19 @@ export class Find extends Request {
   }
 
   /**
-   * Get app data store in the database.
+   * Get app data stored in the database.
    * @returns app data.
    */
   async app() {
     return await this.findOne(APP, { _id: "0" });
+  }
+
+  /**
+   * Get user data stored in the database.
+   * @returns user data.
+   */
+  async user(ID) {
+    return await this.findOne(USER, { _id: ID });
   }
 
   /**
@@ -171,7 +179,7 @@ export class Find extends Request {
    */
   async connect(user) {
     const resp = await this.aggregate(USER, [
-      { $match: { mail: user.mail } },
+      { $match: { phone: user.mail } },
       {
         $lookup: {
           from: ACCESS,
@@ -187,6 +195,16 @@ export class Find extends Request {
     if (resp.length == 1 && !_.isEmpty(resp))
       return Utils.removeKey(resp[0], "connection");
     else return null;
+  }
+
+  /**
+   * Get the id of the user.
+   * @param {String} id The user ID.
+   * @param {String} access The token accessof the user.
+   * @returns id of the user if existing.
+   */
+  async access(id, access) {
+    return await this.findOne(ACCESS, { _id: id, password: access });
   }
 
   /**

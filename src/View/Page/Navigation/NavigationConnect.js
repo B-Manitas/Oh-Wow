@@ -16,7 +16,7 @@ import { NAVIGATION } from "constants/PROPS";
 
 const NavigationConnect = (props) => {
   const { nav } = props;
-  const isConnected = ctrl.thisIsConnected;
+  const isConnected = ctrl.thisIsConnected();
 
   if (!isConnected) return null;
   return (

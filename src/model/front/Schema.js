@@ -16,7 +16,7 @@ export class Schema {
 
   /** Get the database login schema. */
   get login() {
-    return { mail: "", password: "" };
+    return { phone: "", password: "" };
   }
 
   /** Get the database user schema */
@@ -24,7 +24,6 @@ export class Schema {
     return {
       firstname: "",
       lastname: "",
-      mail: "",
       phone: "",
       password: "",
     };

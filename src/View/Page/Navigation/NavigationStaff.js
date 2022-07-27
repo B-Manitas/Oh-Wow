@@ -17,7 +17,7 @@ const NavigationStaff = (props) => {
   const { nav } = props;
 
   // Define componnent state
-  const isStaff = ctrl.thisIsStaff || ctrl.thisIsAdmin();
+  const isStaff = ctrl.thisIsStaff() || ctrl.thisIsAdmin();
 
   if (!isStaff) return null;
   return (
