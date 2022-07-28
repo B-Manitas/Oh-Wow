@@ -52,6 +52,8 @@ const Salons = (...props) => {
   const strTime = (v) => ctrl.onFormat.time(v);
   const onSave = () =>
     ctrl.update.salon(setSaving, salon, initSalon, setInitSalon, setAudit);
+  const setHoursOn = (k, v) =>
+    setSalon({ ...salon, hours_on: { ...salon.hours_on, [k]: strTime(v) } });
 
   // On load componnent
   useEffect(() => {
@@ -128,12 +130,12 @@ const Salons = (...props) => {
               textRight="Fermeture"
               plhLeft={PLH.amOn}
               plhRight={PLH.amOff}
-              valueLeft={formatHours(salon.am_on)}
-              valueRight={formatHours(salon.am_off)}
-              setValueLeft={(v) => setSalon({ ...salon, am_on: strTime(v) })}
-              setValueRight={(v) => setSalon({ ...salon, am_off: strTime(v) })}
-              validLeft={audit?.valid?.am_on}
-              validRight={audit?.valid?.am_off}
+              valueLeft={formatHours(salon?.hours_on.am_on)}
+              valueRight={formatHours(salon?.hours_on.am_off)}
+              setValueLeft={(v) => setHoursOn("am_on", v)}
+              setValueRight={(v) => setHoursOn("am_off", v)}
+              validLeft={audit?.valid?.hours_on?.am_on}
+              validRight={audit?.valid?.hours_on?.am_off}
             />
             <InputHours
               text={"L'après-midi"}
@@ -143,12 +145,12 @@ const Salons = (...props) => {
               textRight="Fermeture"
               plhLeft={PLH.pmOn}
               plhRight={PLH.pmOff}
-              valueLeft={formatHours(salon.pm_on)}
-              valueRight={formatHours(salon.pm_off)}
-              setValueLeft={(v) => setSalon({ ...salon, pm_on: strTime(v) })}
-              setValueRight={(v) => setSalon({ ...salon, pm_off: strTime(v) })}
-              validLeft={audit?.valid?.pm_on}
-              validRight={audit?.valid?.pm_off}
+              valueLeft={formatHours(salon?.hours_on.pm_on)}
+              valueRight={formatHours(salon?.hours_on.pm_off)}
+              setValueLeft={(v) => setHoursOn("pm_on", v)}
+              setValueRight={(v) => setHoursOn("pm_off", v)}
+              validLeft={audit?.valid?.hours_on?.pm_on}
+              validRight={audit?.valid?.hours_on?.pm_off}
             />
           </View>
 

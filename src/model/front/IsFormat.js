@@ -153,6 +153,41 @@ export class IsFormat extends Normalizer {
     return typeof hours === "number" || this._FORMAT_HOURS.test(hours);
   }
 
+  isHoursOn(hoursOn) {
+    // Check if hoursOn object contains only am_on, am_off, pm_on and pm_off key.
+    if (!this.isSchema(hoursOn, super.salon.hours_on)) return false;
+
+    const amOn = this.isHours(hoursOn.am_on);
+    const amOff = this.isHours(hoursOn.am_off);
+    const pmOn = this.isHours(hoursOn.pm_on);
+    const pmOff = this.isHours(hoursOn.pm_off);
+
+    // Check thath each hour has a good format.
+    if (!amOn || !amOff || !pmOn || !pmOff)
+      return { am_on: amOn, am_off: amOff, pm_on: pmOn, pm_off: pmOff };
+
+    const minAMOn = CDate.timeToMinute(hoursOn.am_on);
+    const minAMOff = CDate.timeToMinute(hoursOn.am_off);
+    const minPMOn = CDate.timeToMinute(hoursOn.pm_on);
+    const minPMOff = CDate.timeToMinute(hoursOn.pm_off);
+
+    const am = minAMOn <= minAMOff;
+    const amPM = minAMOff <= minPMOn;
+    const pm = minPMOn <= minPMOff;
+
+    // Check that opening hours are ealier than the closing hours.
+    if (!am || !amPM || !pm)
+      return {
+        am_on: am,
+        am_off: am && amPM,
+        pm_on: pm && amPM,
+        pm_off: pm,
+      };
+
+    // True if hours object is valid.
+    return true;
+  }
+
   isBool(bool) {
     return bool === true || bool === false;
   }

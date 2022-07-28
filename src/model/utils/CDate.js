@@ -48,6 +48,15 @@ export default class CDate extends Date {
     return new CDate(date.getFullYear(), date.getMonth(), date.getDate());
   }
 
+  static timeToMinute(time) {
+    if (typeof time === "number") return time;
+
+    time = time.replace(/[^h0-9]/g, "");
+    const [minutes, hours] = time.split("h").reverse();
+
+    return 60 * parseInt(hours || 0) + parseInt(minutes || 0);
+  }
+
   getFirstDate() {
     return new CDate(this.getFullYear(), this.getMonth(), 1);
   }

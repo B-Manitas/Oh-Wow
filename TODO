@@ -30,7 +30,7 @@ Booking
 ✔ Fix size pour petite durée @done(22-07-26 17:24)
 
 Staff
-☐ Ajouter toggle droit de supression
+✘ Ajouter toggle droit de supression @cancelled(22-07-28 10:46)
 
 Client
 ☐ Ajouter confirmation du set admin et employer
@@ -41,10 +41,10 @@ Settings
 ✔ Un admin puisse deconnecter un employer de force @done(22-07-27 20:42)
 
 Gestion Salons
-☐ PM après AM, vérifier overlap 
+✔ PM après AM, vérifier overlap @done(22-07-28 15:16)
 
 CAS LIMITE
-☐ lookup request après une supression
+✔ lookup request après une supression @done(22-07-28 15:16)
 
 Question Générale
 ✔ Y a t-il un mail dans les contacts ? @done(22-07-26 17:18)
@@ -56,25 +56,6 @@ Question Générale
 
 
 28 17 01 83 
-
-PAGE CLEAN
-✔ BtnSecondary @done(22-07-18 22:20)
-✔ Home @done(22-07-18 22:52)
-✔ HomeHeader @done(22-07-19 09:19)
-✔ Searchbar @done(22-07-19 16:01)
-✔ CtnService @done(22-07-19 16:40)
-✔ CtnServiceLarge @done(22-07-19 16:57)
-✔ ServiceMain @done(22-07-19 19:33)
-✔ Service @done(22-07-19 20:17)
-✔ ServiceMain @done(22-07-20 11:28)
-✔ InputLong @done(22-07-20 11:28)
-✔ All Navigation @done(22-07-21 07:49)
-✔ Contact @done(22-07-21 09:53)
-✔ Settings @done(22-07-23 15:43)
-
-
-shcema
-
 
 Docstring
 ✔ Back @done(22-07-27 09:40)

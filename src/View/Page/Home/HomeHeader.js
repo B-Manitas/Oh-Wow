@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
   h1: {
     fontSize: 45,
-    fontWeight: "500",
+    fontWeight: "200",
     textAlign: "center",
     color: COLORS.main,
   },

@@ -1,4 +1,5 @@
 // Super-class import
+import CDate from "../utils/CDate";
 import { Schema } from "./Schema";
 
 /**
@@ -38,11 +39,10 @@ export class Normalizer extends Schema {
         return this.offer(value);
 
       case "duration":
-      case "am_on":
-      case "am_off":
-      case "pm_on":
-      case "pm_off":
         return this.time(value);
+
+      case "hours_on":
+        return this.hoursOn(value);
 
       case "day_off":
       case "is_opened":
@@ -109,12 +109,12 @@ export class Normalizer extends Schema {
   }
 
   time(time) {
-    if (typeof time === "number") return time;
+    return CDate.timeToMinute(time);
+  }
 
-    time = time.replace(/[^h0-9]/g, "");
-    const [minutes, hours] = time.split("h").reverse();
-
-    return 60 * parseInt(hours || 0) + parseInt(minutes || 0);
+  hoursOn(hours) {
+    Object.keys(hours).map((k) => (hours[k] = this.time(hours[k])));
+    return hours;
   }
 
   number(value) {
