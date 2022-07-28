@@ -25,11 +25,12 @@ import CDate from "model/utils/CDate";
 
 // Constant imports
 import {
+  KEYBOARD_AVOIDING_VIEW,
   INPUT_ADDRESS,
   INPUT_COORD,
   INPUT_PHONE,
   INPUT_SALONS,
-  KEYBOARD_AVOIDING_VIEW,
+  INPUT_DATE_OFF,
 } from "constants/PROPS";
 import { TITLE } from "constants/TEXTS";
 import { STYLE_GENERAL } from "constants/STYLES";
@@ -54,6 +55,8 @@ const Salons = (...props) => {
     ctrl.update.salon(setSaving, salon, initSalon, setInitSalon, setAudit);
   const setHoursOn = (k, v) =>
     setSalon({ ...salon, hours_on: { ...salon.hours_on, [k]: strTime(v) } });
+  const setDateOff = (t) =>
+    setSalon({ ...salon, date_off: ctrl.onFormat.dateOff(salon.date_off, t) });
 
   // On load componnent
   useEffect(() => {
@@ -174,10 +177,10 @@ const Salons = (...props) => {
               Les dates de fermeture :
             </Text>
             <InputError
+              {...INPUT_DATE_OFF}
               value={salon.date_off}
-              setValue={(v) => setSalon({ ...salon, date_off: v })}
-              placeholder={PLH.dateOff}
-              multiline
+              setValue={(t) => setDateOff(t)}
+              valid={audit?.valid?.date_off}
             />
           </View>
 
@@ -186,7 +189,7 @@ const Salons = (...props) => {
             <ToggleLong
               text={"Prise de nouveau RDV"}
               value={salon.is_opened}
-              setValue={(b) => setSalon({ ...salon, date_off: b })}
+              setValue={(b) => setSalon({ ...salon, is_opened: b })}
             />
           </View>
         </ScrollView>

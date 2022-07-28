@@ -15,7 +15,7 @@ const CtnUser = (props) => {
   const { nav, user } = props;
 
   // Define componnent state
-  const isAdmin = user.is_admin;
+  const isAdmin = user.is_admin === true;
   const isStaff = user.id_salon != null && !isAdmin;
 
   // Define button props

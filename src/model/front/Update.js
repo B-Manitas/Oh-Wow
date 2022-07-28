@@ -34,12 +34,17 @@ export class Update extends SuperFrontend {
     );
   }
 
-  async staff(id_user, id_salon, is_admin, setAudit) {
-    const isExistingUser = await this.isExistingUser(id_user);
-    
+  async staff(data, setAudit) {
+    const isExistingUser = await this.isExistingUser(data._id);
+
     if (isExistingUser) {
-      const staff = super.staff(id_user, id_salon, is_admin);
-      await this.backend.update.staff(staff);
+      // The data must match to the staff schema before being added to the database.
+      if (!this.isSchema(data, super.staff()))
+        data = super.staff(data._id, data.id_salon, data.is_admin);
+
+      console.log(data);
+      const updateBack = this.backend.update;
+      await this._actions(data, updateBack.staff.bind(updateBack), setAudit);
     } else throw new UnknowUser(setAudit);
   }
 }

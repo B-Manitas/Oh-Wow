@@ -47,7 +47,9 @@ const Plannings = ({ navigation }) => {
     const endDate = date.getLastDate().getTimestamp();
     ctrl.get.plannings(staff, beginDate, endDate, setPlannings);
 
-    return () => setPlannings([]);
+    return () => {
+      setPlannings([]);
+    };
   }, [staff]);
 
   useEffect(() => {
@@ -76,22 +78,28 @@ const Plannings = ({ navigation }) => {
           ctrl.onPress.planningDay(day, setDate, setShowingPanel)
         }
       />
-      
+
       <Text style={styles.infoText}>
         Appuyer sur un jour pour afficher les réservations.
       </Text>
-      
+
       <SwipeablePanel
         showCloseButton={false}
         isActive={showingPanel}
         onClose={() => setShowingPanel(false)}
+        scrollViewProps={{ showsVerticalScrollIndicator: false }}
         allowTouchOutside
         style={styles.panel}
       >
         <Text style={styles.h1Panel}>Le planning {strH1}</Text>
 
         {selectedPlanning.map((apt) => (
-          <CtnAppointment key={apt._id} data={apt} setApts={setPlannings} />
+          <CtnAppointment
+            key={apt._id}
+            data={apt}
+            setApts={setPlannings}
+            canDelete
+          />
         ))}
       </SwipeablePanel>
     </Page>
@@ -107,6 +115,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: COLORS.gray,
     paddingHorizontal: 10,
+    paddingBottom: 30,
   },
 
   h1Panel: {

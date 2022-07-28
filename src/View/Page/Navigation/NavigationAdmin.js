@@ -28,7 +28,7 @@ const NavigationAdmin = (props) => {
         {...NAVIGATION}
       />
       <Button
-        text="Gérer mon application"
+        text="Gérer mon salon"
         onPress={() => ctrl.goTo.salons(nav)}
         {...NAVIGATION}
       />

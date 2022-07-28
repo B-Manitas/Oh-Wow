@@ -118,3 +118,11 @@ export const INPUT_DURATION = {
   maxLength: 5,
   errorText: ERROR_TEXT.duration,
 };
+
+export const INPUT_DATE_OFF = {
+  placeholder: PLH.dateOff,
+  maxLength: 100,
+  errorText: ERROR_TEXT.dateOff,
+  multiline: true,
+  keyboardType: "number-pad",
+};

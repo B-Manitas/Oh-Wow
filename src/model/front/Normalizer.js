@@ -45,11 +45,12 @@ export class Normalizer extends Schema {
         return this.hoursOn(value);
 
       case "day_off":
-      case "is_opened":
       case "img":
       case "password":
+      case "is_opened":
       case "is_trend":
       case "is_hidden":
+      case "is_admin":
       case "name":
       case "date":
       case "description":

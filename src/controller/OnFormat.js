@@ -55,4 +55,23 @@ export class OnFormat extends SuperController {
     text = text.replace(/[^0-9h]/g, "");
     return this.integer(text, setText);
   }
+
+  dateOff(prevtext, text, setText) {
+    if (prevtext < text) {
+      // Remove extra characters
+      text = text.replace(/[^0-9]/g, "");
+
+      // Add slash every two digits.
+      text = text.replace(/[0-9]{2}/g, "$&/");
+
+      // Add comma every DD/DD pattern with D a digit.
+      text = text.replace(/([0-9]{2})\/([0-9]{2})/g, "$&;");
+      
+      // Replace ;/ by ;
+      text = text.replace(/;\//g, ";");
+    }
+
+    if (setText) setText(text);
+    else return text;
+  }
 }

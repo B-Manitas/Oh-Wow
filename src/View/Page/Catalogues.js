@@ -37,7 +37,9 @@ const Catalogues = (props) => {
     ctrl.get.allServices(setRefresh, setFetch, setService);
     setAdmin(ctrl.thisIsAdmin());
 
-    return () => Utils.cleanUp(setService, setRefresh);
+    return () => {
+      Utils.cleanUp(setService, setRefresh);
+    };
   }, [isFocused]);
 
   // On refresh

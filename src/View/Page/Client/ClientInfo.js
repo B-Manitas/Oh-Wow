@@ -1,6 +1,7 @@
 // React imports
 import React from "react";
 import {
+  Dimensions,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
@@ -11,7 +12,10 @@ import {
 // Componnent imports
 import BtnThird from "buttons/BtnThird";
 import ToggleLong from "componnents/ToggleLong";
+import InputError from "inputs/InputError";
 import InputLong from "inputs/InputLong";
+import CtnView from "containers/CtnView";
+import DaysCheckBoxList from "generators/DaysCheckBoxList";
 
 // Librairies imports
 import { controller as ctrl } from "model/Main";
@@ -26,14 +30,30 @@ import {
   INPUT_LASTNAME,
   INPUT_PHONE,
   INPUT_PASSWORD,
+  INPUT_DATE_OFF,
 } from "constants/PROPS";
 
 const ClientInfo = (props) => {
   // Destructure props
   const { client, setClient, audit, salon, visible, nav } = props;
+  const staff = ctrl.schema.staff();
+  const isStaff = !client.is_admin && client.id_salon != null;
 
   // Define componnent function
   const update = (key, v) => setClient((p) => ({ ...p, [key]: v }));
+  const setStaff = (b) =>
+    setClient((p) => ({
+      ...p,
+      id_salon: b ? salon._id : null,
+      date_off: staff.date_off,
+      day_off: staff.day_off,
+    }));
+
+  const setDateOff = (t) =>
+    setClient({
+      ...client,
+      date_off: ctrl.onFormat.dateOff(client.date_off, t),
+    });
 
   if (!visible) return null;
   return (
@@ -77,7 +97,7 @@ const ClientInfo = (props) => {
           <ToggleLong
             text={"Employé"}
             value={client.is_admin || client.id_salon != null}
-            setValue={(b) => update("id_salon", b ? salon._id : null)}
+            setValue={(b) => setStaff(b)}
           />
           <ToggleLong
             text={"Administrateur"}
@@ -85,6 +105,29 @@ const ClientInfo = (props) => {
             setValue={(b) => update("is_admin", b)}
           />
         </View>
+
+        <CtnView style={STYLE_GENERAL.sectionCtn} visible={isStaff}>
+          <Text style={STYLE_GENERAL.sectionH1}>Les jours de repos :</Text>
+          <DaysCheckBoxList
+            value={client.day_off}
+            setValue={(v) =>
+              setClient({
+                ...client,
+                day_off: { ...client.day_off, ...v },
+              })
+            }
+          />
+        </CtnView>
+
+        <CtnView style={STYLE_GENERAL.sectionCtn} visible={isStaff}>
+          <Text style={STYLE_GENERAL.sectionH1}>Les dates de congés :</Text>
+          <InputError
+            {...INPUT_DATE_OFF}
+            value={client.date_off}
+            setValue={(t) => setDateOff(t)}
+            valid={audit?.valid?.date_off}
+          />
+        </CtnView>
 
         <View style={STYLE_GENERAL.sectionCtn}>
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
@@ -104,6 +147,6 @@ export default ClientInfo;
 const styles = StyleSheet.create({
   container: {
     top: 50,
-    height: "90%",
+    height: Dimensions.get("screen").height - 200,
   },
 });

@@ -33,8 +33,16 @@ export class Find extends Request {
    * Get all staff stored in the database.
    * @returns a list of objects.
    */
-  async allStaff() {
+  async allStaffs() {
     return await this.find(STAFF);
+  }
+
+  /**
+   * Get all employee stored in the database.
+   * @returns a list of objects.
+   */
+  async allEmployee() {
+    return await this.find(STAFF, { filter: { is_admin: false } });
   }
 
   /**
@@ -135,6 +143,7 @@ export class Find extends Request {
           date: 1,
           offer: 1,
           service: "$service.name",
+          duration: "$service.duration",
           firstname: "$user.firstname",
           lastname: "$user.lastname",
           phone: "$user.phone",
@@ -275,6 +284,7 @@ export class Find extends Request {
           offer: 1,
           salon: "$salon.name",
           service: "$service.name",
+          duration: "$service.duration",
           staff: "$staff.firstname",
           price: "$service.price",
         },
@@ -324,6 +334,7 @@ export class Find extends Request {
           offer: 1,
           salon: "$salon.name",
           service: "$service.name",
+          duration: "$service.duration",
           staff: "$staff.firstname",
         },
       },

@@ -1,5 +1,5 @@
 import { Request } from "./Request";
-import { APPT, SALON, SERVICE, USER } from "./Collection";
+import { APPT, SALON, SERVICE, STAFF, USER } from "./Collection";
 
 export class Delete extends Request {
   /**
@@ -23,7 +23,7 @@ export class Delete extends Request {
    * @param {String} ID The staff ID to be deleted.
    */
   async staff(ID) {
-    await this.deleteOne(SERVICE, { _id: ID });
+    await this.deleteOne(STAFF, { _id: ID });
   }
 
   /**

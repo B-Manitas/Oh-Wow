@@ -29,13 +29,24 @@ const Search = (props) => {
 
   // On focus page
   useEffect(() => {
+    if (!isFocused) return;
+
     ctrl.get.allUsersWithFunction(setFetch);
-    return () => Utils.cleanUp(setFetch);
+
+    return () => {
+      Utils.cleanUp(setFetch);
+    };
   }, [isFocused]);
 
   // On fetching data
   useEffect(() => {
+    if (!isFocused) return;
+
     setUsers(fetch);
+
+    return () => {
+      Utils.cleanUp(setUsers);
+    };
   }, [fetch]);
 
   // On search users

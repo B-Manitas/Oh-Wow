@@ -24,9 +24,19 @@ export class Find extends SuperFrontend {
    * @param {...Function} funcs The functions to set staff data.
    * @returns a list of staff.
    */
-  async allStaff(...funcs) {
+  async allStaffs(...funcs) {
     const getBack = this.backend.get;
-    return await this._get(getBack.allStaff.bind(getBack), ...funcs);
+    return await this._get(getBack.allStaffs.bind(getBack), ...funcs);
+  }
+
+  /**
+   * Get all staff stored in the database.
+   * @param {...Function} funcs The functions to set staff data.
+   * @returns a list of staff.
+   */
+  async allEmployee(...funcs) {
+    const getBack = this.backend.get;
+    return await this._get(getBack.allEmployee.bind(getBack), ...funcs);
   }
 
   /**

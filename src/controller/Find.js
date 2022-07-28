@@ -46,6 +46,15 @@ export class Find extends SuperController {
   }
 
   /**
+   * Fetch all staffs in the database.
+   * @param  {...Function} funcs The functions to set list of staffs.
+   */
+  @Catch
+  allEmployee(...funcs) {
+    this.frontend.get.allEmployee(...funcs);
+  }
+
+  /**
    * Fetch all appointments of a user.
    * @param {*} id The ID of the user.
    * @param  {...Function} funcs The functions to set list of user appointments.
@@ -91,7 +100,7 @@ export class Find extends SuperController {
   @Catch
   async allUsersWithFunction(...funcs) {
     const user = await this.frontend.get.allUsers();
-    const staff = await this.frontend.get.allStaff();
+    const staff = await this.frontend.get.allStaffs();
 
     const data = user.map((item) => {
       const access = staff.find((s) => s._id == item._id);
@@ -141,7 +150,12 @@ export class Find extends SuperController {
    */
   @Catch
   async plannings(staffID, beginDate, endDate, ...funcs) {
-    await this.frontend.get.planningStaffBetweenDates(staffID, beginDate, endDate, ...funcs);
+    await this.frontend.get.planningStaffBetweenDates(
+      staffID,
+      beginDate,
+      endDate,
+      ...funcs
+    );
   }
 
   /**

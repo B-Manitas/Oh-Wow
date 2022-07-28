@@ -11,7 +11,7 @@ export class Schema {
    * Otherwise, return false.
    */
   isSchema(object, schema) {
-    return _.isEqual(Object.keys(object), Object.keys(schema));
+    return _.isEqual(Object.keys(object).sort(), Object.keys(schema).sort());
   }
 
   /** Get the database login schema. */
@@ -89,7 +89,21 @@ export class Schema {
    * @returns The database staff schema.
    */
   staff(_id = "", id_salon = null, is_admin = false) {
-    return { _id, id_salon, is_admin };
+    return {
+      _id,
+      id_salon,
+      is_admin,
+      date_off: "",
+      day_off: {
+        0: false,
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+        6: false,
+      },
+    };
   }
 
   /**

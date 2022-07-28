@@ -47,4 +47,5 @@ export const ERROR_TEXT = {
   duration: "Formats '10', '1h' ou '1h10'",
   failedLogin: "Identifiant ou mot de passe invalide.",
   hours: "Horaire invalide",
+  dateOff: "Date ou format invalide: JJ/MM;JJ/MM;"
 };

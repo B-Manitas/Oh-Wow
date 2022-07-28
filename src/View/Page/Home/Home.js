@@ -42,7 +42,9 @@ const Home = (props) => {
     fetchServices();
     ctrl.get.app(setApp, (e) => (refApp.current = e));
 
-    return () => Utils.cleanUp(setRefresh, setService);
+    return () => {
+      Utils.cleanUp(setRefresh, setService);
+    };
   }, []);
 
   // On change app state.

@@ -42,10 +42,15 @@ const Client = (props) => {
     ctrl.get.salon(setSalon);
   }, []);
 
-  // After saving
+  // After saving and catch error audit
   useEffect(() => {
     setSaving(false);
   }, [audit]);
+
+  // If user reset input, then canceled audit error.
+  useEffect(() => {
+    if(_.isEqual(initClient, client)) setAudit()
+  }, [client]);
 
   return (
     <Page>

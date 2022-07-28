@@ -2,10 +2,10 @@ import CDate from "./CDate";
 
 export default class Calendar {
   #isFirstDateOn = true;
-  #day_off;
-  #date_off;
+  #dayOff;
+  #dateOff;
   #date;
-  #days_list;
+  #daysList;
   #bookings;
   #salon;
 
@@ -14,12 +14,16 @@ export default class Calendar {
     else this.#date = date;
   }
 
-  setDayOff(day_off) {
-    this.#day_off = Object.keys(day_off).filter((k) => day_off[k]);
+  setDayOff(salonDayOff, staffDayOff) {
+    this.#dayOff = Object.keys(salonDayOff).filter((k) => salonDayOff[k]);
+    this.#dayOff.push(
+      ...Object.keys(staffDayOff).filter((k) => staffDayOff[k])
+    );
   }
 
-  setDateOff(date_off) {
-    this.#date_off = date_off.split(";");
+  setDateOff(salonDateOff, staffDateOff) {
+    this.#dateOff = salonDateOff.split(";");
+    this.#dateOff.push(...staffDateOff.split(";"));
   }
 
   setFirstDateOn(func, date) {
@@ -30,14 +34,14 @@ export default class Calendar {
   }
 
   initCalendars() {
-    this.#days_list = new Array(42).fill(0);
+    this.#daysList = new Array(42).fill(0);
   }
 
   isDateOn(date) {
     return (
       (!date.isPast() || (date.isPast() && date.isSameDate(CDate.today()))) &&
-      !this.#day_off.includes(date.getDay().toString()) &&
-      !this.#date_off.includes(date.toDateString(true))
+      !this.#dayOff.includes(date.getDay().toString()) &&
+      !this.#dateOff.includes(date.toDateString(true))
     );
   }
 
@@ -83,8 +87,8 @@ export default class Calendar {
     return this.getHours(
       date,
       dur,
-      this.#salon.am_on,
-      this.#salon.am_off,
+      this.#salon.hours_on.am_on,
+      this.#salon.hours_on.am_off,
       is_date_on
     );
   }
@@ -93,13 +97,13 @@ export default class Calendar {
     return this.getHours(
       date,
       dur,
-      this.#salon.pm_on,
-      this.#salon.pm_off,
+      this.#salon.hours_on.pm_on,
+      this.#salon.hours_on.pm_off,
       is_date_on
     );
   }
 
-  getCalendars(date, setDate, plannings, salon, dur) {
+  getCalendars(date, setDate, plannings, salon, dur, staff) {
     if (!salon) return [];
 
     this.#isFirstDateOn = true;
@@ -107,8 +111,8 @@ export default class Calendar {
     this.#salon = salon;
 
     this.setDate(date);
-    this.setDayOff(salon.day_off);
-    this.setDateOff(salon.date_off);
+    this.setDayOff(salon.day_off, staff.day_off);
+    this.setDateOff(salon.date_off, staff.date_off);
     this.initCalendars();
 
     for (var day = 0; day < date.getMonthLength(); day++) {
@@ -121,7 +125,7 @@ export default class Calendar {
       const pm = isDateOn ? this.getPMHours(date, dur, isDateOn) : [];
       const shift = CDate.getFirstDay(date.year, date.month);
 
-      this.#days_list[shift + day] = {
+      this.#daysList[shift + day] = {
         date,
         is_on: isDateOn && (am.is_on || pm.is_on),
         am_hours: am.hours,
@@ -129,7 +133,7 @@ export default class Calendar {
       };
     }
 
-    return this.#days_list;
+    return this.#daysList;
   }
 
   getPlanning(date, plannings) {
@@ -143,9 +147,9 @@ export default class Calendar {
 
       const apt = this.#bookings?.find((b) => date.isSameDate(b.date));
       const shift = CDate.getFirstDay(date.year, date.month);
-      this.#days_list[shift + day] = { date, is_on: apt != undefined };
+      this.#daysList[shift + day] = { date, is_on: apt != undefined };
     }
 
-    return this.#days_list;
+    return this.#daysList;
   }
 }

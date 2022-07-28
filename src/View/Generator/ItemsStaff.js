@@ -4,6 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 
 // Libraries import
 import { controller as ctrl } from "model/Main";
+import Utils from "model/utils/Utils";
 
 export const ItemsStaff = (props) => {
   // Destructure props
@@ -20,6 +21,10 @@ export const ItemsStaff = (props) => {
       const setDefaultValue = (staff) => onChange(staff[0]._id);
       ctrl.get.allUserStaff(setStaff, setDefaultValue);
     }
+
+    return () => {
+      Utils.cleanUp(setStaff);
+    };
   }, []);
 
   // On change staff
@@ -32,7 +37,7 @@ export const ItemsStaff = (props) => {
     }
   }, [staff]);
 
-  if (!staff)
+  if (!staff || (allOption && isInit))
     return <Picker.Item key={0} value={null} label={"Chargement..."} />;
   else
     return staff.map((item, id) => (

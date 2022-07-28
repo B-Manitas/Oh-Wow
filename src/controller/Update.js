@@ -123,21 +123,31 @@ export class Update extends SuperController {
     }
 
     // Remove password key
+    init = Utils.removeKey(init, "password");
     data = Utils.removeKey(data, "password");
 
     // Check if user data must be updated.
     if (!_.isEqual(data, init)) {
-      const user = Utils.removeKey(data, "is_admin", "id_salon");
-      await this.frontend.update.user(user._id, setAudit);
+      const user = Utils.removeKey(
+        data,
+        "is_admin",
+        "id_salon",
+        "day_off",
+        "date_off"
+      );
+      await this.frontend.update.user(user, setAudit);
 
-      if (data.id_salon == null) await this.frontend.delete.staff(data._id);
-      else if (data.id_salon != null || data.is_admin)
-        await this.frontend.update.staff(
-          data._id,
-          data.id_salon,
-          data.is_admin,
-          setAudit
-        );
+      const staff = Utils.removeKey(data, "firstname", "lastname", "phone");
+      const staffInit = Utils.removeKey(init, "firstname", "lastname", "phone");
+
+      // Update the staff data only if it have changed.
+      if (!_.isEqual(staff, staffInit)) {
+        // Check if the user has losed staff access.
+        if (staff.id_salon == null) await this.frontend.delete.staff(staff._id);
+        
+        else if (staff.id_salon != null || staff.is_admin)
+          await this.frontend.update.staff(staff, setAudit);
+      }
     }
 
     setData(data);

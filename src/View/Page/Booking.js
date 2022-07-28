@@ -28,30 +28,47 @@ const Booking = (props) => {
   const [planning, setPlanning] = useState();
   const [salon, setSalon] = useState();
   const [apt, setApt] = useState(ctrl.schema.appointment(userID));
+  const [staffs, setStaffs] = useState();
 
   // Define componnent memo
   const calendar = useMemo(() => new Calendar(), []);
 
-  const days = useMemo(
-    () =>
-      calendar?.getCalendars(date, setDate, planning, salon, service.duration),
-    [planning]
-  );
+  const days = useMemo(() => {
+    if (!staffs || !planning) return;
+
+    // Find the selected staff.
+    const staff = staffs.find((s) => s._id == apt.id_staff);
+
+    // Compute calendar days and hours which are opened and closed off.
+    return calendar?.getCalendars(
+      date,
+      setDate,
+      planning,
+      salon,
+      service.duration,
+      staff
+    );
+  }, [planning, staffs, apt.id_staff]);
 
   // On load componnent
   useEffect(() => {
     setApt((p) => ({ ...p, id_service: service._id, date: date }));
 
     // Fetch data salon and set to apt data
+    ctrl.get.allEmployee(setStaffs, (s) =>
+      setApt((p) => ({ ...p, id_staff: s[0]._id }))
+    );
     ctrl.get.salon(setSalon, (s) => setApt((p) => ({ ...p, id_salon: s._id })));
 
-    return () => Utils.cleanUp(setSalon, setApt);
+    return () => {
+      Utils.cleanUp(setSalon, setStaffs, setApt);
+    };
   }, []);
 
   // Fetch planning on change date and apt data
   useEffect(() => {
     ctrl.get.planningStaff(apt.id_staff, setPlanning);
-  }, [date.month, date.year, apt.id_staff, apt.id_staff]);
+  }, [date.month, date.year, apt.id_staff, apt.id_staff, staffs]);
 
   // Define calendar header props
   const propsCalendarHeader = {
@@ -70,7 +87,7 @@ const Booking = (props) => {
     selected: apt.date,
   };
 
-  if (!salon || !days || !apt) return <Loader />;
+  if (!salon || !days || !apt || !staffs) return <Loader />;
   else
     return (
       <Page>

@@ -35,7 +35,9 @@ const Appointments = (props) => {
     ctrl.get.userApt(userID, false, setUpcoming);
     ctrl.get.userApt(userID, true, setHistoric);
 
-    return () => Utils.cleanUp(setHistoric, setUpcoming);
+    return () => {
+      Utils.cleanUp(setHistoric, setUpcoming);
+    };
   }, []);
 
   // Define radio box props
