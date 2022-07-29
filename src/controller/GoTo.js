@@ -111,6 +111,14 @@ export class GoTo extends SuperController {
   }
 
   /**
+   * Go to photo page.
+   * @param {Object} nav The navigation object for changing page.
+   */
+  legal(nav) {
+    nav.navigate(PAGES.LEGAL);
+  }
+
+  /**
    * Go to previous opened page.
    * @param {Object} nav The navigation object for changing page.
    */

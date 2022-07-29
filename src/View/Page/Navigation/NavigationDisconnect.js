@@ -51,6 +51,11 @@ const NavigationDisconnect = (props) => {
           onPress={() => ctrl.goTo.contact(nav)}
           {...NAVIGATION}
         />
+        <Button
+          text={"Légal"}
+          onPress={() => ctrl.goTo.legal(nav)}
+          {...NAVIGATION}
+        />
       </View>
     </View>
   );

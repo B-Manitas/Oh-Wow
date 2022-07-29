@@ -16,4 +16,5 @@ export default PAGES = {
   CONFIRM_APT: "confirm_apt",
   PLANNING: "plannings",
   PHOTO: "photos",
+  LEGAL: "legal",
 };

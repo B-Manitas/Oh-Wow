@@ -36,15 +36,15 @@ const Header = (props) => {
     style: styles.button,
     noShadow: true,
   };
-  
+
   // Define button props
   const propsButtonImg = {
     image: PHOTO.logo,
     onPress: onPress ? onPress : headerType?.onPress,
     style: styles.img,
     noShadow: true,
-    visible: addLogo,
-    activeOpacity: 1
+    visible: addLogo === true,
+    activeOpacity: 1,
   };
 
   return (

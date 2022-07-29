@@ -25,6 +25,7 @@ import Contact from "./src/View/Page/Contact";
 import Client from "./src/View/Page/Client/Client";
 import Plannings from "./src/View/Page/Plannings";
 import Salons from "./src/View/Page/Salons";
+import Legal from "./src/View/Page/Legal";
 import Photos from "./src/View/Page/Photos/Photos";
 
 // Constants imports
@@ -70,6 +71,7 @@ export default function App() {
             <Stack.Screen name={PAGES.BOOKING} component={Booking} />
             <Stack.Screen name={PAGES.CONFIRM_APT} component={ConfirmAppt} />
             <Stack.Screen name={PAGES.PLANNING} component={Plannings} />
+            <Stack.Screen name={PAGES.LEGAL} component={Legal} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

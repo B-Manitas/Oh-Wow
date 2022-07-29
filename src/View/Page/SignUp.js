@@ -96,10 +96,11 @@ const SignUp = (props) => {
           <View style={styles.parts}>
             <CheckBoxText onPress={setCanSignup} state={canSignup} />
             <Button
-              text={"Accepter les conditions générales d'utilisations"}
+              text={"Je reconnais avoir lu et compris les CGU et je les accepte"}
               nbLines={2}
               styleText={styles.link}
               noShadow
+              onPress={() => ctrl.goTo.legal(nav)}
             />
           </View>
 
