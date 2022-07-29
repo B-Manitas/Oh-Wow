@@ -69,4 +69,22 @@ export class Delete extends SuperController {
     if (setAptFilter) setAptFilter((p) => p.filter((item) => item._id != id));
     await this.frontend.delete.appointment(id);
   }
+
+  /**
+   * Delete photo.
+   * @param {String} id The ID of the photo to be deleted.
+   * @param {Function} setAptFilter The function to remove locally the photo.
+   * @param {Function} setZooming The function to reset the zoom value.
+   * @param {Function} setSelected The function to reset the selected photo value.
+   */
+  @Catch
+  async photo(id, setPhotos, setZooming, setSelected) {
+    if (!(await this.alertDelete("la photo"))) return;
+
+    await this.frontend.delete.photo(id);
+
+    setPhotos((p) => p.filter((item) => item._id != id));
+    setZooming();
+    setSelected();
+  }
 }

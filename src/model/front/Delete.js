@@ -33,6 +33,15 @@ export class Delete extends SuperFrontend {
   }
 
   /**
+   * Delete photo.
+   * @param {String} id The ID of the photo to be deleted.
+   */
+  async photo(id) {
+    const deleteBack = this.backend.delete;
+    await this._actions(id, deleteBack.photo.bind(deleteBack));
+  }
+
+  /**
    * Delete salon.
    * @param {String} id The ID of the salon to be deleted.
    */

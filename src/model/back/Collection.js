@@ -6,3 +6,4 @@ export const SERVICE = "service";
 export const SALON = "salon";
 export const APPT = "appointment";
 export const ACCESS = "access";
+export const PHOTO = "photo";

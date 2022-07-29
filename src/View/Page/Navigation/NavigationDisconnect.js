@@ -38,6 +38,11 @@ const NavigationDisconnect = (props) => {
           onPress={() => ctrl.goTo.services(nav)}
           {...NAVIGATION}
         />
+        <Button
+          text={"Nos photos"}
+          onPress={() => ctrl.goTo.photo(nav)}
+          {...NAVIGATION}
+        />
       </View>
 
       <View style={STYLES_NAV.section}>

@@ -33,6 +33,11 @@ const NavigationConnect = (props) => {
           {...NAVIGATION}
         />
         <Button
+          text={"Nos photos"}
+          onPress={() => ctrl.goTo.photo(nav)}
+          {...NAVIGATION}
+        />
+        <Button
           text={"Mes rendez-vous"}
           onPress={() => ctrl.goTo.appointments(nav)}
           {...NAVIGATION}

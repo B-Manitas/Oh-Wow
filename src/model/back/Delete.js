@@ -1,5 +1,5 @@
 import { Request } from "./Request";
-import { APPT, SALON, SERVICE, STAFF, USER } from "./Collection";
+import { APPT, PHOTO, SALON, SERVICE, STAFF, USER } from "./Collection";
 
 export class Delete extends Request {
   /**
@@ -32,6 +32,14 @@ export class Delete extends Request {
    */
   async salon(ID) {
     await this.deleteOne(SALON, { _id: ID });
+  }
+
+  /**
+   * Delete photo in the database.
+   * @param {String} ID The photo ID to be deleted.
+   */
+  async photo(ID) {
+    await this.deleteOne(PHOTO, { _id: ID });
   }
 
   /**

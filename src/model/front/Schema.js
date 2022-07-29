@@ -81,6 +81,11 @@ export class Schema {
     };
   }
 
+  /** Get the database anonymous user schema. */
+  photo(img = "data:image/jpg;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=") {
+    return { _id: Date.now().toString(), img };
+  }
+
   /**
    * Get the database staff schema.
    * @param {String} _id The ID of the user to be staff.

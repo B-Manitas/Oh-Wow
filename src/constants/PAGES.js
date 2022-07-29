@@ -15,4 +15,5 @@ export default PAGES = {
   BOOKING: "booking",
   CONFIRM_APT: "confirm_apt",
   PLANNING: "plannings",
+  PHOTO: "photos",
 };

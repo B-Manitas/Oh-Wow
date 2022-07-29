@@ -42,7 +42,6 @@ export class Update extends SuperFrontend {
       if (!this.isSchema(data, super.staff()))
         data = super.staff(data._id, data.id_salon, data.is_admin);
 
-      console.log(data);
       const updateBack = this.backend.update;
       await this._actions(data, updateBack.staff.bind(updateBack), setAudit);
     } else throw new UnknowUser(setAudit);

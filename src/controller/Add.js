@@ -12,6 +12,7 @@ import Catch from "exceptions/ErrorsCatcher";
 
 // Constant import
 import PAGES from "constants/PAGES";
+import _ from "lodash";
 
 export class Add extends SuperController {
   /**
@@ -54,5 +55,15 @@ export class Add extends SuperController {
     await this.frontend.add.appointment(appointment, setAudit);
     Alert.alert(`Your appointment has been validated.`);
     navigation.navigate(PAGES.HOME);
+  }
+
+  @Catch
+  async photo(newPhoto, setNewPhoto, setPhotos) {
+    if (!newPhoto) return;
+
+    newPhoto = this.frontend.photo(newPhoto.img);
+    await this.frontend.add.photo(newPhoto);
+    setPhotos((p) => [...p, newPhoto]);
+    setNewPhoto();
   }
 }

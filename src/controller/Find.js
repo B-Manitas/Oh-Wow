@@ -53,6 +53,15 @@ export class Find extends SuperController {
   allEmployee(...funcs) {
     this.frontend.get.allEmployee(...funcs);
   }
+  
+  /**
+   * Fetch all photos from the database.
+   * @param  {...Function} funcs The functions to set list of photos.
+   */
+  @Catch
+  allPhotos(...funcs) {
+    this.frontend.get.allPhotos(...funcs);
+  }
 
   /**
    * Fetch all appointments of a user.

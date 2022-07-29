@@ -1,7 +1,16 @@
 import _ from "lodash";
 import Utils from "../utils/Utils";
 import CDate from "../utils/CDate";
-import { STAFF, SALON, SERVICE, USER, ACCESS, APPT, APP } from "./Collection";
+import {
+  STAFF,
+  SALON,
+  SERVICE,
+  USER,
+  ACCESS,
+  APPT,
+  APP,
+  PHOTO,
+} from "./Collection";
 import { Request } from "./Request";
 
 export class Find extends Request {
@@ -43,6 +52,14 @@ export class Find extends Request {
    */
   async allEmployee() {
     return await this.find(STAFF, { filter: { is_admin: false } });
+  }
+
+  /**
+   * Get all photos stored from the database.
+   * @returns a list of objects.
+   */
+  async allPhotos() {
+    return await this.find(PHOTO);
   }
 
   /**

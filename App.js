@@ -25,6 +25,9 @@ import Contact from "./src/View/Page/Contact";
 import Client from "./src/View/Page/Client/Client";
 import Plannings from "./src/View/Page/Plannings";
 import Salons from "./src/View/Page/Salons";
+import Photos from "./src/View/Page/Photos/Photos";
+
+// Constants imports
 import PAGES from "./src/constants/PAGES";
 
 const Stack = createNativeStackNavigator();
@@ -53,6 +56,7 @@ export default function App() {
               component={Navigation}
               options={{ gestureEnabled: true }}
             />
+            <Stack.Screen name={PAGES.PHOTO} component={Photos} />
             <Stack.Screen name={PAGES.LOGIN} component={Login} />
             <Stack.Screen name={PAGES.SIGNUP} component={SignUp} />
             <Stack.Screen name={PAGES.SALONS} component={Salons} />

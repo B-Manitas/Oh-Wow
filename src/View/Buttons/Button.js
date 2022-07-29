@@ -22,6 +22,7 @@ const Button = (props) => {
     ],
     disabled,
     onPress: props.onPress,
+    activeOpacity: props.activeOpacity,
   };
 
   // Define image props

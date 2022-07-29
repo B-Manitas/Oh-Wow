@@ -2,7 +2,7 @@
 import { Request } from "./Request";
 
 // Collection name import
-import { ACCESS, APPT, SALON, SERVICE, USER } from "./Collection";
+import { ACCESS, APPT, PHOTO, SALON, SERVICE, USER } from "./Collection";
 
 export class Add extends Request {
   /**
@@ -21,6 +21,15 @@ export class Add extends Request {
    */
   async salon(salon) {
     return await this.insertOne(SALON, salon);
+  }
+
+  /**
+   * Send request to insert new photo in the database.
+   * @param {Object} photo The photo's data to insert in the database.
+   * @returns The photo's ID inserted in the database.
+   */
+  async photo(photo) {
+    return await this.insertOne(PHOTO, photo);
   }
 
   /**

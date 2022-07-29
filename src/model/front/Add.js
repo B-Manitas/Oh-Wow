@@ -39,6 +39,15 @@ export class Add extends SuperFrontend {
   }
 
   /**
+   * Add new photo in the database.
+   * @param {Object} salon The object data to be added to the database.
+   */
+  async photo(photo) {
+    const addBack = this.backend.add;
+    await this._actions(photo, addBack.photo.bind(addBack));
+  }
+
+  /**
    * Add new appointment in the database.
    * @param {Object} appointment The object data to be added to the database.
    * @param {Function} setAudit The hook function to be called when required

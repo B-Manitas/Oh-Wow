@@ -40,6 +40,16 @@ export class Find extends SuperFrontend {
   }
 
   /**
+   * Get all photos stored from the database.
+   * @param {...Function} funcs The functions to set photos.
+   * @returns a list of photos.
+   */
+  async allPhotos(...funcs) {
+    const getBack = this.backend.get;
+    return await this._get(getBack.allPhotos.bind(getBack), ...funcs);
+  }
+
+  /**
    * Fetch user staff with their user data in the database.
    * @param  {...Function} funcs The functions to set data.
    * @returns a list of staff with their data.
