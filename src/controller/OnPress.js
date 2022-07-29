@@ -40,10 +40,10 @@ export class OnPress extends SuperController {
    * @param {Function} setSelectedView Function to set the selected offer view.
    * @param {Number} selectedView 1 if is offer, else 0.
    */
-  offer(apt, setSelectedView, selectedView) {
-    const offer = selectedView == 1 ? this.schema.anonymous : null;
+  offer(setApt, setSelectedView, selectedView) {
+    const offer = selectedView == 1 ? this.frontend.anonymous : null;
 
-    apt = { ...apt, offer };
+    setApt((p) => ({ ...p, offer }));
     setSelectedView(selectedView);
   }
 
@@ -82,7 +82,7 @@ export class OnPress extends SuperController {
     });
 
     if (result.cancelled) return;
-    
+
     if (!Utils.lessThan1MB(result.base64))
       Alert.alert("Erreur: L'image doit faire moins 1MB.");
     else {

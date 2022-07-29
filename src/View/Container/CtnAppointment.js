@@ -4,6 +4,7 @@ import { Text, View, StyleSheet } from "react-native";
 
 // Componnent imports
 import Button from "buttons/Button";
+import CtnView from "containers/CtnView";
 
 // Libraries imports
 import CDate from "model/utils/CDate";
@@ -17,6 +18,7 @@ const CtnAppointment = (props) => {
   // Destructure componnent props
   const { data, setApts } = props;
   const canDelete = props.canDelete === true ? true : false;
+  const showComment = props.showComment === true ? true : false;
 
   // Define componnent state
   const date = new CDate(data.date);
@@ -85,6 +87,11 @@ const CtnAppointment = (props) => {
           </Text>
         </View>
       </View>
+
+      <CtnView style={styles.field} visible={showComment}>
+        <Text style={styles.h2Key}>Commentaire:</Text>
+        <Text style={styles.h2Value}>{data.comment}</Text>
+      </CtnView>
     </View>
   );
 };

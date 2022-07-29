@@ -50,7 +50,7 @@ const Plannings = ({ navigation }) => {
     return () => {
       setPlannings([]);
     };
-  }, [staff]);
+  }, [staff, date.month, date.year]);
 
   useEffect(() => {
     if (!showingPanel) setDate(CDate.today());
@@ -99,6 +99,7 @@ const Plannings = ({ navigation }) => {
             data={apt}
             setApts={setPlannings}
             canDelete
+            showComment
           />
         ))}
       </SwipeablePanel>

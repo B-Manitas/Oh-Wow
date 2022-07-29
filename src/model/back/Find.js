@@ -108,7 +108,7 @@ export class Find extends Request {
    */
   async planningStaffBetweenDates(staffID, beginDate, endDate) {
     const staff_match =
-      staffID == "0"
+      staffID == 0
         ? { $match: { date: { $gte: beginDate, $lt: endDate } } }
         : {
             $match: {
@@ -159,6 +159,7 @@ export class Find extends Request {
         $project: {
           date: 1,
           offer: 1,
+          comment: 1,
           service: "$service.name",
           duration: "$service.duration",
           firstname: "$user.firstname",
@@ -299,6 +300,7 @@ export class Find extends Request {
         $project: {
           date: 1,
           offer: 1,
+          comment: 1,
           salon: "$salon.name",
           service: "$service.name",
           duration: "$service.duration",
@@ -349,6 +351,7 @@ export class Find extends Request {
         $project: {
           date: 1,
           offer: 1,
+          comment: 1,
           salon: "$salon.name",
           service: "$service.name",
           duration: "$service.duration",

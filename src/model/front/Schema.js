@@ -126,6 +126,7 @@ export class Schema {
       id_salon,
       id_service,
       id_staff: "",
+      comment: "",
       date: 0,
     };
   }
