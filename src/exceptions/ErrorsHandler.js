@@ -8,7 +8,6 @@ import UnknowUser from "exceptions/user_error/UnknowUser";
 import ExistingUser from "exceptions/user_error/ExistingUser";
 import NetworkError from "exceptions/network_error/NetworkError";
 import BadStatus from "exceptions/network_error/BadStatus";
-import PAGES from "constants/PAGES";
 
 /**
  * Capture errors before the user interface.
@@ -33,7 +32,6 @@ export default class ErrorHandler {
     if (!this.error.setAudit) return;
 
     this.error.setAudit((prev) => ({
-      ...prev,
       valid: { ...prev?.valid, ...this.error.data },
     }));
   }
@@ -50,10 +48,7 @@ export default class ErrorHandler {
   manageUnknowError() {
     if (!this.error.setAudit) return;
 
-    this.error.setAudit((prev) => ({
-      ...prev,
-      error: { unknowError: true },
-    }));
+    this.error.setAudit({ error: { unknowError: true } });
 
     Alert.alert(
       "Inexisting User",
@@ -65,10 +60,7 @@ export default class ErrorHandler {
   manageFailedLogin() {
     if (!this.error.setAudit) return;
 
-    this.error.setAudit((prev) => ({
-      ...prev,
-      error: { failedLogin: true },
-    }));
+    this.error.setAudit({ error: { failedLogin: true } });
   }
 
   /** Catching the NetworkError. */
@@ -91,13 +83,7 @@ export default class ErrorHandler {
   manageInvalidSchema() {
     Alert.alert(
       "Invalid Data",
-      `An error was occured, please try again later.\n${this.error.invalid_data}`,
-      [
-        {
-          text: "OK",
-          onPress: () => navigation.navigate(PAGES.HOME),
-        },
-      ]
+      `An error was occured, please try again later.\n${this.error.invalid_data}`
     );
   }
 
@@ -105,8 +91,8 @@ export default class ErrorHandler {
   manageDefault() {
     console.log(this.error);
     Alert.alert(
-      "Error",
-      `An error was occured, please try again later.\n${this.error}`
+      "Une erreur est survenue",
+      `Merci de vérifier votre connection internet et de rééssayez plus-tard.\n${this.error}`
     );
   }
 

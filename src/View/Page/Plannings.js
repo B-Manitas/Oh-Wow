@@ -52,10 +52,6 @@ const Plannings = ({ navigation }) => {
     };
   }, [staff, date.month, date.year]);
 
-  useEffect(() => {
-    if (!showingPanel) setDate(CDate.today());
-  }, [showingPanel]);
-
   // Define the planning header props of the calendar picker componnent
   const propsPlanningsHeader = {
     date,
@@ -71,6 +67,7 @@ const Plannings = ({ navigation }) => {
     <Page>
       <Header text={"Les réservations"} type={"close"} nav={navigation} />
       <PickerCalendar
+        isSelected={showingPanel}
         data={days}
         date={date}
         header={<HeaderPicker {...propsPlanningsHeader} />}

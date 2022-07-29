@@ -88,7 +88,6 @@ const ClientInfo = (props) => {
             valid={audit?.valid?.password}
             contextMenuHidden
             secureTextEntry={false}
-            multilineErrorText={2}
           />
         </View>
 

@@ -10,6 +10,7 @@ import CtnPhoto from "containers/CtnPhoto";
 import Empty from "componnents/Empty";
 
 // Librairies import
+import Utils from "model/utils/Utils";
 import { controller as ctrl } from "model/Main";
 
 // Constants imports
@@ -28,10 +29,18 @@ const Photos = (props) => {
   // On load componnent
   useEffect(() => {
     ctrl.get.allPhotos(setPhotos);
+
+    return () => {
+      setPhotos();
+    };
   }, []);
 
   useEffect(() => {
     ctrl.add.photo(newPhotos, setNewPhotos, setPhotos);
+
+    return () => {
+      Utils.cleanUp(setNewPhotos, setPhotos);
+    };
   }, [newPhotos]);
 
   return (

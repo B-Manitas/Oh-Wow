@@ -106,7 +106,7 @@ const SignUp = (props) => {
           <View style={styles.buttonCtn}>
             <BtnPrimary
               text={send ? "Enregistrement..." : "Créer un compte"}
-              onPress={() => ctrl.add.user(data, nav, setSend, setAudit)}
+              onPress={() => ctrl.add.user(data, nav, setAudit, setSend)}
               disabled={!canSignup || send}
             />
 

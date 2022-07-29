@@ -34,6 +34,7 @@ export const INPUT_PASSWORD = {
   maxLength: 20,
   keyboardType: "default",
   errorText: ERROR_TEXT.password,
+  multilineErrorText: 2,
 };
 
 export const INPUT_FIRSTNAME = {
@@ -50,8 +51,8 @@ export const INPUT_FIRSTNAME = {
 export const INPUT_LASTNAME = {
   text: "Nom",
   placeholder: PLH.lastname,
-  typeAndroid: "name-given",
-  typeIOS: "givenName",
+  typeAndroid: "name-family",
+  typeIOS: "familyName",
   returnKeyType: "next",
   maxLength: 12,
   keyboardType: "default",

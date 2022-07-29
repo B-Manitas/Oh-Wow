@@ -49,8 +49,8 @@ export class Update extends SuperController {
 
     if (!_.isEqual(init, data)) {
       await this.frontend.update.salon(data, setAudit);
-      setInit(data);
       setAudit();
+      setInit(data);
     }
 
     setSaving(false);
@@ -71,11 +71,16 @@ export class Update extends SuperController {
    * @param {Function} setAudit
    */
   @Catch
-  async settings(data, setAudit) {
+  async settings(data, setAudit, setSending) {
+    setSending(true);
+
     if (!_.isEqual(data, this.thisUserData)) {
       await this.frontend.update.user(data, setAudit);
+      setAudit();
       addUserStore(data);
     }
+
+    setSending(false);
   }
 
   /**
@@ -93,9 +98,9 @@ export class Update extends SuperController {
     setSaving(true);
     if (!_.isEqual(data, init) && this.thisIsAdmin()) {
       await this.frontend.update.service(data, setAudit);
+      setAudit();
       updateService(data);
       setInit(data);
-      setAudit();
     }
     setSaving(false);
   }
@@ -144,15 +149,14 @@ export class Update extends SuperController {
       if (!_.isEqual(staff, staffInit)) {
         // Check if the user has losed staff access.
         if (staff.id_salon == null) await this.frontend.delete.staff(staff._id);
-        
         else if (staff.id_salon != null || staff.is_admin)
           await this.frontend.update.staff(staff, setAudit);
       }
     }
 
+    setAudit();
     setData(data);
     setInit(data);
-    setAudit();
     setSaving(false);
   }
 

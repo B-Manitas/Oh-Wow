@@ -53,7 +53,7 @@ export class Find extends SuperController {
   allEmployee(...funcs) {
     this.frontend.get.allEmployee(...funcs);
   }
-  
+
   /**
    * Fetch all photos from the database.
    * @param  {...Function} funcs The functions to set list of photos.
@@ -133,21 +133,22 @@ export class Find extends SuperController {
   /**
    * Function to be called when the user has pressed the login button.
    * @param {Object} data The user's data to be checked in the database.
-   * @param {Function} func The hook function to be called when required
-   * fields in the user data are missing.
-   * @param {Function} navigation The navigation function for changing page.
+  * @param {Function} navigation The navigation function for changing page.
+  * @param {Function} setAudit The hook function to be called when required
+  * fields in the user data are missing.
    * @param {Function} setSend The function to set sending state.
    */
   @Catch
   async connect(data, navigation, setAudit, setSend) {
     setSend(true);
-
+    
     const user = await this.frontend.get.connect(data, setAudit);
     addUserStore({ ...user, access: data.password });
     await this.frontend.get.status(user._id, updateStatus);
-
+    
+    setAudit();
     navigation.navigate(PAGES.HOME);
-    Alert.alert(`Welcome back, ${user.firstname} !`);
+    Alert.alert(`Bienvenue, ${user.firstname} !`);
   }
 
   /**

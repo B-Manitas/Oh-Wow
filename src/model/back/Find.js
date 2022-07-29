@@ -206,7 +206,7 @@ export class Find extends Request {
    */
   async connect(user) {
     const resp = await this.aggregate(USER, [
-      { $match: { phone: user.mail } },
+      { $match: { phone: user.phone } },
       {
         $lookup: {
           from: ACCESS,

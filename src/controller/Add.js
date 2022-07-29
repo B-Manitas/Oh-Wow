@@ -26,11 +26,13 @@ export class Add extends SuperController {
   @Catch
   async user(data, navigation, setAudit, setSend) {
     setSend(true);
+    
     const user = await this.frontend.add.user(data, setAudit);
     addUserStore(user);
-
+    
+    setAudit();
     navigation.navigate(PAGES.HOME);
-    Alert.alert(`Welcome, ${user.firstname} !`);
+    Alert.alert(`Bienvenue, ${user.firstname} !`);
   }
 
   /**

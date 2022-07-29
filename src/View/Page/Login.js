@@ -66,7 +66,6 @@ const Login = (props) => {
           value={data.password}
           setValue={(t) => setData((props) => ({ ...props, password: t }))}
           valid={audit?.valid?.password}
-          multilineErrorText
         />
 
         <View style={styles.buttonsCtn}>

@@ -9,12 +9,15 @@ import Button from "./Button";
 import COLORS from "constants/COLORS";
 
 const BtnDay = (props) => {
+  // Destructure componnent props
   const { data, calendarDate, onPress } = props;
 
+  // Define componnent state
   const date = data.date;
   const isToday = date?.isToday();
   const isHidden = !date;
   const noCanOn = !data.is_on && !isHidden;
+  const isSelected = props.isSelected === false ? false : true;
   const isOn = date?.isSameDate(calendarDate) && !noCanOn;
 
   const propsButton = {
@@ -27,13 +30,13 @@ const BtnDay = (props) => {
       isHidden && styles.hidden,
       noCanOn && styles.btnNoCanOn,
       isToday && styles.btnToday,
-      isOn && styles.btnOn,
+      isSelected && isOn && styles.btnOn,
     ],
     styleText: [
       styles.txt,
       noCanOn && styles.txtNoCanOn,
       isToday && styles.txtToday,
-      isOn && styles.txtOn,
+      isSelected && isOn && styles.txtOn,
     ],
   };
 

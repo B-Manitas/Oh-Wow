@@ -35,13 +35,22 @@ const Header = (props) => {
     onPress: onPress ? onPress : headerType?.onPress,
     style: styles.button,
     noShadow: true,
-    visible: nav,
+  };
+  
+  // Define button props
+  const propsButtonImg = {
+    image: PHOTO.logo,
+    onPress: onPress ? onPress : headerType?.onPress,
+    style: styles.img,
+    noShadow: true,
+    visible: addLogo,
+    activeOpacity: 1
   };
 
   return (
     <View style={styles.container}>
       <Button {...propsButton} />
-      {addLogo && <Image source={PHOTO.logo} style={styles.img} />}
+      <Button {...propsButtonImg} />
       <Text {...propsText}>{text}</Text>
     </View>
   );
@@ -63,6 +72,8 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     alignSelf: "center",
+    position: "absolute",
+    left: 60,
   },
 
   h1: {

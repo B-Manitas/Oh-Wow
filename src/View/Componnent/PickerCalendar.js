@@ -8,7 +8,9 @@ import Empty from "./Empty";
 
 const PickerCalendar = (props) => {
   // Destructure props
-  const { data, header, footer, onPress, date } = props;
+  const { data, header, footer, onPress, date, isSelected } = props;
+
+  const propsBtnDay = { onPress, isSelected, calendarDate: date };
 
   return (
     <FlatList
@@ -16,9 +18,7 @@ const PickerCalendar = (props) => {
       style={styles.container}
       ListHeaderComponent={header}
       ListFooterComponent={footer}
-      renderItem={(day) => (
-        <BtnDay data={day.item} calendarDate={date} onPress={onPress} />
-      )}
+      renderItem={(day) => <BtnDay {...propsBtnDay} data={day.item} />}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
       numColumns={7}
