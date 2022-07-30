@@ -150,7 +150,9 @@ export class IsFormat extends Normalizer {
   }
 
   isHours(hours) {
-    return typeof hours === "number" || this._FORMAT_HOURS.test(hours);
+    return (
+      (typeof hours === "number" && hours > 9) || this._FORMAT_HOURS.test(hours)
+    );
   }
 
   isHoursOn(hoursOn) {

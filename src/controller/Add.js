@@ -40,7 +40,7 @@ export class Add extends SuperController {
    * @param {Function} navigation the navigation function for changing page.
    */
   service(navigation) {
-    const data = this.schema.service;
+    const data = this.frontend.service;
     navigation.navigate(PAGES.SERVICE, { data, isNew: true });
   }
 

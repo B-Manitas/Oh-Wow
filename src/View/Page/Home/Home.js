@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
 });
 
 const styleList = StyleSheet.create({
-  container: { top: -50, marginBottom: -80 },
+  container: { top: -50, marginBottom: -30 },
 
   header: {
     height: Dimensions.get("window").width - 70,

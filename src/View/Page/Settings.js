@@ -30,6 +30,11 @@ const Settings = (props) => {
   useEffect(() => {
     setSending(false);
   }, [audit]);
+  
+  // Reset audit if data is reset.
+  useEffect(() => {
+    if (_.isEqual(data, ctrl.get.thisUserData)) setAudit();
+  }, [data]);
 
   return (
     <Page>

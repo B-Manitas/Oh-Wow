@@ -12,5 +12,4 @@ export const ICON = {
 
 export const PHOTO = {
   logo: require("img/logo.png"),
-  img: require("img/img.jpg"),
 };

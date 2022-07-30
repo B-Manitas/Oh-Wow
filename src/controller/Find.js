@@ -3,7 +3,7 @@ import { SuperController } from "./SuperController";
 
 // Store import
 import { store } from "store/Store";
-import { addUserStore, updateStatus } from "store/ActionsCreator";
+import { addUserStore, updateStatus, addService } from "store/ActionsCreator";
 
 // React import
 import { Alert } from "react-native";
@@ -30,10 +30,11 @@ export class Find extends SuperController {
     const isAdmin = this.thisIsAdmin();
     const data_store = store.getState().services;
 
-    if (_.isEmpty(data_store)) this.frontend.get.allServices(isAdmin, ...funcs);
+    if (_.isEmpty(data_store))
+      this.frontend.get.allServices(isAdmin, addService, ...funcs);
     else funcs.forEach((func) => func(data_store));
 
-    setTimeout(() => setRefresh(false), 1000);
+    setTimeout(() => setRefresh(false), 500);
   }
 
   /**
@@ -133,19 +134,19 @@ export class Find extends SuperController {
   /**
    * Function to be called when the user has pressed the login button.
    * @param {Object} data The user's data to be checked in the database.
-  * @param {Function} navigation The navigation function for changing page.
-  * @param {Function} setAudit The hook function to be called when required
-  * fields in the user data are missing.
+   * @param {Function} navigation The navigation function for changing page.
+   * @param {Function} setAudit The hook function to be called when required
+   * fields in the user data are missing.
    * @param {Function} setSend The function to set sending state.
    */
   @Catch
   async connect(data, navigation, setAudit, setSend) {
     setSend(true);
-    
+
     const user = await this.frontend.get.connect(data, setAudit);
     addUserStore({ ...user, access: data.password });
     await this.frontend.get.status(user._id, updateStatus);
-    
+
     setAudit();
     navigation.navigate(PAGES.HOME);
     Alert.alert(`Bienvenue, ${user.firstname} !`);

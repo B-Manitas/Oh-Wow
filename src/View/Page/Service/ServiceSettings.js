@@ -65,21 +65,21 @@ const ServiceSettings = (props) => {
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.globalInfo}</Text>
           <InputLong
             {...INPUT_SERVICE}
-            valid={audit?.valid?.name && !saving}
+            valid={audit?.valid?.name}
             value={data.name}
             setValue={(t) => setData((p) => ({ ...p, name: t }))}
           />
           <InputLong
-            {...INPUT_PRICE}
-            valid={audit?.valid?.price && !saving}
-            value={data.price.toString()}
-            setValue={(t) => ctrl.onFormat.integer(t, setPrice)}
-          />
-          <InputLong
             {...INPUT_DURATION}
-            valid={audit?.valid?.duration && !saving}
+            valid={audit?.valid?.duration}
             value={duration(data.duration)}
             setValue={(t) => ctrl.onFormat.time(t, setDur)}
+          />
+          <InputLong
+            {...INPUT_PRICE}
+            valid={audit?.valid?.price}
+            value={data.price.toString()}
+            setValue={(t) => ctrl.onFormat.integer(t, setPrice)}
           />
         </View>
 
@@ -89,7 +89,7 @@ const ServiceSettings = (props) => {
             value={data.description}
             setValue={(t) => setData((p) => ({ ...p, description: t }))}
             placeholder={PLH.description}
-            valid={audit?.valid?.description && !saving}
+            valid={audit?.valid?.description}
             multiline
             errorText={ERROR_TEXT.name}
           />
@@ -100,12 +100,12 @@ const ServiceSettings = (props) => {
           <ToggleLong
             text={"Afficher"}
             value={!data.is_hidden}
-            func={(b) => setData((p) => ({ ...p, is_hidden: !b }))}
+            setValue={(b) => setData((p) => ({ ...p, is_hidden: !b }))}
           />
           <ToggleLong
             text={"Afficher en page d'accueil"}
             value={data.is_trend}
-            func={(b) => setData((p) => ({ ...p, is_trend: b }))}
+            setValue={(b) => setData((p) => ({ ...p, is_trend: b }))}
           />
         </View>
 
@@ -115,7 +115,8 @@ const ServiceSettings = (props) => {
             text={"Supprimer la prestation"}
             fontWeight={"500"}
             color={COLORS.error}
-            func={() => ctrl.delete.service(data._id, nav)}
+            onPress={() => ctrl.delete.service(data._id, nav)}
+            important
           />
         </View>
       </ScrollView>

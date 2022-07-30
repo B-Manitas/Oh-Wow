@@ -42,7 +42,7 @@ const CtnAppointment = (props) => {
       />
 
       <Text style={styles.textDate}>{strDate}</Text>
-      <Text style={styles.h1} numberOfLines={1}>
+      <Text style={styles.h1} numberOfLines={2}>
         {data.service}
       </Text>
 

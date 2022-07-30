@@ -94,21 +94,23 @@ export const INPUT_COORD = {
   placeholder: PLH.coord,
   keyboardType: "numeric",
   errorText: ERROR_TEXT.number,
+  autoCorrect: false,
 };
 
 export const INPUT_PRICE = {
   text: "Prix en dinar tunisien",
   maxLength: 5,
-  keyboardType: "numeric",
+  keyboardType: "number-pad",
   placeholder: PLH.price,
   errorText: ERROR_TEXT.number,
+  autoCorrect: false,
 };
 
 export const INPUT_SERVICE = {
   text: "Nom",
   placeholder: PLH.serviceName,
   returnKeyType: "next",
-  maxLength: 15,
+  maxLength: 25,
   errorText: ERROR_TEXT.name,
 };
 
@@ -118,6 +120,7 @@ export const INPUT_DURATION = {
   returnKeyType: "next",
   maxLength: 5,
   errorText: ERROR_TEXT.duration,
+  autoCorrect: false,
 };
 
 export const INPUT_DATE_OFF = {
@@ -126,4 +129,5 @@ export const INPUT_DATE_OFF = {
   errorText: ERROR_TEXT.dateOff,
   multiline: true,
   keyboardType: "number-pad",
+  autoCorrect: false,
 };

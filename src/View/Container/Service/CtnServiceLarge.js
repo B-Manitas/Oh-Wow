@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
 
   ctnText: {
-    height: 90,
+    height: 95,
     flex: 1,
   },
 

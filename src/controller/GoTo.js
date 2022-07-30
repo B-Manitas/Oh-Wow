@@ -139,10 +139,10 @@ export class GoTo extends SuperController {
   /**
    * Go to service page.
    * @param {Object} nav The navigation object for changing page.
-   * @param {Object} service The service data.
+   * @param {Object} data The service data.
    */
-  service(nav, service) {
-    nav.navigate(PAGES.SERVICE, { service, isNew: false });
+  service(nav, data) {
+    nav.navigate(PAGES.SERVICE, { data, isNew: false });
   }
 
   /**

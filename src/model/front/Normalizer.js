@@ -51,11 +51,13 @@ export class Normalizer extends Schema {
       case "is_trend":
       case "is_hidden":
       case "is_admin":
-      case "name":
       case "date":
-      case "description":
       case "address":
+      case "description":
         return value;
+
+      case "name":
+        return this.trim(value);
 
       case "longitude":
       case "latitude":
@@ -107,6 +109,10 @@ export class Normalizer extends Schema {
         firstname: this.firstname(offer.firstname),
         lastname: this.lastname(offer.lastname),
       };
+  }
+
+  trim(str) {
+    return str.trim();
   }
 
   time(time) {

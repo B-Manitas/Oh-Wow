@@ -11,11 +11,7 @@ const ToggleLong = (props) => {
   return (
     <View style={styles.container}>
       <Text style={STYLE_GENERAL.sectionH2}>{text}</Text>
-      <Switch
-        style={styles.switch}
-        value={value}
-        onValueChange={(b) => setValue(b)}
-      />
+      <Switch style={styles.switch} value={value} onValueChange={setValue} />
     </View>
   );
 };

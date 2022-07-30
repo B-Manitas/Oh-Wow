@@ -24,9 +24,9 @@ const Service = (props) => {
   const { navigation: nav, route } = props;
 
   // Define componnents props
-  const [service, setService] = useState(route.params.service);
-  const [init, setInit] = useState(route.params.service);
-  const [setting, setSetting] = useState(false);
+  const [service, setService] = useState(route.params.data);
+  const [init, setInit] = useState(route.params.data);
+  const [setting, setSetting] = useState(route.params.isNew);
   const [isEdit, setEdit] = useState(false);
 
   // On press settings button

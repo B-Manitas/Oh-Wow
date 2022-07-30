@@ -10,6 +10,7 @@ import {
   removeUserStore,
   defaultStatus,
   updateStatus,
+  updateService,
 } from "store/ActionsCreator";
 
 // Libraries import
@@ -96,12 +97,14 @@ export class Update extends SuperController {
   @Catch
   async service(setSaving, data, init, setInit, setAudit) {
     setSaving(true);
+
     if (!_.isEqual(data, init) && this.thisIsAdmin()) {
       await this.frontend.update.service(data, setAudit);
       setAudit();
       updateService(data);
       setInit(data);
     }
+    
     setSaving(false);
   }
 

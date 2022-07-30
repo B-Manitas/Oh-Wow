@@ -18,9 +18,8 @@ export class Delete extends SuperFrontend {
    * @param {String} id The ID of the service to be deleted.
    */
   async service(id) {
-    const deleteBack = this.backend.delete;
-    await this._actions(id, deleteBack.allServiceApts.bind(deleteBack));
-    await this._actions(id, deleteBack.service.bind(deleteBack));
+    await this.backend.delete.allServiceApts(id);
+    await this.backend.delete.service(id);
   }
 
   /**

@@ -24,7 +24,7 @@ const CtnService = (props) => {
   const propsImage = { source: { uri: service.img }, style: styles.img };
   const propsServiceText = {
     numberOfLines: 2,
-    styles: styles.infoH1,
+    style: styles.infoH1,
     allowFontScaling: true,
   };
 
@@ -76,17 +76,20 @@ const styles = StyleSheet.create({
   info: {
     justifyContent: "center",
     alignItems: "center",
-    height: 50,
+    height: 60,
     paddingHorizontal: 10,
     backgroundColor: "#fff",
   },
 
   infoH1: {
     fontWeight: "500",
+    textAlign: "center",
+    top: -2
   },
 
   infoH2: {
     fontWeight: "200",
+    bottom: -3
   },
 
   img: {
