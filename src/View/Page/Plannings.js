@@ -76,7 +76,7 @@ const Plannings = ({ navigation }) => {
         }
       />
 
-      <Text style={styles.statText}>
+      <Text style={styles.infoText}>
         {plannings.length} réservation{plannings.length > 1 ? "s" : ""} ce
         mois-ci.
       </Text>
@@ -127,15 +127,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 15,
     marginBottom: 20,
-  },
-
-  statText: {
-    textAlign: "center",
-    fontSize: 18,
-    marginHorizontal: 20,
-    color: COLORS.darkGray,
-    marginBottom: 30,
-    fontWeight: "300",
   },
 
   infoText: {

@@ -41,7 +41,8 @@ export class OnFormat extends SuperController {
    */
   float(text) {
     text = text.replace(",", ".");
-    text = text.replace(/[^0-9\.]/g, "");
+    text = text.replace("..", ".");
+    text = text.replace(/[^0-9-\.]/g, "");
     return text;
   }
 
@@ -66,7 +67,7 @@ export class OnFormat extends SuperController {
 
       // Add comma every DD/DD pattern with D a digit.
       text = text.replace(/([0-9]{2})\/([0-9]{2})/g, "$&;");
-      
+
       // Replace ;/ by ;
       text = text.replace(/;\//g, ";");
     }

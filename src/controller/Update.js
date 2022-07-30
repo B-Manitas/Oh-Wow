@@ -31,7 +31,7 @@ export class Update extends SuperController {
     removeUserStore();
     defaultStatus();
     navigation.navigate(PAGES.HOME);
-    Alert.alert(`A bientôt ${firstname}...`);
+    Alert.alert(`A bientôt, ${firstname}.`);
   }
 
   /**

@@ -149,7 +149,7 @@ export class Find extends SuperController {
 
     setAudit();
     navigation.navigate(PAGES.HOME);
-    Alert.alert(`Bienvenue, ${user.firstname} !`);
+    Alert.alert(`Bienvenue, ${user.firstname}.`);
   }
 
   /**

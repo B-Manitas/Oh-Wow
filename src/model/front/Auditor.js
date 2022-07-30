@@ -62,7 +62,7 @@ export class Auditor extends IsFormat {
 
       case "longitude":
       case "latitude":
-        return this.isFloat(value);
+        return this.isCoord(value);
 
       case "offer":
         return this.isOffer(value);

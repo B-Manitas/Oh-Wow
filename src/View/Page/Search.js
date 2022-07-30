@@ -52,6 +52,10 @@ const Search = (props) => {
   // On search users
   useEffect(() => {
     setUsers(ctrl.onSearch.users(fetch, query));
+
+    return () => {
+      Utils.cleanUp(setQuery);
+    };
   }, [query]);
 
   return (

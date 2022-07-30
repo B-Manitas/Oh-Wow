@@ -38,7 +38,7 @@ const CtnSalonContact = (props) => {
         <Text style={styles.key}>Téléphone:</Text>
         <Button
           text={salon.phone}
-          onPress={() => ctrl.onPress.link(`tel:${salon.phone}`)}
+          onPress={() => ctrl.onPress.phone(salon.phone)}
           styleText={styles.value}
           noShadow
         />

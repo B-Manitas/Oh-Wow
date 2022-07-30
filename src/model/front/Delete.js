@@ -6,11 +6,10 @@ export class Delete extends SuperFrontend {
    * @param {String} id The ID user to be deleted.
    */
   async user(id) {
-    const deleteBack = this.backend.delete;
-    await this._actions(id, deleteBack.staff.bind(deleteBack));
-    await this._actions(id, deleteBack.access.bind(deleteBack));
-    await this._actions(id, deleteBack.allUserApts.bind(deleteBack));
-    await this._actions(id, deleteBack.user.bind(deleteBack));
+    await this.backend.delete.staff(id);
+    await this.backend.delete.access(id);
+    await this.backend.delete.allUserApts(id);
+    await this.backend.delete.user(id);
   }
 
   /**
@@ -27,8 +26,7 @@ export class Delete extends SuperFrontend {
    * @param {String} id The ID of the staff to be deleted.
    */
   async staff(id) {
-    const deleteBack = this.backend.delete;
-    await this._actions(id, deleteBack.staff.bind(deleteBack));
+    await this.backend.delete.staff(id);
   }
 
   /**
@@ -36,8 +34,7 @@ export class Delete extends SuperFrontend {
    * @param {String} id The ID of the photo to be deleted.
    */
   async photo(id) {
-    const deleteBack = this.backend.delete;
-    await this._actions(id, deleteBack.photo.bind(deleteBack));
+    await this.backend.delete.photo(id);
   }
 
   /**
@@ -45,8 +42,7 @@ export class Delete extends SuperFrontend {
    * @param {String} id The ID of the salon to be deleted.
    */
   async salon(id) {
-    const deleteBack = this.backend.delete;
-    await this._actions(id, deleteBack.salon.bind(deleteBack));
+    await this.backend.delete.salon(id);
   }
 
   /**
@@ -54,7 +50,38 @@ export class Delete extends SuperFrontend {
    * @param {String} id The ID of the appointment to be deleted.
    */
   async appointment(id) {
-    const deleteBack = this.backend.delete;
-    await this._actions(id, deleteBack.appointment.bind(deleteBack));
+    await this.backend.delete.appointment(id);
+  }
+
+  async allUsers() {
+    await this.backend.delete.allUsers();
+  }
+
+  async allApp() {
+    await this.backend.delete.allApp();
+  }
+
+  async allStaffs() {
+    await this.backend.delete.allStaffs();
+  }
+
+  async allServices() {
+    await this.backend.delete.allServices();
+  }
+
+  async allSalons() {
+    await this.backend.delete.allSalons();
+  }
+
+  async allAppointments() {
+    await this.backend.delete.allAppointments();
+  }
+
+  async allAccess() {
+    await this.backend.delete.allAccess();
+  }
+
+  async allPhotos() {
+    await this.backend.delete.allPhotos();
   }
 }

@@ -39,8 +39,8 @@ export default class ErrorHandler {
   /** Catching the ExistingUser. */
   manageExistingUser() {
     Alert.alert(
-      "User already exist",
-      "A user with this phone already been registered."
+      "Utilisateur existant",
+      "Un utilisateur avec ce numéro de téléphone est déjà enregistré."
     );
   }
 

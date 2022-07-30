@@ -14,8 +14,9 @@ import PAGES from "constants/PAGES";
 
 export class Delete extends SuperController {
   /** Delete the connected user. */
-  async thisUser(navigation, askConfirmation = true) {
+  async thisUser(navigation, askConfirmation = true, setRemoving) {
     if (askConfirmation && !(await this.alertDelete("le compte"))) return;
+    if (setRemoving) setRemoving(true);
 
     await this.frontend.delete.user(this.thisUserData._id);
 
@@ -23,7 +24,7 @@ export class Delete extends SuperController {
     defaultStatus();
 
     navigation.navigate(PAGES.HOME);
-    Alert.alert("Votre compte a correctement été supprimé.");
+    Alert.alert("Votre compte a été supprimé.");
   }
 
   /**
@@ -37,7 +38,7 @@ export class Delete extends SuperController {
 
     if (userID === this.thisUserData._id) this.thisUser(navigation, false);
     else {
-      await this.frontend.delete.user(this.thisUserData._id);
+      await this.frontend.delete.user(userID);
       navigation.goBack();
     }
   }
@@ -54,7 +55,7 @@ export class Delete extends SuperController {
     await this.frontend.delete.service(id);
     deleteService(id);
     navigation.navigate(PAGES.HOME);
-    Alert.alert("La prestation a correctement été supprimé.");
+    Alert.alert("La prestation a été supprimé.");
   }
 
   /**
@@ -86,5 +87,28 @@ export class Delete extends SuperController {
     setPhotos((p) => p.filter((item) => item._id != id));
     setZooming();
     setSelected();
+  }
+
+  /**
+   * Delete all data from the database.
+   */
+  @Catch
+  async all(nav, setRemoving) {
+    if (!(await this.alertDelete("la base de données"))) return;
+    setRemoving(true);
+
+    await this.frontend.delete.allUsers();
+    await this.frontend.delete.allApp();
+    await this.frontend.delete.allStaffs();
+    await this.frontend.delete.allServices();
+    await this.frontend.delete.allSalons();
+    await this.frontend.delete.allAppointments();
+    await this.frontend.delete.allAccess();
+    await this.frontend.delete.allPhotos();
+
+    removeUserStore();
+    defaultStatus();
+    nav.navigate(PAGES.HOME);
+    Alert.alert("La base de données a été réinitialisée.");
   }
 }

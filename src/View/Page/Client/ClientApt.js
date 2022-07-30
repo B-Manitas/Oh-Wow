@@ -15,7 +15,11 @@ const ClientApt = (props) => {
       style={styles.container}
       keyExtractor={(item) => item._id}
       renderItem={(item) => (
-        <CtnAppointment data={{ ...item.item, ...client }} setApts={setApts} />
+        <CtnAppointment
+          data={{ ...client, ...item.item }}
+          setApts={setApts}
+          canDelete
+        />
       )}
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={<Empty />}

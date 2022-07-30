@@ -27,6 +27,7 @@ const CtnAppointment = (props) => {
   const strClient = data.offer
     ? `${data.offer.firstname} ${data.offer.lastname}`
     : strBookBy;
+  const strClientPhone = data.offer ? data.offer.phone : data.phone;
 
   // Define the text value of field props
   const propsTxtValue = { style: styles.h2Value, numberOfLines: 1 };
@@ -70,7 +71,12 @@ const CtnAppointment = (props) => {
 
         <View style={styles.field}>
           <Text style={styles.h2Key}>Tél:</Text>
-          <Text {...propsTxtValue}>{data.phone}</Text>
+          <Button
+            {...propsTxtValue}
+            noShadow
+            text={data.phone}
+            onPress={() => ctrl.onPress.phone(data.phone)}
+          />
         </View>
       </View>
 
@@ -82,13 +88,16 @@ const CtnAppointment = (props) => {
 
         <View style={styles.field}>
           <Text style={styles.h2Key}>Tél:</Text>
-          <Text {...propsTxtValue}>
-            {data.offer ? data.offer.phone : data.phone}
-          </Text>
+          <Button
+            {...propsTxtValue}
+            noShadow
+            text={strClientPhone}
+            onPress={() => ctrl.onPress.phone(strClientPhone)}
+          />
         </View>
       </View>
 
-      <CtnView style={styles.field} visible={showComment}>
+      <CtnView style={styles.field} visible={showComment && data.comment != ""}>
         <Text style={styles.h2Key}>Commentaire:</Text>
         <Text style={styles.h2Value}>{data.comment}</Text>
       </CtnView>
@@ -161,5 +170,6 @@ const styles = StyleSheet.create({
   h2Value: {
     fontSize: 16,
     fontStyle: "italic",
+    backgroundColor: COLORS.default,
   },
 });

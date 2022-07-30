@@ -170,7 +170,7 @@ export class Find extends Request {
           staff: "$staff.firstname",
         },
       },
-      { $sort: { date: -1 } },
+      { $sort: { date: 1 } },
     ]);
   }
 
@@ -308,7 +308,7 @@ export class Find extends Request {
           price: "$service.price",
         },
       },
-      { $sort: { date: -1 } },
+      { $sort: { date: isHistoric ? -1 : 1 } },
     ]);
   }
 
@@ -358,7 +358,7 @@ export class Find extends Request {
           staff: "$staff.firstname",
         },
       },
-      { $sort: { date: -1 } },
+      { $sort: { date: 1 } },
     ]);
   }
 

@@ -49,7 +49,7 @@ const Client = (props) => {
 
   // If user reset input, then canceled audit error.
   useEffect(() => {
-    if(_.isEqual(initClient, client)) setAudit()
+    if (_.isEqual(initClient, client)) setAudit();
   }, [client]);
 
   return (
@@ -89,7 +89,12 @@ const Client = (props) => {
         audit={audit}
         nav={nav}
       />
-      <ClientApt visible={page == 1} appointments={apts} client={initClient} />
+      <ClientApt
+        visible={page == 1}
+        appointments={apts}
+        client={initClient}
+        setApts={setApts}
+      />
     </Page>
   );
 };

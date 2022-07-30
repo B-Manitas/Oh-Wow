@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 60,
   },
-
+  
   h1: {
     paddingLeft: 20,
     fontWeight: "bold",
@@ -91,5 +91,7 @@ const styles = StyleSheet.create({
     padding: 2,
     width: 35,
     height: 35,
+    zIndex: 4,
+    elevation: 4,
   },
 });

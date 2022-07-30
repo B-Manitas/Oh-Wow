@@ -17,6 +17,7 @@ import ToggleLong from "componnents/ToggleLong";
 import Loader from "./Loader";
 import InputError from "inputs/InputError";
 import HeaderSave from "parts/HeaderSave";
+import BtnThird from "buttons/BtnThird";
 
 // Libraries imports
 import _ from "lodash";
@@ -45,6 +46,7 @@ const Salons = (...props) => {
   const [salon, setSalon] = useState();
   const [audit, setAudit] = useState();
   const [saving, setSaving] = useState();
+  const [removing, setRemoving] = useState(false);
 
   // Define componnent function
   const formatHours = (t) => (typeof t == "number" ? CDate.toTimeString(t) : t);
@@ -67,6 +69,10 @@ const Salons = (...props) => {
   useEffect(() => {
     setSaving(false);
   }, [audit]);
+
+  useEffect(() => {
+    if (_.isEqual(salon, initSalon)) setAudit();
+  }, [salon]);
 
   if (!initSalon || !salon) return <Loader />;
   return (
@@ -190,6 +196,13 @@ const Salons = (...props) => {
               text={"Prise de nouveau RDV"}
               value={salon.is_opened}
               setValue={(b) => setSalon({ ...salon, is_opened: b })}
+            />
+
+            <BtnThird
+              text="Réinitialiser la base de données"
+              important
+              disabled={removing}
+              onPress={() => ctrl.delete.all(nav, setRemoving)}
             />
           </View>
         </ScrollView>

@@ -45,9 +45,12 @@ const ClientInfo = (props) => {
     setClient((p) => ({
       ...p,
       id_salon: b ? salon._id : null,
+      is_admin: false,
       date_off: staff.date_off,
       day_off: staff.day_off,
     }));
+  const setAdmin = (b) =>
+    setClient((p) => ({ ...p, id_salon: b ? salon._id : null, is_admin: b }));
 
   const setDateOff = (t) =>
     setClient({
@@ -101,7 +104,7 @@ const ClientInfo = (props) => {
           <ToggleLong
             text={"Administrateur"}
             value={client.is_admin}
-            setValue={(b) => update("is_admin", b)}
+            setValue={setAdmin}
           />
         </View>
 
@@ -132,7 +135,7 @@ const ClientInfo = (props) => {
           <Text style={STYLE_GENERAL.sectionH1}>{TITLE.others}</Text>
           <BtnThird
             text={"Supprimer définitivement le compte"}
-            onPress={() => ctrl.delete.user(nav, client)}
+            onPress={() => ctrl.delete.user(nav, client._id)}
             important
           />
         </View>

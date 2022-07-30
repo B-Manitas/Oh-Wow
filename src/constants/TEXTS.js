@@ -43,7 +43,7 @@ export const ERROR_TEXT = {
     "Doit contenir minimum 8 lettres, un chiffre, une lettre minuscule et une majuscule",
   mail: "Addresse mail invalide",
   phone: "Format invalide",
-  number: "Un nombre positif requis",
+  number: "Un nombre est requis",
   duration: "Formats '10', '1h' ou '1h10'",
   failedLogin: "Identifiant ou mot de passe invalide.",
   hours: "Horaire invalide",

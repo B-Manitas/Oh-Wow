@@ -32,7 +32,7 @@ export class Add extends SuperController {
     
     setAudit();
     navigation.navigate(PAGES.HOME);
-    Alert.alert(`Bienvenue, ${user.firstname} !`);
+    Alert.alert(`Bienvenue, ${user.firstname}.`);
   }
 
   /**
@@ -55,7 +55,7 @@ export class Add extends SuperController {
   async appointment(navigation, appointment, setAudit, setSending) {
     setSending(true);
     await this.frontend.add.appointment(appointment, setAudit);
-    Alert.alert(`Your appointment has been validated.`);
+    Alert.alert(`Votre réservation a été validée.`);
     navigation.navigate(PAGES.HOME);
   }
 

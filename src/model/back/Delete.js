@@ -1,5 +1,14 @@
 import { Request } from "./Request";
-import { APPT, PHOTO, SALON, SERVICE, STAFF, USER } from "./Collection";
+import {
+  ACCESS,
+  APP,
+  APPT,
+  PHOTO,
+  SALON,
+  SERVICE,
+  STAFF,
+  USER,
+} from "./Collection";
 
 export class Delete extends Request {
   /**
@@ -8,6 +17,14 @@ export class Delete extends Request {
    */
   async user(ID) {
     await this.deleteOne(USER, { _id: ID });
+  }
+
+  /**
+   * Delete access in the database.
+   * @param {String} ID The access ID to be deleted.
+   */
+  async access(ID) {
+    await this.deleteOne(ACCESS, { _id: ID });
   }
 
   /**
@@ -56,5 +73,37 @@ export class Delete extends Request {
 
   async allServiceApts(ID) {
     await this.deleteMany(APPT, { id_service: ID });
+  }
+
+  async allUsers() {
+    await this.deleteMany(USER);
+  }
+
+  async allApp() {
+    await this.deleteMany(APP);
+  }
+
+  async allStaffs() {
+    await this.deleteMany(STAFF);
+  }
+
+  async allServices() {
+    await this.deleteMany(SERVICE);
+  }
+
+  async allSalons() {
+    await this.deleteMany(SALON);
+  }
+
+  async allAppointments() {
+    await this.deleteMany(APPT);
+  }
+
+  async allAccess() {
+    await this.deleteMany(ACCESS);
+  }
+
+  async allPhotos() {
+    await this.deleteMany(PHOTO);
   }
 }

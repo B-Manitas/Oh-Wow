@@ -1,9 +1,16 @@
 // React import
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, ScrollView, StyleSheet } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+} from "react-native";
 
 // Componnent import
 import Button from "buttons/Button";
+import TextVisible from "componnents/TextVisible";
 
 // Libraries import
 import { controller as ctrl } from "model/Main";
@@ -59,6 +66,10 @@ const PhotosViewing = (props) => {
         noShadow
         visible={!zooming}
       />
+
+      <TextVisible visible={zooming} style={styles.infoText}>
+        Toucher l'image pour zoomer/dézoomer.
+      </TextVisible>
 
       <Button
         text={"SUPPRIMER"}
@@ -124,5 +135,11 @@ const styles = StyleSheet.create({
   imgZooming: {
     width: "100%",
     height: "80%",
+  },
+
+  infoText: {
+    color: COLORS.darkGray,
+    fontSize: 15,
+    bottom: 200,
   },
 });

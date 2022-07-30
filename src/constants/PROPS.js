@@ -92,7 +92,7 @@ export const INPUT_COORD = {
   returnKeyType: "next",
   maxLength: 10,
   placeholder: PLH.coord,
-  keyboardType: "numeric",
+  // keyboardType: "numeric",
   errorText: ERROR_TEXT.number,
   autoCorrect: false,
 };

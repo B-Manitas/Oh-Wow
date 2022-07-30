@@ -58,6 +58,15 @@ export class OnPress extends SuperController {
   }
 
   /**
+   * Called the number.
+   * @param {String} phone The phone number.
+   */
+  @Catch
+  async phone(phone) {
+    await this.link(`tel:${phone}`);
+  }
+
+  /**
    * On press day button in the planning page.
    * @param {CDate} newDate The date pressed.
    * @param {Function} setDate The function to set new date.
@@ -84,7 +93,7 @@ export class OnPress extends SuperController {
     if (result.cancelled) return;
 
     if (!Utils.lessThan1MB(result.base64))
-      Alert.alert("Erreur: L'image doit faire moins 1MB.");
+      Alert.alert("La taille de l'image dépasse la limite maximale de 1MB.");
     else {
       const base64 = "data:image/jpeg;base64,";
       func((p) => ({ ...p, img: base64 + result.base64 }));

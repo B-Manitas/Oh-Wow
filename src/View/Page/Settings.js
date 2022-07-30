@@ -25,12 +25,13 @@ const Settings = (props) => {
   const [data, setData] = useState(ctrl.get.thisUserData);
   const [audit, setAudit] = useState();
   const [sending, setSending] = useState(false);
+  const [removing, setRemoving] = useState(false);
 
   // After save data.
   useEffect(() => {
     setSending(false);
   }, [audit]);
-  
+
   // Reset audit if data is reset.
   useEffect(() => {
     if (_.isEqual(data, ctrl.get.thisUserData)) setAudit();
@@ -80,10 +81,11 @@ const Settings = (props) => {
             onPress={() => ctrl.update.logout(nav)}
           />
           <BtnThird
-            text={"Supprimer votre compte"}
+            text={removing ? "Suppression..." : "Supprimer votre compte"}
             important
-            onPress={() => ctrl.delete.thisUser(nav)}
+            onPress={() => ctrl.delete.thisUser(nav, true, setRemoving)}
             visible={!ctrl.thisIsStaff()}
+            disabled={removing}
           />
         </View>
       </ScrollView>

@@ -130,7 +130,7 @@ export default class CDate extends Date {
       const strMonth = this.getMonth().toString().padStart(2, "0");
       return `${strDay}/${strMonth}`;
     } else {
-      const strMonth = MONTHS[this.getMonth()];
+      const strMonth = MONTHS[this.getMonth() - 1];
       const strYear = this.getFullYear().toString();
       return `${strDay} ${strMonth} ${strYear}`;
     }

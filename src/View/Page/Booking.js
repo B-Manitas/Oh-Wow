@@ -38,6 +38,7 @@ const Booking = (props) => {
 
     // Find the selected staff.
     const staff = staffs.find((s) => s._id == apt.id_staff);
+    setDate(date.removeTime())
 
     // Compute calendar days and hours which are opened and closed off.
     return calendar?.getCalendars(
