@@ -126,7 +126,7 @@ const styleList = StyleSheet.create({
 
   header: {
     height: Dimensions.get("window").width - 70,
-    marginBottom: 140,
+    marginBottom: 130,
   },
 
   footer: { marginBottom: 50 },

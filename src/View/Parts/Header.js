@@ -14,7 +14,7 @@ import COLORS from "constants/COLORS";
 
 const Header = (props) => {
   // Destructure props
-  const { text, type, nav, onPress, addLogo } = props;
+  const { text, type, nav, onPress, addLogo, isTitle } = props;
   const [headerType, setHeaderType] = useState();
 
   // On load componnent
@@ -24,7 +24,7 @@ const Header = (props) => {
 
   // Define text props
   const propsText = {
-    style: styles.h1,
+    style: [styles.h1, isTitle && styles.title],
     numberOfLines: 1,
     adjustsFontSizeToFit: true,
   };
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 60,
   },
-  
+
   h1: {
     paddingLeft: 20,
     fontWeight: "bold",
@@ -83,6 +83,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: COLORS.black,
     marginHorizontal: 35,
+    fontFamily: "ArialRoundedMTBold",
+  },
+
+  title: {
+    fontFamily: "title",
+    fontSize: 48,
   },
 
   button: {

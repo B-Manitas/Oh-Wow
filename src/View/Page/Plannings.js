@@ -49,6 +49,7 @@ const Plannings = ({ navigation }) => {
 
     return () => {
       setPlannings([]);
+      setStaff();
     };
   }, [staff, date.month, date.year]);
 

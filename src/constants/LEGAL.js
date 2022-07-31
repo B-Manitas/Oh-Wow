@@ -11,9 +11,8 @@ Oh WoW se réserve le droit de modifier unilatéralement et à tout moment le co
 
 =======
 ARTICLE 1 : Les mentions légales
-L’édition et la direction de la publication de l'application Oh WoW est assurée par Manitas Bahri.
+Le développement de la publication de l'application Oh WoW est assuré par Manitas Bahri.
 Adresse e-mail manitas.bhr@gmail.com.
-L'application est hébérgé sur l'apple store et le play store.
 
 =======
 ARTICLE 2 : Accès à l'application
@@ -31,9 +30,12 @@ L'application propose les services suivants :
 - un administrateur de l'application peut ajouter de nouvelle prestation; 
 - un administrateur de l'application peut modifier les prestations existantes;
 - un administrateur de l'application peut modifier les informations personnelles d'un utilisateur qui possède un compte; 
-- un administrateur peut modifier les informations d'un salon; un administrateur peut modifier les photos de l'album photos; 
+- un administrateur peut modifier les informations d'un salon; 
+- un administrateur peut modifier les photos de l'album photos; 
 - un administrateur peut supprimer un utilisateur; 
 - un administrateur peut donner le rôle d'administrateur ou d'un employé à un utilisateur; 
+- un administrateur peut modifer l'image d'accueil;
+- un administrateur peut modifer l'image d'un service;
 
 L'application est accessible gratuitement en tout lieu à tout Utilisateur ayant un accès à Internet. Tous les frais supportés par l'Utilisateur pour accéder au service (matériel informatique, logiciels, connexion Internet, etc.) sont à sa charge.
 Tout événement dû à un cas de force majeure ayant pour conséquence un dysfonctionnement de l'application ou serveur et sous réserve de toute interruption ou modification en cas de maintenance, n'engage pas
@@ -43,12 +45,13 @@ L'Utilisateur a la possibilité de contacter l'application par messagerie élect
 =======
 ARTICLE 3 : Collecte des données
 L'application assure à l'Utilisateur une collecte et un traitement d'informations personnelles dans le respect de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés.
+Les informations récoltées sont seulement utilisé pour contacter l'utilisateur concernant l'une de ces réservations. Celle-ci ne seront en aucun cas vendu ou utilisé à des fins de démarchage commercial.
 En vertu de la loi Informatique et Libertés, en date du 6 janvier 1978, l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de ses données personnelles. L'Utilisateur exerce ce droit : 
 - via son espace personnel ;
 
 =======
 ARTICLE 4 : Propriété intellectuelle
-Les marques, logos, signes ainsi que tous les contenus de l'application (textes, images, son…) font l'objet d'une protection par le Code de la propriété intellectuelle et plus particulièrement par le droit d'auteur.
+Les marques, logos, signes ainsi que tous les contenus de l'application (textes, images, code source…) font l'objet d'une protection par le Code de la propriété intellectuelle et plus particulièrement par le droit d'auteur.
 L'Utilisateur doit solliciter l'autorisation préalable de l'application pour toute reproduction, publication, copie des différents contenus. Il s'engage à une utilisation des contenus de l'application dans un cadre strictement privé, toute utilisation à des fins commerciales et publicitaires est strictement interdite.
 Toute représentation totale ou partielle de cette application par quelque procédé que ce soit, sans l’autorisation expresse de l’exploitant de l'application Internet constituerait une contrefaçon sanctionnée par l’article L 335-2 et suivants du Code de la propriété intellectuelle.
 Il est rappelé conformément à l’article L122-5 du Code de propriété intellectuelle que l’Utilisateur qui reproduit, copie ou publie le contenu protégé doit citer l’auteur et sa source.
@@ -92,4 +95,12 @@ Le contenu de l'Utilisateur peut être à tout moment et pour n'importe quelle r
 ARTICLE 9 : Droit applicable et juridiction compétente
 La législation française s'applique au présent contrat. En cas d'absence de résolution amiable d'un litige né entre les parties, les tribunaux seront seuls compétents pour en connaître.
 Pour toute question relative à l’application des présentes CGU, vous pouvez joindre l’éditeur aux coordonnées inscrites à l’ARTICLE 1.
+
+=======
+GRAPHISTES: 
+- Icone 'Close' créée par joalfa - Flaticon: "https://www.flaticon.com/free-icons/instagram"
+
+- Icone 'Left' créée par th studio - Flaticon: "https://www.flaticon.com/free-icons/left"
+
+- Icone 'Open menu' créée par Pixel perfect - Flaticon: "https://www.flaticon.com/free-icons/open-menu"
 `;

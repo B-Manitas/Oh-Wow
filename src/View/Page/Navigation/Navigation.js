@@ -13,7 +13,7 @@ const Navigation = (props) => {
 
   return (
     <Page>
-      <Header addLogo text="Oh Wow" nav={nav} type="back" />
+      <Header addLogo isTitle text="Oh Wow" nav={nav} type="back" />
 
       <View style={styles.container}>
         <NavigationDisconnect nav={nav} />

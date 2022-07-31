@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     position: "absolute",
-    bottom: 45,
+    bottom: 35,
 
     marginHorizontal: 15,
 
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#fff",
     fontWeight: "600",
+    fontFamily: "Arial Rounded MT Bold"
   },
 
   textOn: { textDecorationLine: "underline", fontWeight: "700" },

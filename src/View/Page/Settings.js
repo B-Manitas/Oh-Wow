@@ -27,6 +27,13 @@ const Settings = (props) => {
   const [sending, setSending] = useState(false);
   const [removing, setRemoving] = useState(false);
 
+  // Define componnent method
+  const setPhone = (t) =>
+    setData((p) => ({
+      ...p,
+      phone: ctrl.onFormat.phone(data.phone, t),
+    }));
+
   // After save data.
   useEffect(() => {
     setSending(false);
@@ -60,7 +67,7 @@ const Settings = (props) => {
           />
           <InputError
             value={data.phone}
-            setValue={(t) => setData((p) => ({ ...p, phone: t }))}
+            setValue={setPhone}
             valid={audit?.valid?.phone}
             editable={!ctrl.thisIsStaff()}
             {...INPUT_PHONE}

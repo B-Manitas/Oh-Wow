@@ -65,7 +65,7 @@ export const INPUT_PHONE = {
   typeAndroid: "tel",
   typeIOS: "telephoneNumber",
   returnKeyType: "next",
-  maxLength: 11,
+  maxLength: 14,
   keyboardType: "number-pad",
   errorText: ERROR_TEXT.phone,
 };
@@ -92,7 +92,6 @@ export const INPUT_COORD = {
   returnKeyType: "next",
   maxLength: 10,
   placeholder: PLH.coord,
-  // keyboardType: "numeric",
   errorText: ERROR_TEXT.number,
   autoCorrect: false,
 };

@@ -72,7 +72,7 @@ const CtnAppointment = (props) => {
         <View style={styles.field}>
           <Text style={styles.h2Key}>Tél:</Text>
           <Button
-            {...propsTxtValue}
+            styleText={styles.h2Value}
             noShadow
             text={data.phone}
             onPress={() => ctrl.onPress.phone(data.phone)}
@@ -89,7 +89,7 @@ const CtnAppointment = (props) => {
         <View style={styles.field}>
           <Text style={styles.h2Key}>Tél:</Text>
           <Button
-            {...propsTxtValue}
+            styleText={styles.h2Value}
             noShadow
             text={strClientPhone}
             onPress={() => ctrl.onPress.phone(strClientPhone)}
@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
 
   h2Value: {
     fontSize: 16,
-    fontStyle: "italic",
     backgroundColor: COLORS.default,
   },
 });

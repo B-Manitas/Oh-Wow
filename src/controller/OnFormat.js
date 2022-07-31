@@ -11,7 +11,7 @@ export class OnFormat extends SuperController {
    */
   phone(prevtext, text, setText) {
     // Add space only if user add text. Prevent formatting on removed text.
-    if (text > prevtext && text.length < 11)
+    if (text > prevtext && text.length < 13)
       text = text.replace(/\D/g, "").replace(/.{2}/g, "$& ");
 
     if (setText) setText(text);

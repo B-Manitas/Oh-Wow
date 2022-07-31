@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const STYLES_NAV = StyleSheet.create({
   section: { paddingVertical: 10, borderBottomWidth: 1 },
   navButton: { width: "100%", marginVertical: 5, alignItems: "flex-start" },
-  navText: { fontSize: 20 },
+  navText: { fontSize: 20, fontFamily: "Arial" },
 });
 
 export const STYLES_LINK = StyleSheet.create({

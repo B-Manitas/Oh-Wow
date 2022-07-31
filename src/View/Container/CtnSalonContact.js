@@ -28,14 +28,14 @@ const CtnSalonContact = (props) => {
       <Text style={styles.h1}>{salon.name}</Text>
 
       <View style={styles.field}>
-        <Text style={styles.key}>Adresse:</Text>
+        <Text style={styles.key}>Adresse</Text>
         <Text style={styles.value} selectable>
           {salon.address}
         </Text>
       </View>
 
       <View style={styles.field}>
-        <Text style={styles.key}>Téléphone:</Text>
+        <Text style={styles.key}>Téléphone</Text>
         <Button
           text={salon.phone}
           onPress={() => ctrl.onPress.phone(salon.phone)}
@@ -73,7 +73,7 @@ export default CtnSalonContact;
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-    padding: 10,
+    padding: 12,
     marginHorizontal: 10,
     borderTopWidth: 2,
     borderColor: COLORS.main,
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "700",
     paddingBottom: 10,
+    fontFamily: "ArialRoundedMTBold"
   },
 
   key: {
