@@ -9,6 +9,7 @@ import Button from "buttons/Button";
 import Page from "containers/Page";
 import BtnPrimary from "buttons/BtnPrimary";
 import InputError from "inputs/InputError";
+import TextError from "texts/TextError";
 
 // Librarie imports
 import { controller as ctrl } from "model/Main";
@@ -17,7 +18,6 @@ import { useIsFocused } from "@react-navigation/native";
 // Constants imports
 import { INPUT_PHONE, INPUT_PASSWORD } from "constants/PROPS";
 import { STYLES_LINK } from "constants/STYLES";
-import COLORS from "constants/COLORS";
 import { ERROR_TEXT } from "constants/TEXTS";
 
 const Login = (props) => {
@@ -51,9 +51,9 @@ const Login = (props) => {
       <Header nav={nav} type="close" />
 
       <ScrollView contentContainerStyle={styles.container}>
-        {audit?.error?.failedLogin && (
-          <Text style={styles.errorLogin}>{ERROR_TEXT.failedLogin}</Text>
-        )}
+        <TextError visible={audit?.error?.failedLogin}>
+          {ERROR_TEXT.failedLogin}
+        </TextError>
 
         <InputError
           {...INPUT_PHONE}
@@ -105,13 +105,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 30,
-  },
-
-  errorLogin: {
-    color: COLORS.error,
-    fontWeight: "600",
-    fontSize: 16,
-    margin: 10,
-    textAlign: "center",
   },
 });

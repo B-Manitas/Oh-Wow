@@ -4,10 +4,9 @@ import { Text } from "react-native";
 
 const TextVisible = (props) => {
   // Destructure componnent props
-  const { children } = props;
-  const visible = props.visible === false ? false : true;
+  const { children, visible } = props;
 
-  if (visible) return null;
+  if (!visible) return null;
   return <Text {...props}>{children}</Text>;
 };
 

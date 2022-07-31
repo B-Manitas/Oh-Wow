@@ -12,6 +12,7 @@ import { controller as ctrl } from "model/Main";
 // Constants imports
 import TEXTS from "constants/TEXTS";
 import COLORS from "constants/COLORS";
+import useFonts from "constants/FONTS";
 import { STYLES_SHADOW } from "constants/STYLES";
 
 const HomeHeader = (props) => {
@@ -19,9 +20,13 @@ const HomeHeader = (props) => {
   const isFocused = useIsFocused();
 
   const [isAdmin, setAdmin] = useState(ctrl.thisIsAdmin());
+  const LoadFont = async () => {
+    await useFonts();
+  };
 
   // On focus homepage
   useEffect(() => {
+    LoadFont();
     setAdmin(ctrl.thisIsAdmin());
   }, [isFocused]);
 
@@ -87,9 +92,9 @@ const styles = StyleSheet.create({
   },
 
   h1: {
-    fontSize: 45,
-    fontWeight: "200",
+    fontSize: 75,
     textAlign: "center",
     color: COLORS.main,
+    fontFamily: "title",
   },
 });

@@ -1,5 +1,5 @@
 // React import
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 // Componnent import
@@ -8,6 +8,8 @@ import Page from "containers/Page";
 import InputError from "inputs/InputError";
 import BtnPrimary from "buttons/BtnPrimary";
 import RadioBox from "componnents/RadioBox";
+import TextError from "texts/TextError";
+import CtnView from "containers/CtnView";
 
 // Libraries import
 import { controller as ctrl } from "model/Main";
@@ -26,17 +28,20 @@ const ConfirmAppt = (props) => {
   const service = route.params.service;
   const salon = route.params.salon;
   const user = ctrl.thisUserData;
-  
+
   const [audit, setAudit] = useState();
   const [apt, setApt] = useState(route.params.apt);
   const [isOffer, setIsOffer] = useState(0);
   const [sending, setSending] = useState();
   const aptDate = new CDate(apt.date);
-  
+
   // Define componnent methods
   const setOffer = (k, t) =>
-  setApt({ ...apt, offer: { ...apt.offer, [k]: t } });
-  
+    setApt({ ...apt, offer: { ...apt.offer, [k]: t } });
+
+  const confirm = () =>
+    ctrl.add.appointment(nav, apt, service.duration, setAudit, setSending);
+
   // After saving
   useEffect(() => {
     setSending(false);
@@ -53,7 +58,7 @@ const ConfirmAppt = (props) => {
     <Page>
       <Header text={"Valider votre réservation"} type={"back"} nav={nav} />
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <RadioBox {...propsRadioBox} text={"Pour moi"} id={0} />
           <RadioBox {...propsRadioBox} text={"Pour un proche"} id={1} />
@@ -135,12 +140,20 @@ const ConfirmAppt = (props) => {
           </View>
         </View>
 
+        <CtnView
+          visible={audit?.error?.failedValid}
+          style={STYLE_GENERAL.sectionCtn}
+        >
+          <TextError visible>
+            Votre date de rendez-vous n'est plus disponnible.
+          </TextError>
+        </CtnView>
+
         <BtnPrimary
           disabled={sending}
           text={sending ? "Envoie..." : "Confirmer la réservation"}
-          onPress={() =>
-            ctrl.add.appointment(nav, apt, setAudit, setSending)
-          }
+          onPress={confirm}
+          visible={!audit?.error?.failedValid}
         />
       </ScrollView>
     </Page>

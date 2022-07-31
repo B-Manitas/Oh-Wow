@@ -92,7 +92,7 @@ export default class ErrorHandler {
     console.log(this.error);
     Alert.alert(
       "Une erreur est survenue",
-      `Merci de vérifier votre connection internet et de rééssayez plus-tard.\n${this.error}`
+      `Merci de vérifier votre connection internet et de rééssayez plus-tard.`
     );
   }
 

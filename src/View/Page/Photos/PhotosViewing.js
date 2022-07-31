@@ -1,16 +1,10 @@
 // React import
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Animated,
-  Dimensions,
-  ScrollView,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { Animated, Dimensions, ScrollView, StyleSheet } from "react-native";
 
 // Componnent import
 import Button from "buttons/Button";
-import TextVisible from "componnents/TextVisible";
+import TextVisible from "texts/TextVisible";
 
 // Libraries import
 import { controller as ctrl } from "model/Main";

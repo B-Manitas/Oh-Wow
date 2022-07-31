@@ -15,6 +15,7 @@ import { controller as ctrl } from "model/Main";
 import Calendar from "model/utils/Calendar";
 import CDate from "model/utils/CDate";
 import Utils from "model/utils/Utils";
+import { useIsFocused } from "@react-navigation/native";
 
 const Booking = (props) => {
   // Destructure props
@@ -23,23 +24,25 @@ const Booking = (props) => {
 
   // Define componnent state
   const userID = ctrl.thisUserData._id;
+  const aptSchema = ctrl.schema.appointment(userID);
+  const isFocused = useIsFocused();
 
   const [date, setDate] = useState(CDate.today());
   const [planning, setPlanning] = useState();
   const [salon, setSalon] = useState();
-  const [apt, setApt] = useState(ctrl.schema.appointment(userID));
+  const [apt, setApt] = useState(aptSchema);
   const [staffs, setStaffs] = useState();
 
   // Define componnent memo
   const calendar = useMemo(() => new Calendar(), []);
 
   const days = useMemo(() => {
-    if (!staffs || !planning) return;
+    if (!salon || !staffs || !planning || !isFocused) return;
 
     // Find the selected staff.
     const staff = staffs.find((s) => s._id == apt.id_staff);
-    setDate(date.removeTime())
-
+    setDate(date.removeTime());
+  
     // Compute calendar days and hours which are opened and closed off.
     return calendar?.getCalendars(
       date,
@@ -49,11 +52,14 @@ const Booking = (props) => {
       service.duration,
       staff
     );
-  }, [planning, staffs, apt.id_staff]);
+  }, [isFocused, planning, salon, staffs, apt?.id_staff]);
 
   // On load componnent
   useEffect(() => {
-    setApt((p) => ({ ...p, id_service: service._id, date: date }));
+    if (!isFocused) return;
+
+    setDate(CDate.today());
+    setApt({ ...aptSchema, id_service: service._id, date: CDate.today() });
 
     // Fetch data salon and set to apt data
     ctrl.get.allEmployee(setStaffs, (s) =>
@@ -64,19 +70,21 @@ const Booking = (props) => {
     return () => {
       Utils.cleanUp(setSalon, setStaffs, setApt);
     };
-  }, []);
+  }, [isFocused]);
 
   // Fetch planning on change date and apt data
   useEffect(() => {
+    if (!isFocused || !apt) return;
+
     ctrl.get.planningStaff(apt.id_staff, setPlanning);
-  }, [date.month, date.year, apt.id_staff, apt.id_staff, staffs]);
+  }, [isFocused, date?.month, date?.year, apt?.id_staff, staffs]);
 
   // Define calendar header props
   const propsCalendarHeader = {
     showStaff: true,
     date,
     setDate,
-    staff: apt.id_staff,
+    staff: apt?.id_staff,
     setStaff: (s) => ctrl.onChange.staff(setApt, s),
   };
 
@@ -85,10 +93,10 @@ const Booking = (props) => {
     calendar: days,
     date,
     onPress: (hours) => ctrl.onPress.aptHours(setApt, hours, date),
-    selected: apt.date,
+    selected: apt?.date,
   };
 
-  if (!salon || !days || !apt || !staffs) return <Loader />;
+  if (!salon || !days || !apt || !staffs || !isFocused) return <Loader />;
   else
     return (
       <Page>

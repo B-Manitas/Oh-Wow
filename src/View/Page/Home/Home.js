@@ -21,6 +21,7 @@ import Utils from "model/utils/Utils";
 import { ICON } from "constants/IMAGES";
 import TEXTS from "constants/TEXTS";
 import COLORS from "constants/COLORS";
+import useFonts from "constants/FONTS";
 
 const Home = (props) => {
   // Destructur props
@@ -38,6 +39,7 @@ const Home = (props) => {
 
   // On load componnent.
   useEffect(() => {
+    useFonts();
     ctrl.update.localUserData(setWaiting);
     fetchServices();
     ctrl.get.app(setApp, (e) => (refApp.current = e));
@@ -124,7 +126,7 @@ const styleList = StyleSheet.create({
 
   header: {
     height: Dimensions.get("window").width - 70,
-    marginBottom: 120,
+    marginBottom: 140,
   },
 
   footer: { marginBottom: 50 },

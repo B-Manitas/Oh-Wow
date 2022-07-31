@@ -89,6 +89,14 @@ export class Find extends SuperFrontend {
     return await this._get(getBack.allSalons.bind(getBack), ...funcs);
   }
 
+  async salon(id) {
+    return await this.backend.get.salon(id);
+  }
+
+  async staff(id) {
+    return await this.backend.get.staff(id);
+  }
+
   /**
    * Get user data stored in the database.
    * @returns user data.
@@ -157,7 +165,8 @@ export class Find extends SuperFrontend {
       date_end
     );
 
-    funcs.map((func) => func(resp));
+    if (funcs) funcs.map((func) => func(resp));
+    return resp;
   }
 
   /**

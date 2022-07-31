@@ -69,6 +69,22 @@ export default class Calendar {
       });
   }
 
+  isValidAppointment(date, planning, salon, staff, duration) {
+    if (!date || !salon || !staff) return;
+
+    this.#date = date.copy().removeTime();
+    this.#bookings = planning;
+    this.#salon = salon;
+
+    this.setDayOff(salon.day_off, staff.day_off);
+    this.setDateOff(salon.date_off, staff.date_off);
+
+    return (
+      this.isDateOn(this.#date) &&
+      this.isHoursOn(this.#date, date.getTime(), duration)
+    );
+  }
+
   getHours(date, dur, time_on, time_off, is_date_on) {
     var h_list = [];
 
@@ -104,7 +120,7 @@ export default class Calendar {
   }
 
   getCalendars(date, setDate, plannings, salon, dur, staff) {
-    if (!salon) return [];
+    if (!salon || !staff || !date) return [];
 
     this.#isFirstDateOn = true;
     this.#bookings = plannings;

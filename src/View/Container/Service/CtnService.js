@@ -45,8 +45,8 @@ const CtnService = (props) => {
 
       <Button
         text={TEXTS.booking}
-        style={styles.aptButton}
-        styleText={styles.aptText}
+        style={[styles.aptButton, service.is_hidden && styles.aptButtonHidden]}
+        styleText={[styles.aptText, service.is_hidden && styles.aptTextHidden]}
         onPress={() => ctrl.goTo.booking(nav, service)}
         noShadow
       />
@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
   },
 
   hidden: {
-    opacity: 0.7,
-    borderColor: COLORS.default,
+    opacity: 0.9,
+    borderColor: COLORS.gray,
   },
 
   info: {
@@ -84,12 +84,12 @@ const styles = StyleSheet.create({
   infoH1: {
     fontWeight: "500",
     textAlign: "center",
-    top: -2
+    top: -2,
   },
 
   infoH2: {
     fontWeight: "200",
-    bottom: -3
+    bottom: -3,
   },
 
   img: {
@@ -108,9 +108,13 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 14,
   },
 
+  aptButtonHidden: { borderColor: COLORS.gray },
+
   aptText: {
     textAlign: "center",
     fontWeight: "800",
     color: COLORS.main,
   },
+
+  aptTextHidden: { color: COLORS.darkGray },
 });

@@ -234,6 +234,10 @@ export class Find extends Request {
     return await this.findOne(ACCESS, { _id: id, password: access });
   }
 
+  async salon(id) {
+    return await this.findOne(SALON, { _id: id });
+  }
+
   /**
    * Get plannings of staff.
    * @param {String} staffID The ID of the salon to get plannings.
